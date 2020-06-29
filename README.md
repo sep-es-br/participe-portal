@@ -1,2 +1,2 @@
 # participe-portal
-Porta de participação
+Portal de participação

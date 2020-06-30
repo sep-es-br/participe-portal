@@ -1,0 +1,36 @@
+<app-template [useCard]="true" title="Complemente seu Cadastro">
+
+  <form class="p-grid ui-fluid p-col-6" [formGroup]="userForm" (submit)="save(userForm.value)">
+    <div class="p-col-12 form-group stacked">
+      <label for="nome">Nome *</label>
+      <input maxlength="50" pInputText formControlName="name" [readOnly]="true">
+      <app-input-message [form]="userForm" field="name"></app-input-message>
+    </div>
+    <div class="p-col-12 form-group stacked">
+      <label for="nome">E-mail *</label>
+      <input maxlength="50" pInputText formControlName="contactEmail" [readOnly]="true">
+      <app-input-message [form]="userForm" field="contactEmail"></app-input-message>
+    </div>
+    <div class="p-col-12 form-group stacked">
+      <label for="nome">Telefone</label>
+      <p-inputMask mask="(99) 99999-9999" formControlName="telephone"></p-inputMask>
+      <app-input-message [form]="userForm" field="telephone"></app-input-message>
+    </div>
+    <div class="p-col-12 form-group stacked">
+      <label for="nome">{{localityType}} *</label>
+      <p-autoComplete styleClass="custom-button-autocomplete" [suggestions]="filteredLocalities"
+        formControlName="locality" (completeMethod)="filterLocalities($event)" [size]="30" [minLength]="1" field="label"
+        [placeholder]="'Digite o nome da ' + localityType + ' pesquisar'" [dropdown]="true">
+      </p-autoComplete>
+    </div>
+    <div class="actions p-col-12 align-right">
+      <button class="btn-primary">
+        Cancelar
+      </button>
+      <button class="btn-primary" type="submit" [disabled]="userForm.invalid">
+        Salvar
+      </button>
+    </div>
+  </form>
+
+</app-template>

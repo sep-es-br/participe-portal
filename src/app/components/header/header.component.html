@@ -1,0 +1,19 @@
+<div class="header-container">
+  <div class="search-container">
+    <img [src]="header?.image">
+    <div class="info-search-container">
+      <h2>{{header?.title}}</h2>
+      <span>{{header?.subtitle}}</span>
+    </div>
+  </div>
+  <div class="actions" *ngIf="isAuthenticated">
+    <div class="action-item" *ngIf="userInfo?.name">
+      {{ userInfo.name }}
+      <img src="assets/icons/user.svg" />
+    </div>
+    <div class="action-item" (click)="logout()">
+      Sair
+      <img src="assets/icons/close.svg" />
+    </div>
+  </div>
+</div>

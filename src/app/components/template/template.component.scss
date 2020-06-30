@@ -1,0 +1,44 @@
+.background-linear {
+  background: var(--primaryColor);
+  background: linear-gradient(140deg, var(--primaryColor) 35%, var(--secondaryColor) 100%);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 0;
+  top: 0px;
+}
+.layout-wrapper {
+  height: 100vh;
+  width: 100%;
+  top: 0px;
+  padding-bottom: 20px;
+  z-index: 999;
+  position: relative;
+
+  .layout-container-card {
+    background: white;
+    min-height: 100px;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .title-container {
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    span {
+      font-weight: lighter;
+      margin-top: 4px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    top: 60px;
+    .title-container {
+      text-align: center;
+    }
+  }
+
+}

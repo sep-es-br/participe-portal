@@ -1,0 +1,12 @@
+<div class="block-screen" *ngIf="show"></div>
+<div class="modal-container" *ngIf="show">
+  <ng-content></ng-content>
+  <div class="actions p-col-12 align-right">
+    <button class="btn-primary" (click)="confirm()">
+      Salvar
+    </button>
+    <button class="btn-secondary" (click)="cancel()">
+      Cancelar
+    </button>
+  </div>
+</div>

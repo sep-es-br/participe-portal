@@ -1,0 +1,22 @@
+<app-template [fullLayout]="true" [disablebreadcrumb]=true>
+
+  <div class="how-it-works-area-container">
+    <div class="cards-container">
+      <div class="card-item" *ngFor="let item of actions; let i = index">
+        <div class="number">
+          <strong>
+            {{i+1}}
+          </strong>
+        </div>
+        <div class="header">
+          <strong>
+            {{item.title}}
+          </strong>
+        </div>
+        <div class= "body">
+          {{item.sub}}
+        </div>
+      </div>
+    </div>
+  </div>
+</app-template>

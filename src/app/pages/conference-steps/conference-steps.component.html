@@ -1,0 +1,69 @@
+<app-template [title]="conferenceStepItem?.structureitem?.title"
+  [subTitle]="conferenceStepItem?.structureitem?.subtitle" [footerVisible]="true" [fullLayout]="true">
+  <div class="search-container">
+    <div class="search-area">
+      <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
+      <input [@rotatedState]='state' [(ngModel)]="textSearch"  minlength="3" *ngIf="disable">
+      <div class="search-img" (click)="showHide()">
+        <img  src="/assets/icons/{{imageName}}.svg" >
+      </div>
+    </div>
+    <div class="{{classMsg}}" *ngIf="showMessage">
+      <div class="message" [ngStyle]="{'background-color': wasFound ? '#316b31' : '#a83838'}">
+        <strong>{{searchMessage}}</strong>
+        <div class="close" (click)="closeMessage()" >x</div>
+      </div>
+    </div>
+  </div>
+  <div class=" conference-step-container">
+    <div class="card-item-empty" *ngIf="conferenceStepItem?.itens?.length === 0 || !conferenceStepItem?.itens">
+      Não existe nenhum {{conferenceStepItem?.structureitem?.name}} para ser exibido
+    </div>
+    <div class="cards-container">
+      <div class="card-item" [ngClass]="{
+        'clickable': conferenceStepItem?.structureitem?.hasNext,
+        'checked': stepItem.checked
+      }" *ngFor="let stepItem of conferenceStepItem?.itens" (click)="selectNextStep(stepItem)">
+        <div class="card-item-content">
+          <h2>{{stepItem.name}}</h2>
+          <p>{{stepItem.description}}</p>
+        </div>
+        <div class="card-actions">
+          <div class="check card-actions-item" [ngClass]="{'checked': stepItem.checked}"
+            *ngIf="conferenceStepItem?.structureitem?.votes" (click)="checkItem(stepItem)">
+            <div class="icon" *ngIf="!stepItem.checked"></div>
+            <img src="assets/icons/check-circle.svg" *ngIf="stepItem.checked">
+            Destacar
+          </div>
+          <div class="comment card-actions-item" [ngClass]="{'checked': stepItem.checked}"
+            *ngIf="conferenceStepItem?.structureitem?.comments" (click)="comment(stepItem)">
+            <img [src]="!stepItem.checked ? 'assets/icons/comment.svg' : 'assets/icons/comment white.svg'">
+            <div class="count" *ngIf="stepItem.comment || stepItem.commentsMade > 0">{{ stepItem.commentsMade || 1 }}
+            </div>
+            Inserir Proposta
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions-footer">
+    <img class="action-back" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" />
+    <div class="help-container" *ngIf="conferenceStepItem?.structureitem?.parentLink"
+      (click)="openAlternativeProposal()">
+      <span>{{conferenceStepItem?.structureitem?.parentLink?.textLink}}</span>
+      <img src="assets/icons/help-circle.svg" />
+    </div>
+  </div>
+  <app-modal class="modalComment" [show]="showModalComment" (onCallback)="modalOnCallback($event)">
+    <h2>{{itemSelect?.name}}</h2>
+    <p>{{itemSelect?.description}}</p>
+    <textarea [maxlength]="200" rows="6" *ngIf="itemSelect" [(ngModel)]="itemSelect.comment"></textarea>
+    <span class="count-characters" *ngIf="itemSelect">Caracteres restantes {{itemSelect?.comment?.length || 0}}/200</span>
+  </app-modal>
+  <app-modal class="modalComment" [show]="showModalAlternativeProposal"
+    (onCallback)="modalAlternativeProposalCallback($event)">
+    <h2 style="margin-bottom: 10px;">Comente sua proposta</h2>
+    <textarea [maxlength]="200" rows="6" [(ngModel)]="alternativeProposal"></textarea>
+    <span class="count-characters">Caracteres restantes {{alternativeProposal?.length || 0}}/200</span>
+  </app-modal>
+</app-template>

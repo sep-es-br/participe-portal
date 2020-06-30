@@ -1,0 +1,102 @@
+<app-template [disablebreadcrumb]=true
+              [fullLayout]="true">
+  
+<div class="search-container">
+  <div class="search-area">
+    <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
+    <input [@rotatedState]='state' [(ngModel)]="textSearch"  minlength="3" *ngIf="disable">
+    <div class="search-img" (click)="showHide()">
+      <img  src="/assets/icons/{{imageName}}.svg" >
+    </div>
+  </div>
+  <div class="{{classMsg}}" *ngIf="showMessage">
+    <div class="message" [ngStyle]="{'background-color': wasFound ? '#316b31' : '#a83838'}">
+      <strong>{{searchMessage}}</strong>
+      <div class="close" (click)="closeMessage()" >x</div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="filter-container">
+  <div class="button-container">
+    <div class="button">
+      <input id="check1" type="checkbox" [(ngModel)]="checkRegion" name="menu"/>
+      <label for="check1">
+        {{regionName}}
+        <span class="arrow"></span>
+      </label>
+      <div class="submenu">
+        <div class="close" (click)="closeSubMenu('region')" >x</div>
+        <label class="container" *ngFor="let item of localityDropdow" >
+            {{item.label}}
+            <input type="checkbox" (click)="LocalitiesSelected(item)">
+            <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    
+    <div class="button">
+      <input id="check2" type="checkbox" [(ngModel)]="checkLocality" name="menu"/>
+      <label for="check2">
+        {{itemName}}
+        <span class="arrow"></span>
+      </label>
+      <div class="submenu">
+        <div class="close" (click)="closeSubMenu('locality')" >x</div>
+        <label class="container" *ngFor="let item of planItemDropdow" >
+            {{item.label}}
+            <input type="checkbox" (click)="planItemSelect(item)">
+            <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="proposals-area-container" (scroll)="onScroll($event)">
+  <div class="cards-container">
+    <div class="card-item" *ngFor="let item of listProposals; let i = index" >
+      
+        <div class="proposal">
+          <img src="assets/icons/quote.svg" >
+
+          <div class="comment"><strong>{{ item.comment }}</strong></div>
+  
+          <div class="person"><strong>{{ item.personName }} - {{ item.localityPerson }}</strong></div>
+
+          <a [ngClass]= "item.isLiked ? 'likes likesAfter' : 'likes likesBefore'" (click)="likeProposal(i, item)" id="{{i}}">
+            <div class="number">{{item.likes }} </div> 
+            <div class="thumbs-up"> <i class="pi pi-thumbs-up"></i></div>
+          </a>
+        </div>
+          
+        <div class="planitens">
+          <div class="p-item">
+            
+            <div class="image">
+              <img src="assets/icons/locality.svg">
+              <p>{{item.localityTypeName}}</p>
+            </div>
+
+            <div class="nameItem">
+              {{item.localityName}}
+            </div>
+          </div>
+         
+          <div class="p-item" *ngFor="let planitem of item.planItens">
+            <div class="image">
+                <img src="assets/icons/{{planitem.fileName}}.svg">
+                <p>{{planitem.structureItemName}}</p>
+              </div>
+            <div class="nameItem">
+              {{planitem.name}}
+            </div>
+          </div>
+          
+        </div>
+    </div>
+  </div>
+</div>
+
+</app-template>

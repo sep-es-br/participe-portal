@@ -1,0 +1,19 @@
+<div class="layout-wrapper">
+  <p-toast position="top-right"></p-toast>
+  <app-header></app-header>
+  <app-menu *ngIf="fullLayout"></app-menu>
+  <app-breadcrumb *ngIf="fullLayout && !disablebreadcrumb"></app-breadcrumb>
+  <div class="title-container">
+    <h2>{{title}}</h2>
+    <span>{{subTitle}}</span>
+  </div>
+  <div class="layout-container" [ngClass]="{'layout-container-card': useCard}">
+    <ng-content></ng-content>
+  </div>
+  <app-footer *ngIf="footerVisible"></app-footer>
+</div>
+<div class="background-linear"></div>
+<div *ngIf="isLoading" class="loading-overlay">
+  <i class="pi pi-spin pi-spinner" style="font-size: 5em"></i>
+  aguarde...
+</div>

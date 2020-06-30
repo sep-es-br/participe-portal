@@ -1,0 +1,33 @@
+<app-template [title]="strategicArea?.structureitem?.title" [subTitle]="strategicArea?.structureitem?.subtitle"
+  [fullLayout]="true">
+  <div class="search-container">
+    <div class="search-area">
+      <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
+      <input [@rotatedState]='state' [(ngModel)]="textSearch"  minlength="3" *ngIf="disable">
+      <div class="search-img" (click)="showHide()">
+        <img  src="/assets/icons/{{imageName}}.svg" >
+      </div>
+    </div>
+    <div class="{{classMsg}}" *ngIf="showMessage">
+      <div class="message" [ngStyle]="{'background-color': wasFound ? '#316b31' : '#a83838'}">
+        <strong>{{searchMessage}}</strong>
+        <div class="close" (click)="closeMessage()" >x</div>
+      </div>
+    </div>
+  </div>
+  <div class="strategic-area-container">
+    <div class="cards-container">
+      <div class="card-item" [ngStyle]="{'background-image': 'url(' + plan.image + ')'}"
+        *ngFor="let plan of strategicArea?.itens" (click)="selectStragicArea(plan)">
+        <h2>{{plan.name}}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="actions-footer">
+    <img class="action-back" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" />
+    <div class="help-container" *ngIf="strategicArea?.structureitem?.parentLink">
+      <span>{{strategicArea?.structureitem?.parentLink?.textLink}}</span>
+      <img src="assets/icons/help-circle.svg" />
+    </div>
+  </div>
+</app-template>

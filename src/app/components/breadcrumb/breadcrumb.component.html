@@ -1,0 +1,10 @@
+<div class="breadcrumb-wrapper">
+  <img title="Clique para voltar ao início" class="home-icon" src="assets/icons/home.svg" [routerLink]="['/conference-map']">
+  <div class="breadcrumb-item" [ngClass]="{'hide-mobile': !first}" *ngFor="let item of items; let first = first">
+    <div class="breadcrumb-container" [ngClass]="{'router-link': !!item.route}" (click)="navigate(item.route)">
+      <h2>{{item.title}}</h2>
+      <span *ngIf="item.subTitle">{{item.subTitle}}</span>
+    </div>
+    <img class="hide-mobile" src="assets/icons/arrow-right.svg" />
+  </div>
+</div>

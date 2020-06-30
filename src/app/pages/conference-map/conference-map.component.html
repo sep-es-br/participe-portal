@@ -1,0 +1,18 @@
+<app-template [title]="conference?.title" [subTitle]="conference?.subtitle" [fullLayout]="true" [footerVisible]="true">
+  <div class="conference-map-container">
+    <div class="cards-container" (mouseout)="paintMap()">
+      <div class="card-item" *ngFor="let locality of conference?.localities" (mouseover)="paintMap(locality)" (click)="selectRegional(locality)">
+        <h2>{{locality?.name}}</h2>
+        <div class="line"></div>
+        <ul>
+          <li *ngFor="let children of locality?.children">
+            {{children.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="map">
+      <object id="map" data="assets/images/map.svg" type="image/svg+xml"></object>
+    </div>
+  </div>
+</app-template>

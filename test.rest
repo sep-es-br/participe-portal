@@ -1,0 +1,22 @@
+
+@refresh = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTRVAtUEkgUGFydGljaXBlIiwic3ViIjoiNDQyIiwiaWF0IjoxNTkxMzcxMjkyLCJuYW1lIjoiUmljYXJkbyBOZXR0byIsImV4cCI6MTU5MTM3ODQ5Mn0.qDjZEF07gqrMz_OnQACB4jBTa76dTDja_xklxE23oTA
+@url = https://dev.totemti.com.br:9010/participe
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTRVAtUEkgUGFydGljaXBlIiwic3ViIjoiNDQyIiwiaWF0IjoxNTkxNzA4NzE1LCJuYW1lIjoiUmljYXJkbyBOZXR0byIsImV4cCI6MTU5MTc5NTExNX0.HNXuLoN3kS_99673ZrrilhA0KHpF-tNuKVlFL1mwSLE
+GET {{url}}/signin/refresh?refreshToken={{refresh}}
+Content-Type: application/json
+
+{}
+
+###
+GET {{url}}/participation/plan-item/565
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+###
+GET {{url}}/participation/portal-header/565
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}

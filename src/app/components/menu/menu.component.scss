@@ -1,0 +1,122 @@
+.menu-wrapper {
+  display: flex;
+  padding: 0 20px;
+  flex-wrap: wrap;
+  .button-item {
+      margin-top: 20px;
+      color: white;
+      border: 2px solid white;
+      padding: 5px 40px;
+      font-size: 1.2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+      i {
+        margin-right: 10px;
+        margin-top: 5px;
+        font-size: 24px;
+      }
+      &:hover {
+        background-color: #ef8533;
+      }
+      &.active {
+        background-color: #ef8533;
+      }
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+
+}
+
+.menu-mobile-wrapper {
+  position: absolute;
+  width: 100%;
+  top: -60px;
+  .mobile-bar {
+    background-color: rgba(0, 0, 0, 0.24);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    img {
+      width: 24px;
+    }
+    .button-search {
+      padding: 5px;
+      background: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 17px !important;
+      }
+    }
+  }
+  @media (min-width: 600px) {
+    display: none;
+  }
+}
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 90%; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: -95%;
+  background-color: #fff; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  box-shadow: 6px 6px 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 60px 20px 20px 20px;
+  > * {
+    margin-top: 10px;
+  }
+  .btn-default {
+    padding: 10px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #000;
+    color: #000; 
+  }
+  .btn-participar  {
+    color: white;
+    background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd));
+    border: none;
+    font-weight: 700;
+  }
+  .btn-minhas-configuracoes {
+    color: white;
+    background: green;
+    border: none;
+    margin-top: 40px;
+  }
+  .btn-sair {
+    color: white;
+    background: red;
+    border: none;
+    font-weight: 700;
+  }
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  color: var(--accentColorEnd);
+  font-size: 2.9rem;
+}

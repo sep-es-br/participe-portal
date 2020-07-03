@@ -99,11 +99,6 @@ export class AuthService {
   private getFrontFallbackUrl(): string {
     const { protocol, host } = window.location;
     let url = `${protocol}//${host}`;
-    
-    if (environment.production) {
-      url = url + '/admin';
-    }
-
     return url;
   }
 

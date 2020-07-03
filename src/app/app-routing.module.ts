@@ -1,3 +1,4 @@
+import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-slim.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
@@ -6,8 +7,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { ConferenceMapComponent } from './pages/conference-map/conference-map.component';
 import { StrategicAreaComponent } from './pages/strategic-area/strategic-area.component';
 import { ConferenceStepsComponent } from './pages/conference-steps/conference-steps.component';
-import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component'
-import { ProposalsComponent } from './pages/proposals/proposals.component'
+import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
+import { ProposalsComponent } from './pages/proposals/proposals.component';
 
 const routes: Routes = [
   { path: 'login/:conference', component: LoginComponent },
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: 'conference-map', component: ConferenceMapComponent },
   { path: 'strategic-area', component: StrategicAreaComponent },
   { path: 'conference-steps/:id', component: ConferenceStepsComponent },
-  { path: 'how-it-works', component: HowItWorksComponent},
-  { path: 'proposals', component: ProposalsComponent}
+  { path: 'how-it-works', component: HowItWorksComponent },
+  { path: 'how-it-works-slim', component: HowItWorksSlimComponent },
+  { path: 'proposals', component: ProposalsComponent }
 ];
 
 @NgModule({

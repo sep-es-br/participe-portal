@@ -2,7 +2,7 @@
 
   <div class="how-it-works-area-container">
     <div class="cards-container">
-      <div class="card-item" *ngFor="let item of actions; let i = index">
+      <div class="card-item" *ngFor="let item of items; let i = index">
         <div class="number">
           <strong>
             {{i+1}}
@@ -13,8 +13,7 @@
             {{item.title}}
           </strong>
         </div>
-        <div class= "body">
-          {{item.sub}}
+        <div class="body" [innerHTML]="item.description">
         </div>
       </div>
     </div>

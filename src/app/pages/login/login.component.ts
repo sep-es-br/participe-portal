@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
     if (success) {
       this.data = data;
-      this.statistics.push({ value: data.participations, label: 'Participações' });
+      this.statistics.push({ value: data.participations, label: 'Participantes' });
       this.statistics.push({ value: data.proposal, label: 'Propostas' });
       this.statistics.push({ value: data.highlights, label: 'Destaques' });
       this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });

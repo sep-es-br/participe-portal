@@ -57,18 +57,10 @@ export class ConferenceMapComponent implements OnInit {
             element.classList.remove('fil0');
             element.classList.add('fil1');
           }
-          if (element.classList.contains('str0')) {
-            element.classList.remove('str0');
-            element.classList.add('str1');
-          }
         } else {
           if (element.classList.contains('fil1')) {
             element.classList.remove('fil1');
             element.classList.add('fil0');
-          }
-          if (element.classList.contains('str1')) {
-            element.classList.remove('str1');
-            element.classList.add('str0');
           }
         }
       });

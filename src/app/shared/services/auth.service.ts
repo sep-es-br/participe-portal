@@ -98,8 +98,7 @@ export class AuthService {
 
   private getFrontFallbackUrl(): string {
     const { protocol, host } = window.location;
-    let url = `${protocol}//${host}`;
-    return url;
+    return `${protocol}//${host}`;
   }
 
   get getUserInfo(): IPerson {

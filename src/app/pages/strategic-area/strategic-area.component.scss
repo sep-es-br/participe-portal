@@ -4,7 +4,7 @@
   align-items: flex-end;
   margin-right: 2rem;
   margin-bottom: 2rem;
-  .search-area{
+  .search-area {
     display: flex;
     flex-direction: row;
     .search-button {
@@ -233,6 +233,7 @@
       background-repeat: no-repeat;
       background-position: -20px;
       cursor: pointer;
+      padding: 15px;
       h2 {
         align-self: center;
       }
@@ -274,6 +275,11 @@
   }
 }
 
+.action-back-header {
+  display: none;
+}
+
+
 @media (max-width: 600px) {
   .cards-container {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
@@ -292,7 +298,24 @@
     }
   }
   .search-area {
-    width: 62%;
+    width: 60%;
     margin-right: 60px;
   }
+
+  :host ::ng-deep app-header {
+    .header-container {
+      margin-bottom: 60px;
+    }
+  }
+  .action-back-header {
+    width: 50px;
+    position: absolute;
+    left: 20px;
+    top: 90px;
+    display: initial;
+    cursor: pointer;
+  }
+
 }
+
+

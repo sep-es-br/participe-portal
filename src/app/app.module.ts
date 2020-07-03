@@ -36,6 +36,7 @@ import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component
 import { ProposalsComponent } from './pages/proposals/proposals.component';
 
 import { ModalComponent } from './components/modal/modal.component';
+import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-slim.component';
 
 @NgModule({
   declarations: [
@@ -52,10 +53,10 @@ import { ModalComponent } from './components/modal/modal.component';
     FooterComponent,
     StrategicAreaComponent,
     HowItWorksComponent,
+    HowItWorksSlimComponent,
     ProposalsComponent,
     ConferenceStepsComponent,
-    HowItWorksComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

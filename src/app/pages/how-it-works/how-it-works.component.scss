@@ -1,14 +1,14 @@
 .how-it-works-area-container {
     display: flex;
-    padding: 15px;
+    padding: 20px 80px;
     justify-content: center;
     .cards-container {
-      width: 80%;
+      width: 100%;
       display: grid;
       grid-row-gap: 14px;
       grid-column-gap: 25px;
       justify-content: center;
-      grid-template-columns: repeat(auto-fill,minmax(450px, 0.4fr));
+      grid-template-columns: repeat(auto-fill,minmax(400px, 0.4fr));
       
       .card-item {
         display: flex;

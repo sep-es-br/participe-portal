@@ -96,12 +96,17 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   }
 
   async checkItem(item: IItem) {
-    if (item.checked) {
-      return;
+    const { success, data } = await this.participationSrv.commentAndHighlights(this.localityId, item.id, this.conferenceSrv.ConferenceActiveId);
+    if(success){
+      
+      if(item.checked === false && data.votes === true)
+        this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} salvo!` });
+
+      else if(item.checked === true && data.votes === false)
+        this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} apagado!` });
+
+      item.checked = data.votes;
     }
-    item.checked = true;
-    await this.participationSrv.commentAndHighlights(this.localityId, item.id, this.conferenceSrv.ConferenceActiveId);
-    this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} salva!` });
   }
 
   comment(item: IItem) {

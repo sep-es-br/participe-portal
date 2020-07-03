@@ -1,5 +1,6 @@
 <app-template [title]="strategicArea?.structureitem?.title" [subTitle]="strategicArea?.structureitem?.subtitle"
   [fullLayout]="true">
+  <img class="action-back-header" *ngIf="strategicArea?.structureitem" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" />
   <div class="search-container">
     <div class="search-area">
       <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>

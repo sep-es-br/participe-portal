@@ -353,6 +353,10 @@
   }
 }
 
+.action-back-header {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .cards-container {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
@@ -373,6 +377,20 @@
   .search-area {
     width: 62%;
     margin-right: 60px;
+  }
+
+  :host ::ng-deep app-header {
+    .header-container {
+      margin-bottom: 60px;
+    }
+  }
+  .action-back-header {
+    width: 50px;
+    position: absolute;
+    left: 20px;
+    top: 90px;
+    display: initial;
+    cursor: pointer;
   }
   
 }

@@ -13,6 +13,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     height: 100vh;
     position: fixed;
   }
+  
 
   .auth-box {
     width: 400px;
@@ -64,12 +65,24 @@ $darkColorOr: rgba(0,0,0,0.16);
         }
         &.google {
           background: #dc4e41;
+          padding: 7px 10px;
+          img {
+            width: 20px !important;
+            margin-right: 15px !important;
+          }
         }
         &.facebook {
           background: #3b5998;
+          img {
+            margin-left: -5px !important;
+            margin-right: 10px !important;
+          }
         }
         &.twitter {
           background: #55acee;
+          img {
+            margin-left: -4px !important;
+          }
         }
 
         img {
@@ -141,6 +154,18 @@ $darkColorOr: rgba(0,0,0,0.16);
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 5px;
+    }
+
+    .how-it-works-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      color: var(--textColorDark);
+      cursor: pointer;
+      :hover {
+        color: white !important;
+      }
     }
   }
   .statistics-container {
@@ -234,6 +259,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     left: 10% !important;
     position: relative !important;
     width: 80% !important;
+    margin-bottom: 100px;
   }
   .statistics-container {
     display: flex !important;

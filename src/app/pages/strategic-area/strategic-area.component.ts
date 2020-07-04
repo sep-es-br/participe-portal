@@ -26,7 +26,7 @@ export class StrategicAreaComponent implements OnInit {
   state: string = 'default';
   imageName: string = "search";
   wasFound: boolean = false;
-  searchMessage: string ;
+  searchMessage: string;
   disable: boolean = false;
   showMessage: boolean = false;
   classMsg: string;
@@ -48,6 +48,7 @@ export class StrategicAreaComponent implements OnInit {
       this.locality = participationState.locality;
       this.loadStrategicArea();
     }
+    window.scrollTo(0, 0);
   }
 
   async loadStrategicArea() {
@@ -79,15 +80,15 @@ export class StrategicAreaComponent implements OnInit {
     await this.delay(10);
     this.hide = (this.hide === 'default' ? 'show' : 'default');
     this.state = (this.state === 'default' ? 'rotated' : 'default');
-    if(this.hide === 'default'){
+    if (this.hide === 'default') {
       await this.delay(600);
       this.imageName = "search"
-      this.disable =  false;
+      this.disable = false;
     }
-    else{
+    else {
       this.imageName = "close"
     }
-    
+
   }
 
   private delay(ms: number): Promise<boolean> {
@@ -98,16 +99,16 @@ export class StrategicAreaComponent implements OnInit {
     });
   }
 
-  async search(){
+  async search() {
     this.indexPage = 0;
     const { success, data } = await this.participationSrv.getPlanItem(this.conferenceSrv.ConferenceActiveId, this.locality.id as number, null, this.textSearch);
-    if(success){
-      if(!data.itens || data.itens.length < 1){
+    if (success) {
+      if (!data.itens || data.itens.length < 1) {
         this.searchMessage = "Hummm... Não estou encontrando esse termo. Que tal tentar um sinônimo ou algo menos específico?"
         this.wasFound = false;
         this.renderList([]);
       }
-      else{
+      else {
         this.searchMessage = "Oba! Encontrei alguma coisa nos itens abaixo!"
         this.wasFound = true;
         this.renderList(data.itens);
@@ -117,11 +118,11 @@ export class StrategicAreaComponent implements OnInit {
     }
   }
 
-  renderList(data: IItem[]){
+  renderList(data: IItem[]) {
     this.strategicArea.itens = data;
   }
 
-  async closeMessage(){
+  async closeMessage() {
     this.classMsg = "animate__animated animate__fadeOutRightBig"
     await this.delay(1000);
     this.showMessage = false;

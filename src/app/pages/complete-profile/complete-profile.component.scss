@@ -6,3 +6,16 @@
 input[readOnly] {
   background-color: var(--light) !important;
 }
+@media (max-width: 600px) {
+  .stacked {
+    flex-direction: column;
+    align-items: stretch;
+    label {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  .actions {
+    padding-right: 0px !important;
+  }
+}

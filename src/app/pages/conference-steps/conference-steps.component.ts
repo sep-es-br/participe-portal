@@ -64,6 +64,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
         this.route.navigate(['/strategic-area']);
       }
     });
+    window.scrollTo(0, 0);
   }
 
   populateState() {

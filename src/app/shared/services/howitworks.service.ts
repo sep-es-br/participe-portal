@@ -10,16 +10,15 @@ export class HowItWorksService {
     return [
       {
         url: '/#', title: 'Login',
-        description: 'Faça login com o Acesso Cidadão ou acesse por meio das redes sociais Não é cadastrado no Acesso Cidadão? ' +
-          '<a target="blank" href="https://acessocidadao.es.gov.br/">Crie sua conta aqui</a>'
+        description: 'Faça login com a sua rede social.'
       },
-      { url: '/#', title: 'Defina sua microrregião', description: 'Escolha para qual microrregião registrará sua contribuição' },
-      { url: '/#', title: 'Escolha a área estratégica', description: 'Clique na área estratégica para a qual deseja contribuir' },
-      { url: '/#', title: 'Destaque um desafio', description: 'Destaque o desafio que você considera de maior relevância' },
+      { url: '/#', title: 'Defina sua microrregião', description: 'Escolha para qual microrregião registrará sua contribuição.' },
+      { url: '/#', title: 'Escolha a área estratégica', description: 'Clique na área estratégica para a qual deseja contribuir.' },
+      { url: '/#', title: 'Destaque um desafio', description: 'Destaque o desafio que você considera de maior relevância.' },
       {
         url: '/#', title: 'Faça sua proposta',
         description: 'Descreva qual ação o governo deve implementar para superar o desafio destacado. ' +
-          'Se preferir, faça uma contribuição livre no final da página'
+          'Se preferir, faça uma contribuição livre no final da página.'
       },
       {
         url: '/#', title: 'Participe quantas vezes quiser',

@@ -5,7 +5,7 @@ import { AuthService } from './../../shared/services/auth.service';
 import { LocalityService } from './../../shared/services/locality.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ConfirmationService, MessageService, SelectItem } from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { PersonService } from 'src/app/shared/services/person.service';
 import * as _ from 'lodash';
 import { ILocality } from '../../shared/interfaces/ILocality';
@@ -75,6 +75,10 @@ export class CompleteProfileComponent implements OnInit {
     this.filteredLocalities = this.localities.filter(
       locality => locality.name.toLowerCase().indexOf(query.toLowerCase()) > -1
     ).map(loc => ({ value: loc.id, label: loc.name }));
+  }
+
+  cancel() {
+    this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
 
 }

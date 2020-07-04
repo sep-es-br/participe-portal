@@ -1,6 +1,6 @@
 <app-template [useCard]="true" title="Complemente seu Cadastro">
 
-  <form class="p-grid ui-fluid p-col-6" [formGroup]="userForm" (submit)="save(userForm.value)">
+  <form class="p-grid ui-fluid p-col-12 col-md-6" [formGroup]="userForm" (submit)="save(userForm.value)">
     <div class="p-col-12 form-group stacked">
       <label for="nome">Nome *</label>
       <input maxlength="50" pInputText formControlName="name" [readOnly]="true">
@@ -24,7 +24,7 @@
       </p-autoComplete>
     </div>
     <div class="actions p-col-12 align-right">
-      <button class="btn-primary">
+      <button type="button" class="btn-primary" (click)="cancel()">
         Cancelar
       </button>
       <button class="btn-primary" type="submit" [disabled]="userForm.invalid">

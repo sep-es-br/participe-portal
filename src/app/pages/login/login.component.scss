@@ -162,12 +162,14 @@ $darkColorOr: rgba(0,0,0,0.16);
       display: flex;
       justify-content: center;
       margin-top: 20px;
-      color: var(--textColorDark);
+      color: white;
       cursor: pointer;
-      :hover {
-        color: white !important;
-      }
+      font-size: x-large;
     }
+    .how-it-works-container:hover {
+        font-weight: bold;
+    }
+    
   }
   .statistics-container {
     position: absolute;

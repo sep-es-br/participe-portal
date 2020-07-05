@@ -103,7 +103,7 @@ export class ProposalsComponent implements OnInit {
       this.regionName = data.regionName;
       this.itemName = data.itemName;
       
-      data.items.sort( function( a, b ) {
+      data.itens.sort( function( a, b ) {
                         if ( a.name < b.name ){
                           return -1;
                         }

@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   signInAcessoCidadao() {
-    this.document.location.href = this.getUrlForSocialAuth('idsvr');
+    this.document.location.href = this.getUrlForSocialAuth('portal');
   }
 
   async refresh() {

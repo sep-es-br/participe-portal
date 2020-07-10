@@ -1,3 +1,4 @@
+import { ILoginResult } from './../interfaces/ILoginResult';
 import { IResultHttp } from './../interfaces/IResultHttp';
 import { IPerson } from './../interfaces/IPerson';
 import { ISocialLoginResult } from './../interfaces/ISocialLoginResult';
@@ -8,9 +9,9 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { ConferenceService } from './conference.service';
 
 import * as jwtDecode from 'jwt-decode';
-import { ConferenceService } from './conference.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -23,12 +24,16 @@ export class AuthService {
     @Inject(DOCUMENT) private document: Document
   ) { }
 
-  async signIn(username: string, password: string) {
-
+  async signIn(login: string, password: string) {
+    return this.http.post<IResultHttp<ILoginResult>>(`${environment.apiUrl}/signin?conference=${this.conferenceSrv.ConferenceActiveId}`, {
+      login,
+      password
+    }).toPromise();
   }
 
   private getUrlForSocialAuth(origin: string) {
-    return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${this.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
+    return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${
+      this.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
   }
 
   signInFacebook() {
@@ -70,7 +75,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  saveToken(data: ISocialLoginResult) {
+  saveToken(data: ISocialLoginResult | ILoginResult) {
     localStorage.setItem(StoreKeys.ACCESS_TOKEN, data.token);
     localStorage.setItem(StoreKeys.REFRESH_TOKE, data.refreshToken);
   }
@@ -124,4 +129,5 @@ export class AuthService {
     }
     return false;
   }
+
 }

@@ -27,6 +27,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { RecaptchaModule } from 'ng-recaptcha';
 import { HomeComponent } from './pages/home/home.component';
 import { ConferenceMapComponent } from './pages/conference-map/conference-map.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -37,6 +38,9 @@ import { ProposalsComponent } from './pages/proposals/proposals.component';
 
 import { ModalComponent } from './components/modal/modal.component';
 import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-slim.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,9 @@ import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-
     ProposalsComponent,
     ConferenceStepsComponent,
     ModalComponent,
+    RegisterComponent,
+    ChangePasswordComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +81,8 @@ import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-
     ToastModule,
     ReactiveFormsModule,
     HttpRequestInterceptorModule,
-    FormsModule
+    FormsModule,
+    RecaptchaModule
   ],
   providers: [
     MessageService,

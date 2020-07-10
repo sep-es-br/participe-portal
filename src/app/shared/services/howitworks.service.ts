@@ -10,7 +10,7 @@ export class HowItWorksService {
     return [
       {
         url: '/#', title: 'Login',
-        description: 'Faça login com a sua rede social.'
+        description: 'Acesse a partir de sua conta no Acesso Cidadão, no Google ou rede social. Se preferir, cadastre-se no site.'
       },
       { url: '/#', title: 'Defina sua microrregião', description: 'Escolha para qual microrregião registrará sua contribuição.' },
       { url: '/#', title: 'Escolha a área estratégica', description: 'Clique na área estratégica para a qual deseja contribuir.' },

@@ -20,23 +20,23 @@
         <img src="assets/icons/twitter.svg" />
         Entrar com Twitter</button>
     </div>
-    <div class="or display-none">
+    <div class="or">
       ou utilize
     </div>
     <div class="form-login">
-      <div class="form-group display-none">
-        <label for="inpLogin">E-mail</label>
-        <input id="inpLogin" type="text">
+      <div class="form-group ">
+        <label>E-mail</label>
+        <input [(ngModel)]="form.login" type="text">
       </div>
-      <div class="form-group display-none">
-        <label for="inpPassword">Senha</label>
-        <input id="inpPassword" type="password">
+      <div class="form-group">
+        <label>Senha</label>
+        <input [(ngModel)]="form.password" type="password">
       </div>
-      <div class="actions display-none">
-        <a href="#">Cadastre-se</a>
-        <a href="#">Esqueceu sua senha?</a>
+      <div class="actions">
+        <a [routerLink]="['/register']">Cadastre-se</a>
+        <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
       </div>
-      <button class="submit display-none">Entrar</button>
+      <button class="submit" (click)="signInWithLogin(form)">Entrar</button>
       <img class="poweredBy" src="assets/images/poweredBy.svg">
     </div>
     <a href="/#/how-it-works-slim" class="how-it-works-container">Saiba como participar</a>

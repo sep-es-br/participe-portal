@@ -1,34 +1,42 @@
-<app-template [useCard]="true" title="Complemente seu Cadastro">
-  <form class="p-grid" [formGroup]="userForm" (submit)="save(userForm.value)">
-    <div class="p-col-12 form-group stacked ui-fluid">
+<app-template [useCard]="true" title="Cadastro de Usuário">
+
+  <form class="p-grid ui-fluid p-col-12 col-md-6" [formGroup]="userForm" (submit)="save(userForm.value)">
+    <div class="p-col-12 form-group stacked">
       <label for="nome">Nome *</label>
-      <input maxlength="50" pInputText formControlName="name" [readOnly]="true">
+      <input maxlength="50" pInputText formControlName="name">
       <app-input-message [form]="userForm" field="name"></app-input-message>
     </div>
-    <div class="p-col-12 form-group stacked ui-fluid">
+    <div class="p-col-12 form-group stacked">
       <label for="nome">E-mail *</label>
-      <input maxlength="50" pInputText formControlName="contactEmail" [readOnly]="true">
+      <input maxlength="50" pInputText formControlName="contactEmail">
       <app-input-message [form]="userForm" field="contactEmail"></app-input-message>
     </div>
-    <div class="p-col-12 form-group stacked ui-fluid">
+    <div class="p-col-12 form-group stacked">
+      <label for="nome">Confirmar E-mail *</label>
+      <input maxlength="50" pInputText formControlName="confirmEmail">
+      <app-input-message [form]="userForm" field="confirmEmail"></app-input-message>
+    </div>
+    <div class="p-col-12 form-group stacked">
       <label for="nome">Telefone</label>
       <p-inputMask mask="(99) 99999-9999" formControlName="telephone"></p-inputMask>
       <app-input-message [form]="userForm" field="telephone"></app-input-message>
     </div>
-    <div class="p-col-12 form-group stacked ui-fluid">
+    <div class="p-col-12 form-group stacked">
       <label for="nome">{{localityType}} *</label>
       <p-autoComplete styleClass="custom-button-autocomplete" [suggestions]="filteredLocalities"
         formControlName="locality" (completeMethod)="filterLocalities($event)" [size]="30" [minLength]="1" field="label"
         [placeholder]="'Digite o nome da ' + localityType + ' pesquisar'" [dropdown]="true">
       </p-autoComplete>
     </div>
+    <re-captcha (resolved)="resolveCaptcha($event)" siteKey="6LcbE68ZAAAAAF0RguVbWPtRafhHNNP-QHq7uqYY"></re-captcha>
     <div class="actions p-col-12 align-right">
       <button type="button" class="btn-primary" (click)="cancel()">
         Cancelar
       </button>
       <button class="btn-primary" type="submit" [disabled]="userForm.invalid">
-        Salvar
+        Enviar
       </button>
     </div>
   </form>
+
 </app-template>

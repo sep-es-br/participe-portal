@@ -58,24 +58,39 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       }),
 
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 422) {
-          this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: error.error.erro });
-        } else if (error.status === 400) {
-          const messages = [];
-          if (Array.isArray(error.error)) {
-            error.error.forEach(m => { messages.push(`${_.get(m, 'propriedade', '').toUpperCase()} ${m.erro}`); });
-          } else {
-            messages.push(_.get(error, 'error.erro', 'Não conseguimos processar sua solicitação'));
-          }
-          this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: messages.join('<br />') });
-        } else if (error.status === 401) {
-          setTimeout(() => {
-            this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Sua sessão expirou' });
-          }, 1000);
-          this.router.navigate([`/login/${this.conferenceSrv.ConferenceActiveId}`]);
-        } else {
-          this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Houve um erro ao processar sua solicitação' });
+        let message = '';
+        const { status: StatusCode } = error;
+        switch (StatusCode) {
+          case 422:
+            message = _.get(error, 'error.erro', 'Não conseguimos processar sua solicitação');
+            break;
+          case 400:
+            const messages = [];
+            if (_.isArray(error.error)) {
+              error.error.forEach(m => { messages.push(`${_.get(m, 'propriedade', '').toUpperCase()} ${m.erro}`); });
+            } else {
+              messages.push(
+                _.get(error, 'error.erro',
+                  _.get(error, 'error.message', 'Não conseguimos processar sua solicitação')
+                )
+              );
+            }
+            message = messages.join('<br />');
+            break;
+          case 401:
+            message = 'Sua sessão expirou';
+            this.router.navigate([`/login/${this.conferenceSrv.ConferenceActiveId}`]);
+            break;
+          case 403:
+            message = _.get(error, 'error.message', 'Não autorizado');
+            break;
+          default:
+            message = 'Houve um erro ao processar sua solicitação';
+            break;
         }
+        setTimeout(() => {
+          this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: message });
+        }, 500);
 
         return throwError({ success: false, data: [{ ...error }], error: error.message });
       }),

@@ -1,3 +1,6 @@
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-slim.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -19,7 +22,10 @@ const routes: Routes = [
   { path: 'conference-steps/:id', component: ConferenceStepsComponent },
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'how-it-works-slim', component: HowItWorksSlimComponent },
-  { path: 'proposals', component: ProposalsComponent }
+  { path: 'proposals', component: ProposalsComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
 ];
 
 @NgModule({

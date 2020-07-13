@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
 
   async signInWithLogin({ login, password }) {
     if (!login || !password) {
-      return this.messageSrv.add({ severity: 'warn', detail: 'Informe o login e senha para efetuar o login' });
+      return this.messageSrv.add({ severity: 'warn', detail: 'Informe o login e senha para efetuar o login', life: 15000 });
     }
     const { success, data } = await this.authSrv.signIn(login, password);
     if (success) {

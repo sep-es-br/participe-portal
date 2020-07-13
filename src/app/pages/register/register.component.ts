@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
   async save({ name, contactEmail, confirmEmail, telephone, locality }) {
 
     if (!this.tokenRecaptcha) {
-      return this.messageSrv.add({ severity: 'warn', detail: 'Você precisa resolver o captcha para continuar!' });
+      return this.messageSrv.add({ severity: 'warn', detail: 'Você precisa resolver o captcha para continuar!', life: 15000 });
     }
 
     const sender: IPerson = {
@@ -77,7 +77,8 @@ export class RegisterComponent implements OnInit {
         this.messageSrv.add({
           severity: 'success',
           detail: `Dentro de instantes você receberá uma mensagem em seu email ${contactEmail} com a sua senha provisória.
-           Utilize-a para entrar e criar a sua senha definitiva`
+           Utilize-a para entrar e criar a sua senha definitiva`,
+           life: 15000
         });
       }, 1000);
       this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);

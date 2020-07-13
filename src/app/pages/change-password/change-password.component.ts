@@ -36,7 +36,7 @@ export class ChangePasswordComponent implements OnInit {
 
   async save({ password, confirmPassword }) {
     if (password !== confirmPassword) {
-      return this.messageSrv.add({ severity: 'warn', detail: 'A senha e a confirmação de senha não são iguais' });
+      return this.messageSrv.add({ severity: 'warn', detail: 'A senha e a confirmação de senha não são iguais', life: 15000 });
     }
     const { success } = await this.personSrv.updatePassword({ password, confirmPassword });
     if (success) {

@@ -89,7 +89,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             break;
         }
         setTimeout(() => {
-          this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: message });
+          this.messageService.add({ severity: 'warn', summary: 'Atenção', detail: message, life: 15000 });
         }, 500);
 
         return throwError({ success: false, data: [{ ...error }], error: error.message });

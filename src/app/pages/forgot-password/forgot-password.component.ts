@@ -39,7 +39,8 @@ export class ForgotPasswordComponent implements OnInit {
       setTimeout(() => {
         this.messageSrv.add({
           severity: 'success',
-          detail: 'Foi enviado para seu e-mail as instruções de como proceder para recuperar a senha'
+          detail: 'Enviamos para o seu e-mail as instruções para renovar a sua senha',
+          life: 15000
         });
       }, 1000);
       this.back();

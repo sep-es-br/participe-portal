@@ -101,10 +101,10 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     if(success){
       
       if(item.checked === false && data.votes === true)
-        this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} salvo!` });
+        this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} salvo!`, life: 15000 });
 
       else if(item.checked === true && data.votes === false)
-        this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} apagado!` });
+        this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} apagado!`, life: 15000 });
 
       item.checked = data.votes;
     }
@@ -117,7 +117,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   async saveComment() {
     if (!this.itemSelect.comment) {
-      return this.messageService.add({ severity: 'warn', detail: 'Você precisa escrever o comentário que deseja adicionar!' });
+      return this.messageService.add({ severity: 'warn', detail: 'Você precisa escrever o comentário que deseja adicionar!', life: 15000 });
     } else {
       const { success, data } = await this.participationSrv.commentAndHighlights(
         this.localityId, this.itemSelect.id, this.conferenceSrv.ConferenceActiveId, this.itemSelect.comment
@@ -131,7 +131,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
         }
         this.showModalComment = false;
         this.itemSelect = {} as any;
-        this.messageService.add({ severity: 'success', detail: 'Proposta Salva' });
+        this.messageService.add({ severity: 'success', detail: 'Proposta Salva', life: 15000 });
       }
     }
   }
@@ -153,7 +153,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   async modalAlternativeProposalCallback(event) {
     if (event) {
       if (!this.alternativeProposal) {
-        return this.messageService.add({ severity: 'warn', detail: 'Descreva uma proposta alternativa para salvar' });
+        return this.messageService.add({ severity: 'warn', detail: 'Descreva uma proposta alternativa para salvar', life: 15000 });
       }
       await this.participationSrv.alternativeProposal(
         this.localityId,
@@ -161,7 +161,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
         this.conferenceSrv.ConferenceActiveId,
         this.alternativeProposal);
       this.showModalAlternativeProposal = false;
-      this.messageService.add({ severity: 'success', detail: 'Proposta Salva' });
+      this.messageService.add({ severity: 'success', detail: 'Proposta Salva', life: 15000 });
     } else {
       this.showModalAlternativeProposal = false;
     }

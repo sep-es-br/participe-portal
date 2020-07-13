@@ -74,7 +74,7 @@ export abstract class BaseService<T> {
                         try {
                             const result = await this.http.delete(`${this.urlBase}/${model['id']}`).toPromise();
                             setTimeout(() => {
-                                this.messageSrv.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso' })
+                                this.messageSrv.add({ severity: 'success', summary: 'Sucesso', detail: 'Registro excluído com sucesso', life: 15000 })
                             }, 300);
                             resolve(result['success']);
                         } catch (error) {

@@ -12,9 +12,9 @@ import { StrategicAreaComponent } from './pages/strategic-area/strategic-area.co
 import { ConferenceStepsComponent } from './pages/conference-steps/conference-steps.component';
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
 import { ProposalsComponent } from './pages/proposals/proposals.component';
+import { ParticipationsComponent } from './pages/participations/participations.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login/664', pathMatch: 'full' },
   { path: 'login/:conference', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },
@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'how-it-works-slim', component: HowItWorksSlimComponent },
   { path: 'proposals', component: ProposalsComponent },
+  { path: 'participations', component: ParticipationsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },

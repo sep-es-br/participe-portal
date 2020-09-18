@@ -20,8 +20,8 @@ export class PersonService extends BaseService<any> {
     return this.http.post<IResultHttp<any>>(`${this.urlBase}/complement`, data).toPromise();
   }
 
-  updatePassword(form: IChangePassword) {
-    return this.http.put<IResultHttp<IPerson>>(`${this.urlBase}`, form).toPromise();
+  updatePassword(idPerson: number, form: IChangePassword) {
+    return this.http.put<IResultHttp<IPerson>>(`${this.urlBase}/${idPerson}`, form).toPromise();
   }
 
   register(data: IPerson, recaptchaToken: string) {

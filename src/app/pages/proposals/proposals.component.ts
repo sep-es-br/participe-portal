@@ -102,18 +102,6 @@ export class ProposalsComponent implements OnInit {
     if(success){
       this.regionName = data.regionName;
       this.itemName = data.itemName;
-      
-      data.itens.sort( function( a, b ) {
-                        if ( a.name < b.name ){
-                          return -1;
-                        }
-                        if ( a.name > b.name ){
-                          return 1;
-                        }
-                        return 0;
-                      } );
-      
-      
       data.itens.forEach(item => {
         const planitem: ISelectItem = {
           value: item.id,
@@ -121,17 +109,6 @@ export class ProposalsComponent implements OnInit {
         }
         this.planItemDropdow.push(planitem)
       });
-      
-      
-      data.localities.sort( function( a, b ) {
-                        if ( a.name < b.name ){
-                          return -1;
-                        }
-                        if ( a.name > b.name ){
-                          return 1;
-                        }
-                        return 0;
-                      } );
 
       data.localities.forEach(locality => {
         const local: ISelectItem = {

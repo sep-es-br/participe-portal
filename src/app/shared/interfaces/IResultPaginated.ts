@@ -1,12 +1,12 @@
-import { ISort } from './ISort';
+import { IPagination } from './IPagination';
 
 export interface IResultPaginated<T> {
-    registros: T[];
-    totalRegistros: number;
-    totalPaginas: number;
-    tamanhoPagina: number;
-    pagina: number;
-    ordenacao: ISort[];
+    content: T[];
+    pageable: IPagination;
+    totalPages: number;
+    totalElements: number;
+    last: boolean;
+    empty: boolean;
 }
 
 

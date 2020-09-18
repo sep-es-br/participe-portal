@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   menu: any = [
     { label: 'Participar', route: '/conference-map', activeWhen: ['conference-map', 'strategic-area'] },
     { label: 'Propostas', route: '/proposals', activeWhen: ['proposals'] },
-    // { label: 'Minhas Participações', route: '#' },
+    { label: 'Minhas Participações', route: '/participations', activeWhen: ['participations'] },
     { label: 'Como Funciona', route: '/how-it-works', activeWhen: ['how-it-works'] },
   ];
 

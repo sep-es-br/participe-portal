@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ILocality } from '../../shared/interfaces/ILocality';
-import { SelectItem, MessageService } from 'primeng/api';
-import { LocalityService } from '../../shared/services/locality.service';
-import { AuthService } from '../../shared/services/auth.service';
-import { PersonService } from '../../shared/services/person.service';
-import { ConferenceService } from '../../shared/services/conference.service';
-import { Router } from '@angular/router';
-import { IPerson } from '../../shared/interfaces/IPerson';
 import * as _ from 'lodash';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService, SelectItem } from 'primeng/api';
+
+import { AuthService } from '../../shared/services/auth.service';
+import { ConferenceService } from '../../shared/services/conference.service';
+import { ILocality } from '../../shared/interfaces/ILocality';
+import { IPerson } from '../../shared/interfaces/IPerson';
+import { LocalityService } from '../../shared/services/locality.service';
+import { PersonService } from '../../shared/services/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -65,9 +67,9 @@ export class RegisterComponent implements OnInit {
 
     const sender: IPerson = {
       name, contactEmail, confirmEmail, telephone,
-      selfDeclaretion: {
-        conference: { id: this.conferenceSrv.ConferenceActiveId },
-        locality: { id: _.get(locality, 'value') }
+      selfDeclaration: {
+        conference: this.conferenceSrv.ConferenceActiveId,
+        locality: _.get(locality, 'value')
       }
     };
 
@@ -78,7 +80,7 @@ export class RegisterComponent implements OnInit {
           severity: 'success',
           detail: `Dentro de instantes você receberá uma mensagem em seu email ${contactEmail} com a sua senha provisória.
            Utilize-a para entrar e criar a sua senha definitiva`,
-           life: 15000
+          life: 15000
         });
       }, 1000);
       this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);

@@ -99,7 +99,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   async checkItem(item: IItem) {
     const { success, data } = await this.participationSrv.commentAndHighlights(this.localityId, item.id, this.conferenceSrv.ConferenceActiveId);
     if(success){
-      
+
       if(item.checked === false && data.votes === true)
         this.messageService.add({ severity: 'success', detail: `Destaque da ${this.conferenceStepItem.structureitem.name} salvo!`, life: 15000 });
 
@@ -192,7 +192,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     else{
       this.imageName = "close"
     }
-    
+
   }
 
   private delay(ms: number): Promise<boolean> {

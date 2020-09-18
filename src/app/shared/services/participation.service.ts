@@ -6,6 +6,9 @@ import { Injectable, Inject, Injector } from '@angular/core';
 import { BaseService } from './base.service';
 import { IParticipationPlanItem } from '../interfaces/IParticipationPlanItem';
 import * as qs from 'qs';
+import { PrepareHttpQuery } from '../utils/query.utils';
+import { IQueryOptions } from '../interfaces/IQueryOptions';
+import { IRespParticipation } from '../interfaces/IRespParticipation';
 
 @Injectable({ providedIn: 'root' })
 export class ParticipationService extends BaseService<any> {
@@ -52,4 +55,7 @@ export class ParticipationService extends BaseService<any> {
     }).toPromise();
   }
 
+  getAllByConferenceId(conferenceId: number, queries?: IQueryOptions) {
+    return this.http.get<IResultHttp<IRespParticipation>>(`${this.urlBase}/${conferenceId}${PrepareHttpQuery(queries)}`).toPromise();
+  }
 }

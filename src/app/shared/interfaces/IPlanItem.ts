@@ -4,4 +4,5 @@ export interface IPlanItem{
     parent?: IPlanItem;
     structureItemName?: string;
     fileName?: string;
+    description?: string;
 }

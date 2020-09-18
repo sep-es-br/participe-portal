@@ -5,4 +5,5 @@ export interface ILocality {
   name?: string;
   mapSplit?: string[];
   children?: ILocalityChildren[];
+  type?: ILocalityChildren;
 }

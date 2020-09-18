@@ -1,7 +1,7 @@
 .breadcrumb-wrapper {
   padding: 20px;
   display: flex;
-  align-items: end;
+  align-items: flex-start;
   margin-top: 10px;
   .home-icon {
     width: 30px;
@@ -17,7 +17,7 @@
     margin-right: 10px;
     max-width: 210px;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
 
     &:last-child {
       img {
@@ -36,7 +36,7 @@
        cursor: pointer;
      }
      h2 {
-      font-size: 1.0rem; 
+      font-size: 1.0rem;
       font-weight: normal;
       background: rgba(255,255,255,0.2);
       padding: 5px 30px;
@@ -58,5 +58,4 @@
   .breadcrumb-wrapper {
     display: none !important;
   }
-  
 }

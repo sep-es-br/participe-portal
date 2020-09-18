@@ -1,14 +1,16 @@
-import { Router } from '@angular/router';
-import { IPerson } from './../../shared/interfaces/IPerson';
-import { ConferenceService } from './../../shared/services/conference.service';
-import { AuthService } from './../../shared/services/auth.service';
-import { LocalityService } from './../../shared/services/locality.service';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ConfirmationService, SelectItem } from 'primeng/api';
-import { PersonService } from 'src/app/shared/services/person.service';
 import * as _ from 'lodash';
+
+import { Component, OnInit } from '@angular/core';
+import { ConfirmationService, SelectItem } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { AuthService } from './../../shared/services/auth.service';
+import { ConferenceService } from './../../shared/services/conference.service';
 import { ILocality } from '../../shared/interfaces/ILocality';
+import { IPerson } from './../../shared/interfaces/IPerson';
+import { LocalityService } from './../../shared/services/locality.service';
+import { PersonService } from 'src/app/shared/services/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-complete-profile',
@@ -58,9 +60,9 @@ export class CompleteProfileComponent implements OnInit {
   async save({ name, contactEmail, telephone, locality }) {
     const sender: IPerson = {
       name, contactEmail, telephone,
-      selfDeclaretion: {
-        conference: { id: this.conferenceSrv.ConferenceActiveId },
-        locality: { id: _.get(locality, 'value') }
+      selfDeclaration: {
+        conference: this.conferenceSrv.ConferenceActiveId,
+        locality: _.get(locality, 'value')
       }
     };
 

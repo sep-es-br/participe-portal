@@ -65,7 +65,7 @@
   </app-modal>
   <app-modal class="modalComment" [show]="showModalAlternativeProposal"
     (onCallback)="modalAlternativeProposalCallback($event)">
-    <h2 style="margin-bottom: 10px;">Faça sua proposta</h2>
+    <h2 style="margin-bottom: 10px;">Comente sua proposta</h2>
     <textarea [maxlength]="200" rows="6" [(ngModel)]="alternativeProposal"></textarea>
     <span class="count-characters">Caracteres restantes {{alternativeProposal?.length || 0}}/200</span>
   </app-modal>

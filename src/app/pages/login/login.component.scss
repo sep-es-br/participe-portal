@@ -4,27 +4,41 @@ $backgroundWindow: rgba(255,255,255,0.7);
 $darkColorOr: rgba(0,0,0,0.16);
 
 .page-login {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  flex-wrap: wrap;
+
   .background-page {
     background: var(--primaryColor);
     background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
     background-image: url(/assets/images/background.png);
     background-size: cover;
-    width: 100%;
+    width: 101%;
     height: 100vh;
     position: fixed;
+    z-index: -1;
+    margin-left: -1px;
   }
-  
+  .left-side,
+  .right-side {
+    display: flex;
+    flex: 1 0 50%;
+  }
+  .right-side {
+    flex-direction: column;
+    align-items: flex-end;
+  }
 
   .auth-box {
-    width: 400px;
+    max-width: 400px;
     background: $backgroundWindow;
-    position: absolute;
-    top: $startTop;
-    left: 150px;
+    margin: $startTop 0 $startTop 150px;
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
     overflow: hidden;
+    flex: 1;
 
     .logo {
       max-width: 275px !important;
@@ -57,7 +71,6 @@ $darkColorOr: rgba(0,0,0,0.16);
         display: flex;
         align-items: center;
         color: white;
-        cursor: pointer;
         &.cidadao {
           background: #016A88;
           img {
@@ -96,25 +109,16 @@ $darkColorOr: rgba(0,0,0,0.16);
       padding: 16px 0;
       text-align: center;
       color: $darkColorOr;
-      &:after {
-        content: ' ';
-        height: 1px;
-        width: 103px;
-        background: $darkColorOr;
-        position: absolute;
-        margin-left: 58px;
-        margin-top: 9px;
-        left: -13px;
+      display: flex;
+      .text {
+        padding: 0 7px;
       }
-      &:before {
-        content: ' ';
+      .line {
+        display: flex;
         height: 1px;
-        width: 103px;
+        align-self: center;
+        flex: 1;
         background: $darkColorOr;
-        position: absolute;
-        margin-left: 58px;
-        margin-top: 9px;
-        left: 50%;
       }
     }
     .form-login {
@@ -162,30 +166,28 @@ $darkColorOr: rgba(0,0,0,0.16);
       display: flex;
       justify-content: center;
       margin-top: 20px;
-      color: white;
+      color: var(--textColorDark);
       cursor: pointer;
-      font-size: x-large;
+      :hover {
+        color: white !important;
+      }
     }
-    .how-it-works-container:hover {
-        font-weight: bold;
-    }
-    
   }
   .statistics-container {
-    position: absolute;
-    right: 20px;
-    top: $startTop;
-    width: 450px;
+    margin: $startTop 20px 0 0;
+    max-width: 450px;
     display: flex;
+    flex: 0 1 50%;
     flex-wrap: wrap;
+
     .statistics-item-container {
       background: $backgroundWindow;
-      width: calc(100% - 230px);
       text-align: center;
       padding: 20px;
       margin-bottom: 10px;
       min-height: 120px;
       display: flex;
+      flex: 0 1 48%;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -205,29 +207,34 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
   }
   .calender-container {
-    position: absolute;
-    width: 450px;
-    right: 20px;
-    top: $startTop + 350px;
+    max-width: 450px;
+    margin: $startTop 20px 0 0;
     display: flex;
+    flex: 0 1 50%;
     flex-direction: column;
     align-items: center;
-    img {
+    width: 100%;
+
+    > img {
       width: 30px;
       cursor: pointer;
+      margin: 5px 0;
+    }
+    .hidden-arrow {
+      opacity: 0;
+      pointer-events: none;
     }
     .calendar-container-grid {
       width: 100%;
-      padding: 10px 0;
+
       .calendar-item {
-        cursor: pointer;
         display: flex;
         margin-bottom: 5px;
         font-size: 0.9rem;
         &:last-child {
           margin-bottom: 0px;
         }
-        .date {   
+        .date {
           background: $backgroundWindow;
           margin-right: 5px;
           padding: 10px;
@@ -246,6 +253,9 @@ $darkColorOr: rgba(0,0,0,0.16);
           align-self: center;
           display: flex;
           align-items: center;
+          white-space: pre-wrap;
+          word-break: break-word;
+
           img {
             width: 22px;
             margin-right: 5px;
@@ -254,26 +264,45 @@ $darkColorOr: rgba(0,0,0,0.16);
       }
     }
   }
+  @media (max-width: 1025px) {
+    .auth-box {
+      margin-left: 5%;
+      padding: 5px 10px 20px 10px;
+    }
+  }
+  @media (max-width: 868px) {
+    .left-side,
+    .right-side {
+      display: flex;
+      flex: 1 !important;
+    }
+    .right-side {
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    .auth-box {
+      margin: 0;
+      padding: 5px 10px 20px 10px;
+    }
+    .statistics-container {
+      display: flex;
+      width: 90%;
+      margin: 10px;
+      flex-direction: column;
+      .statistics-item-container {
+        margin: 0 !important;
+      }
+    }
+    .calender-container {
+      width: 90%;
+      margin: 0;
+      .calendar-container-grid .calendar-item .date {
+        align-self: auto;
+      }
+    }
+  }
+  @media (max-width: 550px) {
+    flex-direction: column;
+  }
 }
 
-@media (max-width: 1000px) {
-  .auth-box {
-    display: block !important;
-    left: 10% !important;
-    position: relative !important;
-    width: 80% !important;
-    margin-bottom: 100px;
-  }
-  .statistics-container {
-    display: flex !important;
-    position: relative !important;
-    width: 80% !important;
-    right: initial !important;
-    left: 10% !important;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    .statistics-item-container { 
-      width: calc(50% - 6px) !important;
-    }   
-  }
-}

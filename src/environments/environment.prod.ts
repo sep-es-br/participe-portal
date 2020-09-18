@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://orcamento.es.gov.br/participe'
+  apiUrl: 'https://dev.totemti.com.br:9010/participe'
 };

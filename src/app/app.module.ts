@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { LoginComponent } from './pages/login/login.component';
 import { CompleteProfileComponent } from './pages/complete-profile/complete-profile.component';
@@ -41,6 +42,7 @@ import { HowItWorksSlimComponent } from './pages/how-it-works-slim/how-it-works-
 import { RegisterComponent } from './pages/register/register.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ParticipationsComponent } from './pages/participations/participations.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     RegisterComponent,
     ChangePasswordComponent,
     ForgotPasswordComponent,
+    ParticipationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     ReactiveFormsModule,
     HttpRequestInterceptorModule,
     FormsModule,
-    RecaptchaModule
+    RecaptchaModule,
+    TooltipModule
   ],
   providers: [
     MessageService,

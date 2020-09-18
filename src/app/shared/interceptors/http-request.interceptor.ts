@@ -85,7 +85,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             message = _.get(error, 'error.message', 'Não autorizado');
             break;
           default:
-            message = 'Houve um erro ao processar sua solicitação';
+            message = _.get(error, 'error.message', 'Houve um erro ao processar sua solicitação');
             break;
         }
         setTimeout(() => {

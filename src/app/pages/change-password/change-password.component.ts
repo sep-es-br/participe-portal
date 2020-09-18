@@ -5,6 +5,7 @@ import { PersonService } from '../../shared/services/person.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import * as _ from 'lodash';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-change-password',
@@ -20,7 +21,8 @@ export class ChangePasswordComponent implements OnInit {
     private personSrv: PersonService,
     private conferenceSrv: ConferenceService,
     private router: Router,
-    private messageSrv: MessageService
+    private messageSrv: MessageService,
+    private authSrv: AuthService
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class ChangePasswordComponent implements OnInit {
     if (password !== confirmPassword) {
       return this.messageSrv.add({ severity: 'warn', detail: 'A senha e a confirmação de senha não são iguais', life: 15000 });
     }
-    const { success } = await this.personSrv.updatePassword({ password, confirmPassword });
+    const { success } = await this.personSrv.updatePassword(this.authSrv.getUserInfo.id, { password, confirmPassword });
     if (success) {
       this.router.navigate(['/conference-map']);
     }

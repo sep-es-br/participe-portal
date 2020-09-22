@@ -25,7 +25,7 @@
     "animate.css": "^4.1.0",
     "core-js": "^2.5.4",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "ng-recaptcha": "^5.0.0",
     "primeflex": "^1.0.0",

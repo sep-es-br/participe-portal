@@ -124,6 +124,7 @@ export class ParticipationsComponent implements OnInit {
   }
 
   async showHide() {
+    this.textSearch = '';
     this.hide = (this.hide === 'default' ? 'show' : 'default');
     this.state = (this.state === 'default' ? 'rotated' : 'default');
     if (this.hide === 'default') {

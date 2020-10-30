@@ -76,6 +76,7 @@ $darkColorOr: rgba(0,0,0,0.16);
           img {
             width: 26px;
           }
+          cursor: pointer;
         }
         &.google {
           background: #dc4e41;
@@ -84,6 +85,7 @@ $darkColorOr: rgba(0,0,0,0.16);
             width: 20px !important;
             margin-right: 15px !important;
           }
+          cursor: pointer;
         }
         &.facebook {
           background: #3b5998;
@@ -91,12 +93,14 @@ $darkColorOr: rgba(0,0,0,0.16);
             margin-left: -5px !important;
             margin-right: 10px !important;
           }
+          cursor: pointer;
         }
         &.twitter {
           background: #55acee;
           img {
             margin-left: -4px !important;
           }
+          cursor: pointer;
         }
 
         img {
@@ -159,6 +163,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 5px;
+      cursor: pointer;
     }
 
     .how-it-works-container {

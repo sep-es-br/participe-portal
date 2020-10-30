@@ -154,6 +154,11 @@ $colorEnd: #f48433;
           }
           .likes {
             color: #737373;
+            img {
+              width: 15px;
+              height: 15px;
+              min-width: 2%;
+            }
             &.has-like {
               color: $orange;
             }
@@ -168,6 +173,10 @@ $colorEnd: #f48433;
               display: flex;
               justify-content: flex-end;
               margin-bottom: 10px;
+              img {
+                max-width: 2%;
+                min-width: 2%;
+              }
             }
           }
         }
@@ -197,7 +206,6 @@ $colorEnd: #f48433;
               img {
                 width: 40px;
                 height: 40px;
-                filter: invert(49%) sepia(96%) saturate(501%) hue-rotate(339deg) brightness(101%) contrast(87%);
               }
               .name {
                 font-size: .6rem;
@@ -276,7 +284,6 @@ $colorEnd: #f48433;
               img {
                 width: 40px;
                 height: 40px;
-                filter: invert(49%) sepia(96%) saturate(501%) hue-rotate(339deg) brightness(101%) contrast(87%);
               }
               .name {
                 font-size: .6rem;
@@ -304,7 +311,6 @@ $colorEnd: #f48433;
               }
             }
           }
-
         }
         .action {
           color: $orange;
@@ -313,7 +319,6 @@ $colorEnd: #f48433;
           img {
             width: 15px;
             height: 15px;
-            transform: scaleX(-1);
             margin-right: 5px;
           }
         }
@@ -322,7 +327,9 @@ $colorEnd: #f48433;
     .how-long-ago {
       display: flex;
       font-size: .7rem;
-      justify-self: flex-end;
+      justify-self: flex-end;      
+      position: relative;
+      left: 10px;
     }
     .moderated-by {
       font-size: .7rem;

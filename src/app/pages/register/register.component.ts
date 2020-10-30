@@ -65,6 +65,10 @@ export class RegisterComponent implements OnInit {
       return this.messageSrv.add({ severity: 'warn', detail: 'Você precisa resolver o captcha para continuar!', life: 15000 });
     }
 
+    if(!_.get(locality, 'value')) {
+      return this.messageSrv.add({ severity: 'warn', detail: 'O município informado é inválido.', life: 15000 });
+    }
+
     const sender: IPerson = {
       name, contactEmail, confirmEmail, telephone,
       selfDeclaration: {

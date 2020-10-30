@@ -8,11 +8,32 @@ import { ParticipationService } from './../../shared/services/participation.serv
 import { Component, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../../shared/services/breadcrumb.service';
 import * as _ from 'lodash';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-strategic-area',
   templateUrl: './strategic-area.component.html',
-  styleUrls: ['./strategic-area.component.scss']
+  styleUrls: ['./strategic-area.component.scss'],
+  animations: [
+    trigger('rotatedState', [
+      state('default', style({transform: 'rotateY(90deg)'})),
+      state('rotated', style({transform: 'rotateY(0deg)'})),
+      transition('rotated => default', animate('500ms ease-out')),
+      transition('default => rotated', animate('500ms ease-in'))
+    ]),
+    trigger('hide',[
+      state('default', style({opacity: '0'})),
+      state('show', style({opacity: '1'})),
+      transition('default => show', animate('500ms ease-in')),
+      transition('show => default', animate('500ms ease-out'))
+    ]),
+    trigger('showMessage', [
+      state('default', style({transform: 'translate(450px,0)'})),
+      state('show', style({transform: "translate(-450px,0)"})),
+      transition('default => show', animate('500ms ease-in')),
+      transition('show => default', animate('500ms ease-out'))
+    ])
+  ]
 })
 export class StrategicAreaComponent implements OnInit {
 
@@ -76,6 +97,7 @@ export class StrategicAreaComponent implements OnInit {
   }
 
   async showHide() {
+    this.textSearch = '';
     this.disable = true;
     await this.delay(10);
     this.hide = (this.hide === 'default' ? 'show' : 'default');

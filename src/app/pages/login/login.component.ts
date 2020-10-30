@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.pagination.more = 0
+    this.pagination.size = 0
     this.activeRoute.params.subscribe(async ({ conference }) => {
       this.conferenceId = +conference;
       this.loadConference(conference);
@@ -64,7 +66,11 @@ export class LoginComponent implements OnInit {
 
     if (success) {
       this.meetings = content;
-      this.pagination.more = content.length > 0 && totalPages > (this.pagination.page + 1);
+      if(content == null || content.length == 0) {
+        this.pagination.more = 0;  
+      } else {
+        this.pagination.more = content.length > 0 && totalPages > (this.pagination.page + 1);
+      }
     }
   }
 

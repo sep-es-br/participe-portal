@@ -1,19 +1,21 @@
 .conference-map-container {
   display: flex;
-  padding: 20px;
+  padding: 20px 20px 20px 50px;
   .cards-container {
     width: calc(100% - 340px);
     display: grid;
-    grid-row-gap: 14px;
-    grid-column-gap: 14px;
+    grid-row-gap: 18px;
+    grid-column-gap: 18px;
     grid-template-columns: repeat(auto-fill,minmax(180px, 1fr));
     .card-item {
+      //width: 180px;
       border: 1px solid white;
       background: white;
       padding: 20px;
       border-radius: 4px;
       h2 {
         color: var(--textColorDark);
+        font-size: 20px;
       }
       ul {
         margin-block-start: 0px;
@@ -21,7 +23,8 @@
         padding-inline-start: 0px;
         list-style: none;
         li {
-          font-size: 0.9rem;
+          //font-size: 0.9rem;
+          font-size: 12px;
         }
       }
       .line {
@@ -29,7 +32,7 @@
         height: 4px;
         background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd));
         margin: 10px 0;
-      }  
+      }
       &:hover {
         cursor: pointer;
         color: white;
@@ -44,7 +47,8 @@
     }
   }
   object#map {
-    width: 300px;
+    width: 350px;
+    align-content: right;
   }
 }
 
@@ -58,5 +62,4 @@
       display: none;
     }
   }
-  
 }

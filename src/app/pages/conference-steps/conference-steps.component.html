@@ -39,7 +39,7 @@
           </div>
           <div class="comment card-actions-item" [ngClass]="{'checked': stepItem.checked}"
             *ngIf="conferenceStepItem?.structureitem?.comments" (click)="comment(stepItem)">
-            <img [src]="!stepItem.checked ? 'assets/icons/comment.svg' : 'assets/icons/comment white.svg'">
+            <img [src]="!stepItem.checked ? 'assets/icons/comment2.svg' : 'assets/icons/comment2 white.svg'">
             <div class="count" *ngIf="stepItem.comment || stepItem.commentsMade > 0">{{ stepItem.commentsMade || 1 }}
             </div>
             Inserir Proposta

@@ -3,14 +3,14 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 import { ProposalService } from 'src/app/shared/services/proposal.service';
 import { ISelectItem } from 'src/app/shared/interfaces/ISelectItem';
 import { IProposal } from 'src/app/shared/interfaces/IProposal';
-import { IProposals } from 'src/app/shared/interfaces/IProposals';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
+import { howLongAgo } from 'src/app/shared/utils/date.utils';
 
 @Component({
   selector: 'app-proposals',
   templateUrl: './proposals.component.html',
   styleUrls: ['./proposals.component.scss'],
-  animations:[
+  animations: [
     trigger('rotatedState', [
       state('default', style({transform: 'rotateY(90deg)'})),
       state('rotated', style({transform: 'rotateY(0deg)'})),
@@ -139,14 +139,14 @@ export class ProposalsComponent implements OnInit {
 
   async likeProposal(index:string, item:IProposal){
     const { success, data } = await this.proposalSrv.makeLike(item.commentid);
-    
     if(success){
-      item.likes = data;
+      item.likes = Number(data);
       let likeElement = document.getElementById(index);
-      if(likeElement.className.includes("likes likesAfter"))
+      if(likeElement.className.includes("likes likesAfter")) {
         likeElement.className = 'likes likesBefore';
-      else
+      } else {
         likeElement.className = 'likes likesAfter';
+      }
     }
     else{
       console.error(success, data);
@@ -189,6 +189,7 @@ export class ProposalsComponent implements OnInit {
   }
 
   async showHide() {
+    this.textSearch = '';
     this.disable = true;
     await this.delay(10);
     this.hide = (this.hide === 'default' ? 'show' : 'default');
@@ -256,5 +257,15 @@ export class ProposalsComponent implements OnInit {
     
     if(subMenu.includes("locality"))
       this.checkLocality = false;
+  }
+
+  howLongAgo(strDateAndTime: string) {
+    if (strDateAndTime.indexOf('T') !== -1) {
+      return howLongAgo(new Date(strDateAndTime));
+    }
+    const [ strDate, strTime ] = strDateAndTime.split(' ');
+    const [ day, month, year ] = strDate.split('/');
+    const date = new Date(`${month}-${day}-${year} ${strTime}`);
+    return howLongAgo(date);
   }
 }

@@ -1,6 +1,7 @@
 <app-template [disablebreadcrumb]=true
-              [fullLayout]="true">
-  
+              [fullLayout]="true"
+              [footerVisible]="true">
+              
 <div class="search-container">
   <div class="search-area">
     <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
@@ -27,7 +28,7 @@
         <span class="arrow"></span>
       </label>
       <div class="submenu">
-        <div class="close" (click)="closeSubMenu('region')" >x</div>
+        <div class="close" (click)="closeSubMenu('region')">x</div>
         <label class="container" *ngFor="let item of localityDropdow" >
             {{item.label}}
             <input type="checkbox" (click)="LocalitiesSelected(item)">
@@ -59,15 +60,16 @@
     <div class="card-item" *ngFor="let item of listProposals; let i = index" >
       
         <div class="proposal">
-          <img src="assets/icons/quote.svg" >
+          <img src="assets/icons/quote2.svg">
 
           <div class="comment"><strong>{{ item.comment }}</strong></div>
   
           <div class="person"><strong>{{ item.personName }} - {{ item.localityPerson }}</strong></div>
+          <div class="how-long-ago">{{ howLongAgo(item.time) }}</div>
 
           <a [ngClass]= "item.isLiked ? 'likes likesAfter' : 'likes likesBefore'" (click)="likeProposal(i, item)" id="{{i}}">
-            <div class="number">{{item.likes }} </div> 
-            <div class="thumbs-up"> <i class="pi pi-thumbs-up"></i></div>
+            <div class="number">{{ item.likes || 0}}</div> 
+            <img src="assets/icons/like2.svg" style="min-width: 2%; width: 11px; height: 11px;">
           </a>
         </div>
           
@@ -75,7 +77,7 @@
           <div class="p-item">
             
             <div class="image">
-              <img src="assets/icons/locality.svg">
+              <img src="assets/icons/locality2.svg">
               <p>{{item.localityTypeName}}</p>
             </div>
 
@@ -86,7 +88,7 @@
          
           <div class="p-item" *ngFor="let planitem of item.planItens">
             <div class="image">
-                <img src="assets/icons/{{planitem.fileName}}.svg">
+                <img src="assets/icons/{{planitem.fileName}}2.svg">
                 <p>{{planitem.structureItemName}}</p>
               </div>
             <div class="nameItem">
@@ -98,5 +100,4 @@
     </div>
   </div>
 </div>
-
 </app-template>

@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'http://hom.orcamento.es.gov.br:8080/participe'
 };

@@ -15,6 +15,8 @@ import { ProposalsComponent } from './pages/proposals/proposals.component';
 import { ParticipationsComponent } from './pages/participations/participations.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login/', pathMatch: 'full' },  
+  { path: 'login', redirectTo: 'login/', pathMatch: 'full' },
   { path: 'login/:conference', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },

@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://dev.totemti.com.br:9010/participe',
+  production: false,
+  apiUrl: 'https://host.of.my.api/participe',
+  defaultConference: '000',
 };

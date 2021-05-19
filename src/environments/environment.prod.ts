@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://orcamento.es.gov.br/participe'
+  apiUrl: 'https://host.of.my.api/participe',
+  defaultConference: '000',
 };

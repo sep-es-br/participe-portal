@@ -9,6 +9,8 @@ import { Meeting } from './../../shared/models/Meeting';
 import { MeetingService } from './../../shared/services/meeting.service';
 import { MessageService } from 'primeng/api';
 import { StoreKeys } from '../../shared/commons/contants';
+import { environment } from 'src/environments/environment';
+import { isNumber } from 'lodash';
 
 @Component({
   selector: 'app-login',
@@ -40,11 +42,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.pagination.more = 0
     this.pagination.size = 0
-    this.activeRoute.params.subscribe(async ({ conference }) => {
-      this.conferenceId = +conference;
-      this.loadConference(conference);
-      this.loadMeeting(conference);
-    });
+    if (this.activeRoute.params) {
+      this.activeRoute.params.subscribe(async ({ conference }) => {
+        this.conferenceId = ((isNumber(+conference) && (+conference > 0)))
+                            ? +conference
+                            : +environment.defaultConference;
+        this.loadConference(+this.conferenceId);
+        this.loadMeeting(+this.conferenceId);        
+      });
+    }
   }
 
   async loadConference(conferenceId: number) {

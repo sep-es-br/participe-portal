@@ -48,7 +48,8 @@
       </div>
     </div>
     <div class="calender-container">
-      <img src="assets/icons/up.svg" (click)="meetingPreviousPage()" [class.hidden-arrow]="pagination.page === 0" />
+      
+      <!--img src="assets/icons/up.svg" (click)="meetingPreviousPage()" [class.hidden-arrow]="pagination.page === 0" />
       <div class="calendar-container-grid">
         <div class="calendar-item" *ngFor="let meeting of meetings">
           <div class="date">
@@ -59,7 +60,39 @@
             {{ meeting?.localityPlace?.name }} - {{ meeting.place }}</div>
         </div>
       </div>
-      <img src="assets/icons/down.svg" (click)="meetingNextPage()" [class.hidden-arrow]="!pagination.more" />
+      <img src="assets/icons/down.svg" (click)="meetingNextPage()" [class.hidden-arrow]="!pagination.more" /-->
+      
+      <div class="row">
+        <div style="margin: 20px 0 20px 0; color: white; font-size: 22px; font-weight: 600;">
+            <h4>ACOMPANHE NOSSOS ENCONTROS VIRTUAIS</h4>
+            <h5>Transmissões: YouTube, TVE e Rádio Espírito Santo</h5>
+        </div>
+      </div>
+
+      <div class="row" style="background-color: rgba(255, 255, 255, 0.705); width: 500px; text-align: start; padding: 10px; margin-bottom: 10px;">
+          <div class="col" style="text-align: left; margin: auto"><h4 style="font-weight: 900;">15/06/21</h4></div>
+          <div class="col" style="text-align: right;">
+              <h6>Terça-feira</h6>
+              <h6>A partir das 15h</h6>
+          </div>
+      </div>
+
+      <div class="row" style="background-color: rgba(255, 255, 255, 0.705); width: 500px; text-align: start; padding: 10px; margin-bottom: 10px;">
+          <div class="col" style="text-align: left; margin: auto"><h4 style="font-weight: 900;">16/06/21</h4></div>
+          <div class="col" style="text-align: right;">
+              <h6>Quarta-feira</h6>
+              <h6>A partir das 15h</h6>
+          </div>
+      </div>
+
+      <div class="row" style="background-color: rgba(255, 255, 255, 0.705); width: 500px; text-align: start; padding: 10px; margin-bottom: 10px;">
+          <div class="col" style="text-align: left; margin: auto"><h4 style="font-weight: 900;">17/06/21</h4></div>
+          <div class="col" style="text-align: right;">
+              <h6>Quinta-feira</h6>
+              <h6>A partir das 15h</h6>
+          </div>
+      </div>  
+      
     </div>
   </div>
   <p-toast position="top-right"></p-toast>

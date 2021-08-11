@@ -1,4 +1,4 @@
-import { ConferenceService } from './../../shared/services/conference.service';
+import { ConferenceService } from '../../shared/services/conference.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PersonService } from '../../shared/services/person.service';
@@ -42,12 +42,12 @@ export class ChangePasswordComponent implements OnInit {
     }
     const { success } = await this.personSrv.updatePassword(this.authSrv.getUserInfo.id, { password, confirmPassword });
     if (success) {
-      this.router.navigate(['/conference-map']);
+      await this.router.navigate(['/conference-map']);
     }
   }
 
-  cancel() {
-    this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
+  async cancel() {
+    await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
 
 }

@@ -1,7 +1,7 @@
 import { ILocalityChildren } from './ILocalityChildren';
-import { IItem } from './IItem'
+import { IItem } from './IItem';
 
-export interface IProposalFilters{
+export interface IProposalFilters {
     regionName: string;
     itemName: string;
     itens: IItem[];

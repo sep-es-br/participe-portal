@@ -1,9 +1,18 @@
 <div class="footer-container">
   <div class="block-item"></div>
   <div class="block-item align-center">
-    Secretaria de Estado de Economia e Planejamento
+    <a *ngIf="researchStatus === 'ACTIVE' && researchUrl" (click)="researchRedirect()">
+      <div class="research">
+        <i class="fas fa-clipboard-list"></i>
+        <div class="research-text">
+          <span><b>Responder à pesquisa</b></span>
+          <span>{{estimatedTimeResearch}}</span>
+        </div>
+      </div>
+    </a>
+    <span>Secretaria de Estado de Economia e Planejamento</span>
   </div>
   <div class="block-item align-right">
-    <img src="assets/images/poweredBy_branco.svg">
+    <img src="assets/images/poweredBy_branco.svg" alt="">
   </div>
 </div>

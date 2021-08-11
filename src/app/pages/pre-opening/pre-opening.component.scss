@@ -1,0 +1,110 @@
+.page-pre-opening {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    .background-page {
+      background: var(--primaryColor);
+      background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
+      background-image: url(src/assets/images/background.png);
+      background-size: cover;
+      width: 101%;
+      height: 101vh;
+      position: fixed;
+      z-index: -1;
+      margin-left: -1px;
+    }
+    .counter-block {
+        margin: 55px 0 35px 65px;
+        height: fit-content;
+        .counter-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            padding-left: 2px;
+        }
+        .counter {
+            margin-top: 5px;
+            display: flex;
+            flex-direction: row;
+            color: var(--primaryColor);
+            .date-block {
+                width: 85px;
+                height: 80px;
+                background-color: #bbb;
+                border-radius: 10px;
+                margin: 0 2px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .date-content {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .date-number {
+                        font-size: 30px;
+                        font-weight: bold;
+                    }
+                    .date-description {
+                        font-size: 12px;
+                        margin-top: 2px;
+                    }
+                }
+            }
+        }
+    }
+    .conference-warning-block {
+        margin: 0 65px 40px;
+        background: white;
+        border-top: 10px solid var(--accentColorEnd);
+        // min-height: 380px;
+        .conference-warning-message {
+            padding: 40px 80px 30px 50px;
+        }
+    }
+}
+
+.center {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .page-pre-opening {
+        .conference-warning-block {
+            .conference-warning-message {
+                padding: 20px 25px 20px 25px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .page-pre-opening {
+        align-items: center;
+        .counter-block {
+            margin: 50px 5px 35px 0;
+        }
+        .conference-warning-block {
+            margin: 0px 27px 0 22px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .page-pre-opening {
+       .counter-block {
+            .counter-title {
+                font-size: 23px;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 25px;
+            }
+            .counter {
+                .date-block {
+                    width: 75px;
+                    height: 75px;
+                }
+            }
+        }
+    }
+}

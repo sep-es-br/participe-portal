@@ -1,7 +1,8 @@
 import { IPlanItem } from './IPlanItem';
 
-export interface IProposal{
-    commentid:number;
+export interface IProposal {
+    commentid: number;
+    time: string;
     comment: string;
     isLiked: boolean;
     personName: string;

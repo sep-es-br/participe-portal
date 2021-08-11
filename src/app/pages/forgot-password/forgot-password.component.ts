@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PersonService } from '../../shared/services/person.service';
-import { ConferenceService } from '../../shared/services/conference.service';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PersonService} from '../../shared/services/person.service';
+import {ConferenceService} from '../../shared/services/conference.service';
+import {Router} from '@angular/router';
+import {MessageService} from 'primeng/api';
 import * as _ from 'lodash';
 
 @Component({
@@ -43,12 +43,12 @@ export class ForgotPasswordComponent implements OnInit {
           life: 15000
         });
       }, 1000);
-      this.back();
+      await this.back();
     }
   }
 
-  back() {
-    this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
+  async back() {
+    await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
 
 }

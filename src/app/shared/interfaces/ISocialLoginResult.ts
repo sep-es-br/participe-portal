@@ -1,4 +1,4 @@
-import { IPerson } from './IPerson';
+import {IPerson} from './IPerson';
 
 export interface ISocialLoginResult {
   person: IPerson;
@@ -6,4 +6,15 @@ export interface ISocialLoginResult {
   type: string;
   token: string;
   refreshToken: string;
+  authServiceName?: string;
+}
+
+export interface ILoginProfileResult {
+  loginId: string;
+  loginType: string;
+  loginEmail: string;
+  loginName: string;
+  name: string;
+  hasRelatedRecord: boolean;
+  personIdAlreadyRelated: number;
 }

@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BreadcrumbService } from './../../shared/services/breadcrumb.service';
+import { BreadcrumbService } from '../../shared/services/breadcrumb.service';
 
 export interface IBreadcrumbItem {
   title: string;
   subTitle?: string;
   route?: any;
+  queryParams?: any;
 }
 @Component({
   selector: 'app-breadcrumb',
@@ -36,8 +37,12 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigate(route) {
-    this.router.navigate(route);
+  async navigate(route, queryParams?) {
+    if (queryParams && !isNaN(queryParams)) {
+      await this.router.navigate(route, {queryParams});
+    } else {
+      await this.router.navigate(route);
+    }
   }
 
 }

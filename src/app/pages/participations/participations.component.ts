@@ -13,14 +13,14 @@ import { ParticipationService } from 'src/app/shared/services/participation.serv
   selector: 'app-participations',
   templateUrl: './participations.component.html',
   styleUrls: ['./participations.component.scss'],
-  animations:[
+  animations: [
     trigger('rotatedState', [
       state('default', style({transform: 'rotateY(90deg)'})),
       state('rotated', style({transform: 'rotateY(0deg)'})),
       transition('rotated => default', animate('500ms ease-out')),
       transition('default => rotated', animate('500ms ease-in'))
     ]),
-    trigger('hide',[
+    trigger('hide', [
       state('default', style({opacity: '0'})),
       state('show', style({opacity: '1'})),
       transition('default => show', animate('500ms ease-in')),
@@ -45,6 +45,7 @@ export class ParticipationsComponent implements OnInit {
   textSearch: string = '';
   state: string = 'default';
   listParticipations: IParticipation[] = [];
+  regionalization: boolean;
   showModalProposal = false;
   selectedParticipation: IParticipation;
   newProposal: string = '';
@@ -59,15 +60,16 @@ export class ParticipationsComponent implements OnInit {
     private messageService: MessageService
   ) { }
 
-  ngOnInit() {
-    this.search(true);
+  async ngOnInit() {
+    await this.search(true);
+    await this.loadRegionalizationConference();
   }
 
   @HostListener('window:scroll', ['$event'])
   async onScroll(event: any) {
-    const top = event.srcElement.scrollingElement.scrollTop;
-    const offset = event.srcElement.scrollingElement.offsetHeight;
-    const max = event.srcElement.scrollingElement.scrollHeight;
+    const top = event.target.scrollingElement.scrollTop;
+    const offset = event.target.scrollingElement.offsetHeight;
+    const max = event.target.scrollingElement.scrollHeight;
     if ((top + offset) >= max) {
       if (this.indexPage <= this.totalPages) {
         this.indexPage = this.indexPage + 1;
@@ -103,7 +105,7 @@ export class ParticipationsComponent implements OnInit {
         });
         this.totalPages = data.totalPages;
         if (!skipMsg && !!this.textSearch) {
-          if (!data.participations || data.participations.length < 1){
+          if (!data.participations || data.participations.length < 1) {
             this.searchMessage = 'Hummm... Não estou encontrando esse termo. Que tal tentar um sinônimo ou algo menos específico?';
             this.wasFound = false;
           } else {
@@ -119,7 +121,7 @@ export class ParticipationsComponent implements OnInit {
         severity: 'warn',
         summary: 'Erro',
         detail: 'Erro ao tentar buscar as participações, tente novamente'
-      })
+      });
     }
   }
 
@@ -130,18 +132,18 @@ export class ParticipationsComponent implements OnInit {
     if (this.hide === 'default') {
       this.textSearch = '';
       this.searchIconClass = 'pi pi-search';
-      this.search(true);
-      this.closeMessage();
+      await this.search(true);
+      await this.closeMessage();
     } else {
       this.searchIconClass = 'pi pi-times';
     }
   }
 
   async saveProposal() {
-    if (!this.newProposal) {
+    if (!this.newProposal.trim()) {
       return this.messageService.add({ severity: 'warn', detail: 'Você precisa escrever o comentário que deseja adicionar!', life: 15000 });
     }
-    const localityId = Number(this.selectedParticipation.localityDto.id);
+    const localityId = this.regionalization ? Number(this.selectedParticipation.localityDto.id) : null;
     const planItem = this.selectedParticipation.planItems[0].id;
     const { success } = await this.participationSrv.commentAndHighlights(
       localityId, planItem, this.conferenceSrv.ConferenceActiveId, this.newProposal
@@ -167,9 +169,16 @@ export class ParticipationsComponent implements OnInit {
     }
   }
 
-  modalOnCallback(event) {
+  async loadRegionalizationConference() {
+    if (this.conferenceSrv.ConferenceActiveId) {
+      const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
+      this.regionalization = data.regionalization;
+    }
+}
+
+  async modalOnCallback(event) {
     if (event) {
-      this.saveProposal();
+      await this.saveProposal();
     } else {
       this.showModalProposal = false;
     }
@@ -212,7 +221,7 @@ export class ParticipationsComponent implements OnInit {
     };
   }
 
-  async closeMessage(){
+  async closeMessage() {
     this.classMsg = 'animate__animated animate__fadeOutRightBig';
     setTimeout(() => this.showMessage = false, 1000);
   }

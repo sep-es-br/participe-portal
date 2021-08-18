@@ -356,7 +356,7 @@ $darkColorOr: rgba(0,0,0,0.16);
               img {
                 cursor: pointer;
                 margin-right: 10px;
-                .wake {
+                .waze {
                   display: none;
                 }
               }
@@ -382,9 +382,6 @@ $darkColorOr: rgba(0,0,0,0.16);
               img {
                 cursor: pointer;
                 margin-right: 10px;
-                .wake {
-                  display: none;
-                }
               }
             }
           }
@@ -409,6 +406,12 @@ $darkColorOr: rgba(0,0,0,0.16);
           }
         }
       }
+    }
+  }
+
+  ::ng-deep {
+    .waze {
+      display: none;
     }
   }
 
@@ -450,8 +453,11 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
   }
   @media (max-width: 800px) {
-    .icons-locality .waze {
-      display: block;
+    .icons-locality{
+      display: flex;
+      .waze {
+       display: block;
+     }
     }
   }
   @media (max-width: 550px) {

@@ -3,4 +3,5 @@ export class MeetingFilterModel {
   beginDate?: string;
   endDate?: string;
   localities?: number[];
+  currentDate?: string;
 }

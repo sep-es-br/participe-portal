@@ -19,7 +19,11 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { ChartModule } from 'primeng/chart';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MenuModule} from 'primeng/menu';
 import { LoginComponent } from './pages/login/login.component';
 import { CompleteProfileComponent } from './pages/complete-profile/complete-profile.component';
 import { TemplateComponent } from './components/template/template.component';
@@ -43,10 +47,18 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ParticipationsComponent } from './pages/participations/participations.component';
+import { PreOpeningComponent } from './pages/pre-opening/pre-opening.component';
+import { PostClosureComponent } from './pages/post-closure/post-closure.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { HeatMapComponent } from './pages/statistics/graphs/heat-map/heat-map.component';
+import { HorizontalBarGraphComponent } from './pages/statistics/graphs/horizontal-bar-graph/horizontal-bar-graph.component';
+import { StartComponent } from './pages/start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    StartComponent,
     LoginComponent,
     CompleteProfileComponent,
     TemplateComponent,
@@ -67,8 +79,15 @@ import { ParticipationsComponent } from './pages/participations/participations.c
     ChangePasswordComponent,
     ForgotPasswordComponent,
     ParticipationsComponent,
+    PreOpeningComponent,
+    PostClosureComponent,
+    ProfileComponent,
+    StatisticsComponent,
+    HeatMapComponent,
+    HorizontalBarGraphComponent,
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -86,7 +105,11 @@ import { ParticipationsComponent } from './pages/participations/participations.c
     HttpRequestInterceptorModule,
     FormsModule,
     RecaptchaModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule,
+    ChartModule,
+    MultiSelectModule,
+    MenuModule,
   ],
   providers: [
     MessageService,

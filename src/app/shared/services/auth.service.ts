@@ -1,10 +1,10 @@
-import { ILoginResult } from './../interfaces/ILoginResult';
-import { IResultHttp } from './../interfaces/IResultHttp';
-import { IPerson } from './../interfaces/IPerson';
-import { ISocialLoginResult } from './../interfaces/ISocialLoginResult';
-import { environment } from './../../../environments/environment';
+import { ILoginResult } from '../interfaces/ILoginResult';
+import { IResultHttp } from '../interfaces/IResultHttp';
+import { IPerson } from '../interfaces/IPerson';
+import { ISocialLoginResult } from '../interfaces/ISocialLoginResult';
+import { environment } from '../../../environments/environment';
 import { DOCUMENT } from '@angular/common';
-import { StoreKeys } from './../commons/contants';
+import { StoreKeys } from '../commons/contants';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -33,23 +33,31 @@ export class AuthService {
 
   private getUrlForSocialAuth(origin: string) {
     return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${
-      this.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
+      AuthService.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
   }
 
   signInFacebook() {
     this.document.location.href = this.getUrlForSocialAuth('facebook');
   }
 
-  signInTwitter() {
-    this.document.location.href = this.getUrlForSocialAuth('twitter');
+  signInFacebookProfile() {
+    this.document.location.href = this.getUrlForSocialAuth('facebook-profile');
   }
 
   signInGoogle() {
     this.document.location.href = this.getUrlForSocialAuth('google');
   }
 
+  signInGoogleProfile() {
+    this.document.location.href = this.getUrlForSocialAuth('google-profile');
+  }
+
   signInAcessoCidadao() {
     this.document.location.href = this.getUrlForSocialAuth('portal');
+  }
+
+  signInAcessoCidadaoProfile() {
+    this.document.location.href = this.getUrlForSocialAuth('portal-profile');
   }
 
   async refresh() {
@@ -72,7 +80,7 @@ export class AuthService {
 
   async signOut() {
     this.clearTokens();
-    this.router.navigate(['/login']);
+    await this.router.navigate(['/login']);
   }
 
   saveToken(data: ISocialLoginResult | ILoginResult) {
@@ -87,6 +95,8 @@ export class AuthService {
   clearTokens() {
     localStorage.removeItem(StoreKeys.ACCESS_TOKEN);
     localStorage.removeItem(StoreKeys.REFRESH_TOKE);
+    localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
+    localStorage.removeItem(StoreKeys.CONFERENCE_ACTIVE);
   }
 
   getAccessToken() {
@@ -101,7 +111,7 @@ export class AuthService {
     return jwtDecode(this.getAccessToken());
   }
 
-  private getFrontFallbackUrl(): string {
+  private static getFrontFallbackUrl(): string {
     const { protocol, host } = window.location;
     return `${protocol}//${host}`;
   }

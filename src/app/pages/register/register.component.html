@@ -28,7 +28,9 @@
         [placeholder]="'Digite o nome da ' + localityType + ' pesquisar'" [dropdown]="true">
       </p-autoComplete>
     </div>
-    <re-captcha (resolved)="resolveCaptcha($event)" siteKey="6LcbE68ZAAAAAF0RguVbWPtRafhHNNP-QHq7uqYY"></re-captcha>
+    <re-captcha (resolved)="resolveCaptcha($event)" [siteKey]="siteKey"></re-captcha>
+    
+    
     <div class="actions p-col-12 align-right">
       <button type="button" class="btn-primary" (click)="cancel()">
         Cancelar

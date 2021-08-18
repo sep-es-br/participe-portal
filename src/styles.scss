@@ -67,18 +67,23 @@ button.btn-secondary {
   .ui-button {
     background: var(--accentColorStart) !important;
     border-color: #a6a6a6 !important;
-    color: var(--light);
+    color: var(--light);  
     .ui-button-icon-left:before {
-      content: "\e908";
+      content: "\e902";
     }
     &:enabled:hover {
       color: var(--accentColorEnd);
     }
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }
 
 .actions-footer {
-  padding: 20px;
+  padding: 20px 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;

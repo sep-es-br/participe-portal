@@ -1,0 +1,218 @@
+::ng-deep .app-profile{
+  .title {
+    color: #fff;
+    padding: 20px 50px 0 0;
+    position: absolute;
+    margin-top: -4.1rem;
+    margin-left: -1rem;
+  }
+  form {
+    padding:  1.8rem 2rem;
+  }
+  .stacked {
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    label {
+      width: 100%;
+    }
+  }
+  .pi-chevron-down:before {
+    content: '\e906';
+  }
+
+  .autentication {
+    margin: 3rem 0;
+    .external, .internal {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background-color: #bdbfc1;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      width: 75px;
+      height: 75px;
+      cursor: pointer;
+      &.active {
+        background-color: #15993f;
+      }
+      &.active-current {
+        border: 3px solid #15993f;
+      }
+      img {
+          width: 80%;
+      }
+      &.cidadao img {
+        margin-left: 10px;
+        width: 100%;
+      }
+      &.facebook {
+        padding: 0;
+        img {
+          width: 100%;
+        }
+      }
+      &.sagres {
+        padding: 11px;
+      }
+     i {
+        font-family: primeicons, serif;
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        display: inline-block;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        margin-top: 2.7em;
+        margin-left: 2.5em;
+        position: absolute;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        background-color: #fff;
+        &.icon-plus {
+          border: 1px solid #50b270;
+          &:after {
+            content: "\e90d";
+            color: #15993f;
+          }
+        }
+        &.icon-times {
+          border: 1px solid #ee8c59;
+          &:after {
+            content: "\e90b";
+            color: #e96b2a;
+          }
+        }
+      }
+    }
+  }
+
+  .field-switch {
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    label {
+      margin-left: 0.8rem;
+    }
+    .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+      background-color: #e8731e;
+      &:hover {
+        background-color: #e8731e;
+      }
+    }
+  }
+  .btn-primary, .btn-secondary {
+    width: 10rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+  }
+}
+
+@media(min-width: 800px) {
+  form {
+    width: 60%;
+  }
+}
+@media(max-width: 600px) {
+  .btn-primary, .btn-secondary {
+    width: 7rem;
+    font-size: 0.8rem;
+  }
+}
+@media (min-width: 600px) and (max-width: 800px) {
+  form {
+    width: 80%;
+  }
+}
+
+
+
+.dialog-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 40px;
+  position: relative;
+  .fa-times-circle {
+    color: #008000;
+  }
+  .title-text {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+}
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .question-text {
+    margin: 7px 0px;
+    font-weight: bold;
+    font-size: 26px;
+    margin-top: 5px;
+  }
+  .options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .option {
+      margin: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}
+
+::ng-deep body {
+  .fa-times-circle {
+    font-size: 2.5rem;
+  }
+  .ui-button{
+    background: #ef8533;
+    border: 1px solid #ef8533 !important;
+  }
+  .ui-button-icon-left {
+    left: 1.5em;
+  }
+  .ui-button.ui-button-text-icon-left{
+    .ui-button-text {
+      padding: 0.429em 3.5em 0.429em;
+    }
+  }
+  .ui-dialog .ui-dialog-content {
+    border: none;
+  }
+  .ui-widget-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .ui-dialog .ui-dialog-titlebar {
+    border: none;
+    background-color: #fff;
+    padding: 0;
+  }
+  .ui-dialog .ui-dialog-titlebar-icon span {
+    display: block;
+    margin: 5px;
+    font-size: 1.2rem;
+  }
+  .ui-button:hover {
+    background: #ef8533 !important;
+  }
+  .ui-button:active {
+    background: #ef8533 !important;
+  }
+}

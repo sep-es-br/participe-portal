@@ -1,0 +1,123 @@
+<app-template [disablebreadcrumb]="true" [fullLayout]="false" [footerVisible]="true"
+              [useCard]="true">
+  <div class="app-profile">
+    <h2 class="title">Meu Perfil</h2>
+    <form class="p-grid ui-fluid p-col-12 col-md-6" [formGroup]="userForm" (submit)="save()"
+          *ngIf="userForm">
+      <div class="p-col-12 form-group stacked">
+        <label for="nome">Nome*</label>
+        <input id="nome" pInputText formControlName="name" type="text">
+        <app-input-message [form]="userForm" field="name"></app-input-message>
+      </div>
+      <div class="p-col-12 p-md-7 form-group stacked">
+        <label for="contactEmail">E-mail de contato*</label>
+        <p-dropdown id="contactEmail" [options]="optionsContactEmail"
+                    formControlName="contactEmail"></p-dropdown>
+        <app-input-message [form]="userForm" field="contactEmail"></app-input-message>
+      </div>
+      <div class="p-col-12 p-md-5 form-group stacked">
+        <label for="telephone">Telefone</label>
+        <p-inputMask mask="(99) 99999-9999" formControlName="telephone"></p-inputMask>
+        <app-input-message [form]="userForm" field="telephone"></app-input-message>
+      </div>
+      <div class="p-col-12 p-md-8 form-group stacked">
+        <label for="locality">{{localityType}}</label>
+        <p-dropdown id="locality" [options]="optionsLocality" formControlName="localityId"
+                    [filter]="true"></p-dropdown>
+        <app-input-message [form]="userForm" field="localityId"></app-input-message>
+      </div>
+      <section class="autentication p-col-12">
+        <h3>Autenticação</h3>
+        <div class="external">
+          <button [class]="findAuthentication('AcessoCidadao') ? 'cidadao active' : 'cidadao'"
+                  type="button"
+                  (click)="findAuthentication('AcessoCidadao') ? deleteAuthCidadao() : addAuthCidadao()">
+            <img src="assets/icons/cidadao.svg" alt=""/>
+            <i [class]="findAuthentication('AcessoCidadao') ? 'icon-times' : 'icon-plus'"></i>
+          </button>
+          <button [class]="findAuthentication('Google') ? 'google active' : 'google'" type="button"
+                  (click)="findAuthentication('Google') ? deleteAuthGoogle() : addAuthGoogle() "
+          >
+            <img src="assets/icons/google.svg" alt=""/>
+            <i [class]="findAuthentication('Google') ? 'icon-times' : 'icon-plus'"></i>
+          </button>
+
+          <button [class]="findAuthentication('Facebook') ? 'facebook active' : 'facebook'"
+                  type="button"
+                  (click)="findAuthentication('Facebook') ? deleteAuthFacebook() : addAuthFacebook()"
+          >
+            <img src="assets/icons/facebook.svg" alt=""/>
+            <i [class]="findAuthentication('Facebook') ? 'icon-times' : 'icon-plus'"></i>
+          </button>
+        </div>
+
+        <div class="internal p-col-12">
+          <button class="sagres p-col-3" [ngClass]="statusLogin === 'ATIVO' && 'active'"
+                  type="button"
+                  (click)="statusLogin === 'DESATIVADO' ? addAuthParticipe() : deleteAuthParticipe()">
+            <img src="assets/icons/logomark-white2.svg" alt=""/>
+            <i [class]="statusLogin !== 'DESATIVADO' ? 'icon-times' : 'icon-plus'"></i>
+          </button>
+          <div class="fields p-col-7" *ngIf="statusLogin !== 'DESATIVADO'">
+            <div class="p-col-12 form-group stacked">
+              <label for="login">E-mail/CPF</label>
+              <p-dropdown id="login" [options]="optionsContactEmail"
+                          (onChange)="changeAuthParticipe($event)"></p-dropdown>
+            </div>
+            <div class="internal">
+              <div class="p-col-12 p-md-6 form-group stacked">
+                <label for="newPassword">Nova senha</label>
+                <input id="newPassword" pInputText formControlName="newPassword" type="password">
+                <app-input-message [form]="userForm" field="newPassword"></app-input-message>
+              </div>
+              <div class="p-col-12 p-md-6 form-group stacked">
+                <label for="confirmNewPassword">Confirme a nova senha</label>
+                <input id="confirmNewPassword" pInputText formControlName="confirmNewPassword"
+                       type="password">
+                <app-input-message [form]="userForm" field="confirmNewPassword"></app-input-message>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="p-col-12 form-group field-switch">
+        <p-inputSwitch id="informational" formControlName="receiveInformational">
+        </p-inputSwitch>
+        <label for="informational">Desejo receber mensagens informativas</label>
+      </div>
+
+      <div class="actions p-col-12">
+        <button class="btn-primary" type="submit" [disabled]="userForm.invalid">
+          Salvar
+        </button>
+        <button type="button" class="btn-secondary" (click)="cancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</app-template>
+
+<p-dialog [(visible)]="mergeEventData.displayMergeProfileDialog" [modal]="true"
+[style]="{width:'60vw'}" showEffect="fade" [resizable]="false" [draggable]="false" [responsive]="true">
+  <div class="dialog-title">
+    <i class="far fa-times-circle"></i>
+    <span class="title-text">
+        Atenção
+        Você {{mergeEventData.email}} já utilizou esse email para realizar um outro cadastro neste
+        site. Você pode unificar os dois cadastros. Se o fizer, o site juntará todas as suas
+        participações e passará a considerar ambos os cadastros como de uma só pessoa.
+      </span>
+  </div>
+  <div class="dialog-content">
+    <span class="question-text">Deseja unificar os seus cadastros agora?</span>
+    <div class="options">
+      <div class="option" (click)="wannaMergeProfile({answer: true})">
+        <span>SIM</span>
+      </div>
+      <div class="option" (click)="wannaMergeProfile({answer: false})">
+        <span>NÃO</span>
+      </div>
+    </div>
+  </div>
+</p-dialog>

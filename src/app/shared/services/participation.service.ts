@@ -1,7 +1,7 @@
-import { IItem } from './../interfaces/IItem';
+import { IItem } from '../interfaces/IItem';
 
-import { IParticipationHeader } from './../interfaces/IParticipationHeader';
-import { IResultHttp } from './../interfaces/IResultHttp';
+import { IParticipationHeader } from '../interfaces/IParticipationHeader';
+import { IResultHttp } from '../interfaces/IResultHttp';
 import { Injectable, Inject, Injector } from '@angular/core';
 import { BaseService } from './base.service';
 import { IParticipationPlanItem } from '../interfaces/IParticipationPlanItem';
@@ -24,12 +24,16 @@ export class ParticipationService extends BaseService<any> {
     ).toPromise();
   }
 
-  getPlanItem(conferenceId: number, localityId: number, planItemId?: number, text?: string) {
+  setSurvey(conferenceId: number, answerSurvey: boolean) {
+    return this.http.post<any>(`${this.urlBase}/portal-header/${conferenceId}/selfdeclarations/decline`, answerSurvey).toPromise();
+  }
+
+  getPlanItem(conferenceId: number, localityId?: number, planItemId?: number, text?: string) {
     return this.http.get<IResultHttp<IParticipationPlanItem>>(
       `${this.urlBase}/plan-item/${conferenceId}${qs.stringify({
         idLocality: localityId,
         idPlanItem: planItemId,
-        text: text
+        text
       }, { addQueryPrefix: true })}`
     ).toPromise();
   }
@@ -41,7 +45,7 @@ export class ParticipationService extends BaseService<any> {
       conference: conferenceId
     };
     if (comment) {
-      sender['text'] = comment;
+      sender[`text`] = comment;
     }
     return this.http.post<IResultHttp<IItem>>(`${this.urlBase}/highlights`, sender).toPromise();
   }

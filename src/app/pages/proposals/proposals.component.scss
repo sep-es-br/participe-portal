@@ -18,8 +18,7 @@
       font-size: 12px;
     }
     input{
-      padding: 0;
-      padding-left: 8px;
+      padding: 0 0 0 8px;
       outline:none;
       opacity: 0.8;
       width: 30em;
@@ -40,7 +39,7 @@
         width: 15px;
         height: 15px;
       }
-    } 
+    }
   }
   .message{
     color: white;
@@ -48,9 +47,7 @@
     padding: 1rem;
     margin-top: 15px;
     margin-left: 20px;
-    border: 1px;
-    border-color: white;
-    border-style: solid;
+    border: 1px solid white;
     border-radius: 10px;
     strong{
       margin-right: 1rem;
@@ -66,7 +63,7 @@
 }
 
 .filter-container{
-  
+
   padding: 0 15px;
   margin-left: 1rem;
   margin-top: 10px;
@@ -118,30 +115,24 @@
       }
       input:checked ~ .checkmark:after {
         display: block;
-        
+
       }
 
       div.submenu{
         position:absolute;
         max-height:0;
-        padding:0;
-        padding-left: 4px;
-        padding-right: 4px;
+        padding: 0 4px;
         overflow:hidden;
         list-style-type:none;
         background: white;
         transition:max-height 0.5s ease-out;
-        position:absolute;
         min-width:auto;
         z-index:2;
         margin-top: 10px;
         width: inherit;
         .close{
           text-align: right;
-          margin-top: 5px;
-          margin-right: 5px;
-          margin-left: auto;
-          margin-bottom: 0;
+          margin: 5px 5px 0 auto;
           font-weight: bold;
           cursor: pointer;
           width: 10%;
@@ -172,7 +163,7 @@
           height: 0;
           width: 0;
         }
-        
+
         .checkmark {
           position: absolute;
           top: 7px;
@@ -188,11 +179,11 @@
           position: absolute;
           display: none;
         }
-        
+
         .container input:checked ~ .checkmark:after {
           display: block;
         }
-        
+
         .container .checkmark:after {
           left: 4px;
           top: 2px;
@@ -207,12 +198,12 @@
       }
     }
   }
-} 
+}
 .proposals-area-container {
   display: flex;
   padding: 10px;
   justify-content: center;
-  
+
   .cards-container {
     width: 95%;
     display: grid;
@@ -220,7 +211,7 @@
     grid-column-gap: 15px;
     justify-content: center;
     grid-template-columns: repeat(auto-fill,minmax(380px, 0.4fr));
-    
+
     .card-item {
       display: flex;
       //min-height: 240px;
@@ -241,6 +232,7 @@
           margin-bottom: 1rem;
         }
         .comment{
+          word-wrap: break-word;
           min-height: 100px;
           font-size: 12px;
         }
@@ -292,7 +284,7 @@
           }
         }
       }
-      
+
       .planitens{
         display: block;
         margin-left: 1px;

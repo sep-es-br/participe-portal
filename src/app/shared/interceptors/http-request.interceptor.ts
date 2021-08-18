@@ -1,22 +1,22 @@
-import { ConferenceService } from './../services/conference.service';
-import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import {ConferenceService} from '../services/conference.service';
+import {Router} from '@angular/router';
+import {Injectable} from '@angular/core';
 import {
+  HttpErrorResponse,
   HttpEvent,
-  HttpInterceptor,
   HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
   HttpRequest,
   HttpResponse,
-  HttpErrorResponse,
-  HttpHeaders,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, finalize } from 'rxjs/operators';
-import { MessageService } from 'primeng/api';
+import {Observable, throwError} from 'rxjs';
+import {catchError, finalize, map} from 'rxjs/operators';
+import {MessageService} from 'primeng/api';
 import * as _ from 'lodash';
-import { AuthService } from '../services/auth.service';
-import { LoadingService } from '../services/loading.service';
-import { IResultHttp } from '../interfaces/IResultHttp';
+import {AuthService} from '../services/auth.service';
+import {LoadingService} from '../services/loading.service';
+import {IResultHttp} from '../interfaces/IResultHttp';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -46,14 +46,13 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          const cloneEvent = event.clone({
+          return event.clone({
             body: {
               success: true,
               data: event.body || [],
               error: undefined
             }
           });
-          return cloneEvent;
         }
       }),
 
@@ -79,7 +78,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             break;
           case 401:
             message = 'Sua sessão expirou';
-            this.router.navigate([`/login/${this.conferenceSrv.ConferenceActiveId}`]);
+            this.router.navigate([`/login/${this.conferenceSrv.ConferenceActiveId}`]).then();
             break;
           case 403:
             message = _.get(error, 'error.message', 'Não autorizado');

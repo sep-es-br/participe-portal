@@ -1,16 +1,16 @@
 import * as _ from 'lodash';
 
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService, SelectItem } from 'primeng/api';
+import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MessageService, SelectItem} from 'primeng/api';
+import {ConferenceService} from '../../shared/services/conference.service';
+import {ILocality} from '../../shared/interfaces/ILocality';
+import {IPerson} from '../../shared/interfaces/IPerson';
+import {LocalityService} from '../../shared/services/locality.service';
+import {PersonService} from '../../shared/services/person.service';
+import {environment} from '../../../environments/environment';
 
-import { AuthService } from '../../shared/services/auth.service';
-import { ConferenceService } from '../../shared/services/conference.service';
-import { ILocality } from '../../shared/interfaces/ILocality';
-import { IPerson } from '../../shared/interfaces/IPerson';
-import { LocalityService } from '../../shared/services/locality.service';
-import { PersonService } from '../../shared/services/person.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +25,8 @@ export class RegisterComponent implements OnInit {
   localityType: string;
   tokenRecaptcha: string;
 
+  siteKey: string = _.get(environment, 'siteKey') ? _.get(environment, 'siteKey') : '6LfvfAEVAAAAAFEiE8bzs3d47SKNl3iJFxvAfV83';
+
   constructor(
     private formBuilder: FormBuilder,
     private localitySrv: LocalityService,
@@ -32,16 +34,17 @@ export class RegisterComponent implements OnInit {
     private conferenceSrv: ConferenceService,
     private router: Router,
     private messageSrv: MessageService
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     this.setForm({});
-    this.loadLocalities();
+    await this.loadLocalities();
   }
 
 
   async loadLocalities() {
-    const { success, data } = await this.localitySrv.getAllForConference(this.conferenceSrv.ConferenceActiveId);
+    const {success, data} = await this.localitySrv.getAllForConference(this.conferenceSrv.ConferenceActiveId);
     if (success) {
       this.localityType = data.nameType;
       this.localities = data.localities;
@@ -59,14 +62,14 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  async save({ name, contactEmail, confirmEmail, telephone, locality }) {
+  async save({name, contactEmail, confirmEmail, telephone, locality}) {
 
     if (!this.tokenRecaptcha) {
-      return this.messageSrv.add({ severity: 'warn', detail: 'Você precisa resolver o captcha para continuar!', life: 15000 });
+      return this.messageSrv.add({severity: 'warn', detail: 'Você precisa resolver o captcha para continuar!', life: 15000});
     }
 
-    if(!_.get(locality, 'value')) {
-      return this.messageSrv.add({ severity: 'warn', detail: 'O município informado é inválido.', life: 15000 });
+    if (!_.get(locality, 'value')) {
+      return this.messageSrv.add({severity: 'warn', detail: 'O município informado é inválido.', life: 15000});
     }
 
     const sender: IPerson = {
@@ -77,7 +80,7 @@ export class RegisterComponent implements OnInit {
       }
     };
 
-    const { success } = await this.personSrv.register(sender, this.tokenRecaptcha);
+    const {success} = await this.personSrv.register(sender, this.tokenRecaptcha);
     if (success) {
       setTimeout(() => {
         this.messageSrv.add({
@@ -87,19 +90,20 @@ export class RegisterComponent implements OnInit {
           life: 15000
         });
       }, 1000);
-      this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
+      await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
     }
+    grecaptcha.reset();
   }
 
-  filterLocalities({ query }) {
+  filterLocalities({query}) {
     this.filteredLocalities = [];
     this.filteredLocalities = this.localities.filter(
       locality => locality.name.toLowerCase().indexOf(query.toLowerCase()) > -1
-    ).map(loc => ({ value: loc.id, label: loc.name }));
+    ).map(loc => ({value: loc.id, label: loc.name}));
   }
 
-  cancel() {
-    this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
+  async cancel() {
+    await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
 
   resolveCaptcha(event) {

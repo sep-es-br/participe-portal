@@ -1,7 +1,7 @@
-import { IConferenceCards } from './../interfaces/IConferenceCards';
-import { ILocalityConference } from './../interfaces/ILocalityConference';
-import { environment } from './../../../environments/environment';
-import { IResultHttp } from './../interfaces/IResultHttp';
+import { IConferenceCards } from '../interfaces/IConferenceCards';
+import { ILocalityConference } from '../interfaces/ILocalityConference';
+import { environment } from '../../../environments/environment';
+import { IResultHttp } from '../interfaces/IResultHttp';
 import { Injectable, Inject, Injector } from '@angular/core';
 import { BaseService } from './base.service';
 

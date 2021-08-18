@@ -1,12 +1,12 @@
 <app-template [title]="strategicArea?.structureitem?.title" [subTitle]="strategicArea?.structureitem?.subtitle"
   [fullLayout]="true" [footerVisible]="true">
-  <img class="action-back-header" *ngIf="strategicArea?.structureitem" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" />
+  <img class="action-back-header" *ngIf="strategicArea?.structureitem" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" alt=""/>
   <div class="search-container">
     <div class="search-area">
       <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
       <input [@rotatedState]='state' [(ngModel)]="textSearch"  minlength="3" *ngIf="disable">
       <div class="search-img" (click)="showHide()">
-        <img  src="/assets/icons/{{imageName}}.svg" >
+        <img  src="/assets/icons/{{imageName}}.svg" alt="">
       </div>
     </div>
     <div class="{{classMsg}}" *ngIf="showMessage">
@@ -25,10 +25,10 @@
     </div>
   </div>
   <div class="actions-footer">
-    <img class="action-back" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" />
+    <img class="action-back" (click)="backNavitation()" src="assets/icons/arrow-left-circle.svg" alt=""/>
     <div class="help-container" *ngIf="strategicArea?.structureitem?.parentLink">
       <span>{{strategicArea?.structureitem?.parentLink?.textLink}}</span>
-      <img src="assets/icons/help-circle.svg"/>
+      <img src="assets/icons/help-circle.svg" alt=""/>
     </div>
   </div>
 </app-template>

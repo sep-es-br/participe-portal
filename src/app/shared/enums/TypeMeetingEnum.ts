@@ -1,0 +1,5 @@
+export enum typeMeetingEnum {
+    PRESENCIAL = 'PRESENCIAL',
+    VIRTUAL = 'VIRTUAL',
+    PRESENCIAL_VIRTUAL = 'PRESENCIAL_VIRTUAL'
+}

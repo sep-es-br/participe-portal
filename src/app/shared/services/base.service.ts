@@ -15,7 +15,7 @@ export abstract class BaseService<T> {
     http: HttpClient;
     confirmationSrv: ConfirmationService;
     messageSrv: MessageService;
-    private urlBaseOriginal: string;
+    private readonly urlBaseOriginal: string;
 
     constructor(
         public url: string,

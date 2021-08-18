@@ -1,5 +1,5 @@
-import { ILocality } from './../interfaces/ILocality';
-import { ParticipationStateModel } from './../models/ParticipationStateModel';
+import { ILocality } from '../interfaces/ILocality';
+import { ParticipationStateModel } from '../models/ParticipationStateModel';
 import { Subject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
@@ -37,12 +37,14 @@ export class ParticipationStateService {
   }
 
   addNavigation(item: INavigation) {
-    if (!Array.isArray(this.state.navigation)) { this.state.navigation = []; }
-    const foundIndex = this.state.navigation.findIndex(nav => nav.label === item.label);
-    if (foundIndex === -1) {
-      this.state.navigation = _.concat(this.state.navigation, [{ ...item }]);
-    } else {
-      this.state.navigation[foundIndex] = item;
+    if (this.state) {
+      if (!Array.isArray(this.state.navigation) ) { this.state.navigation = []; }
+      const foundIndex = this.state.navigation.findIndex(nav => nav.label === item.label);
+      if (foundIndex === -1) {
+        this.state.navigation = _.concat(this.state.navigation, [{ ...item }]);
+      } else {
+        this.state.navigation[foundIndex] = item;
+      }
     }
     this.subState.next(this.state);
     this.persisteState();
@@ -55,7 +57,7 @@ export class ParticipationStateService {
   }
 
   clearNavigation() {
-    this.state.navigation = [];
+    if (this.state) {  this.state.navigation = []; }
     this.subState.next(this.state);
     this.persisteState();
   }

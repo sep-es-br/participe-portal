@@ -23,7 +23,13 @@ export class InputMessageComponent {
   }
 
   message() {
-    let message = 'Informação inválida';
+    const errors = this.form.get(this.field).errors;
+
+    if (!errors) {
+      return;
+    }
+
+    let message = errors.custom && errors.custom.message ? errors.custom.message : 'Informação inválida';
 
     if (this.form.get(this.field).errors.required) message = 'Campo obrigatório';
     return message;

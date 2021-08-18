@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
-import { BreadcrumbService } from './../../shared/services/breadcrumb.service';
-import { IConferenceCards } from './../../shared/interfaces/IConferenceCards';
-import { LocalityService } from './../../shared/services/locality.service';
-import { ConferenceService } from './../../shared/services/conference.service';
+import { BreadcrumbService } from '../../shared/services/breadcrumb.service';
+import { IConferenceCards } from '../../shared/interfaces/IConferenceCards';
+import { LocalityService } from '../../shared/services/locality.service';
+import { ConferenceService } from '../../shared/services/conference.service';
 import { Component, OnInit } from '@angular/core';
 import { ILocality } from '../../shared/interfaces/ILocality';
-import { ParticipationStateService } from './../../shared/services/participation-state.service';
+import { ParticipationStateService } from '../../shared/services/participation-state.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -16,6 +16,7 @@ import * as _ from 'lodash';
 export class ConferenceMapComponent implements OnInit {
 
   conference: IConferenceCards;
+  regionalization: boolean;
 
   constructor(
     private localitySrv: LocalityService,
@@ -25,8 +26,11 @@ export class ConferenceMapComponent implements OnInit {
     private participationStateSrv: ParticipationStateService
   ) { }
 
-  ngOnInit() {
-    this.loadConference();
+  async ngOnInit() {
+    await this.loadRegionalizationConference();
+    if (this.regionalization) {
+      await this.loadConference();
+    }
     this.participationStateSrv.clear();
   }
 
@@ -38,10 +42,24 @@ export class ConferenceMapComponent implements OnInit {
     }
   }
 
-  selectRegional(item: ILocality) {
-    this.breadcrumbSrv.update({ title: this.conference.regionalizable, subTitle: item.name, route: ['/conference-map'] }, 0);
+  async loadRegionalizationConference() {
+      if (this.conferenceSrv.ConferenceActiveId) {
+        const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
+        this.regionalization = data.regionalization;
+      }
+      if (!this.regionalization) {
+        await this.router.navigate(['/conference-steps']);
+      }
+  }
+
+  async selectRegional(item: ILocality) {
+    this.breadcrumbSrv.update({
+      title: this.conference.regionalizable,
+      subTitle: item.name,
+      route: ['/conference-map']
+    }, 0);
     this.participationStateSrv.setLocality(_.pick(item, ['id', 'name']));
-    this.router.navigate(['/strategic-area']);
+    await this.router.navigate(['/conference-steps']);
   }
 
   paintMap(item?: ILocality) {

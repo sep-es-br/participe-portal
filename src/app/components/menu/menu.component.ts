@@ -1,8 +1,9 @@
-import { ConferenceService } from './../../shared/services/conference.service';
-import { Router } from '@angular/router';
-import { AuthService } from './../../shared/services/auth.service';
+import { ConferenceService } from '../../shared/services/conference.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
+import { IConference } from 'src/app/shared/interfaces/IConference';
 
 @Component({
   selector: 'app-menu',
@@ -11,14 +12,17 @@ import * as _ from 'lodash';
 })
 export class MenuComponent implements OnInit {
 
-  menu: any = [
+  menu: Array<any> = [
     { label: 'Participar', route: '/conference-map', activeWhen: ['conference-map', 'strategic-area'] },
     { label: 'Propostas', route: '/proposals', activeWhen: ['proposals'] },
     { label: 'Minhas Participações', route: '/participations', activeWhen: ['participations'] },
     { label: 'Como Funciona', route: '/how-it-works', activeWhen: ['how-it-works'] },
+    { label: 'Estatísticas', route: '/statistics', activeWhen: ['statistics'] },
   ];
 
   @ViewChild('sidemenu') sidemenu: ElementRef;
+
+  conference: IConference;
 
   constructor(
     private authSrv: AuthService,
@@ -26,7 +30,8 @@ export class MenuComponent implements OnInit {
     private conferenceSrv: ConferenceService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.loadConference();
   }
 
   isActive(item) {
@@ -42,13 +47,26 @@ export class MenuComponent implements OnInit {
     this.sidemenu.nativeElement.style.left = '-95%';
   }
 
-  logout() {
+  async logout() {
     this.authSrv.clearTokens();
-    this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
+    await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
-  navigate(url: string) {
-    this.router.navigate([url]);
+  async navigate(url: string) {
+    await this.router.navigate([url]);
     this.closeSidemenu();
+  }
+
+  async loadConference() {
+    const result = await this.conferenceSrv.GetById(this.conferenceSrv.ConferenceActiveId);
+    if (result.success) {
+      this.conference = result.data;
+      if (this.conference.displayStatusConference !== 'OPEN') {
+        this.menu.shift();
+        if (this.router.url === '/conference-map') {
+          await this.router.navigate(['/proposals']);
+        }
+      }
+    }
   }
 
 }

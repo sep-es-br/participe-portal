@@ -3,7 +3,7 @@ $startTop: 40px;
 $backgroundWindow: rgba(255,255,255,0.7);
 $darkColorOr: rgba(0,0,0,0.16);
 
-.page-login {
+::ng-deep .page-login {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
@@ -12,7 +12,6 @@ $darkColorOr: rgba(0,0,0,0.16);
   .background-page {
     background: var(--primaryColor);
     background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
-    background-image: url(/assets/images/background.png);
     background-size: cover;
     width: 101%;
     height: 100vh;
@@ -95,14 +94,6 @@ $darkColorOr: rgba(0,0,0,0.16);
           }
           cursor: pointer;
         }
-        &.twitter {
-          background: #55acee;
-          img {
-            margin-left: -4px !important;
-          }
-          cursor: pointer;
-        }
-
         img {
           width: 30px;
           margin-right: 9px;
@@ -231,6 +222,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
     .calendar-container-grid {
       width: 100%;
+      cursor: pointer;
 
       .calendar-item {
         display: flex;
@@ -265,10 +257,164 @@ $darkColorOr: rgba(0,0,0,0.16);
             width: 22px;
             margin-right: 5px;
           }
+          i {
+            color: #F58634;
+            margin-right: 5px;
+            font-size: 1.3em;
+          }
         }
       }
     }
   }
+ .dialog-detail {
+    .ui-dialog  {
+      .ui-dialog-titlebar {
+        background-color: #fff;
+        border: none;
+        padding-bottom: 0px;
+        .ui-dialog-titlebar-icon {
+          font-size: 2.8em;
+        }
+      }
+      .ui-dialog-content {
+        border: none;
+      }
+    }
+    .modal-detail {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      .icon-navigate {
+        display: flex;
+        align-items: center;
+        padding: 0px 7px;
+        font-size: 1.5em;
+
+        .icon-right, .icon-left {
+          border-radius: 50%;
+          color: #abadb0;
+          border: 3px solid #abadb0;
+          padding: 5px 8px;
+          cursor: pointer;
+        }
+      }
+      .modal-content {
+        padding: 0px 20px 20px 20px;
+        .title {
+          margin: 0;
+          font-size: 2em;
+        }
+        .description {
+          margin-top: 0px;
+          font-weight: 100;
+          font-size: 1.6em;
+        }
+        .date-time-container {
+          margin: 25px 0;
+          font-weight: bold;
+          display: flex;
+          .date {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+            font-size: 1.7em;
+            img {
+              width: 30px;
+              height: 30px;
+              margin-right: 10px;
+            }
+          }
+          .time {
+            display: flex;
+            align-items: baseline;
+            font-size: 1.7em;
+            .hour-icon {
+              vertical-align: middle;
+              margin-right: 10px;
+              font-size: 1.1em;
+              color: #f58e42;
+            }
+          }
+        }
+        .locality-channel-container {
+          display: flex;
+          .locality-container {
+            .locality {
+              display: block;
+              font-weight: bold;
+              max-width: 250px;
+              font-size: 1.2em;
+              margin-bottom: 10px;
+            }
+            .adreess {
+              display: block;
+              max-width: 350px;
+              font-size: 1.2em;
+              margin-bottom: 15px;
+            }
+            .icons-locality {
+              img {
+                cursor: pointer;
+                margin-right: 10px;
+                .waze {
+                  display: none;
+                }
+              }
+            }
+          }
+          .left-container {
+            border-right: 1px solid #d1d1d1;
+            padding-right: 10px;
+            .locality {
+              display: block;
+              font-weight: bold;
+              max-width: 200px;
+              font-size: 1.2em;
+              margin-bottom: 10px;
+            }
+            .adreess {
+              display: block;
+              max-width: 300px;
+              font-size: 1.2em;
+              margin-bottom: 15px;
+            }
+            .icons-locality {
+              img {
+                cursor: pointer;
+                margin-right: 10px;
+              }
+            }
+          }
+          .channels-container {
+            .channel {
+              display: block;
+              font-size: 1.1em;
+              color: #333;
+              cursor: auto;
+            }
+            .channel.pointer {
+              cursor: pointer;
+            }
+          }
+          .right-container {
+            padding: 8px 0px 0px 20px;
+            .channel {
+              display: block;
+              font-size: 1.1em;
+              color: #333;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ::ng-deep {
+    .waze {
+      display: none;
+    }
+  }
+
   @media (max-width: 1025px) {
     .auth-box {
       margin-left: 5%;
@@ -306,8 +452,15 @@ $darkColorOr: rgba(0,0,0,0.16);
       }
     }
   }
+  @media (max-width: 800px) {
+    .icons-locality{
+      display: flex;
+      .waze {
+       display: block;
+     }
+    }
+  }
   @media (max-width: 550px) {
     flex-direction: column;
   }
 }
-

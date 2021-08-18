@@ -1,7 +1,6 @@
-import { ParticipationStateModel } from './../models/ParticipationStateModel';
-import { ParticipationService } from './participation.service';
+import { ParticipationStateModel } from '../models/ParticipationStateModel';
 import { Subject, Observable, Subscription } from 'rxjs';
-import { IBreadcrumbItem } from './../../components/breadcrumb/breadcrumb.component';
+import { IBreadcrumbItem } from '../../components/breadcrumb/breadcrumb.component';
 import { Injectable, OnDestroy } from '@angular/core';
 import * as _ from 'lodash';
 import { ParticipationStateService } from './participation-state.service';
@@ -29,14 +28,17 @@ export class BreadcrumbService implements OnDestroy {
 
 
   init(state?: ParticipationStateModel) {
-    this.items = [{ title: 'Microrregião', subTitle: _.get(state, 'locality.name'), route: ['/conference-map'] }];
+    this.items = _.get(state, 'locality.id')
+     ? [{ title: 'Microrregião', subTitle: _.get(state, 'locality.name'), route: ['/conference-map'] }]
+     : [];
     _.forEach(
       _.get(state, 'navigation', [])
       , (navigate, index) => {
         this.items.push({
           title: navigate.label,
           subTitle: _.get(navigate, 'nav.name'),
-          route: index > 0 ? [`/conference-steps`, _.get(state, `navigation[${index - 1}].nav.id`, 0)] : ['/strategic-area']
+          route: [`/conference-steps`],
+          queryParams: { id:  _.get(state, `navigation[${index - 1}].nav.id`) }
         });
       });
     this.subItems.next(this.items);

@@ -9,4 +9,8 @@ export interface ILoginScreenInfo {
   highlights: number;
   participations: number;
   numberOfLocalities: number;
+  backgroundImageUrl: IImage;
+  status: string;
+  beginDate?: string;
+  endDate?: string;
 }

@@ -19,8 +19,7 @@
       font-size: 12px;
     }
     input{
-      padding: 0;
-      padding-left: 8px;
+      padding: 0 0 0 8px;
       outline:none;
       opacity: 0.8;
       width: 30em;
@@ -41,7 +40,7 @@
         width: 15px;
         height: 15px;
       }
-    } 
+    }
   }
   .message{
     color: white;
@@ -49,9 +48,7 @@
     padding: 1rem;
     margin-top: 15px;
     margin-left: 20px;
-    border: 1px;
-    border-color: white;
-    border-style: solid;
+    border: 1px solid white;
     border-radius: 10px;
     strong{
       margin-right: 1rem;
@@ -67,7 +64,7 @@
 }
 
 .filter-container{
-  
+
   padding: 0 15px;
   margin-left: 1rem;
   margin-top: 10px;
@@ -119,36 +116,29 @@
       }
       input:checked ~ .checkmark:after {
         display: block;
-        
+
       }
 
       div.submenu{
         position:absolute;
         max-height:0;
-        padding:0;
-        padding-left: 4px;
-        padding-right: 4px;
+        padding: 0 4px;
         overflow:hidden;
         list-style-type:none;
         background: white;
         transition:max-height 0.5s ease-out;
-        position:absolute;
         min-width:auto;
         z-index:2;
         margin-top: 10px;
         width: inherit;
         .close{
           text-align: right;
-          margin-top: 5px;
-          margin-right: 5px;
-          margin-left: auto;
-          margin-bottom: 0;
+          margin: 5px 5px 0 auto;
           font-weight: bold;
           cursor: pointer;
           width: 10%;
         }
         label{
-
           font-weight: normal;
         }
 
@@ -173,7 +163,7 @@
           height: 0;
           width: 0;
         }
-        
+
         .checkmark {
           position: absolute;
           top: 7px;
@@ -189,11 +179,11 @@
           position: absolute;
           display: none;
         }
-        
+
         .container input:checked ~ .checkmark:after {
           display: block;
         }
-        
+
         .container .checkmark:after {
           left: 4px;
           top: 2px;
@@ -208,7 +198,7 @@
       }
     }
   }
-} 
+}
 
 .conference-step-container {
   display: flex;
@@ -229,7 +219,7 @@
     grid-column-gap: 14px;
     grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
     .card-item {
-      background: white;
+      background: white no-repeat -20px;
       min-height: 140px;
       display: flex;
       justify-content: space-between;
@@ -239,7 +229,7 @@
       padding: 20px;
       &.checked {
         color: white;
-        background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd));
+        background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd)) !important;
       }
       &.clickable {
         cursor: pointer;
@@ -250,14 +240,23 @@
         }
 
       }
+
+      .card-item-content.center-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        .center {
+          text-align: center;
+        }
+      }
       .card-actions {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
         .card-actions-item {
-          padding: 10px;
-          padding-bottom: 0px;
+          padding: 10px 10px 0;
           color: var(--accentColorEnd);
           &:hover {
             color: var(--accentColorStart);
@@ -289,7 +288,7 @@
           cursor: pointer;
           .count {
             position: absolute;
-            margin-left: 0px;
+            margin-left: 0;
             color: white;
             font-size: 0.7rem;
             width: 29px;
@@ -390,5 +389,5 @@
     display: initial;
     cursor: pointer;
   }
-  
+
 }

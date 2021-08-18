@@ -1,0 +1,40 @@
+<div [ngClass]="meetingDate ? 'page-pre-opening' : 'page-pre-opening center'">
+  <div class="background-page"></div>
+  <div class="counter-block" *ngIf="meetingDate">
+    <span class="counter-title" *ngIf="closed; else open">INICIAREMOS EM:</span>
+    <ng-template #open>
+      <span class="counter-title">INICIAMOS HÁ:</span>
+    </ng-template>
+    <div class="counter">
+      <div class="date-block">
+        <div class="date-content">
+          <span class="date-number">{{days}}</span>
+          <span class="date-description">dias</span>
+        </div>
+      </div>
+      <div class="date-block">
+        <div class="date-content">
+          <span class="date-number">{{hours}}</span>
+          <span class="date-description">horas</span>
+        </div>
+      </div>
+      <div class="date-block">
+        <div class="date-content">
+          <span class="date-number">{{minutes}}</span>
+          <span class="date-description">minutos</span>
+        </div>
+      </div>
+      <div class="date-block">
+        <div class="date-content">
+          <span class="date-number">{{seconds}}</span>
+          <span class="date-description">segundos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conference-warning-block">
+    <div class="conference-warning-message" [innerHTML]="preOpeningText">
+    </div>
+  </div>
+</div>

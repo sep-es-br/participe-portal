@@ -1,6 +1,6 @@
-import { Subscription } from 'rxjs';
-import { LoadingService } from './../../shared/services/loading.service';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {Subscription} from 'rxjs';
+import {LoadingService} from '../../shared/services/loading.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-template',
@@ -18,7 +18,7 @@ export class TemplateComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() subTitle: string;
 
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   loadingSub: Subscription;
 
   constructor(

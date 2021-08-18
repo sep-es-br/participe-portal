@@ -5,6 +5,7 @@ export interface IResultPaginated<T> {
     pageable: IPagination;
     totalPages: number;
     totalElements: number;
+    first: boolean;
     last: boolean;
     empty: boolean;
 }

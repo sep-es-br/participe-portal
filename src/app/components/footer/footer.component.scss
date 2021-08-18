@@ -3,8 +3,28 @@
   display: flex;
   align-items: center;
   padding: 20px;
+  margin-top: 50px;
   .block-item {
     width: 33%;
+    a {
+      color: white;
+      .research {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 100px;
+        i {
+          font-size: 2.8rem;
+        }
+        .research-text {
+          display: flex;
+          flex-direction: column;
+          padding: 5px 0 0 15px;
+          text-align: left;
+        }
+      }
+    }
   }
 }
 

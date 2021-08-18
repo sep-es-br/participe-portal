@@ -1,22 +1,26 @@
 <div class="page-login">
-  <div class="background-page"></div>
+  <div class="background-page" [ngStyle]="{'background-image':'url('+backgroundImageUrl+')'}"></div>
   <div class="left-side">
     <div class="auth-box">
-      <img class="logo" *ngIf="data?.fileAuthentication" [src]="data?.fileAuthentication?.url" />
+      <img class="logo" *ngIf="conferenceData?.fileAuthentication"
+           [src]="conferenceData?.fileAuthentication?.url" alt=""/>
       <div class="header">
-        <h2>{{ data?.titleAuthentication }}</h2>
-        <p>{{ data?.subtitleAuthentication }}</p>
+        <h2>{{ conferenceData?.titleAuthentication }}</h2>
+        <p>{{ conferenceData?.subtitleAuthentication }}</p>
       </div>
       <div class="social-login">
         <button class="cidadao" (click)="signInAcessoCidadao()">
-          <img src="assets/icons/cidadao.svg" />
-          Entrar</button>
+          <img src="assets/icons/cidadao.svg" alt=""/>
+          Entrar
+        </button>
         <button class="google" (click)="signInGoogle()">
-          <img src="assets/icons/google.svg" />
-          Entrar com Google</button>
+          <img src="assets/icons/google.svg" alt=""/>
+          Entrar com Google
+        </button>
         <button class="facebook" (click)="signInFacebook()">
-          <img src="assets/icons/facebook.svg" />
-          Entrar com Facebook</button>
+          <img src="assets/icons/facebook.svg" alt=""/>
+          Entrar com Facebook
+        </button>
       </div>
       <div class="or">
         <span class="line"></span><span class="text">ou utilize</span><span class="line"></span>
@@ -35,9 +39,10 @@
           <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
         </div>
         <button class="submit" (click)="signInWithLogin(form)">Entrar</button>
-        <img class="poweredBy" src="assets/images/poweredBy.svg">
+        <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
       </div>
-      <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como participar</a>
+      <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como
+        participar</a>
     </div>
   </div>
   <div class="right-side">
@@ -48,19 +53,81 @@
       </div>
     </div>
     <div class="calender-container">
-      <img src="assets/icons/up.svg" (click)="meetingPreviousPage()" [class.hidden-arrow]="pagination.page === 0" />
+      <img src="assets/icons/up.svg" (click)="meetingPreviousPage()"
+           [class.hidden-arrow]="pagination.empty"
+       alt=""/>
       <div class="calendar-container-grid">
-        <div class="calendar-item" *ngFor="let meeting of meetings">
+        <div class="calendar-item" *ngFor="let meeting of meetings"
+             (click)="showModalDetailMeeting(meeting.id)">
           <div class="date">
-            <img src="assets/icons/calendar.svg" />
-            {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MM' }}</div>
+            <img src="assets/icons/calendar.svg" alt=""/>
+            {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MM' }}
+          </div>
           <div class="place">
-            <img src="assets/icons/pin.svg" />
-            {{ meeting?.localityPlace?.name }} - {{ meeting.place }}</div>
+            <img src="assets/icons/pin.svg"
+                 *ngIf="meeting?.typeMeetingEnum !== typeMeeting.VIRTUAL" alt=""/>
+            <i class="fas fa-desktop"
+               *ngIf="meeting?.typeMeetingEnum !== typeMeeting.PRESENCIAL"></i>
+            {{ meeting?.name }}
+          </div>
         </div>
       </div>
-      <img src="assets/icons/down.svg" (click)="meetingNextPage()" [class.hidden-arrow]="!pagination.more" />
+      <img src="assets/icons/down.svg" (click)="meetingNextPage()"
+           [class.hidden-arrow]="pagination.empty"
+       alt=""/>
     </div>
   </div>
   <p-toast position="top-right"></p-toast>
+
+  <p-dialog [(visible)]="modalDetailMeeting" *ngIf="modalDetailMeeting" [modal]="true"
+            [style]="{width: responsive ? '60vw' : '33vw'}"
+            showEffect="fade" [resizable]="false" [draggable]="false" [responsive]="true"
+            class="dialog-detail">
+    <div class="modal-detail">
+      <div class="icon-navigate">
+        <i class="fas fa-chevron-left icon-left" (click)="previousMeetingDetail()"
+           *ngIf="meetingDetail?.hasPreviousMeeting"></i>
+      </div>
+      <div class="modal-content">
+        <h1 class="title">{{meetingDetail.name}}</h1>
+        <h3 class="description">{{labelDescriptionDetailMeeting(meetingDetail)}}</h3>
+
+        <div class="date-time-container">
+          <span class="date">
+            <img src="assets/icons/calendar2.svg" alt="calendario">
+            {{labelDateDetailMetting(meetingDetail?.beginDate)}}
+          </span>
+          <span class="time">
+            <i class="far fa-clock hour-icon"></i>
+            {{labelTimeDetailMetting(meetingDetail?.beginDate)}}
+          </span>
+        </div>
+        <div class="locality-channel-container">
+          <div
+            [ngClass]="meetingDetail.typeMeetingEnum === typeMeeting.PRESENCIAL ? 'locality-container' : 'left-container' "
+            *ngIf="meetingDetail.typeMeetingEnum !== typeMeeting.VIRTUAL">
+            <span class="locality">{{meetingDetail?.place}}</span>
+            <span class="adreess">{{meetingDetail?.address}}</span>
+            <div class="icons-locality">
+              <img src="assets/icons/gmaps.svg" alt="google-maps" width="40px" height="40px"
+                   (click)="goToLink('https://maps.google.com/?q=' + meetingDetail.place + '+' + meetingDetail.address)">
+              <img src="assets/icons/waze.svg" alt="waze" width="40px" height="40px" class="waze"
+                   (click)="goToLink('waze://?q==' + meetingDetail.place + '+' + meetingDetail.address)">
+            </div>
+          </div>
+          <div
+            [ngClass]="meetingDetail.typeMeetingEnum === typeMeeting.VIRTUAL ? 'channels-container' : 'right-container' "
+            *ngIf="meetingDetail.typeMeetingEnum !== typeMeeting.PRESENCIAL">
+            <a *ngFor=" let channel of meetingDetail.channels"
+               [ngClass]="channel.url ? 'channel pointer' : 'channel'"
+               target="_blank" (click)="goToLink(channel.url)">{{channel.name}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="icon-navigate">
+        <i class="fas fa-chevron-right icon-right" (click)="nextMeetingDetail()"
+           *ngIf="meetingDetail?.hasNextMeeting"></i>
+      </div>
+    </div>
+  </p-dialog>
 </div>

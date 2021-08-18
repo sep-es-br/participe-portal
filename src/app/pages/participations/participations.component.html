@@ -1,4 +1,4 @@
-<app-template [disablebreadcrumb]=true 
+<app-template [disablebreadcrumb]=true
               [fullLayout]="true"
               [footerVisible]="true">
   <div class="participations">
@@ -39,17 +39,17 @@
                 <span class="how-long-ago" [pTooltip]="participation.time">{{ howLongAgo(participation.time) }}</span>
               </div>
               <div class="plan-items">
-                <div class="item">
+                <div class="item" *ngIf="regionalization">
                   <div class="structure-item">
-                    <img src="assets/icons/locality-without-map-gradient.svg">
+                    <img src="assets/icons/locality-without-map-gradient.svg" alt="">
                     <div class="name">{{ participation.localityDto?.type?.name}}</div>
                   </div>
                   <div class="name">{{ participation.localityDto?.name }}</div>
                 </div>
                 <div class="item" *ngFor="let item of participation.planItems; last as isLast">
                   <div class="structure-item">
-                    <img *ngIf="!isLast" src="assets/icons/{{item.fileName}}-gradient.svg">
-                    <img *ngIf="isLast" src="assets/icons/{{item.fileName}}.svg">
+                    <img *ngIf="!isLast" src="assets/icons/{{item.fileName}}-gradient.svg" alt="">
+                    <img *ngIf="isLast" src="assets/icons/{{item.fileName}}.svg" alt="">
                     <div class="name">{{ item.structureItemName }}</div>
                   </div>
                   <div class="name">{{ item.name }}</div>
@@ -73,16 +73,16 @@
                   <span class="how-long-ago" [pTooltip]="getTimeParticipation(participation)">{{ howLongAgo(participation.moderateTime || participation.time) }}</span>
                 </div>
                 <p class="text" style="font-size: 18px;">{{ participation.text }}</p>
-                
+
                 <a class="likes" [class.has-like]="!!participation.qtdLiked" style="font-size: 12px;">
                   {{ participation.qtdLiked || 0 }}
-                  <img src="assets/icons/like2.svg">
+                  <img src="assets/icons/like2.svg" alt="">
                 </a>
               </div>
               <div class="info-plan">
-                <div class="item">
+                <div class="item" *ngIf="regionalization">
                   <div class="structure-item">
-                    <img src="assets/icons/locality-without-map-gradient.svg">
+                    <img src="assets/icons/locality-without-map-gradient.svg" alt="">
                     <div class="name">{{ participation.localityDto?.type?.name}}</div>
                   </div>
                   <div class="name">{{ participation.localityDto?.name }}</div>
@@ -90,8 +90,8 @@
                 <div class="item" *ngFor="let item of participation.planItems; let i = index; last as isLast"
                   [ngStyle]="{ order: item.structureItemName === 'Área Estratégica' ? ( i === 0 ? 2 : 1 ) : i }">
                   <div class="structure-item">
-                    <img *ngIf="!isLast" src="assets/icons/{{item.fileName}}-gradient.svg">
-                    <img *ngIf="isLast" src="assets/icons/{{item.fileName}}.svg">
+                    <img *ngIf="!isLast" src="assets/icons/{{item.fileName}}-gradient.svg" alt="">
+                    <img *ngIf="isLast" src="assets/icons/{{item.fileName}}.svg" alt="">
                     <div class="name">{{ item.structureItemName }}</div>
                   </div>
                   <div class="name">{{ item.name }}</div>

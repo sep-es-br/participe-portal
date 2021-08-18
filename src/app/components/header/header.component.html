@@ -1,19 +1,44 @@
 <div class="header-container">
   <div class="search-container">
-    <img *ngIf="header" [src]="header?.image">
+    <img *ngIf="header" [src]="header?.image" alt="">
     <div class="info-search-container">
       <h2>{{header?.title}}</h2>
       <span>{{header?.subtitle}}</span>
     </div>
   </div>
   <div class="actions" *ngIf="isAuthenticated">
-    <div class="action-item" *ngIf="userInfo?.name">
-      {{ userInfo.name }}
-      <img src="assets/icons/user2.svg" />
+    <p-menu #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
+    <div class="action-item" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
+      {{conference.externalLinksMenuLabel}}
+      <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
     </div>
-    <div class="action-item" (click)="logout()">
+    <div class="action-item" *ngIf="userInfo?.name" (click)="navigate('/profile')">
+      {{ userInfo.name }}
+      <img src="assets/icons/user2.svg" alt=""/>
+    </div>
+    <div class="action-item" (click)="showDialog()">
       Sair
-      <img src="assets/icons/close2.svg"/>
+      <img src="assets/icons/close2.svg" alt=""/>
     </div>
   </div>
 </div>
+
+<p-dialog [(visible)]="display">
+  <div class="dialog-title">
+    <i class="far fa-times-circle"></i>
+    <span class="title-text">Já está de saída?</span>
+  </div>
+  <div class="dialog-content">
+    <span>Antes de ir por favor responda à nossa</span>
+    <p-button icon="fas fa-clipboard-list" label="Pesquisa ({{estimatedTimeResearch}})" (onClick)="researchRedirect()">
+    </p-button>
+    <div class="options">
+      <div class="option" (click)="wannaAnswerLater({answer: true})">
+        <span>Responder depois</span>
+      </div>
+      <div class="option" (click)="wannaAnswerLater({answer: false})">
+        <span>Não, obrigado</span>
+      </div>
+    </div>
+  </div>
+</p-dialog>

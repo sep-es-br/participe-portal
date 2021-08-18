@@ -1,5 +1,6 @@
 export interface IHowItWorks {
+  id?: number;
+  order: number;
   title: string;
-  description: string;
-  url?: string;
+  text: string;
 }

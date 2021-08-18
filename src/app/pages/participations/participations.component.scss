@@ -78,9 +78,7 @@ $colorEnd: #f48433;
       padding: 1rem 25px 1rem 1rem;
       margin-top: 15px;
       margin-left: 20px;
-      border: 1px;
-      border-color: white;
-      border-style: solid;
+      border: 1px solid white;
       border-radius: 10px;
       strong{
         margin-right: 1rem;
@@ -191,7 +189,7 @@ $colorEnd: #f48433;
             flex-direction: row;
             border: 1px solid $orange;
             margin: 5px;
-            height: auto;
+            height: 64px;
 
             .structure-item {
               display: flex;
@@ -262,15 +260,12 @@ $colorEnd: #f48433;
           display: flex;
           flex-wrap: wrap;
           margin: 5px 0;
-          flex-direction: row-reverse;
 
           .item {
             display: flex;
             flex: 1 0 23%;
-            flex-direction: row;
             border: 1px solid $orange;
             margin: 5px;
-
             .structure-item {
               display: flex;
               justify-content: center;
@@ -327,7 +322,7 @@ $colorEnd: #f48433;
     .how-long-ago {
       display: flex;
       font-size: .7rem;
-      justify-self: flex-end;      
+      justify-self: flex-end;
       position: relative;
       left: 10px;
     }

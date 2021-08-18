@@ -13,23 +13,31 @@ import { ConferenceStepsComponent } from './pages/conference-steps/conference-st
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
 import { ProposalsComponent } from './pages/proposals/proposals.component';
 import { ParticipationsComponent } from './pages/participations/participations.component';
+import { PreOpeningComponent } from './pages/pre-opening/pre-opening.component';
+import { PostClosureComponent } from './pages/post-closure/post-closure.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { StartComponent } from './pages/start/start.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login/', pathMatch: 'full' },  
-  { path: 'login', redirectTo: 'login/', pathMatch: 'full' },
+  { path: '', component: StartComponent },
   { path: 'login/:conference', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },
   { path: 'conference-map', component: ConferenceMapComponent },
   { path: 'strategic-area', component: StrategicAreaComponent },
-  { path: 'conference-steps/:id', component: ConferenceStepsComponent },
+  { path: 'conference-steps', component: ConferenceStepsComponent },
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'how-it-works-slim', component: HowItWorksSlimComponent },
   { path: 'proposals', component: ProposalsComponent },
   { path: 'participations', component: ParticipationsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: ':conference/post-closure', component: PostClosureComponent },
+  { path: ':conference/pre-opening', component: PreOpeningComponent },
+  { path: 'statistics', component: StatisticsComponent },
 ];
 
 @NgModule({

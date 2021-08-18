@@ -1,0 +1,64 @@
+<div class="page-post-closure">
+  <div class="background-page"></div>
+  <div id="left-side" class="left-side">
+    <div class="conference-warning-block">
+      <div class="conference-warning-message" [innerHTML]="postClosureText">
+      </div>
+    </div>
+  </div>
+  <div id="right-side" class="right-side">
+    <div class="auth-box">
+      <img class="logo" *ngIf="data?.fileAuthentication" [src]="data?.fileAuthentication?.url" alt=""/>
+      <div class="header">
+        <h2>{{ data?.titleAuthentication }}</h2>
+        <p>{{ data?.subtitleAuthentication }}</p>
+      </div>
+      <div class="social-login">
+        <button class="cidadao" (click)="signInAcessoCidadao()">
+          <img src="assets/icons/cidadao.svg" alt=""/>
+          Entrar</button>
+        <button class="google" (click)="signInGoogle()">
+          <img src="assets/icons/google.svg" alt=""/>
+          Entrar com Google</button>
+        <button class="facebook" (click)="signInFacebook()">
+          <img src="assets/icons/facebook.svg" alt=""/>
+          Entrar com Facebook</button>
+      </div>
+      <div class="or">
+        <span class="line"></span><span class="text">ou utilize</span><span class="line"></span>
+      </div>
+      <div class="form-login">
+        <div class="form-group ">
+          <label>CPF/E-mail</label>
+          <input [(ngModel)]="form.login" type="text">
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input [(ngModel)]="form.password" type="password">
+        </div>
+        <div class="actions">
+          <a [routerLink]="['/register']">Cadastre-se</a>
+          <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
+        </div>
+        <button class="submit" (click)="signInWithLogin(form)">Entrar</button>
+        <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
+      </div>
+      <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como participar</a>
+    </div>
+  </div>
+  <div id="login-mobile">
+    <div class="login-mobile">
+      <div class="button-position">
+        <button class="submit" (click)="changeToLoginForm()">Entrar</button>
+      </div>
+      <div class="actions">
+        <div>
+          <a [routerLink]="['/register']">Cadastre-se</a>
+        </div>
+        <div>
+          <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

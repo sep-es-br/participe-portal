@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {ConferenceService} from 'src/app/shared/services/conference.service';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
-import { ConferenceService } from 'src/app/shared/services/conference.service';
+import 'moment-timezone';
 
 @Component({
   selector: 'app-pre-opening',
@@ -24,10 +25,11 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
   constructor(
     private conferenceSrv: ConferenceService,
     private activeRoute: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
-    this.activeRoute.params.subscribe(async ({ conference }) => {
+    this.activeRoute.params.subscribe(async ({conference}) => {
       this.conferenceId = +conference;
       this.dateFormat();
     });
@@ -35,10 +37,13 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
   }
 
   async getTime() {
-    const { success, data } = await this.conferenceSrv.getConferencePreOpeningScreenInfo(this.conferenceId);
+    const {success, data} = await this.conferenceSrv.getConferencePreOpeningScreenInfo(this.conferenceId);
     if (success) {
       this.preOpeningText = data.text;
-      this.meetingDate = data.date;
+
+      let date = new Date(moment.tz(data.date, 'Atlantic/Azores').toString());
+
+      this.meetingDate = moment(date).toArray();
       if (this.meetingDate) {
         setInterval(() => {
           this.dateFormat();
@@ -48,22 +53,22 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
   }
 
   dateFormat() {
-      moment.locale('pt-BR');
-      const secs = moment().diff(this.meetingDate, 'seconds');
-      let timeLeft: any;
-      if (secs < 0) {
-        this.closed = true;
-        timeLeft = this.ddhhmmss(-secs);
-      } else {
-        this.closed = false;
-        timeLeft = this.ddhhmmss(secs);
-      }
-      if (timeLeft) {
-        this.days = timeLeft.days;
-        this.hours = timeLeft.hours;
-        this.minutes = timeLeft.minutes;
-        this.seconds = timeLeft.seconds;
-      }
+    moment.locale('pt-BR');
+    const secs = moment().diff(this.meetingDate, 'seconds');
+    let timeLeft: any;
+    if (secs < 0) {
+      this.closed = true;
+      timeLeft = this.ddhhmmss(-secs);
+    } else {
+      this.closed = false;
+      timeLeft = this.ddhhmmss(secs);
+    }
+    if (timeLeft) {
+      this.days = timeLeft.days;
+      this.hours = timeLeft.hours;
+      this.minutes = timeLeft.minutes;
+      this.seconds = timeLeft.seconds;
+    }
   }
 
   ddhhmmss(secs) {
@@ -74,13 +79,13 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
     const days = Math.floor(hours / 24);
     hours = hours % 24;
     if (days > 0) {
-      return { days, hours, minutes, seconds: secs };
+      return {days, hours, minutes, seconds: secs};
     } else if (days < 1 && hours > 0) {
-      return { days: 0, hours, minutes, seconds: secs };
+      return {days: 0, hours, minutes, seconds: secs};
     } else if (days < 1 && hours < 1 && minutes > 0) {
-      return { days: 0, hours: 0, minutes, seconds: secs };
+      return {days: 0, hours: 0, minutes, seconds: secs};
     } else {
-      return { days: 0, hours: 0, minutes: 0, seconds: secs };
+      return {days: 0, hours: 0, minutes: 0, seconds: secs};
     }
   }
 

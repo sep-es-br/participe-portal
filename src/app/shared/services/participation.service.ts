@@ -33,7 +33,7 @@ export class ParticipationService extends BaseService<any> {
       `${this.urlBase}/plan-item/${conferenceId}${qs.stringify({
         idLocality: localityId,
         idPlanItem: planItemId,
-        text
+        text: text
       }, { addQueryPrefix: true })}`
     ).toPromise();
   }

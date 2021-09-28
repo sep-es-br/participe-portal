@@ -88,7 +88,6 @@ export class LoginComponent implements OnInit {
       } else if (this.conferenceData.status === 'POST_CLOSURE') {
         await this.router.navigate([`${this.conferenceId}/post-closure`]);
       }
-
     }
   }
 
@@ -136,9 +135,9 @@ export class LoginComponent implements OnInit {
   }
 
   labelTimeDetailMetting(dataTime: string) {
-    const [_, time] = dataTime.split(' ');
-    const [hour] = time.split(':');
-    return `${hour}h`;
+    const time = dataTime.split(' ')[1];
+    const [hour, minutes] = time.split(':');
+    return `${hour}h${minutes}`;
   }
 
   async meetingNextPage() {
@@ -202,7 +201,11 @@ export class LoginComponent implements OnInit {
 
   async signInWithLogin({login, password}) {
     if (!login || !password) {
-      return this.messageSrv.add({severity: 'warn', detail: 'Informe o login e senha para efetuar o login', life: 15000});
+      return this.messageSrv.add({
+        severity: 'warn',
+        detail: 'Informe o login e senha para efetuar o login',
+        life: 15000
+      });
     }
     const {success, data} = await this.authSrv.signIn(login, password);
 

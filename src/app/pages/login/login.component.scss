@@ -180,7 +180,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       background: $backgroundWindow;
       text-align: center;
       padding: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 18px;
       min-height: 120px;
       display: flex;
       flex: 0 1 48%;
@@ -197,8 +197,8 @@ $darkColorOr: rgba(0,0,0,0.16);
       span {
         font-weight: lighter;
       }
-      &:nth-child(odd) {
-        margin-right: 10px;
+      &:nth-child(even) {
+        margin-left: 18px;
       }
     }
   }
@@ -229,7 +229,7 @@ $darkColorOr: rgba(0,0,0,0.16);
         margin-bottom: 5px;
         font-size: 0.9rem;
         &:last-child {
-          margin-bottom: 0px;
+          margin-bottom: 0;
         }
         .date {
           background: $backgroundWindow;
@@ -271,7 +271,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       .ui-dialog-titlebar {
         background-color: #fff;
         border: none;
-        padding-bottom: 0px;
+        padding-bottom: 0;
         .ui-dialog-titlebar-icon {
           font-size: 2.8em;
         }
@@ -287,7 +287,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       .icon-navigate {
         display: flex;
         align-items: center;
-        padding: 0px 7px;
+        padding: 0 7px;
         font-size: 1.5em;
 
         .icon-right, .icon-left {
@@ -299,13 +299,13 @@ $darkColorOr: rgba(0,0,0,0.16);
         }
       }
       .modal-content {
-        padding: 0px 20px 20px 20px;
+        padding: 0 20px 20px 20px;
         .title {
           margin: 0;
           font-size: 2em;
         }
         .description {
-          margin-top: 0px;
+          margin-top: 0;
           font-weight: 100;
           font-size: 1.6em;
         }
@@ -397,7 +397,7 @@ $darkColorOr: rgba(0,0,0,0.16);
             }
           }
           .right-container {
-            padding: 8px 0px 0px 20px;
+            padding: 8px 0 0 20px;
             .channel {
               display: block;
               font-size: 1.1em;

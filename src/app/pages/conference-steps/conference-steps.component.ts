@@ -45,6 +45,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   localityId: number;
   navigation: INavigation[];
   showModalComment: boolean = false;
+  toggleVote: boolean = false;
   showModalAlternativeProposal: boolean = false;
   alternativeProposal: string;
   itemSelect: IItem;
@@ -79,7 +80,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.populateState();
     this.subParams = await this.activeRoute.queryParams.subscribe(async ({id}) => {
-      this.stepId = +id;
+      this.stepId = id as number;
       await this.loadConferenceStep();
     });
     window.scrollTo(0, 0);
@@ -106,6 +107,14 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   }
 
   async selectNextStep(item: IItem) {
+    if (this.showModalComment) {
+      return;
+    }
+
+    if (this.toggleVote) {
+      return;
+    }
+
     const hasNext = _.get(this.conferenceStepItem, 'structureitem.hasNext', false);
     if (!hasNext) {
       return;
@@ -113,16 +122,20 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     const {name} = this.conferenceStepItem.structureitem;
     this.participationStateSrv.addNavigation({label: name, nav: item});
     this.breadcrumbSrv
-    .updateLast({title: name, subTitle: item.name, route: ['/conference-steps'], queryParams: {id: this.stepId } });
+      .updateLast({title: name, subTitle: item.name, route: ['/conference-steps'], queryParams: {id: this.stepId}});
 
-    await this.route.navigate(['/conference-steps'], {queryParams: {id: item.id} });
+    await this.route.navigate(['/conference-steps'], {queryParams: {id: item.id}});
   }
 
   async checkItem(item: IItem) {
+    this.toggleVote = true;
+
     const {success, data} = await this.participationSrv
       .commentAndHighlights(this.localityId ? this.localityId : null, item.id, this.conferenceSrv.ConferenceActiveId);
-    if (success) {
 
+    console.log(data);
+
+    if (success) {
       if (item.checked === false && data.votes === true) {
         this.messageService.add({
           severity: 'success',
@@ -137,6 +150,8 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
       item.checked = data.votes;
     }
+
+    this.toggleVote = false;
   }
 
   comment(item: IItem) {
@@ -146,7 +161,11 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   async saveComment() {
     if (!this.itemSelect.comment.trim()) {
-      return this.messageService.add({severity: 'warn', detail: 'Você precisa escrever o comentário que deseja adicionar!', life: 15000});
+      return this.messageService.add({
+        severity: 'warn',
+        detail: 'Você precisa escrever o comentário que deseja adicionar!',
+        life: 15000
+      });
     } else {
       const {success, data} = await this.participationSrv.commentAndHighlights(
         this.localityId ? this.localityId : null, this.itemSelect.id, this.conferenceSrv.ConferenceActiveId, this.itemSelect.comment.trim()
@@ -182,7 +201,11 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   async modalAlternativeProposalCallback(event) {
     if (event) {
       if (!this.alternativeProposal) {
-        return this.messageService.add({severity: 'warn', detail: 'Descreva uma proposta alternativa para salvar', life: 15000});
+        return this.messageService.add({
+          severity: 'warn',
+          detail: 'Descreva uma proposta alternativa para salvar',
+          life: 15000
+        });
       }
       await this.participationSrv.alternativeProposal(
         this.localityId,
@@ -203,7 +226,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     if (this.navigation.length >= 2) {
       const lastStep2 = this.navigation[this.navigation.length - 2];
       this.participationStateSrv.removeLast();
-      return await this.route.navigate(['/conference-steps'], {queryParams: {id: lastStep2.nav.id} });
+      return await this.route.navigate(['/conference-steps'], {queryParams: {id: lastStep2.nav.id}});
     }
     if (this.navigation.length === 1) {
       this.participationStateSrv.clear();
@@ -230,17 +253,10 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   }
 
-  private delay(ms: number): Promise<boolean> {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(true);
-      }, ms);
-    });
-  }
-
   async search() {
     const {success, data} = await this.participationSrv
       .getPlanItem(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);
+
     if (success) {
       if (!data.itens || data.itens.length < 1) {
         this.searchMessage = 'Hummm... Não estou encontrando esse termo. Que tal tentar um sinônimo ou algo menos específico?';
@@ -251,6 +267,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
         this.wasFound = true;
         this.renderList(data.itens);
       }
+
       this.showMessage = true;
       this.classMsg = 'animate__animated animate__fadeInRightBig';
     }
@@ -264,6 +281,14 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     this.classMsg = 'animate__animated animate__fadeOutRightBig';
     await this.delay(1000);
     this.showMessage = false;
+  }
+
+  private delay(ms: number): Promise<boolean> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(true);
+      }, ms);
+    });
   }
 
 }

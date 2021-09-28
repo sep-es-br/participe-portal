@@ -5,17 +5,18 @@
       <div class="p-col-12 p-md-2 item-filter">
         <label>Resultado</label>
         <p-dropdown [options]="resultOptions" (onChange)="loadChartsSelectedResult()"
-          [(ngModel)]="filters.selectedResult" [autoDisplayFirst]="false"></p-dropdown>
+                    [(ngModel)]="filters.selectedResult" [autoDisplayFirst]="false"></p-dropdown>
       </div>
       <div class="p-col-12 p-md-2 item-filter">
         <label>Origem</label>
         <p-dropdown [options]="originOptions" (onChange)="handleOriginSelected()" [(ngModel)]="filters.selectedOrigin"
-          [autoDisplayFirst]="false"></p-dropdown>
+                    [autoDisplayFirst]="false"></p-dropdown>
       </div>
       <div class="p-col-12 p-md-2 item-filter">
         <label>Presencial</label>
-        <p-multiSelect [options]="meetingListOptions" [(ngModel)]="filters.selectedMeeting" defaultLabel="Selecione" [disabled]="validateOriginSelectedPresential()"
-          [filter]="true" (onChange)="loadCharts()">
+        <p-multiSelect [options]="meetingListOptions" [(ngModel)]="filters.selectedMeeting" defaultLabel="Selecione"
+                       [disabled]="validateOriginSelectedPresential()"
+                       [filter]="true" (onChange)="loadCharts()">
         </p-multiSelect>
       </div>
       <div class="p-col-12 p-md-6 refresh-filter">
@@ -59,27 +60,29 @@
               <div class="chart-param">
                 <label>Agrupar:</label>
                 <p-dropdown class="param" [options]="microregionChartAgroupOptions"
-                  (onChange)="handleMicroregionChartAgroupClicked()" [autoDisplayFirst]="false"
-                  [(ngModel)]="microregionChartAgroupSelected"></p-dropdown>
+                            (onChange)="handleMicroregionChartAgroupClicked()" [autoDisplayFirst]="false"
+                            [(ngModel)]="microregionChartAgroupSelected"></p-dropdown>
               </div>
               <div class="chart-param">
                 <label>Exibir:</label>
-                <p-dropdown class="param" (onChange)="handleDisplayModeMicroregionChartChange()" [autoDisplayFirst]="false"
-                  [options]="chartDisplayOptions" [group]="true" [(ngModel)]="microregionChartDisplaySelected">
+                <p-dropdown class="param" (onChange)="handleDisplayModeMicroregionChartChange()"
+                            [autoDisplayFirst]="false"
+                            [options]="chartDisplayOptions" [group]="true"
+                            [(ngModel)]="microregionChartDisplaySelected">
                 </p-dropdown>
               </div>
             </div>
           </div>
           <div class="header-sub-description"
-              *ngIf="barStrategicAreaSelecteds && barStrategicAreaSelecteds.length > 0">
-              <span>{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].description}}</span>
-            </div>
+               *ngIf="barStrategicAreaSelecteds && barStrategicAreaSelecteds.length > 0">
+            <span>{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].description}}</span>
+          </div>
           <div class="divisor" *ngIf="conference">
-            <hr />
+            <hr/>
           </div>
           <div class="chart" *ngIf="dashboardData && showMicroregionChart && dashboardData.microregionChart">
             <app-horizontal-bar-graph [chartData]="dashboardData?.microregionChart"
-              (graphClicked)="handleMicroregionChartClicked($event)">
+                                      (graphClicked)="handleMicroregionChartClicked($event)">
             </app-horizontal-bar-graph>
           </div>
           <div class="selected-bar-values" *ngIf="!showMicroregionChart">
@@ -98,11 +101,11 @@
             </div>
           </div>
           <div class="chart-heatmap-divisor" *ngIf="conference">
-            <hr />
+            <hr/>
           </div>
           <div class="chart-heatmap" *ngIf="dashboardData">
-            <app-heat-map [locations]="dashboardData.heatMapChart" 
-              [center]="heatMapCenter" [zoom]="heatmapZoom"></app-heat-map>
+            <app-heat-map [locations]="dashboardData.heatMapChart"
+                          [center]="heatMapCenter" [zoom]="heatmapZoom"></app-heat-map>
           </div>
         </div>
         <div class="chart-container">
@@ -115,15 +118,17 @@
               <div class="bar-navigation" *ngIf="barStrategicAreaSelecteds && barStrategicAreaSelecteds.length > 0">
                 <fa-icon [icon]="arrowLeftIcon" class="fas-icon" (click)="handleBackStrategicAreaChartClicked()">
                 </fa-icon>
-                <span class="description">{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length -
-                  1].description}}</span>
+                <span
+                  class="description">{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].description}}</span>
               </div>
             </div>
             <div class="chart-params">
               <div class="chart-param">
                 <label>Exibir:</label>
-                <p-dropdown class="param" (onChange)="handleDisplayModeStrategicAreaChartChange()" [autoDisplayFirst]="false"
-                  [options]="chartDisplayOptions" [group]="true" [(ngModel)]="strategicAreaChartDisplaySelected">
+                <p-dropdown class="param" (onChange)="handleDisplayModeStrategicAreaChartChange()"
+                            [autoDisplayFirst]="false"
+                            [options]="chartDisplayOptions" [group]="true"
+                            [(ngModel)]="strategicAreaChartDisplaySelected">
                 </p-dropdown>
               </div>
             </div>
@@ -132,15 +137,16 @@
             <span>{{barRegionSelecteds[barRegionSelecteds.length - 1].description}}</span>
           </div>
           <div class="divisor">
-            <hr />
+            <hr/>
           </div>
           <div class="chart" *ngIf="dashboardData && showStrategicAreaChart && dashboardData.strategicAreaChart">
             <app-horizontal-bar-graph [chartData]="dashboardData?.strategicAreaChart"
-              (graphClicked)="handleStrategicAreaChartClicked($event)">
+                                      (graphClicked)="handleStrategicAreaChartClicked($event)">
             </app-horizontal-bar-graph>
           </div>
           <div class="selected-bar-values" *ngIf="!showStrategicAreaChart">
-            <span class="description">{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].description}}</span>
+            <span
+              class="description">{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].description}}</span>
             <span class="value">{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].quantity}}</span>
           </div>
         </div>

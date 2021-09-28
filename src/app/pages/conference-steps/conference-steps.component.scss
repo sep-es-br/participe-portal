@@ -1,16 +1,18 @@
-.search-container{
+.search-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin-right: 50px;
   margin-bottom: 2rem;
-  .search-area{
+
+  .search-area {
     display: flex;
     flex-direction: row;
+
     .search-button {
       cursor: pointer;
       color: white;
-      outline:none;
+      outline: none;
       border-radius: 60px;
       background: linear-gradient(to right, var(--accentColorStart), var(--accentColorEnd));
       padding: 6px;
@@ -18,15 +20,17 @@
       text-align: center;
       font-size: 12px;
     }
-    input{
+
+    input {
       padding: 0 0 0 8px;
-      outline:none;
+      outline: none;
       opacity: 0.8;
       width: 30em;
       border: 0;
       border-radius: 60px;
     }
-    .search-img{
+
+    .search-img {
       cursor: pointer;
       position: absolute;
       border-radius: 50%;
@@ -34,7 +38,8 @@
       right: 50px;
       width: 27px;
       height: 27px;
-      img{
+
+      img {
         margin-left: 6px;
         margin-top: 6px;
         width: 15px;
@@ -42,7 +47,8 @@
       }
     }
   }
-  .message{
+
+  .message {
     color: white;
     font-size: 18px;
     padding: 1rem;
@@ -50,10 +56,12 @@
     margin-left: 20px;
     border: 1px solid white;
     border-radius: 10px;
-    strong{
+
+    strong {
       margin-right: 1rem;
     }
-    .close{
+
+    .close {
       float: right;
       cursor: pointer;
       font-size: 14px;
@@ -63,20 +71,26 @@
   }
 }
 
-.filter-container{
+.filter-container {
 
   padding: 0 15px;
   margin-left: 1rem;
   margin-top: 10px;
-  .button-container{
+
+  .button-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    .button{
+
+    .button {
       margin-top: 30px;
       margin-right: 2rem;
-      input{display:none}
-      label{
+
+      input {
+        display: none
+      }
+
+      label {
         color: white;
         font-size: 1.2rem;
         margin-top: 20px;
@@ -87,6 +101,7 @@
         font-weight: bold;
         cursor: pointer;
         align-items: center;
+
         .arrow {
           position: relative;
           display: inline-block;
@@ -101,44 +116,48 @@
         }
       }
 
-      input:checked ~ div.submenu{
+      input:checked ~ div.submenu {
         max-height: fit-content;
         box-shadow: 2px 2px 20px 1px black;
       }
 
-      input:checked ~ label{
+      input:checked ~ label {
         color: var(--accentColorEnd);
         border-color: var(--accentColorEnd);
-        .arrow{
+
+        .arrow {
           border-right: 2px solid var(--accentColorEnd);
           border-top: 2px solid var(--accentColorEnd);
         }
       }
+
       input:checked ~ .checkmark:after {
         display: block;
 
       }
 
-      div.submenu{
-        position:absolute;
-        max-height:0;
+      div.submenu {
+        position: absolute;
+        max-height: 0;
         padding: 0 4px;
-        overflow:hidden;
-        list-style-type:none;
+        overflow: hidden;
+        list-style-type: none;
         background: white;
-        transition:max-height 0.5s ease-out;
-        min-width:auto;
-        z-index:2;
+        transition: max-height 0.5s ease-out;
+        min-width: auto;
+        z-index: 2;
         margin-top: 10px;
         width: inherit;
-        .close{
+
+        .close {
           text-align: right;
           margin: 5px 5px 0 auto;
           font-weight: bold;
           cursor: pointer;
           width: 10%;
         }
-        label{
+
+        label {
           font-weight: normal;
         }
 
@@ -171,9 +190,10 @@
           height: 15px;
           width: 15px;
           border: 1px;
-          border-color:var(--accentColorEnd);
+          border-color: var(--accentColorEnd);
           border-style: solid;
         }
+
         .checkmark:after {
           content: "";
           position: absolute;
@@ -203,6 +223,7 @@
 .conference-step-container {
   display: flex;
   padding: 20px 50px;
+
   .card-item-empty {
     background: white;
     min-height: 140px;
@@ -212,12 +233,14 @@
     width: 500px;
     border-radius: 10px;
   }
+
   .cards-container {
     width: 100%;
     display: grid;
     grid-row-gap: 14px;
     grid-column-gap: 14px;
-    grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+
     .card-item {
       background: white no-repeat -20px;
       min-height: 140px;
@@ -227,53 +250,69 @@
       flex-direction: column;
       overflow: hidden;
       padding: 20px;
-      &.checked {
-        color: white;
-        background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd)) !important;
-      }
+
       &.clickable {
         cursor: pointer;
+
         &:hover {
           h2 {
             color: var(--accentColorStart);
           }
         }
-
       }
 
-      .card-item-content.center-container{
+      &.checked {
+        color: white;
+        background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd)) !important;
+
+        &:hover {
+          h2 {
+            color: white;
+          }
+        }
+      }
+
+      .card-item-content.center-container {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
+
         .center {
           text-align: center;
         }
       }
+
       .card-actions {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+
         .card-actions-item {
           padding: 10px 10px 0;
           color: var(--accentColorEnd);
+
           &:hover {
             color: var(--accentColorStart);
           }
+
           &.checked {
             color: white;
           }
         }
+
         .check {
           display: flex;
           align-items: center;
           cursor: pointer;
+
           img {
             width: 30px;
             height: 30px;
             margin-right: 10px;
           }
+
           .icon {
             width: 30px;
             height: 30px;
@@ -282,10 +321,12 @@
             margin-right: 10px;
           }
         }
+
         .comment {
           display: flex;
           align-items: center;
           cursor: pointer;
+
           .count {
             position: absolute;
             margin-left: 0;
@@ -293,8 +334,9 @@
             font-size: 0.7rem;
             width: 29px;
             text-align: center;
-            transform: translate(1px,-3px);
+            transform: translate(1px, -3px);
           }
+
           img {
             width: 30px;
             height: 30px;
@@ -305,15 +347,18 @@
     }
   }
 }
+
 .modalComment {
   textarea {
     background: #efe6e6;
     border: 1px solid #ccc;
   }
+
   p {
     margin-block-start: 0.8rem;
     margin-block-end: 0.8rem;
   }
+
   .count-characters {
     color: #928c8c;
     font-size: 0.9rem;
@@ -322,25 +367,28 @@
 }
 
 @media (max-width: 600px) {
-  .search-container{
-    .search-area{
-      input{
+  .search-container {
+    .search-area {
+      input {
         width: 20rem;
       }
     }
   }
-  .filter-container{
-    .button-container{
+  .filter-container {
+    .button-container {
       flex-direction: column;
-      .button{
+
+      .button {
         margin-top: 2rem;
-        label{
+
+        label {
           font-weight: normal;
           font-size: 1.0rem;
           padding: 5px 15px;
           border: 1px solid white;
           border-radius: 40px;
-          .arrow{
+
+          .arrow {
             border-right: 1px solid white;
             border-top: 1px solid white;
           }
@@ -364,6 +412,7 @@
     top: -45px;
     margin-right: initial;
     margin-bottom: initial;
+
     .message {
       position: relative;
       width: calc(100% - 88px);

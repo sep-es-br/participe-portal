@@ -1,18 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { IConference } from 'src/app/shared/interfaces/IConference';
-import { IHorizontalBarChartItem, IStatisticsDashboardData } from 'src/app/shared/interfaces/IStatisticsDashboardData';
-import { ConferenceService } from 'src/app/shared/services/conference.service';
-import { MeetingService } from 'src/app/shared/services/meeting.service';
-import { ResponsiveService } from 'src/app/shared/services/responsive.service';
-import { StatisticsDashboardService } from 'src/app/shared/services/statistics.dashboard.service';
-import {
-  faArrowLeft
-} from '@fortawesome/free-solid-svg-icons';
-import { DomainService } from 'src/app/shared/services/domain.service';
-import { StructureItemService } from 'src/app/shared/services/structure-item.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SelectItem, SelectItemGroup} from 'primeng/api';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {IConference} from 'src/app/shared/interfaces/IConference';
+import {IHorizontalBarChartItem, IStatisticsDashboardData} from 'src/app/shared/interfaces/IStatisticsDashboardData';
+import {ConferenceService} from 'src/app/shared/services/conference.service';
+import {MeetingService} from 'src/app/shared/services/meeting.service';
+import {ResponsiveService} from 'src/app/shared/services/responsive.service';
+import {StatisticsDashboardService} from 'src/app/shared/services/statistics.dashboard.service';
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {StructureItemService} from 'src/app/shared/services/structure-item.service';
+
 interface IItem {
   id: number;
   name: string;
@@ -230,10 +228,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   validateOriginSelectedPresential() {
-    if (this.filters.selectedOrigin && this.filters.selectedOrigin === 'PRESENTIAL') {
-      return false;
-    }
-    return true;
+    return !(this.filters.selectedOrigin && this.filters.selectedOrigin === 'PRESENTIAL');
   }
 
   async clearFilters(clearResult = true) {
@@ -334,7 +329,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           this.dashboardData.strategicAreaChart = strategicAreaChartDataOrderedAlphaDesc.sort((a, b) => {
             const x = a.description.toUpperCase();
             const y = b.description.toUpperCase();
-            return x === y ? 0 : x > y ? 1 : -1;
+            return x === y ? 0 : x > y ? -1 : 1;
           });
           break;
         case 'ALPHABETIC_ASC':
@@ -342,7 +337,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           this.dashboardData.strategicAreaChart = strategicAreaChartDataOrderedAlphaAsc.sort((a, b) => {
             const x = a.description.toUpperCase();
             const y = b.description.toUpperCase();
-            return x === y ? 0 : x > y ? -1 : 1;
+            return x === y ? 0 : x > y ? 1 : -1;
           });
           break;
         case 'TOP_FIVE':
@@ -372,10 +367,10 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       this.filters.selectedMeeting,
       this.microregionChartAgroupSelected,
       barRegionSelected,
-      this.showMicroregionChart ? false : true,
+      !this.showMicroregionChart,
       this.itemStructureSelected.id,
       barStrategicAreaSelected,
-      this.showStrategicAreaChart ? false : true
+      !this.showStrategicAreaChart
     );
     if (result.success) {
       this.dashboardDataResponse = Object.assign({}, result.data);

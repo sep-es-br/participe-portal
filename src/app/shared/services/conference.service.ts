@@ -7,7 +7,7 @@ import {StoreKeys} from '../commons/contants';
 import {IPreOpeningScreenInfo} from '../interfaces/IConferencePreOpeningScreenInfo';
 import {IPostClosureScreenInfo} from '../interfaces/IConferencePostClosureScreenInfo';
 import {IResultRegionalizationConference} from '../interfaces/IResultRegionalizationConference';
-import { IConference } from '../interfaces/IConference';
+import {IConference} from '../interfaces/IConference';
 
 @Injectable({providedIn: 'root'})
 export class ConferenceService extends BaseService<any> {
@@ -18,29 +18,27 @@ export class ConferenceService extends BaseService<any> {
     super('conferences', injector);
   }
 
-  async getConferenceScreenInfo(conferenceId: number) {
-    return this.http.get<IResultHttp<ILoginScreenInfo>>(
-      `${environment.apiUrl}/conferences/AuthenticationScreen/${conferenceId}`
-    ).toPromise();
-  }
-
-  async getConferencePreOpeningScreenInfo(conferenceId: number) {
-    return this.http.get<IResultHttp<IPreOpeningScreenInfo>>(
-      `${environment.apiUrl}/conferences/AuthenticationScreen/${conferenceId}/pre-opening`
-    ).toPromise();
-  }
-
-  async getConferencePostClosureScreenInfo(conferenceId: number) {
-    return this.http.get<IResultHttp<IPostClosureScreenInfo>>(
-      `${environment.apiUrl}/conferences/AuthenticationScreen/${conferenceId}/post-closure`).toPromise();
-  }
-
   get ConferenceActiveId(): number {
     try {
       return Number(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE));
     } catch (error) {
       return 0;
     }
+  }
+
+  async getConferenceScreenInfo(conferenceId: number) {
+    return this.http.get<IResultHttp<ILoginScreenInfo>>(
+      `${environment.apiUrl}/conferences/AuthenticationScreen/${conferenceId}`).toPromise();
+  }
+
+  async getConferencePreOpeningScreenInfo(conferenceId: number) {
+    return this.http.get<IResultHttp<IPreOpeningScreenInfo>>(
+      `${environment.apiUrl}/conferences/AuthenticationScreen/${conferenceId}/pre-opening`).toPromise();
+  }
+
+  async getConferencePostClosureScreenInfo(conferenceId: number) {
+    return this.http.get<IResultHttp<IPostClosureScreenInfo>>(
+      `${environment.apiUrl}/conferences/AuthenticationScreen/${conferenceId}/post-closure`).toPromise();
   }
 
   async getRegionalization(conferenceId: number) {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ILoginScreenInfo } from 'src/app/shared/interfaces/IConferenceActive';
@@ -10,12 +11,13 @@ import { ConferenceService } from 'src/app/shared/services/conference.service';
   templateUrl: './post-closure.component.html',
   styleUrls: ['./post-closure.component.scss']
 })
-export class PostClosureComponent implements OnInit {
+export class PostClosureComponent implements OnInit, OnDestroy {
 
   data: ILoginScreenInfo;
   form: any = {};
   conferenceId: number;
   postClosureText: string = '';
+  subParams: Subscription;
 
   constructor(
     private conferenceSrv: ConferenceService,
@@ -26,8 +28,9 @@ export class PostClosureComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activeRoute.params.subscribe(async ({ conference }) => {
+    this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
       this.conferenceId = +conference;
+      await this.loadConference();
       await this.getText();
     });
   }
@@ -36,6 +39,13 @@ export class PostClosureComponent implements OnInit {
     const { success, data } = await this.conferenceSrv.getConferencePostClosureScreenInfo(this.conferenceId);
     if (success) {
       this.postClosureText = data.text;
+    }
+  }
+
+  async loadConference() {
+    const {success, data} = await this.conferenceSrv.getConferenceScreenInfo(this.conferenceId);
+    if (success) {
+      this.data = data;
     }
   }
 
@@ -71,6 +81,12 @@ export class PostClosureComponent implements OnInit {
       if (data.temporaryPassword) {
         return this.router.navigate(['/change-password']);
       }
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.subParams) {
+      this.subParams.unsubscribe();
     }
   }
 }

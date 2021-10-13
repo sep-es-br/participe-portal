@@ -59,10 +59,10 @@
     }
   }
   .charts-container {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2em;
+    // display: grid;
+    // justify-content: center;
+    // grid-template-columns: 1fr 1fr 1fr;
+    // gap: 2em;
     margin: 0.5em 0;
   }
   .chart-container {
@@ -93,7 +93,7 @@
     }
   }
   .chart-heatmap-container {
-    padding: 2em 2em 0.5em;
+    padding: 2em 2em 1em;
   }
   .divisor {
     padding: 0 0 2em;
@@ -200,7 +200,7 @@
   }
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 1200px) {
   .app-dashboard {
     padding: 15px;
   }
@@ -219,9 +219,10 @@
     }
   }
   .charts-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // display: flex;
+    // width: 100%;
+    // flex-direction: column;
+    // justify-content: center;
     margin: 0.5em 0;
   }
   .chart-container {
@@ -231,10 +232,11 @@
     padding: 1em;
   }
   .chart-heatmap-container {
-    padding: 1em 1em 0.5em;
+    padding: 1em 1em 1em;
   }
   .divisor {
     padding: 0 0 1em;
+    margin-top: 0.5em;
     hr {
       border: 1px solid #f2f2f2;
     }
@@ -255,9 +257,11 @@
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
+      padding-bottom: 5px;
       .title {
         font-size: 0.8rem;
         text-transform: uppercase;
+        padding-bottom: 0;
       }
       .subtitle {
         margin-left: 5px;
@@ -266,6 +270,9 @@
         color: #797979;
         text-transform: uppercase;
       }
+    }
+    .header-sub-description {
+      padding-top: 0.5em;
     }
     .chart-heatmap-title {
       .subtitle {

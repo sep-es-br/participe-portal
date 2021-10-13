@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ConferenceService} from 'src/app/shared/services/conference.service';
 import * as moment from 'moment';
@@ -13,7 +13,6 @@ import 'moment-timezone';
 export class PreOpeningComponent implements OnInit, OnDestroy {
 
   conferenceId: number;
-  subscription: Subscription;
   days: number = 0;
   hours: number = 0;
   minutes: number = 0;
@@ -21,17 +20,20 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
   preOpeningText: string = '';
   closed: boolean = false;
   meetingDate: number[]; // [yyyy, m-1, d, h, m, s]
+  subParams: Subscription;
+  interval;
+  play = false;
 
   constructor(
     private conferenceSrv: ConferenceService,
     private activeRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
   async ngOnInit() {
-    this.activeRoute.params.subscribe(async ({conference}) => {
+    this.subParams = this.activeRoute.params.subscribe(async ({conference}) => {
       this.conferenceId = +conference;
-      this.dateFormat();
     });
     await this.getTime();
   }
@@ -40,16 +42,28 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
     const {success, data} = await this.conferenceSrv.getConferencePreOpeningScreenInfo(this.conferenceId);
     if (success) {
       this.preOpeningText = data.text;
-
-      let date = new Date(moment.tz(data.date, 'Atlantic/Azores').toString());
-
+      const date = data.date && new Date(moment(data.date).toString());
       this.meetingDate = moment(date).toArray();
       if (this.meetingDate) {
-        setInterval(() => {
-          this.dateFormat();
-        }, 1000);
+        this.startTimer();
       }
     }
+  }
+
+  startTimer() {
+    this.play = true;
+    this.interval = setInterval(() => {
+      this.dateFormat();
+    });
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+    this.router.navigate([`/login/${this.conferenceId}`], {
+      queryParams: {
+        isOpen: true
+      }
+    });
   }
 
   dateFormat() {
@@ -68,6 +82,9 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
       this.hours = timeLeft.hours;
       this.minutes = timeLeft.minutes;
       this.seconds = timeLeft.seconds;
+    }
+    if (this.days <= 0 && this.hours <= 0 && this.minutes <= 0 && this.seconds <= 0) {
+      this.pauseTimer();
     }
   }
 
@@ -89,7 +106,10 @@ export class PreOpeningComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.subParams) {
+      this.subParams.unsubscribe();
+    }
   }
+
 }

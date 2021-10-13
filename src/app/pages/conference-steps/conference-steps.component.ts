@@ -250,7 +250,12 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     } else {
       this.imageName = 'close';
     }
+    const {success, data} = await this.participationSrv
+      .getPlanItem(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);
 
+    if (success) {
+      this.renderList(data.itens);
+    }
   }
 
   async search() {

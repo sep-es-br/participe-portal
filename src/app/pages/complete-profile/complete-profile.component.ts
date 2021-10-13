@@ -78,7 +78,7 @@ export class CompleteProfileComponent implements OnInit {
 
   filterLocalities({query}) {
     this.filteredLocalities = [];
-    this.filteredLocalities = this.localities.filter(
+    this.filteredLocalities = this.localities && this.localities.filter(
       locality => locality.name.toLowerCase().indexOf(query.toLowerCase()) > -1
     ).map(loc => ({value: loc.id, label: loc.name}));
   }

@@ -1,16 +1,17 @@
-import {ActivatedRoute, Router} from '@angular/router';
-import {Component, HostListener, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 
-import {AuthService} from '../../shared/services/auth.service';
-import {ConferenceService} from '../../shared/services/conference.service';
-import {ILoginScreenInfo} from '../../shared/interfaces/IConferenceActive';
-import {IMeetingDetail} from '../../shared/interfaces/IMeetingDetail';
-import {ISelectItem} from '../../shared/interfaces/ISelectItem';
-import {Meeting} from '../../shared/models/Meeting';
-import {MeetingService} from '../../shared/services/meeting.service';
-import {MessageService} from 'primeng/api';
-import {StoreKeys} from '../../shared/commons/contants';
-import {typeMeetingEnum} from 'src/app/shared/enums/TypeMeetingEnum';
+import { AuthService } from '../../shared/services/auth.service';
+import { ConferenceService } from '../../shared/services/conference.service';
+import { ILoginScreenInfo } from '../../shared/interfaces/IConferenceActive';
+import { IMeetingDetail } from '../../shared/interfaces/IMeetingDetail';
+import { ISelectItem } from '../../shared/interfaces/ISelectItem';
+import { Meeting } from '../../shared/models/Meeting';
+import { MeetingService } from '../../shared/services/meeting.service';
+import { MessageService } from 'primeng/api';
+import { StoreKeys } from '../../shared/commons/contants';
+import { typeMeetingEnum } from 'src/app/shared/enums/TypeMeetingEnum';
 import * as _ from 'lodash';
 
 @Component({
@@ -18,7 +19,7 @@ import * as _ from 'lodash';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   conferenceData: ILoginScreenInfo;
   statistics: ISelectItem[] = [];
@@ -38,7 +39,9 @@ export class LoginComponent implements OnInit {
   typeMeeting = typeMeetingEnum;
   modalDetailMeeting: boolean = false;
   responsive: boolean;
-  status: string;
+  subParams: Subscription;
+  subQueryParams: Subscription;
+  isOpen = false;
   backgroundImageUrl: string = '/assets/images/background.png';
 
   constructor(
@@ -49,16 +52,27 @@ export class LoginComponent implements OnInit {
     private meetingSrv: MeetingService,
     private router: Router
   ) {
+    this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
+      this.conferenceId = +conference;
+    });
+    this.subQueryParams = this.activeRoute.queryParams.subscribe(async ({ isOpen }) => {
+      this.isOpen = isOpen;
+    });
   }
 
   async ngOnInit() {
-    await this.activeRoute.params.subscribe(async ({conference}) => {
-      this.conferenceId = +conference;
+    await this.loadConference(this.conferenceId);
+    await this.loadMeetingPageNumber(this.conferenceId, `${new Date().toLocaleDateString('pt-BR')} 00:00:00}`);
+    await this.loadMeeting(this.conferenceId);
+  }
 
-      await this.loadConference(this.conferenceId);
-      await this.loadMeetingPageNumber(this.conferenceId, `${new Date().toLocaleDateString('pt-BR')} 00:00:00}`);
-      await this.loadMeeting(this.conferenceId);
-    });
+  ngOnDestroy(): void {
+    if (this.subParams) {
+      this.subParams.unsubscribe();
+    }
+    if (this.subQueryParams) {
+      this.subQueryParams.unsubscribe();
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -68,31 +82,27 @@ export class LoginComponent implements OnInit {
 
   async loadConference(conferenceId: number) {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
-
-    const {success, data} = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
-
+    const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
     if (success) {
       this.conferenceData = data;
-
       this.statistics = [];
+      this.statistics.push({ value: data.participations, label: 'Participantes' });
+      this.statistics.push({ value: data.proposal, label: 'Propostas' });
+      this.statistics.push({ value: data.highlights, label: 'Destaques' });
+      this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
 
-      this.statistics.push({value: data.participations, label: 'Participantes'});
-      this.statistics.push({value: data.proposal, label: 'Propostas'});
-      this.statistics.push({value: data.highlights, label: 'Destaques'});
-      this.statistics.push({value: data.numberOfLocalities, label: 'Municípios já participaram'});
+      this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
 
-      this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url');
-
-      if (this.conferenceData.status === 'PRE_OPENING') {
-        await this.router.navigate([`${this.conferenceId}/pre-opening`]);
+      if (this.conferenceData.status === 'PRE_OPENING' && !this.isOpen) {
+        this.router.navigate([`${this.conferenceId}/pre-opening`]);
       } else if (this.conferenceData.status === 'POST_CLOSURE') {
-        await this.router.navigate([`${this.conferenceId}/post-closure`]);
+        this.router.navigate([`${this.conferenceId}/post-closure`]);
       }
     }
   }
 
   async loadMeeting(conferenceId: number) {
-    const {success, data: {content, totalPages, first, last, empty}} = await this.meetingSrv.getMeetingsByIdConference(
+    const { success, data: { content, totalPages, first, last, empty } } = await this.meetingSrv.getMeetingsByIdConference(
       conferenceId,
       {},
       {
@@ -199,7 +209,7 @@ export class LoginComponent implements OnInit {
     this.authSrv.signInAcessoCidadao();
   }
 
-  async signInWithLogin({login, password}) {
+  async signInWithLogin({ login, password }) {
     if (!login || !password) {
       return this.messageSrv.add({
         severity: 'warn',
@@ -207,7 +217,7 @@ export class LoginComponent implements OnInit {
         life: 15000
       });
     }
-    const {success, data} = await this.authSrv.signIn(login, password);
+    const { success, data } = await this.authSrv.signIn(login, password);
 
     if (success) {
       this.authSrv.saveToken(data);
@@ -232,9 +242,9 @@ export class LoginComponent implements OnInit {
   }
 
   private async loadMeetingPageNumber(conferenceId: number, currentDate: string) {
-    const {success, data} = await this.meetingSrv.getPageNumberOfMeetingWithCurrentDate(
+    const { success, data } = await this.meetingSrv.getPageNumberOfMeetingWithCurrentDate(
       conferenceId,
-      {currentDate},
+      { currentDate },
       {
         pageSize: this.pagination.size,
         page: 0,

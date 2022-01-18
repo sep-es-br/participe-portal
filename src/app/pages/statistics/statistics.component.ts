@@ -83,6 +83,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       { label: 'Propostas', value: 'PROPOSALS' }
     ];
     this.originOptions = [
+      { label: 'Todas', value: '' },
       { label: 'Remota', value: 'REMOTE' },
       { label: 'Presencial', value: 'PRESENTIAL' }
     ];

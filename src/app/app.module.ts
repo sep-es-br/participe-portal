@@ -2,7 +2,7 @@ import { HttpRequestInterceptorModule } from './shared/interceptors/http-request
 import { InputMessageComponent } from './components/input-message/input-message.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -54,6 +54,10 @@ import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { HeatMapComponent } from './pages/statistics/graphs/heat-map/heat-map.component';
 import { HorizontalBarGraphComponent } from './pages/statistics/graphs/horizontal-bar-graph/horizontal-bar-graph.component';
 import { StartComponent } from './pages/start/start.component';
+import { registerLocaleData } from '@angular/common';
+import localePtBr from '@angular/common/locales/pt';
+
+registerLocaleData(localePtBr);
 
 @NgModule({
   declarations: [
@@ -119,6 +123,7 @@ import { StartComponent } from './pages/start/start.component';
       useValue: JWT_OPTIONS
     },
     JwtHelperService,
+    { provide: LOCALE_ID, useValue: "pt" },
   ],
   bootstrap: [AppComponent]
 })

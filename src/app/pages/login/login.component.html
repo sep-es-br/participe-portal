@@ -80,7 +80,7 @@
   <p-toast position="top-right"></p-toast>
 
   <p-dialog [(visible)]="modalDetailMeeting" *ngIf="modalDetailMeeting" [modal]="true"
-            [style]="{width: responsive ? '60vw' : '33vw'}"
+            [style]="{width: responsive ? '60vw' : '50vw'}"
             showEffect="fade" [resizable]="false" [draggable]="false" [responsive]="true"
             class="dialog-detail">
     <div class="modal-detail">
@@ -95,11 +95,13 @@
         <div class="date-time-container">
           <span class="date">
             <img src="assets/icons/calendar2.svg" alt="calendario">
-            {{labelDateDetailMetting(meetingDetail?.beginDate)}}
+            {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'd'}}
+             de {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMM'}}
           </span>
           <span class="time">
             <i class="far fa-clock hour-icon"></i>
-            {{labelTimeDetailMetting(meetingDetail?.beginDate)}}
+            {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'hh:mm'}}h
+             às {{getDateFromAPIStr(meetingDetail?.endDate) | date: 'hh:mm'}}h
           </span>
         </div>
         <div class="locality-channel-container">

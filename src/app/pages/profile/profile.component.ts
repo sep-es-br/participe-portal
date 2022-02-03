@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit {
     private messageSrv: MessageService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private location: Location,
   ) {
   }
 
@@ -195,7 +196,8 @@ export class ProfileComponent implements OnInit {
   }
 
   async cancel() {
-    await this.router.navigate(['/conference-map']);
+    this.location.back();
+    //await this.router.navigate(['/conference-map']);
   }
 
   private processSocialLoginProfile() {
@@ -268,6 +270,7 @@ export class ProfileComponent implements OnInit {
         life: 15000
       });
     });
+    this.location.back();
   }
 
   async wannaMergeProfile(param: { answer: boolean }) {

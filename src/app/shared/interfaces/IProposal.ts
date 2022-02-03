@@ -5,6 +5,7 @@ export interface IProposal {
     time: string;
     comment: string;
     isLiked: boolean;
+    personId: number;
     personName: string;
     planItens: IPlanItem[];
     localityTypeName: string;

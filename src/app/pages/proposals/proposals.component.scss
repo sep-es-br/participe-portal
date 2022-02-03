@@ -252,12 +252,13 @@
           justify-content: center;
         }
         .likesBefore{
-          max-height: 18px;
+          max-height: 20px;
           .number{
             color: rgb(132, 134, 136);
             margin-right: 3px;
             margin-top: 1px;
-            font-size: 10px;
+            font-size: 20px;
+            font-weight: bold;
           }
           .thumbs-up{
             margin-bottom: 2px;
@@ -268,12 +269,13 @@
           }
         }
         .likesAfter{
-          max-height: 18px;
+          max-height: 20px;
           .number{
             color: var(--accentColorStart);
             margin-right: 3px;
             margin-top: 1px;
-            font-size: 10px;
+            font-size: 20px;
+            font-weight: bold;
           }
           .thumbs-up{
             margin-bottom: 2px;
@@ -371,4 +373,8 @@
       }
     }
   }
+}
+
+.disable-anchor-tag {
+  pointer-events: none;
 }

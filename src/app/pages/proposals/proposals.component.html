@@ -67,9 +67,12 @@
           <div class="person"><strong>{{ item.personName }} - {{ item.localityPerson }}</strong></div>
           <div class="how-long-ago">{{ howLongAgo(item.time) }}</div>
 
-          <a [ngClass]= "item.isLiked ? 'likes likesAfter' : 'likes likesBefore'" (click)="likeProposal(i, item)" id="{{i}}">
+          <a [ngClass]= "item.isLiked ? 'likes likesAfter' : 'likes likesBefore'"
+            [class.disable-anchor-tag]="isMyComment(item)"
+
+            (click)="likeProposal(i, item)" id="{{i}}">
             <div class="number">{{ item.likes || 0}}</div>
-            <img src="assets/icons/like2.svg" style="min-width: 2%; width: 11px; height: 11px;" alt="">
+            <img src="assets/icons/like2.svg" style="min-width: 2%; width: 20px; height: 20px;" alt="">
           </a>
         </div>
 

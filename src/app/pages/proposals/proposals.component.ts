@@ -5,6 +5,8 @@ import { ISelectItem } from 'src/app/shared/interfaces/ISelectItem';
 import { IProposal } from 'src/app/shared/interfaces/IProposal';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
+import { IPerson } from 'src/app/shared/interfaces/IPerson';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-proposals',
@@ -59,9 +61,12 @@ export class ProposalsComponent implements OnInit {
 
   listProposals: IProposal[];
 
+  userId: number;
+
   constructor(
     private proposalSrv: ProposalService,
     private conferenceSrv: ConferenceService,
+    private authSrv: AuthService,
   ) { }
 
   async ngOnInit() {
@@ -150,6 +155,10 @@ export class ProposalsComponent implements OnInit {
       const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
       this.regionalization = data.regionalization;
     }
+  }
+
+  isMyComment(item: IProposal): boolean {
+    return (item.personId === this.authSrv.getUserInfo.id);
   }
 
   async likeProposal(index: number, item: IProposal) {

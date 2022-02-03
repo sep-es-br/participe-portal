@@ -23,6 +23,7 @@
     </div>
     <div class="participations-list">
       <div class="p-grid timeline">
+        <div *ngIf="listParticipations.length === 0" class="no-participation-msg">Nenhum destaque ou proposta</div>
         <div class="p-col-12 line" *ngFor="let participation of listParticipations; let i = index;">
           <div class="link-line">
             <div class="vertical-line top" [class.hidden]="!i"></div>

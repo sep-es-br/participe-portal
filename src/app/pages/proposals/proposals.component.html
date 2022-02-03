@@ -57,6 +57,7 @@
 
 <div class="proposals-area-container" (scroll)="onScroll($event)">
   <div class="cards-container">
+    <div *ngIf="listProposals.length === 0" class="no-proposal-msg">Nenhuma proposta encontrada</div>
     <div class="card-item" *ngFor="let item of listProposals; let i = index" >
 
         <div class="proposal">

@@ -70,6 +70,7 @@
     display: flex;
     flex-direction: column;
     padding: 2em;
+    min-height: 780px;
   }
   .selected-bar-values {
     display: flex;
@@ -96,7 +97,7 @@
     padding: 2em 2em 1em;
   }
   .divisor {
-    padding: 0 0 2em;
+    padding: 0 0 0;
     hr {
       border: 1px solid #f2f2f2;
     }
@@ -113,12 +114,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    height: 80px;
+    //height: 80px;
     .chart-navigation-header {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      height: 100%;
+      align-items: center;
+      //height: 100%;
       flex: 1;
       justify-content: space-between;
       .bar-navigation {
@@ -188,7 +189,7 @@
   }
   .chart {
     height: 600px;
-    overflow-y: scroll;
+    //overflow-y: scroll;
   }
   .chart-heatmap {
     height: 640px;
@@ -230,6 +231,7 @@
     display: flex;
     flex-direction: column;
     padding: 1em;
+    min-height: 780px;
   }
   .chart-heatmap-container {
     padding: 1em 1em 1em;
@@ -269,6 +271,7 @@
         font-weight: 700;
         color: #797979;
         text-transform: uppercase;
+        text-align: center;
       }
     }
     .header-sub-description {

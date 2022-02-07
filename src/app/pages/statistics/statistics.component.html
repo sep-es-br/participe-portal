@@ -46,22 +46,22 @@
         <div class="p-grid p-jc-between">
           <div class="p-col-12 p-xl-4">
             <div class="chart-container">
-              <div class="chart-header">
-                <div class="chart-navigation-header">
+              <div class="p-grid chart-header">
+                <div class="p-col-12 chart-navigation-header">
                   <div class="chart-title">
-                    <span class="title">{{chartsTitleSelected}} por:</span>
-                    <span class="subtitle">Microrregião</span>
+                    <span class="subtitle">{{chartsTitleSelected}} por Microrregião</span>
                   </div>
                   <div class="bar-navigation" *ngIf="barRegionSelecteds && barRegionSelecteds.length > 0">
                     <fa-icon [icon]="arrowLeftIcon" class="fas-icon" (click)="handleBackRegionChartClicked()"></fa-icon>
                     <span class="description">{{barRegionSelecteds[barRegionSelecteds.length - 1].description}}</span>
                   </div>
                 </div>
-                <div class="header-sub-description"
+                <div class="p-col-12 header-sub-description"
                   *ngIf="barStrategicAreaSelecteds && barStrategicAreaSelecteds.length > 0 && responsive">
                   <span>{{barStrategicAreaSelecteds[barStrategicAreaSelecteds.length - 1].description}}</span>
                 </div>
-                <div class="chart-params">
+
+                <div class="p-col-12 chart-params">
                   <div class="chart-param">
                     <label>Agrupar:</label>
                     <p-dropdown class="param" [options]="microregionChartAgroupOptions"
@@ -117,11 +117,10 @@
           </div>
           <div class="p-col-12 p-xl-4">
             <div class="chart-container">
-              <div class="chart-header">
-                <div class="chart-navigation-header">
+              <div class="p-grid chart-header">
+                <div class="p-col-12 chart-navigation-header">
                   <div class="chart-title">
-                    <span class="title">{{chartsTitleSelected}} por:</span>
-                    <span class="subtitle">Área Estratégica</span>
+                    <span class="subtitle">{{chartsTitleSelected}} por Área Estratégica</span>
                   </div>
                   <div class="bar-navigation" *ngIf="barStrategicAreaSelecteds && barStrategicAreaSelecteds.length > 0">
                     <fa-icon [icon]="arrowLeftIcon" class="fas-icon" (click)="handleBackStrategicAreaChartClicked()">
@@ -130,11 +129,11 @@
                       1].description}}</span>
                   </div>
                 </div>
-                <div class="header-sub-description"
+                <div class="p-col-12 header-sub-description"
                   *ngIf="barRegionSelecteds && barRegionSelecteds.length > 0 && responsive">
                   <span>{{barRegionSelecteds[barRegionSelecteds.length - 1].description}}</span>
                 </div>
-                <div class="chart-params">
+                <div class="p-col-12 chart-params">
                   <div class="chart-param">
                     <label>Exibir:</label>
                     <p-dropdown class="param" (onChange)="handleDisplayModeStrategicAreaChartChange()"

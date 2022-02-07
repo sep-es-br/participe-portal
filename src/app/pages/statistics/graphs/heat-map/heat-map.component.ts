@@ -71,20 +71,24 @@ export class HeatMapComponent implements OnInit, OnDestroy, OnChanges {
     });
 
     const cfg = {
-      radius: 0.05,
-      minOpacity: 0.5,
-      maxOpacity: 1,
-      scaleRadius: true,
-      useLocalExtrema: false,
+      radius: 30,
+      minOpacity: 0.1,
+      maxOpacity: 0.8,
+      scaleRadius: false,
+      useLocalExtrema: true,
       latField: 'lat',
       lngField: 'lng',
       valueField: 'count',
-      // gradient: {
-      //  '.5': 'blue',
-      //  '.8': 'red',
-      //  '.95': 'white'
-      // },
+      blur: .95,
+      gradient: {
+        '.15': 'rgb(0, 116, 248)',
+        '.3': 'rgb(120, 248, 0)',
+        '.5': 'yellow',
+        '.7': 'orange',
+        '1': 'rgb(177, 1, 59)'
+      },
     };
+
     this.heatmapLayer = new HeatmapOverlay(cfg);
     const map = new L.Map('map', {
       center: new L.LatLng(this.center.lat, this.center.lng),

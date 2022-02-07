@@ -163,8 +163,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   async loadChartsSelectedResult() {
-    // this.setChartsTitle();
-    // this.clearBarChartSelecteds();
     await this.clearFilters(false);
     await this.loadRegionStructureConference();
   }
@@ -284,18 +282,20 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           break;
         case 'ALPHABETIC_DESC':
           const microregionChartDataOrderedAlphaDesc = Array.from(this.dashboardDataResponse.microregionChart);
+
           this.dashboardData.microregionChart = microregionChartDataOrderedAlphaDesc.sort((a, b) => {
             const x = a.description.toUpperCase();
             const y = b.description.toUpperCase();
-            return x === y ? 0 : x > y ? -1 : 1;
+            return y.localeCompare(x, 'pt');
           });
+
           break;
         case 'ALPHABETIC_ASC':
           const microregionChartDataOrderedAlphaAsc = Array.from(this.dashboardDataResponse.microregionChart);
           this.dashboardData.microregionChart = microregionChartDataOrderedAlphaAsc.sort((a, b) => {
             const x = a.description.toUpperCase();
             const y = b.description.toUpperCase();
-            return x === y ? 0 : x > y ? 1 : -1;
+            return x.localeCompare(y, 'pt');
           });
           break;
         case 'TOP_FIVE':
@@ -330,7 +330,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           this.dashboardData.strategicAreaChart = strategicAreaChartDataOrderedAlphaDesc.sort((a, b) => {
             const x = a.description.toUpperCase();
             const y = b.description.toUpperCase();
-            return x === y ? 0 : x > y ? -1 : 1;
+            return y.localeCompare(x, 'pt');
           });
           break;
         case 'ALPHABETIC_ASC':
@@ -338,7 +338,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           this.dashboardData.strategicAreaChart = strategicAreaChartDataOrderedAlphaAsc.sort((a, b) => {
             const x = a.description.toUpperCase();
             const y = b.description.toUpperCase();
-            return x === y ? 0 : x > y ? 1 : -1;
+            return x.localeCompare(y, 'pt');
           });
           break;
         case 'TOP_FIVE':

@@ -29,9 +29,13 @@
       </label>
       <div class="submenu">
         <div class="close" (click)="closeSubMenu('region')">x</div>
+        <label class="container check-all" *ngIf="localityDropdow?.length > 0" >
+          <input type="checkbox" [(ngModel)]="selectAllLocalities" (change)="toggleAllLocalities()">
+          <span [ngClass]="(partiallySelected(localityDropdow)) ? 'checkmark checkmark-mid' : 'checkmark checkmark-all'"></span>
+        </label>
         <label class="container" *ngFor="let item of localityDropdow" >
             {{item.label}}
-            <input type="checkbox" (click)="LocalitiesSelected(item)">
+            <input type="checkbox" [(ngModel)]="item.check" (change)="LocalitiesSelected(item)">
             <span class="checkmark"></span>
         </label>
       </div>
@@ -45,9 +49,13 @@
       </label>
       <div class="submenu">
         <div class="close" (click)="closeSubMenu('locality')" >x</div>
+        <label class="container check-all" *ngIf="planItemDropdow?.length > 0" >
+          <input type="checkbox" [(ngModel)]="selectAllPlanItems" (change)="toggleAllItems()">
+          <span [ngClass]="(partiallySelected(planItemDropdow)) ? 'checkmark checkmark-mid' : 'checkmark checkmark-all'"></span>
+        </label>
         <label class="container" *ngFor="let item of planItemDropdow" >
             {{item.label}}
-            <input type="checkbox" (click)="planItemSelect(item)">
+            <input type="checkbox" [(ngModel)]="item.check" (change)="planItemSelect(item)">
             <span class="checkmark"></span>
         </label>
       </div>
@@ -57,7 +65,7 @@
 
 <div class="proposals-area-container" (scroll)="onScroll($event)">
   <div class="cards-container">
-    <div *ngIf="listProposals.length === 0" class="no-proposal-msg">Nenhuma proposta encontrada</div>
+    <div *ngIf="listProposals?.length === 0" class="no-proposal-msg">Nenhuma proposta encontrada</div>
     <div class="card-item" *ngFor="let item of listProposals; let i = index" >
 
         <div class="proposal">

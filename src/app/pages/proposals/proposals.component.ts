@@ -1,12 +1,14 @@
-import { Component, OnInit, HostListener  } from '@angular/core';
+import { Component, OnInit, HostListener, NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import { ProposalService } from 'src/app/shared/services/proposal.service';
-import { ISelectItem } from 'src/app/shared/interfaces/ISelectItem';
+//import { ISelectItem } from 'src/app/shared/interfaces/ISelectItem';
+import { ISelectCheckItem } from 'src/app/shared/interfaces/ISelectCheckItem';
 import { IProposal } from 'src/app/shared/interfaces/IProposal';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
 import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 
 @Component({
   selector: 'app-proposals',
@@ -33,6 +35,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
     ])
   ]
 })
+
 export class ProposalsComponent implements OnInit {
 
   indexPage: number = 0;
@@ -56,8 +59,12 @@ export class ProposalsComponent implements OnInit {
   wasFound: boolean = false;
   checkRegion: boolean = false;
   checkLocality: boolean = false;
-  localityDropdow: ISelectItem[];
-  planItemDropdow: ISelectItem[];
+
+  localityDropdow: ISelectCheckItem[];
+  selectAllLocalities: boolean;
+
+  planItemDropdow: ISelectCheckItem[];
+  selectAllPlanItems: boolean;
 
   listProposals: IProposal[];
 
@@ -70,9 +77,9 @@ export class ProposalsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.loadProposals(this.indexPage);
     await this.loadRegionalizationConference();
     await this.loadInformationFilters();
+    await this.loadProposals(this.indexPage);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -111,25 +118,46 @@ export class ProposalsComponent implements OnInit {
     if (success) {
       if (this.regionalization) {
         this.regionName = data.regionName;
-        data.localities.forEach(locality => {
-          const local: ISelectItem = {
-            value: locality.id,
-            label: locality.name
-          };
-          this.localityDropdow.push(local);
+        this.localityDropdow = await data.localities.map(locality => {
+          return {check: true, value: locality.id, label: locality.name};
         });
+        this.localityIds = await data.localities.map(locality => locality.id);
+        this.localityDropdow.sort((a, b) => (a.label.toUpperCase().localeCompare(b.label.toUpperCase(), 'pt')));
+        this.selectAllLocalities = true;
       }
       this.itemName = data.itemName;
-      data.itens.forEach(item => {
-        const planitem: ISelectItem = {
-          value: item.id,
-          label: item.name
-        };
-        this.planItemDropdow.push(planitem);
+
+      this.planItemDropdow = await data.itens.map(item => {
+        return {check: true, value: item.id, label: item.name};
       });
-
+      this.planItemIds = await data.itens.map(item => item.id);
+      this.planItemDropdow.sort((a, b) => (a.label.toUpperCase().localeCompare(b.label.toUpperCase(), 'pt')));
+      this.selectAllPlanItems = true;
     }
+  }
 
+  async toggleAllItems() {
+    this.planItemDropdow.forEach(dropItem => {
+      dropItem.check = this.selectAllPlanItems;
+    });
+    this.planItemIds = this.planItemDropdow.map(item => {
+      if (item.check) {
+        return item.value;
+      }
+    });
+    this.loadProposals(0);
+  }
+
+  async toggleAllLocalities() {
+    this.localityDropdow.forEach(dropLocality => {
+      dropLocality.check = this.selectAllLocalities;
+    });
+    this.localityIds = this.localityDropdow.map(locality => {
+      if (locality.check) {
+        return locality.value;
+      }
+    });
+    this.loadProposals(0);
   }
 
   async loadProposals(indexPage: number) {
@@ -176,13 +204,21 @@ export class ProposalsComponent implements OnInit {
     }
   }
 
-  async LocalitiesSelected(item: ISelectItem) {
+  async LocalitiesSelected(item: ISelectCheckItem) {
+    this.localityIds =
+    this.localityDropdow
+      .map(dropLocality => {
+        if (dropLocality.check) {
+          return dropLocality.value;
+        }
+      });
 
-    const index = this.localityIds.findIndex(id => id === item.value);
-    if (index > -1) {
-      this.localityIds.splice(index, 1);
-    } else {
-      this.localityIds.push(item.value);
+    const selectedCount = this.localityDropdow.filter(option => option.check).length;
+    if (selectedCount === this.localityDropdow.length) {
+      this.selectAllLocalities = true;
+    }
+    if (selectedCount === 0) {
+      this.selectAllLocalities = false;
     }
 
     this.indexPage = 0;
@@ -194,12 +230,28 @@ export class ProposalsComponent implements OnInit {
     }
   }
 
-  async planItemSelect(item: ISelectItem) {
-    const index = this.planItemIds.findIndex(id => id === item.value);
-    if (index > -1) {
-      this.planItemIds.splice(index, 1);
-    } else {
-      this.planItemIds.push(item.value);
+  partiallySelected(dropDown: ISelectCheckItem[]): boolean {
+    const selectedCount = dropDown.filter(option => option.check).length;
+    return ((selectedCount !== dropDown.length) && (selectedCount !== 0));
+  }
+
+  async planItemSelect(item: ISelectCheckItem) {
+
+    this.planItemIds =
+      this.planItemDropdow
+        .map(dropItem => {
+          if (dropItem.check) {
+            return dropItem.value;
+          }
+        })
+        .filter(id => (id !== undefined));
+
+    const selectedCount = this.planItemDropdow.filter(option => option.check).length;
+    if (selectedCount === this.planItemDropdow.length) {
+      this.selectAllPlanItems = true;
+    }
+    if (selectedCount === 0) {
+      this.selectAllPlanItems = false;
     }
 
     this.indexPage = 0;

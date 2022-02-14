@@ -132,10 +132,12 @@
         width: inherit;
         .close{
           text-align: right;
-          margin: 5px 5px 0 auto;
+          margin: 5px 5px -30px auto;
           font-weight: bold;
           cursor: pointer;
-          width: 10%;
+          width: 18px;
+          font-size: 25px;
+          padding-right: 5px;
         }
         label{
 
@@ -154,6 +156,8 @@
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
+          border: none!important;
+          width: 90%
         }
 
         .container input {
@@ -174,6 +178,21 @@
           border-color:var(--accentColorEnd);
           border-style: solid;
         }
+
+        .check-all {
+          margin-top: 5px;
+          margin-bottom: 25px;
+        }
+
+        .checkmark-all {
+          border: 3px;
+          border-color: var(--accentColorEnd);
+          border-style: solid;
+          height: 19px;
+          width: 19px;
+          margin-left: -2px;
+        }
+
         .checkmark:after {
           content: "";
           position: absolute;
@@ -186,7 +205,7 @@
 
         .container .checkmark:after {
           left: 4px;
-          top: 2px;
+         // top: 2px;
           width: 4px;
           height: 8px;
           border: solid var(--accentColorEnd);
@@ -195,6 +214,11 @@
           -ms-transform: rotate(45deg);
           transform: rotate(45deg);
         }
+
+        .checkmark-mid {
+          background: #dfb89e;
+        }
+
       }
     }
   }

@@ -56,6 +56,7 @@ import { HorizontalBarGraphComponent } from './pages/statistics/graphs/horizonta
 import { StartComponent } from './pages/start/start.component';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
+import { TriStateCheckboxModule } from 'primeng/components/tristatecheckbox/tristatecheckbox';
 
 registerLocaleData(localePtBr);
 
@@ -114,6 +115,7 @@ registerLocaleData(localePtBr);
     ChartModule,
     MultiSelectModule,
     MenuModule,
+    TriStateCheckboxModule
   ],
   providers: [
     MessageService,

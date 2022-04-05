@@ -1,3 +1,4 @@
+import { IConference } from 'src/app/shared/interfaces/IConference';
 import { Router } from '@angular/router';
 import { BreadcrumbService } from '../../shared/services/breadcrumb.service';
 import { IConferenceCards } from '../../shared/interfaces/IConferenceCards';
@@ -15,6 +16,7 @@ import * as _ from 'lodash';
 })
 export class ConferenceMapComponent implements OnInit {
 
+  conferenceInfo: IConference
   conference: IConferenceCards;
   regionalization: boolean;
 
@@ -27,29 +29,36 @@ export class ConferenceMapComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.loadRegionalizationConference();
-    if (this.regionalization) {
-      await this.loadConference();
-    }
+    await this.loadConference();
     this.participationStateSrv.clear();
   }
 
   async loadConference() {
-    const { success, data } = await this.localitySrv.getConferenceCards(this.conferenceSrv.ConferenceActiveId);
-    if (success) {
-      this.conference = data;
-      this.breadcrumbSrv.update({ title: data.regionalizable, route: ['/conference-map'] }, 0);
+    // If no ConferenceActiveId, something is wrong. Go back to login
+    if (!(this.conferenceSrv.ConferenceActiveId) || (this.conferenceSrv.ConferenceActiveId === 0)) {
+      await this.router.navigate(['/login']);
+    } else { // Having a ConferenceActiveId, go ahead
+      // Getting conference data
+      const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
+      this.regionalization = data.regionalization;
+      const result = await this.conferenceSrv.GetById(this.conferenceSrv.ConferenceActiveId);
+      this.conferenceInfo = result.data;
+      // We can only render this page if the conference is currently OPEN
+      if (this.conferenceInfo.displayStatusConference === 'OPEN') {
+        // If this conference is regionalized, we shall get the localization cards
+        if (this.regionalization) {
+          const { success, data } = await this.localitySrv.getConferenceCards(this.conferenceSrv.ConferenceActiveId);
+          if (success) {
+            this.conference = data;
+            this.breadcrumbSrv.update({ title: data.regionalizable, route: ['/conference-map'] }, 0);
+          }
+        } else { // If this conference is not regionalized, we must skip to the steps pages.
+          await this.router.navigate(['/conference-steps']);
+        }
+      } else { // If the conference is not OPEN, no participation page can be rendered. Skip to the Proposals page.
+        await this.router.navigate(['/proposals']);
+      }
     }
-  }
-
-  async loadRegionalizationConference() {
-      if (this.conferenceSrv.ConferenceActiveId) {
-        const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
-        this.regionalization = data.regionalization;
-      }
-      if (!this.regionalization) {
-        await this.router.navigate(['/conference-steps']);
-      }
   }
 
   async selectRegional(item: ILocality) {

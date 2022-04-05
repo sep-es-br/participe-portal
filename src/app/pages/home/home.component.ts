@@ -5,6 +5,7 @@ import {Component, OnInit} from '@angular/core';
 import {StoreKeys} from '../../shared/commons/contants';
 import {MessageService} from 'primeng/api';
 import {ConferenceService} from '../../shared/services/conference.service';
+import { IConference } from 'src/app/shared/interfaces/IConference';
 
 
 @Component({
@@ -13,6 +14,9 @@ import {ConferenceService} from '../../shared/services/conference.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  conference: IConference;
+  regionalization: boolean;
 
   constructor(
     private authSrv: AuthService,
@@ -23,8 +27,17 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.loadConference();
     await this.processSocialLogin();
   }
+
+  async loadConference() {
+    const result = await this.conferenceSrv.GetByUrl(document.location.href);
+    if (result.success && !(result.data instanceof Array)) {
+      this.conference = result.data;
+    }
+  }
+
 
   private async processSocialLogin() {
     try {
@@ -51,7 +64,16 @@ export class HomeComponent implements OnInit {
         this.authSrv.saveUserInfo(userInfo.person);
 
         if (userInfo.completed) {
-          await this.router.navigate(['/conference-map']);
+          if (this.conference.displayStatusConference === 'OPEN') {
+            const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
+            if (data.regionalization) {
+              await this.router.navigate(['/conference-map']);
+            } else {
+              await this.router.navigate(['/conference-steps']);
+            }
+          } else {
+            await this.router.navigate(['/proposals']);
+          }
         } else {
           localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
           await this.router.navigate(['/complete-profile']);

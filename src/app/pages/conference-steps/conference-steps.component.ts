@@ -1,3 +1,4 @@
+import { IConference } from 'src/app/shared/interfaces/IConference';
 import {ParticipationStateService} from '../../shared/services/participation-state.service';
 import {IItem} from '../../shared/interfaces/IItem';
 import {Component, OnDestroy, OnInit} from '@angular/core';
@@ -39,6 +40,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
+  conference: IConference;
   conferenceStepItem: IParticipationPlanItem;
   subParams: Subscription;
   stepId: number;
@@ -78,12 +80,22 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    await this.validateState();
     this.populateState();
     this.subParams = await this.activeRoute.queryParams.subscribe(async ({id}) => {
       this.stepId = id as number;
       await this.loadConferenceStep();
     });
     window.scrollTo(0, 0);
+  }
+
+  async validateState() {
+    const result = await this.conferenceSrv.GetById(this.conferenceSrv.ConferenceActiveId);
+    this.conference = result.data;
+    // We can only render this page if the conference is currently in OPEN state
+    if (this.conference.displayStatusConference !== 'OPEN') {
+      await this.route.navigate(['/proposals']);
+    }
   }
 
   populateState() {

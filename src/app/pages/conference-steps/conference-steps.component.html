@@ -17,8 +17,8 @@
       </div>
     </div>
   </div>
-  <div class=" conference-step-container">
-    <div class="card-item-empty" *ngIf="conferenceStepItem?.itens?.length === 0 || !conferenceStepItem?.itens">
+  <div class=" conference-step-container" *ngIf="conferenceStepItem?.itens">
+    <div class="card-item-empty" *ngIf="conferenceStepItem.itens.length === 0">
       Não existe nenhum {{conferenceStepItem?.structureitem?.name}} para ser exibido
     </div>
     <div class="cards-container">

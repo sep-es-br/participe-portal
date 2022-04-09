@@ -40,7 +40,7 @@
     "leaflet": "^1.7.1",
     "leaflet-heatmap": "^1.0.0",
     "lodash": "^4.17.21",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "moment-timezone": "^0.5.33",
     "ng-recaptcha": "^5.0.0",
     "primeflex": "^1.0.0",

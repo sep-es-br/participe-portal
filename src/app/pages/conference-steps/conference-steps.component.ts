@@ -168,6 +168,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   comment(item: IItem) {
     this.showModalComment = true;
+    item.comment = '';
     this.itemSelect = item;
   }
 

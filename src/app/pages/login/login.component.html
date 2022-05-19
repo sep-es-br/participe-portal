@@ -61,7 +61,7 @@
              (click)="showModalDetailMeeting(meeting.id)">
           <div class="date">
             <img src="assets/icons/calendar.svg" alt=""/>
-            {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MM' }}
+            {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MMM' }}
           </div>
           <div class="place">
             <img src="assets/icons/pin.svg"
@@ -95,8 +95,7 @@
         <div class="date-time-container">
           <span class="date">
             <img src="assets/icons/calendar2.svg" alt="calendario">
-            {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'd'}}
-             de {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMM'}}
+            {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'dd'}}/{{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMM'}}
           </span>
           <span class="time">
             <i class="far fa-clock hour-icon"></i>

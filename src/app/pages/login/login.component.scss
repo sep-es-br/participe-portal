@@ -241,6 +241,7 @@ $darkColorOr: rgba(0,0,0,0.16);
           align-self: center;
           display: flex;
           align-items: center;
+          width: 92px;
           img {
             width: 22px;
             margin-right: 5px;
@@ -442,5 +443,8 @@ $darkColorOr: rgba(0,0,0,0.16);
       padding: 0;
     }
 
+    .statistics-item-container {
+      margin-left: 5px!important;
+    }
   }
 }

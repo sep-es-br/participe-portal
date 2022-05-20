@@ -19,20 +19,20 @@ $darkColorOr: rgba(0,0,0,0.16);
     z-index: -1;
     margin-left: -1px;
   }
-  .left-side,
-  .right-side {
-    display: flex;
-    flex: 1 0 50%;
-  }
-  .right-side {
-    flex-direction: column;
-    align-items: flex-end;
+
+  @media (max-width: 600px)
+  {
+    .background-page
+    {
+      background-image: none!important;
+      background-color: #296d8033;
+    }
   }
 
   .auth-box {
-    max-width: 400px;
+    max-width: 450px;
     background: $backgroundWindow;
-    margin: $startTop 0 $startTop 150px;
+    margin: $startTop 0 $startTop 60px;
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
@@ -175,6 +175,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     display: flex;
     flex: 0 1 50%;
     flex-wrap: wrap;
+    float: right;
 
     .statistics-item-container {
       background: $backgroundWindow;
@@ -210,6 +211,8 @@ $darkColorOr: rgba(0,0,0,0.16);
     flex-direction: column;
     align-items: center;
     width: 100%;
+    float: right;
+    padding: 0;;
 
     > img {
       width: 30px;
@@ -414,52 +417,30 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: 992px) {
     .auth-box {
-      margin-left: 5%;
-      padding: 5px 10px 20px 10px;
+      margin: $startTop auto $startTop auto;
     }
-  }
-  @media (max-width: 868px) {
-    .left-side,
-    .right-side {
-      display: flex;
-      flex: 1 !important;
-    }
-    .right-side {
-      justify-content: center !important;
-      align-items: center !important;
-    }
-    .auth-box {
-      margin: 0;
-      padding: 5px 10px 20px 10px;
-    }
+
     .statistics-container {
-      display: flex;
-      width: 90%;
-      margin: 10px;
-      flex-direction: column;
-      .statistics-item-container {
-        margin: 0 !important;
-      }
+      margin: 0 auto 0 auto;
+      float: none;
     }
+
     .calender-container {
-      width: 90%;
+      margin: 0 auto 0 auto;
+      float: none;
+    }
+
+    .left-side {
       margin: 0;
-      .calendar-container-grid .calendar-item .date {
-        align-self: auto;
-      }
+      padding: 0;
     }
-  }
-  @media (max-width: 800px) {
-    .icons-locality{
-      display: flex;
-      .waze {
-       display: block;
-     }
+
+    .sides {
+      margin: 0;
+      padding: 0;
     }
-  }
-  @media (max-width: 550px) {
-    flex-direction: column;
+
   }
 }

@@ -1,80 +1,89 @@
 <div class="page-login">
   <div class="background-page" [ngStyle]="{'background-image':'url('+backgroundImageUrl+')'}"></div>
-  <div class="left-side">
-    <div class="auth-box">
-      <img class="logo" *ngIf="conferenceData?.fileAuthentication"
-           [src]="conferenceData?.fileAuthentication?.url" alt=""/>
-      <div class="header">
-        <h2>{{ conferenceData?.titleAuthentication }}</h2>
-        <p>{{ conferenceData?.subtitleAuthentication }}</p>
-      </div>
-      <div class="social-login">
-        <button class="cidadao" (click)="signInAcessoCidadao()">
-          <img src="assets/icons/cidadao.svg" alt=""/>
-          Entrar
-        </button>
-        <button class="google" (click)="signInGoogle()">
-          <img src="assets/icons/google.svg" alt=""/>
-          Entrar com Google
-        </button>
-        <button class="facebook" (click)="signInFacebook()">
-          <img src="assets/icons/facebook.svg" alt=""/>
-          Entrar com Facebook
-        </button>
-      </div>
-      <div class="or">
-        <span class="line"></span><span class="text">ou utilize</span><span class="line"></span>
-      </div>
-      <div class="form-login">
-        <div class="form-group ">
-          <label>CPF/E-mail</label>
-          <input [(ngModel)]="form.login" type="text">
+  <div class="sides p-grid p-col-12">
+    <div class="left-side p-grid p-col-12 p-lg-6">
+      <div class="auth-box">
+        <img class="logo" *ngIf="conferenceData?.fileAuthentication"
+            [src]="conferenceData?.fileAuthentication?.url" alt=""/>
+        <div class="header">
+          <h2>{{ conferenceData?.titleAuthentication }}</h2>
+          <p>{{ conferenceData?.subtitleAuthentication }}</p>
         </div>
-        <div class="form-group">
-          <label>Senha</label>
-          <input [(ngModel)]="form.password" type="password">
+        <div class="social-login">
+          <button class="cidadao" (click)="signInAcessoCidadao()">
+            <img src="assets/icons/cidadao.svg" alt=""/>
+            Entrar
+          </button>
+          <button class="google" (click)="signInGoogle()">
+            <img src="assets/icons/google.svg" alt=""/>
+            Entrar com Google
+          </button>
+          <button class="facebook" (click)="signInFacebook()">
+            <img src="assets/icons/facebook.svg" alt=""/>
+            Entrar com Facebook
+          </button>
         </div>
-        <div class="actions">
-          <a [routerLink]="['/register']">Cadastre-se</a>
-          <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
+        <div class="or">
+          <span class="line"></span><span class="text">ou utilize</span><span class="line"></span>
         </div>
-        <button class="submit" (click)="signInWithLogin(form)">Entrar</button>
-        <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
-      </div>
-      <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como
-        participar</a>
-    </div>
-  </div>
-  <div class="right-side">
-    <div class="statistics-container">
-      <div class="statistics-item-container" *ngFor="let item of statistics">
-        <h2>{{item.value}}</h2>
-        <span>{{item.label}}</span>
-      </div>
-    </div>
-    <div class="calender-container">
-      <img src="assets/icons/up.svg" (click)="meetingPreviousPage()"
-           [class.hidden-arrow]="pagination.empty"
-       alt=""/>
-      <div class="calendar-container-grid">
-        <div class="calendar-item" *ngFor="let meeting of meetings"
-             (click)="showModalDetailMeeting(meeting.id)">
-          <div class="date">
-            <img src="assets/icons/calendar.svg" alt=""/>
-            {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MMM' }}
+        <div class="form-login">
+          <div class="form-group ">
+            <label>CPF/E-mail</label>
+            <input [(ngModel)]="form.login" type="text">
           </div>
-          <div class="place">
-            <img src="assets/icons/pin.svg"
-                 *ngIf="meeting?.typeMeetingEnum !== typeMeeting.VIRTUAL" alt=""/>
-            <i class="fas fa-desktop"
-               *ngIf="meeting?.typeMeetingEnum !== typeMeeting.PRESENCIAL"></i>
-            {{ meeting?.name }}
+          <div class="form-group">
+            <label>Senha</label>
+            <input [(ngModel)]="form.password" type="password">
+          </div>
+          <div class="actions">
+            <a [routerLink]="['/register']">Cadastre-se</a>
+            <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
+          </div>
+          <button class="submit" (click)="signInWithLogin(form)">Entrar</button>
+          <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
+        </div>
+        <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como
+          participar</a>
+      </div>
+    </div>
+    <div class="right-side p-col-12 p-lg-6">
+      <div class="statistics-container p-col-12">
+        <div class="p-grid">
+          <div class="statistics-item-container p-col-6" *ngFor="let item of statistics">
+            <h2>{{item.value}}</h2>
+            <span>{{item.label}}</span>
           </div>
         </div>
       </div>
-      <img src="assets/icons/down.svg" (click)="meetingNextPage()"
-           [class.hidden-arrow]="pagination.empty"
-       alt=""/>
+      <div class="calender-container p-col-12 p-grid">
+
+            <img src="assets/icons/up.svg" (click)="meetingPreviousPage()"
+                [class.hidden-arrow]="pagination.empty"
+            alt=""/>
+
+            <div class="calendar-container-grid">
+              <div class="calendar-item" *ngFor="let meeting of meetings"
+                  (click)="showModalDetailMeeting(meeting.id)">
+                <div class="date">
+                  <img src="assets/icons/calendar.svg" alt=""/>
+                  {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MMM' }}
+                </div>
+                <div class="place">
+                  <img src="assets/icons/pin.svg"
+                      *ngIf="meeting?.typeMeetingEnum !== typeMeeting.VIRTUAL" alt=""/>
+                  <i class="fas fa-desktop"
+                    *ngIf="meeting?.typeMeetingEnum !== typeMeeting.PRESENCIAL"></i>
+                  {{ meeting?.name }}
+                </div>
+              </div>
+            </div>
+
+            <img src="assets/icons/down.svg" (click)="meetingNextPage()"
+                [class.hidden-arrow]="pagination.empty"
+            alt=""/>
+
+
+      </div>
     </div>
   </div>
   <p-toast position="top-right"></p-toast>

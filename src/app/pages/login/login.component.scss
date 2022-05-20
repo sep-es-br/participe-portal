@@ -241,7 +241,7 @@ $darkColorOr: rgba(0,0,0,0.16);
           align-self: center;
           display: flex;
           align-items: center;
-          width: 92px;
+          min-width: 92px!important;
           img {
             width: 22px;
             margin-right: 5px;

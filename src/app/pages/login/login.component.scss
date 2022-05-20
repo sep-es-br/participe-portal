@@ -446,5 +446,13 @@ $darkColorOr: rgba(0,0,0,0.16);
     .statistics-item-container {
       margin-left: 5px!important;
     }
+
+    .icons-locality{
+      display: flex;
+      .waze {
+       display: block;
+     }
+    }
   }
+
 }

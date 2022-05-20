@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   typeMeeting = typeMeetingEnum;
   modalDetailMeeting: boolean = false;
   responsive: boolean;
+  dialogWidth: number;
   subParams: Subscription;
   subQueryParams: Subscription;
   isOpen = false;
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.dialogWidth = window.innerWidth;
     await this.loadConference(this.conferenceId);
     await this.loadMeetingPageNumber(this.conferenceId, `${new Date().toLocaleDateString('pt-BR')} 00:00:00}`);
     await this.loadMeeting(this.conferenceId);
@@ -77,9 +79,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.responsive = event.target.innerWidth <= 800;
+    this.dialogWidth = event.target.innerWidth;
   }
-
   async loadConference(conferenceId: number) {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);

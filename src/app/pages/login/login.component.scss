@@ -268,22 +268,29 @@ $darkColorOr: rgba(0,0,0,0.16);
   }
  .dialog-detail {
     .ui-dialog  {
+      background: white;
       .ui-dialog-titlebar {
-        background-color: #fff;
+        background-color: transparent;
         border: none;
         padding-bottom: 0;
+        margin-bottom: -10px;
+        overflow: overlay;
+        z-index: 1001;
         .ui-dialog-titlebar-icon {
           font-size: 2.8em;
         }
       }
       .ui-dialog-content {
         border: none;
-      }
+        margin-top: -50px;
+        background: transparent;      }
+    }
+    .p-grid {
+      margin-top: 0;
     }
     .modal-detail {
-      display: flex;
       justify-content: space-between;
-      padding-bottom: 20px;
+      margin-top: 0px;
       .icon-navigate {
         display: flex;
         align-items: center;
@@ -299,63 +306,64 @@ $darkColorOr: rgba(0,0,0,0.16);
         }
       }
       .modal-content {
-        padding: 0 20px 20px 20px;
         .title {
-          margin: 0;
           font-size: 2em;
+          margin: 0;
         }
         .description {
-          margin-top: 0;
           font-weight: 100;
           font-size: 1.6em;
+          margin: 0;
         }
         .date-time-container {
-          margin: 25px 0;
           font-weight: bold;
-          display: flex;
           .date {
-            display: flex;
             align-items: center;
-            margin-right: 30px;
             font-size: 1.7em;
             img {
-              width: 30px;
-              height: 30px;
-              margin-right: 10px;
+              height: 25px;
+              vertical-align: baseline;
+              margin-bottom: -3px;
+              margin-right: 5px;
+              margin-left: 3px;
+            }
+            .date-text {
+              vertical-align: middle;
+              display: contents;
             }
           }
           .time {
-            display: flex;
             align-items: baseline;
             font-size: 1.7em;
             .hour-icon {
               vertical-align: middle;
-              margin-right: 10px;
               font-size: 1.1em;
               color: #f58e42;
+              margin-top: -3px;
+              margin-right: 3px;
+            }
+            .time-text {
+              vertical-align: middle;
+              display: contents;
             }
           }
         }
         .locality-channel-container {
-          display: flex;
+          margin: 10px;
           .locality-container {
             .locality {
-              display: block;
               font-weight: bold;
               max-width: 250px;
               font-size: 1.2em;
-              margin-bottom: 10px;
             }
             .adreess {
-              display: block;
               max-width: 350px;
               font-size: 1.2em;
-              margin-bottom: 15px;
             }
             .icons-locality {
               img {
-                cursor: pointer;
                 margin-right: 10px;
+                cursor: pointer;
                 .waze {
                   display: none;
                 }
@@ -364,30 +372,23 @@ $darkColorOr: rgba(0,0,0,0.16);
           }
           .left-container {
             border-right: 1px solid #d1d1d1;
-            padding-right: 10px;
             .locality {
-              display: block;
               font-weight: bold;
               max-width: 200px;
               font-size: 1.2em;
-              margin-bottom: 10px;
             }
             .adreess {
-              display: block;
               max-width: 300px;
               font-size: 1.2em;
-              margin-bottom: 15px;
             }
             .icons-locality {
               img {
                 cursor: pointer;
-                margin-right: 10px;
               }
             }
           }
           .channels-container {
             .channel {
-              display: block;
               font-size: 1.1em;
               color: #333;
               cursor: auto;
@@ -397,9 +398,7 @@ $darkColorOr: rgba(0,0,0,0.16);
             }
           }
           .right-container {
-            padding: 8px 0 0 20px;
             .channel {
-              display: block;
               font-size: 1.1em;
               color: #333;
             }

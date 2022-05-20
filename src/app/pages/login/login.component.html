@@ -80,36 +80,43 @@
   <p-toast position="top-right"></p-toast>
 
   <p-dialog [(visible)]="modalDetailMeeting" *ngIf="modalDetailMeeting" [modal]="true"
-            [style]="{width: responsive ? '60vw' : '50vw'}"
+  [style]="{width: '555px'}"
             showEffect="fade" [resizable]="false" [draggable]="false" [responsive]="true"
             class="dialog-detail">
-    <div class="modal-detail">
-      <div class="icon-navigate">
+
+    <div class="modal-detail p-grid p-justify-between">
+      <div class="icon-navigate p-col-1 p-justify-center">
         <i class="fas fa-chevron-left icon-left" (click)="previousMeetingDetail()"
            *ngIf="meetingDetail?.hasPreviousMeeting"></i>
       </div>
-      <div class="modal-content">
-        <h1 class="title">{{meetingDetail.name}}</h1>
-        <h3 class="description">{{labelDescriptionDetailMeeting(meetingDetail)}}</h3>
+      <div class="modal-content p-col-10">
+        <h1 class="title p-col-12">{{meetingDetail.name}}</h1>
+        <h3 class="description p-col-12">{{labelDescriptionDetailMeeting(meetingDetail)}}</h3>
 
-        <div class="date-time-container">
-          <span class="date">
-            <img src="assets/icons/calendar2.svg" alt="calendario">
-            {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'dd'}}/{{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMM'}}
-          </span>
-          <span class="time">
-            <i class="far fa-clock hour-icon"></i>
-            {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'HH:mm'}}h
-             às {{getDateFromAPIStr(meetingDetail?.endDate) | date: 'HH:mm'}}h
-          </span>
+        <div class="date-time-container p-grid p-col-12">
+
+            <div class="date p-col-12 p-sm-5">
+              <img src="assets/icons/calendar2.svg" alt="calendario">
+              <div class="date-text">
+              {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'dd'}}/{{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMM'}}
+              </div>
+            </div>
+            <div class="time p-col-12 p-sm-7">
+              <i class="far fa-clock hour-icon"></i>
+              <div class="time-text">
+              {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'HH:mm'}}h
+              às {{getDateFromAPIStr(meetingDetail?.endDate) | date: 'HH:mm'}}h
+              </div>
+            </div>
+
         </div>
-        <div class="locality-channel-container">
+        <div class="locality-channel-container p-grid">
           <div
             [ngClass]="meetingDetail.typeMeetingEnum === typeMeeting.PRESENCIAL ? 'locality-container' : 'left-container' "
-            *ngIf="meetingDetail.typeMeetingEnum !== typeMeeting.VIRTUAL">
-            <span class="locality">{{meetingDetail?.place}}</span>
-            <span class="adreess">{{meetingDetail?.address}}</span>
-            <div class="icons-locality">
+            *ngIf="meetingDetail.typeMeetingEnum !== typeMeeting.VIRTUAL" class="p-grid" >
+            <div class="locality p-col-12">{{meetingDetail?.place}}</div>
+            <div class="adreess p-col-12">{{meetingDetail?.address}}</div>
+            <div class="icons-locality p-col-12">
               <img src="assets/icons/gmaps.svg" alt="google-maps" width="40px" height="40px"
                    (click)="goToLink('https://maps.google.com/?q=' + meetingDetail.place + '+' + meetingDetail.address)">
               <img src="assets/icons/waze.svg" alt="waze" width="40px" height="40px" class="waze"
@@ -125,7 +132,7 @@
           </div>
         </div>
       </div>
-      <div class="icon-navigate">
+      <div class="icon-navigate p-col-1 p-justify-center">
         <i class="fas fa-chevron-right icon-right" (click)="nextMeetingDetail()"
            *ngIf="meetingDetail?.hasNextMeeting"></i>
       </div>

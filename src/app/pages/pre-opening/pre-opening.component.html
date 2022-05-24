@@ -34,7 +34,7 @@
   </div>
 
   <div class="conference-warning-block">
-    <div class="conference-warning-message" [innerHTML]="preOpeningText">
+    <div class="conference-warning-message" [innerHTML]="preOpeningText | safeHTML">
     </div>
   </div>
 </div>

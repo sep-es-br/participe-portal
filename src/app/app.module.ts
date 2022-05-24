@@ -57,6 +57,8 @@ import { StartComponent } from './pages/start/start.component';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { TriStateCheckboxModule } from 'primeng/components/tristatecheckbox/tristatecheckbox';
+import { SafeHTMLPipe } from './shared/pipes/safeHTML/safe-html.pipe';
+import { ButtonModule } from 'primeng/components/button/button';
 
 registerLocaleData(localePtBr);
 
@@ -90,6 +92,7 @@ registerLocaleData(localePtBr);
     StatisticsComponent,
     HeatMapComponent,
     HorizontalBarGraphComponent,
+    SafeHTMLPipe,
   ],
   imports: [
     FontAwesomeModule,
@@ -105,6 +108,7 @@ registerLocaleData(localePtBr);
     AutoCompleteModule,
     ListboxModule,
     DialogModule,
+    ButtonModule,
     ToastModule,
     ReactiveFormsModule,
     HttpRequestInterceptorModule,

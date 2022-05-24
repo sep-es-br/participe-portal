@@ -2,7 +2,7 @@
   <div class="background-page"></div>
   <div id="left-side" class="left-side">
     <div class="conference-warning-block">
-      <div class="conference-warning-message" [innerHTML]="postClosureText">
+      <div class="conference-warning-message" [innerHTML]="postClosureText | safeHTML">
       </div>
     </div>
   </div>

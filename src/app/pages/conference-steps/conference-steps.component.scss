@@ -249,7 +249,7 @@
       text-align: left;
       flex-direction: column;
       overflow: hidden;
-      padding: 20px;
+
 
       &.clickable {
         cursor: pointer;
@@ -439,4 +439,14 @@
     cursor: pointer;
   }
 
+}
+
+.item-image-container {
+  background-position-x: right;
+  background-repeat: no-repeat;
+  padding: 20px;
+  background-position-y: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 15px;
 }

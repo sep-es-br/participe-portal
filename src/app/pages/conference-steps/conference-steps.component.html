@@ -22,28 +22,30 @@
       Não existe nenhum {{conferenceStepItem?.structureitem?.name}} para ser exibido
     </div>
     <div class="cards-container">
-      <div class="card-item" [style.backgroundImage]="stepItem.image ? 'url(' + stepItem.image + ')': ''"
+      <div class="card-item"
            [ngClass]="{
         'clickable': conferenceStepItem?.structureitem?.hasNext,
         'checked': stepItem.checked
       }" *ngFor="let stepItem of conferenceStepItem?.itens" (click)="selectNextStep(stepItem)">
-        <div class="card-item-content" [class.center-container]="!stepItem.description">
-          <h2 [class.center]="!stepItem.description">{{stepItem.name}}</h2>
-          <p>{{stepItem.description}}</p>
-        </div>
-        <div class="card-actions">
-          <div class="check card-actions-item" [ngClass]="{'checked': stepItem.checked}"
-               *ngIf="conferenceStepItem?.structureitem?.votes" (click)="checkItem(stepItem)">
-            <div class="icon" *ngIf="!stepItem.checked"></div>
-            <img src="assets/icons/check-circle.svg" *ngIf="stepItem.checked" alt="">
-            Destacar
+        <div class="item-image-container" [style.backgroundImage]="stepItem.image ? 'url(' + stepItem.image + ')': ''">
+          <div class="card-item-content" [class.center-container]="!stepItem.description">
+            <h2 [class.center]="!stepItem.description">{{stepItem.name}}</h2>
+            <p>{{stepItem.description}}</p>
           </div>
-          <div class="comment card-actions-item" [ngClass]="{'checked': stepItem.checked}"
-               *ngIf="conferenceStepItem?.structureitem?.comments" (click)="comment(stepItem)">
-            <img [src]="!stepItem.checked ? 'assets/icons/comment2.svg' : 'assets/icons/comment2 white.svg'" alt="">
-            <div class="count" *ngIf="stepItem.comment || stepItem.commentsMade > 0">{{ stepItem.commentsMade || 1 }}
+          <div class="card-actions">
+            <div class="check card-actions-item" [ngClass]="{'checked': stepItem.checked}"
+                *ngIf="conferenceStepItem?.structureitem?.votes" (click)="checkItem(stepItem)">
+              <div class="icon" *ngIf="!stepItem.checked"></div>
+              <img src="assets/icons/check-circle.svg" *ngIf="stepItem.checked" alt="">
+              Destacar
             </div>
-            Inserir Proposta
+            <div class="comment card-actions-item" [ngClass]="{'checked': stepItem.checked}"
+                *ngIf="conferenceStepItem?.structureitem?.comments" (click)="comment(stepItem)">
+              <img [src]="!stepItem.checked ? 'assets/icons/comment2.svg' : 'assets/icons/comment2 white.svg'" alt="">
+              <div class="count" *ngIf="stepItem.comment || stepItem.commentsMade > 0">{{ stepItem.commentsMade || 1 }}
+              </div>
+              Inserir Proposta
+            </div>
           </div>
         </div>
       </div>

@@ -81,7 +81,8 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     await this.validateState();
-    this.populateState();
+    await this.populateState();
+    await this.validatePage();
     this.subParams = await this.activeRoute.queryParams.subscribe(async ({id}) => {
       this.stepId = id as number;
       await this.loadConferenceStep();
@@ -98,7 +99,13 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     }
   }
 
-  populateState() {
+  async validatePage() {
+    if (this.conference.plan.structure.regionalization && !this.localityId) {
+      await this.route.navigate(['/conference-map']);
+    }
+  }
+
+  async populateState() {
     const participationState = this.participationStateSrv.getSync();
     this.localityId = _.get(participationState, 'locality.id');
     this.navigation = _.get(participationState, 'navigation', []);

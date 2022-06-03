@@ -4,6 +4,8 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
 import { IConference } from 'src/app/shared/interfaces/IConference';
+import { IPerson } from 'src/app/shared/interfaces/IPerson';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-menu',
@@ -23,6 +25,8 @@ export class MenuComponent implements OnInit {
   @ViewChild('sidemenu') sidemenu: ElementRef;
 
   conference: IConference;
+  userInfo: IPerson;
+  externalLinksMenuItems: MenuItem[];
 
   constructor(
     private authSrv: AuthService,
@@ -31,7 +35,9 @@ export class MenuComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.userInfo = this.authSrv.getUserInfo;
     await this.loadConference();
+    await this.loadExternalLinksMenuItems();
   }
 
   isActive(item) {
@@ -66,6 +72,14 @@ export class MenuComponent implements OnInit {
           await this.router.navigate(['/proposals']);
         }
       }
+    }
+  }
+
+  async loadExternalLinksMenuItems() {
+    if (this.conference.externalLinks) {
+      this.externalLinksMenuItems = this.conference.externalLinks.map(item => ({
+        label: item.label, url: item.url, target: '_blank'
+      }));
     }
   }
 

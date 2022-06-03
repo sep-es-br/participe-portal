@@ -15,5 +15,19 @@
   <a class="btn-default" (click)="navigate('/proposals')">Propostas</a>
   <a class="btn-default" (click)="navigate('/participations')">Minhas Participações</a>
   <a class="btn-default" (click)="navigate('/how-it-works')">Como Funciona</a>
-  <a class="btn-default btn-sair" (click)="logout()">Sair</a>
+  <a class="btn-default" (click)="navigate('/statistics')">Estatísticas</a>
+  <div class="header-menu">
+    <div class="action-group">
+      <a class="btn-default action-button" (click)="navigate('/profile')">
+        {{ userInfo?.name }}
+        <img src="assets/icons/user2.svg" alt=""/>
+      </a>
+      <p-menu class="pmenu" #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
+      <a class="btn-default action-button" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
+        {{conference.externalLinksMenuLabel}}
+        <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
+      </a>
+    </div>
+    <a class="btn-default btn-sair" (click)="logout()">Sair</a>
+  </div>
 </div>

@@ -106,14 +106,35 @@
     border: none;
     margin-top: 40px;
   }
-  .btn-sair {
-    color: white;
-    background: red;
-    border: none;
-    font-weight: 700;
+  .header-menu {
+    .action-group {
+      margin-top: 20px;
+      margin-bottom: 30px;
+      .pmenu {
+        margin: 0;
+      }
+      .action-button {
+        background-color: #a9a9a9;
+        color: white;
+        border: none;
+        display: block;
+        margin-bottom: 10px;
+        img {
+          width: 20px;
+          margin-bottom: -4px;
+          margin-left: 9px;
+        }
+      }
+    }
+    .btn-sair {
+      color: white;
+      background: red;
+      border: none;
+      font-weight: 700;
+      display: block;
+    }
   }
 }
-
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
   position: absolute;

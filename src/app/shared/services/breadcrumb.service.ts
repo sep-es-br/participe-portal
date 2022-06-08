@@ -28,9 +28,13 @@ export class BreadcrumbService implements OnDestroy {
 
 
   init(state?: ParticipationStateModel) {
-    this.items = _.get(state, 'locality.id')
-     ? [{ title: 'Microrregião', subTitle: _.get(state, 'locality.name'), route: ['/conference-map'] }]
-     : [];
+    if (this.items.length > 0) {
+      this.items[0].subTitle = _.get(state, 'locality.name');
+      this.items[0].route = ['/conference-map'];
+      for (let i = this.items.length - 1; i > 0; i-- ) {
+        this.items.pop();
+      }
+    }
     _.forEach(
       _.get(state, 'navigation', [])
       , (navigate, index) => {

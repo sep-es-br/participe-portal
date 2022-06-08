@@ -16,7 +16,7 @@ import * as _ from 'lodash';
 })
 export class ConferenceMapComponent implements OnInit {
 
-  conferenceInfo: IConference
+  conferenceInfo: IConference;
   conference: IConferenceCards;
   regionalization: boolean;
 
@@ -50,7 +50,7 @@ export class ConferenceMapComponent implements OnInit {
           const { success, data } = await this.localitySrv.getConferenceCards(this.conferenceSrv.ConferenceActiveId);
           if (success) {
             this.conference = data;
-            this.breadcrumbSrv.update({ title: data.regionalizable, route: ['/conference-map'] }, 0);
+            this.breadcrumbSrv.add({ title: data.regionalizable});
           }
         } else { // If this conference is not regionalized, we must skip to the steps pages.
           await this.router.navigate(['/conference-steps']);
@@ -71,6 +71,7 @@ export class ConferenceMapComponent implements OnInit {
     await this.router.navigate(['/conference-steps']);
   }
 
+  /*
   paintMap(item?: ILocality) {
     let map: any = document.querySelector('#map');
     if (map && !map.contentDocument) { return; }
@@ -93,5 +94,6 @@ export class ConferenceMapComponent implements OnInit {
       });
     }
   }
+  */
 
 }

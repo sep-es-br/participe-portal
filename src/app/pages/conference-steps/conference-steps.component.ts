@@ -249,7 +249,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
       return await this.route.navigate(['/conference-steps'], {queryParams: {id: lastStep2.nav.id}});
     }
     if (this.navigation.length === 1) {
-      this.participationStateSrv.clear();
+      this.participationStateSrv.removeLast();
       return await this.route.navigate(['/conference-steps']);
     }
     if (this.navigation.length === 0) {

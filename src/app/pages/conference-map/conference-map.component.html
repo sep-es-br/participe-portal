@@ -1,7 +1,7 @@
 <app-template [title]="conference?.title" [subTitle]="conference?.subtitle" [fullLayout]="true" [footerVisible]="true">
   <div class="conference-map-container">
     <div class="cards-container">
-      <div class="card-item" *ngFor="let locality of conference?.localities" (mouseover)="paintMap(locality)" (click)="selectRegional(locality)">
+      <div class="card-item" *ngFor="let locality of conference?.localities" (click)="selectRegional(locality)">
         <h2>{{locality?.name}}</h2>
         <div class="line"></div>
         <ul>

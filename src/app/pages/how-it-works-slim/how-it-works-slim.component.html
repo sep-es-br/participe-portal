@@ -11,7 +11,7 @@
           {{item.title}}
         </strong>
       </div>
-      <div class="body" [innerHTML]="item.text">
+      <div class="body" [innerHTML]="item.text | safeHTML">
       </div>
     </div>
   </div>

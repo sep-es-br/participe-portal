@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   signInAcessoCidadao() {
-    localStorage.setItem('LogoutURL', environment.logoutURIAcessoCidadao);
+    localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIAcessoCidadao);
     this.document.location.href = this.getUrlForSocialAuth('portal');
   }
 
@@ -80,8 +80,11 @@ export class AuthService {
   }
 
   async signOut() {
+    let logoutURI = '' + localStorage.getItem(StoreKeys.LOGOUT_URI);
     this.clearTokens();
-    window.location.href = localStorage.getItem('LogoutURL');
+    if (logoutURI.length > 0) {
+      window.location.href = logoutURI;
+    }
   }
 
   saveToken(data: ISocialLoginResult | ILoginResult) {
@@ -98,6 +101,7 @@ export class AuthService {
     localStorage.removeItem(StoreKeys.REFRESH_TOKE);
     localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
     localStorage.removeItem(StoreKeys.CONFERENCE_ACTIVE);
+    localStorage.removeItem(StoreKeys.LOGOUT_URI);
   }
 
   getAccessToken() {

@@ -5,5 +5,6 @@ export const StoreKeys = {
   USER_INFO: '@portal-participe/USER_INFO',
   PARTICIPATION_STATE: '@portal-participe/PARTICIPATION_STATE',
   IS_PROFILE_INCOMPLETED: '@portal-participe/IS_PROFILE_COMPLETED',
+  LOGOUT_URI: '@portal-participe/LOGOUT_URI',
 };
 

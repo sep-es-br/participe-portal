@@ -84,6 +84,10 @@ export class AuthService {
     this.clearTokens();
     if (logoutURI.length > 0) {
       window.location.href = logoutURI;
+    } else {
+      const { protocol, host } = window.location;
+      let url = `${protocol}//${host}`;
+      window.location.href = url;
     }
   }
 

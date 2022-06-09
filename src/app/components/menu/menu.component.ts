@@ -54,8 +54,7 @@ export class MenuComponent implements OnInit {
   }
 
   async logout() {
-    this.authSrv.clearTokens();
-    await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
+    this.authSrv.signOut();
   }
   async navigate(url: string) {
     await this.router.navigate([url]);

@@ -53,6 +53,7 @@ export class AuthService {
   }
 
   signInAcessoCidadao() {
+    localStorage.setItem('LogoutURL', environment.logoutURIAcessoCidadao);
     this.document.location.href = this.getUrlForSocialAuth('portal');
   }
 
@@ -80,7 +81,7 @@ export class AuthService {
 
   async signOut() {
     this.clearTokens();
-    await this.router.navigate(['/login']);
+    window.location.href = localStorage.getItem('LogoutURL');
   }
 
   saveToken(data: ISocialLoginResult | ILoginResult) {

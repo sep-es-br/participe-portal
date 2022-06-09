@@ -64,8 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   async logout() {
-    await this.navigate(`/login/${this.conferenceSrv.ConferenceActiveId}`);
-    this.authSrv.clearTokens();
+    this.authSrv.signOut();
   }
 
   async researchRedirect() {

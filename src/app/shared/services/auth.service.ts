@@ -85,9 +85,7 @@ export class AuthService {
     if (logoutURI.length > 0) {
       window.location.href = logoutURI;
     } else {
-      const { protocol, host } = window.location;
-      let url = `${protocol}//${host}`;
-      window.location.href = url;
+      await this.router.navigate(['/login']);
     }
   }
 

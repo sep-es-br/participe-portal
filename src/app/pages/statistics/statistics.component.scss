@@ -190,6 +190,7 @@
   .chart {
     height: 600px;
     //overflow-y: scroll;
+    overflow: hidden auto;
   }
   .chart-heatmap {
     height: 640px;

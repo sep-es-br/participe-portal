@@ -24,6 +24,11 @@ export class AuthService {
     @Inject(DOCUMENT) private document: Document
   ) { }
 
+  private static getFrontFallbackUrl(): string {
+    const { protocol, host } = window.location;
+    return `${protocol}//${host}`;
+  }
+
   async signIn(login: string, password: string) {
     return this.http.post<IResultHttp<ILoginResult>>(`${environment.apiUrl}/signin?conference=${this.conferenceSrv.ConferenceActiveId}`, {
       login,
@@ -37,6 +42,10 @@ export class AuthService {
   }
 
   signInFacebook() {
+    localStorage.setItem(
+      StoreKeys.LOGOUT_URI,
+      environment.logoutURIFacebook + '?next=' + AuthService.getFrontFallbackUrl()
+    );
     this.document.location.href = this.getUrlForSocialAuth('facebook');
   }
 
@@ -45,6 +54,7 @@ export class AuthService {
   }
 
   signInGoogle() {
+    localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle + '?continue=' + AuthService.getFrontFallbackUrl());
     this.document.location.href = this.getUrlForSocialAuth('google');
   }
 
@@ -53,7 +63,10 @@ export class AuthService {
   }
 
   signInAcessoCidadao() {
-    localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIAcessoCidadao);
+    localStorage.setItem(
+      StoreKeys.LOGOUT_URI,
+      environment.logoutURIAcessoCidadao + '?post_logout_redirect_uri=' + AuthService.getFrontFallbackUrl()
+    );
     this.document.location.href = this.getUrlForSocialAuth('portal');
   }
 
@@ -80,12 +93,17 @@ export class AuthService {
   }
 
   async signOut() {
-    let logoutURI = '' + localStorage.getItem(StoreKeys.LOGOUT_URI);
-    this.clearTokens();
-    if (logoutURI.length > 0) {
+    let logoutURI = localStorage.getItem(StoreKeys.LOGOUT_URI);
+    const accessToken = this.getAccessToken();
+    if (logoutURI !== null) {
+      this.clearTokens();
+      if (logoutURI.includes(environment.logoutURIFacebook)) {
+        logoutURI += '&access_token=' + accessToken;
+      }
       window.location.href = logoutURI;
     } else {
       await this.router.navigate(['/login']);
+      this.clearTokens();
     }
   }
 
@@ -116,11 +134,6 @@ export class AuthService {
 
   getTokenPayload() {
     return jwtDecode(this.getAccessToken());
-  }
-
-  private static getFrontFallbackUrl(): string {
-    const { protocol, host } = window.location;
-    return `${protocol}//${host}`;
   }
 
   get getUserInfo(): IPerson {

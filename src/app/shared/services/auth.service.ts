@@ -102,7 +102,7 @@ export class AuthService {
       }
       window.location.href = logoutURI;
     } else {
-      await this.router.navigate(['/login']);
+      await this.router.navigate(['']);
       this.clearTokens();
     }
   }

@@ -44,7 +44,7 @@ export class AuthService {
   signInFacebook() {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
-      environment.logoutURIFacebook + '?next=' + AuthService.getFrontFallbackUrl()
+      environment.logoutURIFacebook
     );
     this.document.location.href = this.getUrlForSocialAuth('facebook');
   }
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   signInGoogle() {
-    localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle + '?continue=' + AuthService.getFrontFallbackUrl());
+    localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle);
     this.document.location.href = this.getUrlForSocialAuth('google');
   }
 
@@ -65,7 +65,7 @@ export class AuthService {
   signInAcessoCidadao() {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
-      environment.logoutURIAcessoCidadao + '?post_logout_redirect_uri=' + AuthService.getFrontFallbackUrl()
+      environment.logoutURIAcessoCidadao
     );
     this.document.location.href = this.getUrlForSocialAuth('portal');
   }

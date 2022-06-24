@@ -52,6 +52,7 @@ export class CompleteProfileComponent implements OnInit {
 
   async setForm(value) {
     this.userForm = this.formBuilder.group({
+      id: value.id,
       name: [_.get(value, 'name', ''), Validators.required],
       contactEmail: [_.get(value, 'contactEmail', ''), Validators.required],
       telephone: [_.get(value, 'telephone', '')],
@@ -60,9 +61,9 @@ export class CompleteProfileComponent implements OnInit {
   }
 
 
-  async save({name, contactEmail, telephone, locality}) {
+  async save({id, name, contactEmail, telephone, locality}) {
     const sender: IPerson = {
-      name, contactEmail, telephone,
+      id, name, contactEmail, telephone,
       selfDeclaration: {
         conference: this.conferenceSrv.ConferenceActiveId,
         locality: _.get(locality, 'value')

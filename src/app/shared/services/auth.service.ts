@@ -42,10 +42,12 @@ export class AuthService {
   }
 
   signInFacebook() {
+    /*
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
       environment.logoutURIFacebook
     );
+    */
     this.document.location.href = this.getUrlForSocialAuth('facebook');
   }
 
@@ -54,7 +56,7 @@ export class AuthService {
   }
 
   signInGoogle() {
-    localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle);
+    // localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle);
     this.document.location.href = this.getUrlForSocialAuth('google');
   }
 

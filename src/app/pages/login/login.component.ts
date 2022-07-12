@@ -52,20 +52,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     private messageSrv: MessageService,
     private meetingSrv: MeetingService,
     private router: Router
-  ) {
-    this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
-      this.conferenceId = +conference;
-    });
-    this.subQueryParams = this.activeRoute.queryParams.subscribe(async ({ isOpen }) => {
-      this.isOpen = isOpen;
-    });
-  }
+  ) {}
 
   async ngOnInit() {
     this.dialogWidth = window.innerWidth;
-    await this.loadConference(this.conferenceId);
-    await this.loadMeetingPageNumber(this.conferenceId, `${new Date().toLocaleDateString('pt-BR')} 00:00:00}`);
-    await this.loadMeeting(this.conferenceId);
+    this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
+      this.conferenceId = +conference;
+      this.loadConference(this.conferenceId).then(() => {
+        if (this.isOpen) {
+          this.loadMeetingPageNumber(this.conferenceId, `${new Date().toLocaleDateString('pt-BR')} 00:00:00}`)
+            .then(() => this.loadMeeting(this.conferenceId));
+        }
+      });
+    });
   }
 
   ngOnDestroy(): void {
@@ -85,19 +84,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
     if (success) {
-      this.conferenceData = data;
-      this.statistics = [];
-      this.statistics.push({ value: data.participations, label: 'Participantes' });
-      this.statistics.push({ value: data.proposal, label: 'Propostas' });
-      this.statistics.push({ value: data.highlights, label: 'Destaques' });
-      this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
 
-      this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
-
-      if (this.conferenceData.status === 'PRE_OPENING' && !this.isOpen) {
+      if (data.status === 'PRE_OPENING') {
         this.router.navigate([`${this.conferenceId}/pre-opening`]);
-      } else if (this.conferenceData.status === 'POST_CLOSURE') {
+      } else if (data.status === 'POST_CLOSURE') {
         this.router.navigate([`${this.conferenceId}/post-closure`]);
+      } else {
+        this.isOpen = true;
+        this.conferenceData = data;
+        this.statistics = [];
+        this.statistics.push({ value: data.participations, label: 'Participantes' });
+        this.statistics.push({ value: data.proposal, label: 'Propostas' });
+        this.statistics.push({ value: data.highlights, label: 'Destaques' });
+        this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
+
+        this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
       }
     }
   }

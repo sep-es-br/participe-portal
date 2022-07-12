@@ -1,9 +1,9 @@
-<div class="page-login">
+<div class="page-login" *ngIf="isOpen">
   <div class="background-page" [ngStyle]="{'background-image':'url('+backgroundImageUrl+')'}"></div>
   <div class="sides p-grid p-col-12">
     <div class="left-side p-grid p-col-12 p-lg-6">
       <div class="auth-box">
-        <img class="logo" *ngIf="conferenceData?.fileAuthentication"
+        <img class="logo" *ngIf="conferenceData?.fileAuthentication?.url"
             [src]="conferenceData?.fileAuthentication?.url" alt=""/>
         <div class="header">
           <h2>{{ conferenceData?.titleAuthentication }}</h2>

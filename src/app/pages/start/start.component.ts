@@ -19,16 +19,17 @@ export class StartComponent implements OnInit {
   ) {
   }
 
-  async ngOnInit() {
-    await this.loadServer();
+  ngOnInit() {
+    this.loadServer();
   }
 
-  async loadServer() {
-    const result = await this.conferenceSrv.GetByUrl(document.location.href);
-    if (result.success && !(result.data instanceof Array)) {
-      this.conference = result.data;
-      await this.router.navigate(['/login', this.conference.id]);
-    }
+  loadServer() {
+    this.conferenceSrv.GetByUrl(document.location.href)
+      .then((result) => {
+        if (result.success && !(result.data instanceof Array)) {
+          this.conference = result.data;
+          this.router.navigate(['/login', this.conference.id]);
+        }
+      });
   }
-
 }

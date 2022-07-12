@@ -28,25 +28,25 @@ export class PostClosureComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
+    this.subParams = this.activeRoute.params.subscribe(({ conference }) => {
       this.conferenceId = +conference;
-      await this.loadConference();
-      await this.getText();
+      this.conferenceSrv.getConferenceScreenInfo(this.conferenceId)
+        .then (({success, data}) => {
+          if (success) {
+            if (data.status === 'POST_CLOSURE') {
+              this.data = data;
+              this.conferenceSrv.getConferencePostClosureScreenInfo(this.conferenceId)
+              .then(({ success, data }) => {
+                if (success) {
+                  this.postClosureText = data.text;
+                }
+              });
+            } else {
+              return this.router.navigate(['/login/' + this.conferenceId]);
+            }
+          }
+        });
     });
-  }
-
-  async getText() {
-    const { success, data } = await this.conferenceSrv.getConferencePostClosureScreenInfo(this.conferenceId);
-    if (success) {
-      this.postClosureText = data.text;
-    }
-  }
-
-  async loadConference() {
-    const {success, data} = await this.conferenceSrv.getConferenceScreenInfo(this.conferenceId);
-    if (success) {
-      this.data = data;
-    }
   }
 
   changeToLoginForm() {

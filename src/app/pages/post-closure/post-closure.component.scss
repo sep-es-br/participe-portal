@@ -6,18 +6,17 @@ $darkColorOr: rgba(0,0,0,0.16);
   display: flex;
   min-height: 100vh;
   flex-direction: row;
-  //   flex-wrap: wrap;
 
     .background-page {
         background: var(--primaryColor);
         background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
         background-image: url(src/assets/images/background.png);
         background-size: cover;
-        width: 101%;
+        width: 100%;
         height: 100vh;
         position: fixed;
         z-index: -1;
-        margin-left: -1px;
+        margin-left: 0px;
     }
     .left-side {
         width: 100%;
@@ -177,61 +176,11 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
 }
 
-@media (max-width: 1280px) {
-    .conference-warning-block {
-        max-width: 60vw !important;
-    }
-}
-
-@media (max-width: 1120px) {
-    .conference-warning-block {
-        max-width: 54vw !important;
-    }
-    .auth-box {
-        max-width: 26vw;
-    }
-    .actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    .poweredBy {
-        width: 18vw;
-    }
-}
-
 @media (max-width: 868px) {
-    .left-side {
-        .conference-warning-block {
-            max-width: 50vw !important;
-        }
-    }
-
-    .right-side {
-        justify-content: center !important;
-        align-items: center !important;
-    }
-    .auth-box {
-        margin: 0;
-        padding: 5px 10px 20px 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .right-side {
-        margin-right: 45px;
-    }
-    .auth-box {
-        // margin-top: -10px !important;
-        padding: 15px 15px !important;
-    }
-    .poweredBy {
-        width: 21vw;
-    }
-}
-
-@media (max-width: 600px) {
     .page-post-closure {
         flex-direction: column !important;
+        margin-right: 0px;
+        margin-left: 0px;
     }
     .background-page{
         height: 100% !important;
@@ -239,26 +188,27 @@ $darkColorOr: rgba(0,0,0,0.16);
     .left-side {
         display: flex;
         justify-content: center;
+        padding: 13px;
     }
     .conference-warning-block {
         margin: 0 !important;
         margin-top: 30px !important;
     }
     .left-side .conference-warning-block {
-        max-width: 89vw !important
+        max-width: 75% !important;
+        min-width: 300px !important;
     }
+
     .right-side {
-        display: none;
-        margin: 10vh 0 0 !important;
+      width: 100%;
+      margin: 0;
     }
     .auth-box {
-        margin: 10px 0 0 !important;
-        max-width: 90vw;
+        margin: 10px auto 10px auto!important;
+        width: 75%;
+        min-width: 300px;
     }
-    .login-mobile {
-        display: flex !important;
-        flex-direction: column;
-    }
+
     .button-position {
         display: flex;
         justify-content: center;

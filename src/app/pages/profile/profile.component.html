@@ -22,8 +22,7 @@
       </div>
       <div class="p-col-12 p-md-8 form-group stacked">
         <label for="locality">{{localityType}}</label>
-        <p-dropdown id="locality" [options]="optionsLocality" formControlName="localityId"
-                    [filter]="true"></p-dropdown>
+        <p-dropdown id="locality" [options]="optionsLocality" formControlName="localityId"></p-dropdown>
         <app-input-message [form]="userForm" field="localityId"></app-input-message>
       </div>
       <section class="autentication p-col-12">

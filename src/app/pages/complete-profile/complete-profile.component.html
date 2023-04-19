@@ -17,10 +17,10 @@
     </div>
     <div class="p-col-12 form-group stacked ui-fluid">
       <label for="locality">{{localityType}} *</label>
-      <p-autoComplete styleClass="custom-button-autocomplete" [suggestions]="filteredLocalities"
-        formControlName="locality" (completeMethod)="filterLocalities($event)" [size]="30" [minLength]="1" field="label"
-        [placeholder]="'Digite o nome da ' + localityType + ' pesquisar'" [dropdown]="true">
-      </p-autoComplete>
+      <p-dropdown class="locality-dropbox" [options]="localities"
+        formControlName="locality" field="label" optionLabel="name" optionValue="id"
+        [placeholder]="'Selecione o seu ' + localityType">
+      </p-dropdown>
     </div>
     <div class="actions p-col-12 align-right">
       <button type="button" class="btn-primary" (click)="cancel()">

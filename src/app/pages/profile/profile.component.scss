@@ -88,10 +88,10 @@
           }
         }
         &.icon-times {
-          border: 1px solid #ee8c59;
+          border: 1px solid #00a198;
           &:after {
             content: "\e90b";
-            color: #e96b2a;
+            color: #00a198;
           }
         }
       }
@@ -106,9 +106,9 @@
       margin-left: 0.8rem;
     }
     .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
-      background-color: #e8731e;
+      background-color: #00a198;
       &:hover {
-        background-color: #e8731e;
+        background-color: #00a198;
       }
     }
   }
@@ -182,8 +182,8 @@
     font-size: 2.5rem;
   }
   .ui-button{
-    background: #ef8533;
-    border: 1px solid #ef8533 !important;
+    background: #00a198;
+    border: 1px solid #00a198 !important;
   }
   .ui-button-icon-left {
     left: 1.5em;
@@ -210,9 +210,9 @@
     font-size: 1.2rem;
   }
   .ui-button:hover {
-    background: #ef8533 !important;
+    background: #00a198 !important;
   }
   .ui-button:active {
-    background: #ef8533 !important;
+    background: #00a198 !important;
   }
 }

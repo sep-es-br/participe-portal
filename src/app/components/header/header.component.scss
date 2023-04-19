@@ -18,7 +18,7 @@
       font-weight: lighter;
     }
     img {
-      width: 100px;
+      height: 115px;
       margin-right: 10px;
     }
   }
@@ -42,7 +42,7 @@
         width: 20px;
         color: white;
       }
-      
+
     }
   }
   @media (max-width: 600px) {
@@ -67,7 +67,7 @@
 
         }
 
-        img {  
+        img {
           width: 60px;
         }
       }
@@ -118,8 +118,8 @@
     font-size: 2.5rem;
   }
   .ui-button{
-    background: #ef8533;
-    border: 1px solid #ef8533 !important;
+    background: var(--accentColorStart);
+    border: 1px solid var(--accentColorStart) !important;
   }
   .ui-button-icon-left {
     left: 1.5em;
@@ -146,9 +146,9 @@
     font-size: 1.2rem;
   }
   .ui-button:hover {
-    background: #ef8533 !important;
+    background: var(--accentColorStart) !important;
   }
   .ui-button:active {
-    background: #ef8533 !important;
+    background: var(--accentColorStart) !important;
   }
 }

@@ -67,7 +67,7 @@ button.btn-secondary {
   .ui-button {
     background: var(--accentColorStart) !important;
     border-color: #a6a6a6 !important;
-    color: var(--light);  
+    color: var(--light);
     .ui-button-icon-left:before {
       content: "\e902";
     }
@@ -130,10 +130,10 @@ button.btn-secondary {
 }
 
 :root {
-  --primaryColor: rgba(48,40,119,1);
-  --secondaryColor: rgba(54,139,181,1);
-  --accentColorStart: #de5230;
-  --accentColorEnd: #ee7f33;
+  --primaryColor: rgba(21,57,97,1);
+  --secondaryColor: rgba(21,57,97,1);
+  --accentColorStart: #00a198;
+  --accentColorEnd: #00a198;
   --tertiaryColor:#3F5291;
   --textColorDark: #343333;
   --light: #F0F0F3

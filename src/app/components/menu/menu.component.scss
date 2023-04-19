@@ -22,10 +22,10 @@
         font-size: 24px;
       }
       &:hover {
-        background-color: #ef8533;
+        background-color: var(--accentColorStart);
       }
       &.active {
-        background-color: #ef8533;
+        background-color: var(--accentColorStart);
       }
   }
 

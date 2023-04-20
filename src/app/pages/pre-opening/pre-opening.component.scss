@@ -4,9 +4,10 @@
     flex-direction: column;
 
     .background-page {
-      background: var(--primaryColor);
-      background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
-      background-image: url(src/assets/images/background.png);
+      //background: var(--primaryColor);
+      //background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
+      //background-image: url(src/assets/images/background.png);
+      background: rgba(21,57,97,0.93);
       background-size: cover;
       width: 101%;
       height: 101vh;

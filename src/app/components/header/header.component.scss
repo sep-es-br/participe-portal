@@ -18,7 +18,7 @@
       font-weight: lighter;
     }
     img {
-      height: 115px;
+      max-height: 115px;
       margin-right: 10px;
     }
   }
@@ -68,7 +68,7 @@
         }
 
         img {
-          width: 60px;
+          max-width: 230px;
         }
       }
       .actions {

@@ -55,7 +55,7 @@
     }
     .conference-warning-block {
         margin: 0 65px 40px;
-        background: white;
+        background: var(--primaryColor);
         border-top: 10px solid var(--accentColorEnd);
         // min-height: 380px;
         .conference-warning-message {

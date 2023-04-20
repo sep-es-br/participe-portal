@@ -22,7 +22,7 @@ $darkColorOr: rgba(0,0,0,0.16);
         width: 100%;
         .conference-warning-block {
             margin: 40px 0 0 95px;
-            background: white;
+            background: var(--primaryColor);
             border-top: 10px solid var(--accentColorEnd);
             .conference-warning-message {
                 padding: 40px 45px 30px 45px;

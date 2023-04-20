@@ -195,8 +195,8 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
         const chartArea = chartInstance.chartArea;
         const data = chart.config.data;
         const gradient = ctx.createLinearGradient(0, 0, gradientLenght, 0);
-        gradient.addColorStop(0, 'rgb(219, 75, 31)');
-        gradient.addColorStop(1, 'rgb(245, 134, 52)');
+        gradient.addColorStop(0, '#00a198');
+        gradient.addColorStop(1, '#00a198');
         data.datasets.forEach((dataset, i) => {
           const meta = chartInstance.controller.getDatasetMeta(i);
           meta.data.forEach((bar, index) => {

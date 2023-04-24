@@ -27,6 +27,15 @@ $darkColorOr: rgba(0,0,0,0.16);
       background-image: none!important;
       background-color: #296d8033;
     }
+    .agenda-mobile {
+      display: flex !important;
+      max-width: 100%;
+      padding: 10px;
+    }
+  }
+
+  .agenda-mobile {
+    display: none;
   }
 
   .auth-box {

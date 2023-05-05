@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    //this.authSrv.clearTokens();
     this.dialogWidth = window.innerWidth;
     this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
       this.conferenceId = +conference;

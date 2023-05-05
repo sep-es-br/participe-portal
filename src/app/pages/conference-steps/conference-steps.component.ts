@@ -113,7 +113,8 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   async loadConferenceStep() {
     const {success, data} = await this.participationSrv.getPlanItem(
-      this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId ? this.stepId : null, ''
+//      this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId ? this.stepId : null, ''
+      this.conference.id, this.localityId, this.stepId ? this.stepId : null, ''
     );
     if (success) {
       this.conferenceStepItem = data;

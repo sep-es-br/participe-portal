@@ -90,8 +90,7 @@ export class AuthService {
       return true;
     } catch (err) {
     }
-    this.clearTokens();
-    return false;
+      return false;
   }
 
   async signOut() {

@@ -465,3 +465,16 @@ $darkColorOr: rgba(0,0,0,0.16);
   }
 
 }
+
+.policy-container {
+  font-size: 12px;
+  display: flex;
+  height: 100%;
+}
+
+.policy-link {
+  display: inline-block;
+  align-self: flex-end;
+  text-align: center;
+  margin: 0 auto 0 auto;
+}

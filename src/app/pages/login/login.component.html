@@ -14,14 +14,6 @@
             <img src="assets/icons/cidadao.svg" alt=""/>
             Entrar com Acesso Cidadão
           </button>
-          <button class="google" (click)="signInGoogle()">
-            <img src="assets/icons/google.svg" alt=""/>
-            Entrar com Google
-          </button>
-          <button class="facebook" (click)="signInFacebook()">
-            <img src="assets/icons/facebook.svg" alt=""/>
-            Entrar com Facebook
-          </button>
         </div>
         <div class="or">
           <span class="line"></span><span class="text">ou utilize</span><span class="line"></span>
@@ -52,7 +44,7 @@
     <div>
       <img class="agenda-mobile" src="assets/images/agenda.png" alt=""/>
     </div>
-    <div class="right-side p-col-12 p-lg-6">
+    <div class="right-side p-col-12 p-lg-6 " >
       <div class="statistics-container p-col-12">
         <div class="p-grid">
           <div class="statistics-item-container p-col-6" *ngFor="let item of statistics">
@@ -134,8 +126,6 @@
             <div class="locality p-col-12">{{meetingDetail?.place}}</div>
             <div class="adreess p-col-12">{{meetingDetail?.address}}</div>
             <div class="icons-locality p-col-12">
-              <img src="assets/icons/gmaps.svg" alt="google-maps" width="40px" height="40px"
-                   (click)="goToLink('https://maps.google.com/?q=' + meetingDetail.place + '+' + meetingDetail.address)">
               <img src="assets/icons/waze.svg" alt="waze" width="40px" height="40px" class="waze"
                    (click)="goToLink('waze://?q==' + meetingDetail.place + '+' + meetingDetail.address)">
             </div>

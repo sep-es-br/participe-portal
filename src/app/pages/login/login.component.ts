@@ -90,19 +90,23 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate([`${this.conferenceId}/pre-opening`]);
       } else if (data.status === 'POST_CLOSURE') {
         this.router.navigate([`${this.conferenceId}/post-closure`]);
-      } else {
+      } else if(data.showStatistics == false) {
         this.isOpen = true;
         this.conferenceData = data;
-        this.statistics = [];
-        this.statistics.push({ value: data.participations, label: 'Participantes' });
-        this.statistics.push({ value: data.proposal, label: 'Propostas' });
-        this.statistics.push({ value: data.highlights, label: 'Destaques' });
-        this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
 
         this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
+        } else {
+          this.isOpen = true;
+          this.conferenceData = data;
+          this.statistics = [];
+          this.statistics.push({ value: data.participations, label: 'Participantes' });
+          this.statistics.push({ value: data.proposal, label: 'Propostas' });
+          this.statistics.push({ value: data.highlights, label: 'Destaques' });
+          this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
+          this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
+        }
       }
     }
-  }
 
   async loadMeeting(conferenceId: number) {
     const { success, data: { content, totalPages, first, last, empty } } = await this.meetingSrv.getMeetingsByIdConference(
@@ -200,14 +204,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  signInFacebook() {
-    this.authSrv.signInFacebook();
-  }
-
-  signInGoogle() {
-    this.authSrv.signInGoogle();
-  }
-
   signInAcessoCidadao() {
     this.authSrv.signInAcessoCidadao();
   }
@@ -258,4 +254,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.pagination.page = data.page;
     }
   }
+
+  
 }

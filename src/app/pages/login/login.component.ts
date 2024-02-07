@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   subQueryParams: Subscription;
   isOpen = false;
   backgroundImageUrl: string = '/assets/images/background.png';
+  displayCalendar: Boolean;
+  
 
   constructor(
     private authSrv: AuthService,
@@ -81,10 +83,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   onResize(event) {
     this.dialogWidth = event.target.innerWidth;
   }
+
+  async calendar(id){
+    
+  }
+
+  
   async loadConference(conferenceId: number) {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
     if (success) {
+
+      this.displayCalendar = data.showCalendar;
 
       if (data.status === 'PRE_OPENING') {
         this.router.navigate([`${this.conferenceId}/pre-opening`]);

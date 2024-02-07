@@ -76,7 +76,9 @@ $darkColorOr: rgba(0,0,0,0.16);
       flex-direction: column;
       button {
         padding: 2px 10px;
+        height: 7vh;
         margin-bottom: 5px;
+        border-radius: 10px;
         border: none;
         display: flex;
         align-items: center;
@@ -155,7 +157,8 @@ $darkColorOr: rgba(0,0,0,0.16);
       width: 100%;
       display: flex;
       justify-content: center;
-      margin-top: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
       color: var(--textColorDark);
       cursor: pointer;
       :hover {
@@ -463,3 +466,4 @@ $darkColorOr: rgba(0,0,0,0.16);
   text-align: center;
   margin: 0 auto 0 auto;
 }
+

@@ -1,7 +1,7 @@
 <div class="page-login" *ngIf="isOpen">
   <div class="background-page" [ngStyle]="{'background-image':'url('+backgroundImageUrl+')'}"></div>
   <div class="sides p-grid p-col-12">
-    <div class="left-side p-grid p-col-12 p-lg-6">
+    <div class="left-side p-col-12 p-lg-6">
       <div class="auth-box">
         <img class="logo" *ngIf="conferenceData?.fileAuthentication?.url"
             [src]="conferenceData?.fileAuthentication?.url" alt=""/>
@@ -16,22 +16,6 @@
           </button>
         </div>
         <div class="or">
-          <span class="line"></span><span class="text">ou utilize</span><span class="line"></span>
-        </div>
-        <div class="form-login">
-          <div class="form-group ">
-            <label>CPF/E-mail</label>
-            <input [(ngModel)]="form.login" type="text">
-          </div>
-          <div class="form-group">
-            <label>Senha</label>
-            <input [(ngModel)]="form.password" type="password">
-          </div>
-          <div class="actions">
-            <a [routerLink]="['/register']">Cadastre-se</a>
-            <a [routerLink]="['/forgot-password']">Esqueceu sua senha?</a>
-          </div>
-          <button class="submit" (click)="signInWithLogin(form)">Entrar</button>
           <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
         </div>
         <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como
@@ -54,7 +38,7 @@
         </div>
       </div>
       <!-- Ocultando o calendário das presenciais da página de login -->
-      <!--div-- class="calender-container p-col-12 p-grid">
+      <div *ngIf="displayCalendar" class="test calender-container p-col-12 p-grid">
 
             <img src="assets/icons/up.svg" (click)="meetingPreviousPage()"
                 [class.hidden-arrow]="pagination.empty"
@@ -63,7 +47,7 @@
             <div class="calendar-container-grid">
               <div class="calendar-item" *ngFor="let meeting of meetings"
                   (click)="showModalDetailMeeting(meeting.id)">
-                <div class="date">
+                <div class="date" >
                   <img src="assets/icons/calendar.svg" alt=""/>
                   {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MMM' }}
                 </div>
@@ -80,9 +64,7 @@
             <img src="assets/icons/down.svg" (click)="meetingNextPage()"
                 [class.hidden-arrow]="pagination.empty"
             alt=""/>
-
-
-      </!--div-->
+          </div>
     </div>
   </div>
   <p-toast position="top-right"></p-toast>

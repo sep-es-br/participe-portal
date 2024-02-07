@@ -125,32 +125,15 @@ export class ProfileComponent implements OnInit {
     return this.person.authentications ? this.person.authentications.find(auth => auth[key] === value) : undefined;
   }
 
-  addAuthFacebook() {
-    this.backupData();
-    this.authSrv.signInFacebookProfile();
-  }
-
   addAuthCidadao() {
     this.backupData();
     this.authSrv.signInAcessoCidadaoProfile();
-  }
-
-  addAuthGoogle() {
-    this.backupData();
-    this.authSrv.signInGoogleProfile();
-  }
-
-  deleteAuthFacebook() {
-    this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.FACEBOOK);
   }
 
   deleteAuthCidadao() {
     this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.ACESSO_CIDADAO);
   }
 
-  deleteAuthGoogle() {
-    this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.GOOGLE);
-  }
 
   addAuthParticipe() {
     this.statusLogin = 'ANDAMENTO';

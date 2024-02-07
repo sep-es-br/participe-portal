@@ -41,29 +41,6 @@ export class AuthService {
       AuthService.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
   }
 
-  signInFacebook() {
-    /*
-    localStorage.setItem(
-      StoreKeys.LOGOUT_URI,
-      environment.logoutURIFacebook
-    );
-    */
-    this.document.location.href = this.getUrlForSocialAuth('facebook');
-  }
-
-  signInFacebookProfile() {
-    this.document.location.href = this.getUrlForSocialAuth('facebook-profile');
-  }
-
-  signInGoogle() {
-    // localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle);
-    this.document.location.href = this.getUrlForSocialAuth('google');
-  }
-
-  signInGoogleProfile() {
-    this.document.location.href = this.getUrlForSocialAuth('google-profile');
-  }
-
   signInAcessoCidadao() {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,

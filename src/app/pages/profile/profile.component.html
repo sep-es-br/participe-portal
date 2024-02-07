@@ -34,49 +34,6 @@
             <img src="assets/icons/cidadao.svg" alt=""/>
             <i [class]="findAuthentication('AcessoCidadao') ? 'icon-times' : 'icon-plus'"></i>
           </button>
-          <button [class]="findAuthentication('Google') ? 'google active' : 'google'" type="button"
-                  (click)="findAuthentication('Google') ? deleteAuthGoogle() : addAuthGoogle() "
-          >
-            <img src="assets/icons/google.svg" alt=""/>
-            <i [class]="findAuthentication('Google') ? 'icon-times' : 'icon-plus'"></i>
-          </button>
-
-          <button [class]="findAuthentication('Facebook') ? 'facebook active' : 'facebook'"
-                  type="button"
-                  (click)="findAuthentication('Facebook') ? deleteAuthFacebook() : addAuthFacebook()"
-          >
-            <img src="assets/icons/facebook.svg" alt=""/>
-            <i [class]="findAuthentication('Facebook') ? 'icon-times' : 'icon-plus'"></i>
-          </button>
-        </div>
-
-        <div class="internal p-col-12">
-          <button class="sagres p-col-3" [ngClass]="statusLogin === 'ATIVO' && 'active'"
-                  type="button"
-                  (click)="statusLogin === 'DESATIVADO' ? addAuthParticipe() : deleteAuthParticipe()">
-            <img src="assets/icons/logomark-white2.svg" alt=""/>
-            <i [class]="statusLogin !== 'DESATIVADO' ? 'icon-times' : 'icon-plus'"></i>
-          </button>
-          <div class="fields p-col-7" *ngIf="statusLogin !== 'DESATIVADO'">
-            <div class="p-col-12 form-group stacked">
-              <label for="login">E-mail/CPF</label>
-              <p-dropdown id="login" [options]="optionsContactEmail"
-                          (onChange)="changeAuthParticipe($event)"></p-dropdown>
-            </div>
-            <div class="internal">
-              <div class="p-col-12 p-md-6 form-group stacked">
-                <label for="newPassword">Nova senha</label>
-                <input id="newPassword" pInputText formControlName="newPassword" type="password">
-                <app-input-message [form]="userForm" field="newPassword"></app-input-message>
-              </div>
-              <div class="p-col-12 p-md-6 form-group stacked">
-                <label for="confirmNewPassword">Confirme a nova senha</label>
-                <input id="confirmNewPassword" pInputText formControlName="confirmNewPassword"
-                       type="password">
-                <app-input-message [form]="userForm" field="confirmNewPassword"></app-input-message>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
       <div class="p-col-12 form-group field-switch">

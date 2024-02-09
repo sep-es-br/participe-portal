@@ -84,11 +84,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.dialogWidth = event.target.innerWidth;
   }
 
-  async calendar(id){
-    
-  }
 
-  
   async loadConference(conferenceId: number) {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);

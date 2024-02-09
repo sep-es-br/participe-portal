@@ -25,9 +25,9 @@
         </div>
       </div>
     </div>
-    <div>
+    <!-- <div>
       <img class="agenda-mobile" src="assets/images/agenda.png" alt=""/>
-    </div>
+    </div> -->
     <div class="right-side p-col-12 p-lg-6 " >
       <div class="statistics-container p-col-12">
         <div class="p-grid">
@@ -37,8 +37,7 @@
           </div>
         </div>
       </div>
-      <!-- Ocultando o calendário das presenciais da página de login -->
-      <div *ngIf="displayCalendar" class="test calender-container p-col-12 p-grid">
+      <div *ngIf="displayCalendar" class="calendar-container p-col-12 p-grid">
 
             <img src="assets/icons/up.svg" (click)="meetingPreviousPage()"
                 [class.hidden-arrow]="pagination.empty"

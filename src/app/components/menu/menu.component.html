@@ -1,5 +1,6 @@
 <div class="menu-wrapper">
-  <div [routerLink]="item.route" [ngClass]="{'active': isActive(item)}" class="button-item" *ngFor="let item of menu">
+  <!-- 'visibility: 'hidden' -->
+  <div [routerLink]="item.route" [ngClass]="{'active': isActive(item)}" [ngClass]=" {'visibility': 'hideButton'}" class="button-item" *ngFor="let item of menu">
     {{item.label}}
   </div>
 </div>
@@ -15,7 +16,7 @@
   <a class="btn-default" (click)="navigate('/proposals')">Propostas</a>
   <a class="btn-default" (click)="navigate('/participations')">Minhas Participações</a>
   <a class="btn-default" (click)="navigate('/how-it-works')">Como Funciona</a>
-  <a class="btn-default" (click)="navigate('/statistics')">Estatísticas</a>
+  <a class="btn-default" (click)="navigate('/statistics')" *ngIf="displayStatisticsPanel" >Estatísticas</a>
   <div class="header-menu">
     <div class="action-group">
       <a class="btn-default action-button" (click)="navigate('/profile')">

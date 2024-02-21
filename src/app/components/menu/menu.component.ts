@@ -75,7 +75,6 @@ export class MenuComponent implements OnInit {
           }
         })
       }
-      console.log(this.displayStatisticsPanel)
       this.conference = result.data;
       if (this.conference.displayStatusConference !== 'OPEN') {
         this.menu.shift();

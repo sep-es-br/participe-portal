@@ -5,6 +5,7 @@ export interface ILoginScreenInfo {
   showStatistics: Boolean;
   showCalendar: Boolean;
   showStatisticsPanel: Boolean;
+  showExternalLinks: Boolean;
   titleAuthentication: string;
   subtitleAuthentication: string;
   fileAuthentication: IImage;

@@ -14,6 +14,7 @@ export interface ILoginScreenInfo {
   participations: number;
   numberOfLocalities: number;
   backgroundImageUrl: IImage;
+  calendarImageUrl: any;
   status: string;
   beginDate?: string;
   endDate?: string;

@@ -20,28 +20,31 @@ $darkColorOr: rgba(0,0,0,0.16);
     margin-left: -1px;
   }
 
-  // @media (max-width: 600px)
-  // {
-  //   .background-page
-  //   {
-  //     //background-image: none!important;
-  //     background-color:  #296d8033;
-  //   }
-  //   .agenda-mobile {
-  //     display: flex !important;
-  //     max-width: 100%;
-  //     padding-left: 12px;
-  //     padding-right: 12px;
-  //     margin-bottom: 12px;
-  //   }
+  @media (max-width: 600px)
+  {
+    // .background-page
+    // {
+    //   //background-image: none!important;
+    //   background-color:  #296d8033;
+    // }
+    .agenda-mobile {
+      display: flex !important;
+      max-width: 100%;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-bottom: 12px;
+    }
+    .calendar-container{
+      display: none !important;
+    }
     
-  //   .teste {
-  //     padding-left: 12px !important;
-  //     padding-right: 12px !important;
-  //     margin-bottom: 12px !important;
-  //   }
+    // .teste {
+    //   padding-left: 12px !important;
+    //   padding-right: 12px !important;
+    //   margin-bottom: 12px !important;
+    // }
 
-  // }
+  }
 
   .agenda-mobile {
     display: none;

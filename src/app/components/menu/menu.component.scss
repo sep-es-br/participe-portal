@@ -1,11 +1,13 @@
+@import '~src/styles.scss';
+
 .menu-wrapper {
   display: flex;
   padding: 0 50px;
   flex-wrap: wrap;
   .button-item {
       margin-top: 20px;
-      color: white;
-      border: 2px solid white;
+      color: $font-color-primary;
+      border: 2px solid $border-color;
       padding: 5px 40px;
       font-size: 1.2rem;
       border-radius: 60px;
@@ -22,10 +24,10 @@
         font-size: 24px;
       }
       &:hover {
-        background-color: var(--accentColorStart);
+        background-color: $accent-color;
       }
       &.active {
-        background-color: var(--accentColorStart);
+        background-color: $accent-color;
       }
   }
 
@@ -96,7 +98,7 @@
   }
   .btn-participar  {
     color: white;
-    background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd));
+    background: linear-gradient(45deg, $accent-color, $accent-color-secondary);
     border: none;
     font-weight: 700;
   }
@@ -139,6 +141,6 @@
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  color: var(--accentColorEnd);
+  color: $accent-color-secondary;
   font-size: 2.9rem;
 }

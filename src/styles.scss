@@ -1,6 +1,26 @@
 //@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
 @import '~animate.css/animate.min';
+
+
+$menu-color-primary: rgba(21,57,97,1);
+$menu-color-secondary: rgba(21,57,97,1);
+
+$accent-color: #00a198;
+$accent-color-secondary:#00a198;
+
+$font-color-primary: white;
+$font-color-secondary:white;
+
+$card-font-color:black;
+$card-font-color-hover:white;
+
+$card-color: white;
+$border-color: white;
+
+
+
+
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +28,7 @@ body {
 }
 
 a {
-  color: var(--primaryColor);
+  color: $menu-color-primary;
   cursor: pointer;
 }
 
@@ -130,7 +150,7 @@ button.btn-secondary {
 }
 
 :root {
-  --primaryColor: rgba(21,57,97,1);
+  --primaryColor:rgba(21,57,97,1);
   --secondaryColor: rgba(21,57,97,1);
   --accentColorStart: #00a198;
   --accentColorEnd: #00a198;

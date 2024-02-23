@@ -1,3 +1,5 @@
+@import '~src/styles.scss';
+
 ::ng-deep .app-dashboard {
   padding: 20px 50px;
   .refresh-filter {
@@ -41,7 +43,7 @@
   }
   .card-indicator {
     border: #ffffff 1px solid;
-    background-color: #ffffff;
+    background-color: $card-color;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,7 +52,7 @@
     span {
       font-size: 2.3em;
       font-weight: 700;
-      color: #00a198;
+      color: $accent-color;
     }
     label {
       font-size: 1em;
@@ -66,7 +68,7 @@
     margin: 0.5em 0;
   }
   .chart-container {
-    background-color: white;
+    background-color: $card-color;
     display: flex;
     flex-direction: column;
     padding: 2em;

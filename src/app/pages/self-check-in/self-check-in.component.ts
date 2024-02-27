@@ -1,26 +1,34 @@
 import { Component, OnInit } from "@angular/core";
+import { StoreKeys } from "src/app/shared/commons/contants";
 import { AuthService } from "src/app/shared/services/auth.service";
+import { MeetingService } from "src/app/shared/services/meeting.service";
+import 'moment-timezone';
+
 
 @Component({
     selector: 'app-self-check-in',
     templateUrl: './self-check-in.component.html',
     styleUrls: ['./self-check-in.component.scss']
 })
-export class SelfCheckIn implements OnInit {
+export class SelfCheckInComponent implements OnInit {
+
 
     constructor(
-        private authSrv: AuthService,
+      private authSrv: AuthService,
+      protected meetingSrv: MeetingService,
     ){}
 
     
     async ngOnInit() {
-        this.signInAcessoCidadao()
-        
+      await this.checkin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
+
+      sessionStorage.removeItem(StoreKeys.CHECK_IN);
     }
 
-    signInAcessoCidadao() {
-        this.authSrv.signInAcessoCidadao();
-      }
+    checkin(meeting, persoId){
+      var now = new Date();
+      var timeZone = now.toString().split(' ')[5];
+      this.meetingSrv.postCheckIn(meeting, persoId, timeZone)
+    }
 
-}
-
+  }

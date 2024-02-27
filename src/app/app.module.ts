@@ -59,6 +59,9 @@ import localePtBr from '@angular/common/locales/pt';
 import { TriStateCheckboxModule } from 'primeng/components/tristatecheckbox/tristatecheckbox';
 import { SafeHTMLPipe } from './shared/pipes/safeHTML/safe-html.pipe';
 import { ButtonModule } from 'primeng/components/button/button';
+import { LoginSelfCheckInComponent } from './pages/login-self-check-in/login-self-check-in.component';
+import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
+
 
 registerLocaleData(localePtBr);
 
@@ -93,6 +96,8 @@ registerLocaleData(localePtBr);
     HeatMapComponent,
     HorizontalBarGraphComponent,
     SafeHTMLPipe,
+    LoginSelfCheckInComponent,
+    SelfCheckInComponent,
   ],
   imports: [
     FontAwesomeModule,

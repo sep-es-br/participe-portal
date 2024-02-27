@@ -7,6 +7,7 @@ import { PrepareHttpQuery } from '../utils/query.utils';
 import { IResultPaginated } from '../interfaces/IResultPaginated';
 import {IQueryOptions} from '../interfaces/IQueryOptions';
 
+
 @Injectable({ providedIn: 'root' })
 export class MeetingService extends BaseService<any> {
 
@@ -33,4 +34,18 @@ export class MeetingService extends BaseService<any> {
       search: filter,
     })}`).toPromise();
   }
+
+  postCheckIn(meetingId: number, personId: number, timeZone: string): Promise<any> {
+    return this.http.post(
+      `${this.urlBase}/checkIn`,
+      {
+        meetingId,
+        personId,
+        timeZone
+      },
+    ).toPromise();
+  }
+
+  
+
 }

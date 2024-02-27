@@ -63,7 +63,15 @@ export class HomeComponent implements OnInit {
         this.authSrv.saveToken(userInfo);
         this.authSrv.saveUserInfo(userInfo.person);
 
-        if (userInfo.completed) {
+        if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
+          if (userInfo.completed) {
+            await this.router.navigate(['/self-check-in'])
+          }else{
+            localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
+            await this.router.navigate(['/complete-profile']);
+          }
+        }
+        else if (userInfo.completed) {
           if (this.conference.displayStatusConference === 'OPEN') {
             const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
             if (data.regionalization) {
@@ -78,7 +86,7 @@ export class HomeComponent implements OnInit {
           localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
           await this.router.navigate(['/complete-profile']);
         }
-      }
+       }
     } catch (error) {
       console.log('Social login error: ', error);
     }

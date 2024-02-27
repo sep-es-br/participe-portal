@@ -18,6 +18,9 @@ import { PostClosureComponent } from './pages/post-closure/post-closure.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { StartComponent } from './pages/start/start.component';
+import { LoginSelfCheckInComponent } from './pages/login-self-check-in/login-self-check-in.component';
+import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
+
 
 const routes: Routes = [
   { path: '', component: StartComponent },
@@ -38,6 +41,9 @@ const routes: Routes = [
   { path: ':conference/post-closure', component: PostClosureComponent },
   { path: ':conference/pre-opening', component: PreOpeningComponent },
   { path: 'statistics', component: StatisticsComponent },
+  { path: 'self-check-in/:meeting', component: LoginSelfCheckInComponent},
+  { path: 'self-check-in', component: SelfCheckInComponent},
+
 ];
 
 @NgModule({

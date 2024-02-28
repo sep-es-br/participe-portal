@@ -1,3 +1,5 @@
+@import '~src/styles.scss';
+
 .search-container {
   display: flex;
   flex-direction: column;
@@ -14,7 +16,7 @@
       color: white;
       outline: none;
       border-radius: 60px;
-      background: linear-gradient(to right, var(--accentColorStart), var(--accentColorEnd));
+      background: linear-gradient(to right, $accent-color, $accent-color-secondary);
       padding: 6px;
       width: 6rem;
       text-align: center;
@@ -38,6 +40,7 @@
       right: 50px;
       width: 27px;
       height: 27px;
+      color: $accent-color;
 
       img {
         margin-left: 6px;
@@ -122,12 +125,12 @@
       }
 
       input:checked ~ label {
-        color: var(--accentColorEnd);
-        border-color: var(--accentColorEnd);
+        color: $accent-color-secondary;
+        border-color: $accent-color-secondary;
 
         .arrow {
-          border-right: 2px solid var(--accentColorEnd);
-          border-top: 2px solid var(--accentColorEnd);
+          border-right: 2px solid $accent-color-secondary;
+          border-top: 2px solid $accent-color-secondary;
         }
       }
 
@@ -190,7 +193,7 @@
           height: 15px;
           width: 15px;
           border: 1px;
-          border-color: var(--accentColorEnd);
+          border-color: $accent-color-secondary;
           border-style: solid;
         }
 
@@ -209,7 +212,7 @@
           top: 2px;
           width: 4px;
           height: 8px;
-          border: solid var(--accentColorEnd);
+          border: solid $accent-color-secondary;
           border-width: 0 2px 2px 0;
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
@@ -242,13 +245,14 @@
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 
     .card-item {
-      background: white no-repeat -20px;
+      background: $card-color no-repeat -20px;
       min-height: 140px;
       display: flex;
       justify-content: space-between;
       text-align: left;
       flex-direction: column;
       overflow: hidden;
+      color:$card-font-color;
 
 
       &.clickable {
@@ -256,14 +260,14 @@
 
         &:hover {
           h2 {
-            color: var(--accentColorStart);
+            color: $card-font-color-hover;
           }
         }
       }
 
       &.checked {
-        color: white;
-        background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd)) !important;
+        color: $card-font-color-hover;
+        background: linear-gradient(45deg, $accent-color, $accent-color-secondary) !important;
 
         &:hover {
           h2 {
@@ -294,14 +298,14 @@
 
         .card-actions-item {
           padding: 10px 10px 0;
-          color: var(--accentColorEnd);
+          color: $accent-color-secondary;
 
           &:hover {
-            color: var(--accentColorStart);
+            color: $accent-color;
           }
 
           &.checked {
-            color: white;
+            color: $card-font-color-hover;
           }
         }
 
@@ -319,7 +323,7 @@
           .icon {
             width: 30px;
             height: 30px;
-            border: 2px solid var(--accentColorEnd);
+            border: 2px solid $accent-color-secondary;
             border-radius: 50%;
             margin-right: 10px;
           }

@@ -1,13 +1,17 @@
+@import '~src/styles.scss';
+
+
 .page-pre-opening {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
 
     .background-page {
-      //background: var(--primaryColor);
-      //background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
+      //background: $menu-color-primary;
+      //background: linear-gradient(140deg, $menu-color-primary 0%, $menu-color-secondary 100%);
       //background-image: url(src/assets/images/background.png);
-      background: rgba(21,57,97,0.93);
+      background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 100%);
+      //background: rgba(21,57,97,0.93);
       background-size: cover;
       width: 101%;
       height: 101vh;
@@ -21,18 +25,18 @@
         .counter-title {
             font-size: 24px;
             font-weight: bold;
-            color: white;
+            color: $font-color-primary;
             padding-left: 2px;
         }
         .counter {
             margin-top: 5px;
             display: flex;
             flex-direction: row;
-            color: var(--primaryColor);
+            color: $menu-color-primary;
             .date-block {
                 width: 85px;
                 height: 80px;
-                background-color: #bbb;
+                background-color: $font-color-primary;
                 border-radius: 10px;
                 margin: 0 2px;
                 display: flex;
@@ -56,8 +60,8 @@
     }
     .conference-warning-block {
         margin: 0 65px 40px;
-        background: var(--primaryColor);
-        border-top: 10px solid var(--accentColorEnd);
+        background: $card-color;
+        border-top: 10px solid $accent-color-secondary;
         // min-height: 380px;
         .conference-warning-message {
             padding: 40px 80px 30px 50px;

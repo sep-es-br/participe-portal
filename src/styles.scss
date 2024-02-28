@@ -64,7 +64,7 @@ button.btn-primary {
   margin: 5px;
   border-radius: 20px;
   color: white;
-  background: linear-gradient(45deg, var(--accentColorStart), var(--accentColorEnd));
+  background: $accent-color;
   cursor: pointer;
 
   &[disabled] {

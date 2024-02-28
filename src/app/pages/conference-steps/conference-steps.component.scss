@@ -40,6 +40,7 @@
       right: 50px;
       width: 27px;
       height: 27px;
+      color: $accent-color;
 
       img {
         margin-left: 6px;
@@ -251,6 +252,7 @@
       text-align: left;
       flex-direction: column;
       overflow: hidden;
+      color:$card-font-color;
 
 
       &.clickable {
@@ -258,13 +260,13 @@
 
         &:hover {
           h2 {
-            color: $accent-color;
+            color: $card-font-color-hover;
           }
         }
       }
 
       &.checked {
-        color: white;
+        color: $card-font-color-hover;
         background: linear-gradient(45deg, $accent-color, $accent-color-secondary) !important;
 
         &:hover {
@@ -303,7 +305,7 @@
           }
 
           &.checked {
-            color: white;
+            color: $card-font-color-hover;
           }
         }
 

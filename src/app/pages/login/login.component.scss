@@ -51,8 +51,9 @@ $darkColorOr: rgba(0,0,0,0.16);
 
   .auth-box {
     max-width: 450px;
-    background: $backgroundWindow;
-    margin: $startTop 0 $startTop 60px;
+    border-radius: 1rem;
+    background-color: rgba(241, 142, 177, 0.9);
+    margin: 250px 0 $startTop 60px;
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
@@ -72,7 +73,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       h2, p {
         margin-block-start: 0;
         margin-block-end: 0;
-        color: var(--textColorDark);
+        color: $card-font-color;
       }
       p {
         margin-top: 5px;
@@ -168,7 +169,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       justify-content: center;
       margin-top: 10px;
       margin-bottom: 10px;
-      color: var(--textColorDark);
+      color: $card-font-color;
       cursor: pointer;
       :hover {
         color: white !important;

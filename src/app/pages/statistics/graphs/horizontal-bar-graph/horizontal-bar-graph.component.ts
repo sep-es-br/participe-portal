@@ -51,7 +51,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       this.responsive = value;
       this.align = this.responsive ? 'end' : 'end';
       this.anchor = this.responsive ? 'center' : 'end';
-      this.labelColor = this.responsive ? '#000000' : '#797979';
+      this.labelColor = this.responsive ? '#000000' : '#ffffff';
       this.data = undefined;
       this.config = undefined;
       this.plugins = undefined;
@@ -88,7 +88,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
             return context.dataset.data[context.dataIndex] > 0;
           },
           font: {
-            size: this.responsive ? 10 : 10
+            size: this.responsive ? 10 : 10,
           },
           formatter: Math.round
         }
@@ -145,6 +145,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
               }
             },
             fontSize: this.responsive ? 10 : 10,
+            fontColor: this.labelColor,
           },
           offset: true
         }],
@@ -202,7 +203,8 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
           meta.data.forEach((bar, index) => {
             if (!bar._model) { return; }
             const valor = +dataset.data[index];
-            bar._view.backgroundColor = gradient;
+            // bar._view.backgroundColor = gradient;
+            bar._view.backgroundColor = '#F18EB1';
           });
         });
       }

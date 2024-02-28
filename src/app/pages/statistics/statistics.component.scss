@@ -27,7 +27,7 @@
     flex-direction: column;
     > label {
       padding-bottom: 5px;
-      color: #ffffff;
+      color: $font-color-primary;
     }
     .ui-dropdown, .ui-multiselect {
       width: 100%;
@@ -42,7 +42,7 @@
     margin: 0.5em 0;
   }
   .card-indicator {
-    border: #ffffff 1px solid;
+    //border: #ffffff 1px solid;
     background-color: $card-color;
     display: flex;
     flex-direction: column;
@@ -58,6 +58,7 @@
       font-size: 1em;
       font-weight: 400;
       text-transform: uppercase;
+      color: $card-font-color;
     }
   }
   .charts-container {
@@ -85,14 +86,14 @@
       font-size: 2rem;
       text-transform: uppercase;
       font-weight: 700;
-      color: #5B5B5B;
+      color: $card-font-color;
       text-align: center;
     }
     .value {
       margin-top: 35px;
       font-size: 4.7rem;
       font-weight: 700;
-      color: #5B5B5B;
+      color: $card-font-color;
     }
   }
   .chart-heatmap-container {
@@ -132,16 +133,16 @@
         font-size: 1.3rem;
         font-weight: bold;
         margin-right: 10px;
-        color: #797979;
+        color: $card-font-color;
         cursor: pointer;
       }
       .description {
         font-size: 14px;
-        color: #797979;
+        color: $card-font-color;
       }
       .sub-description {
         font-size: 13px;
-        color: #797979;
+        color: $card-font-color;
       }
     }
     .chart-title {
@@ -155,7 +156,7 @@
       .subtitle {
         font-size: 1rem;
         font-weight: 700;
-        color: #797979;
+        color: $card-font-color;
         text-transform: uppercase;
       }
     }
@@ -163,7 +164,7 @@
       .subtitle {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #797979;
+        color: $card-font-color;
         text-transform: uppercase;
       }
     }
@@ -171,6 +172,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      color: $card-font-color;
       .chart-param {
         display: flex;
         flex-direction: column;
@@ -200,7 +202,7 @@
   .header-sub-description {
     font-size: 13px;
     padding-top: 5px;
-    color: #797979;
+    color: $card-font-color;
   }
 }
 
@@ -272,7 +274,7 @@
         margin-left: 5px;
         font-size: 1rem;
         font-weight: 700;
-        color: #797979;
+        color: $card-font-color;
         text-transform: uppercase;
         text-align: center;
       }
@@ -284,7 +286,7 @@
       .subtitle {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #797979;
+        color: $card-font-color;
         text-transform: uppercase;
       }
     }

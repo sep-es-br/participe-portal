@@ -3,23 +3,44 @@
 @import '~animate.css/animate.min';
 
 
-$menu-color-primary: rgba(21,57,97,1);
-$menu-color-secondary: rgba(21,57,97,1);
+// $menu-color-primary: rgba(21,57,97,1);
+// $menu-color-secondary: rgba(21,57,97,1);
 
-$accent-color: #00a198;
-$accent-color-secondary:#00a198;
+// $accent-color: #00a198;
+// $accent-color-secondary:#00a198;
 
-$font-color-primary: white;
-$font-color-secondary:white;
+// $font-color-primary: white;
+// $font-color-secondary:white;
 
-$card-font-color:black;
+// $card-font-color:black;
+// $card-font-color-hover:white;
+
+// $card-color: white;
+// $border-color: white;
+
+//mudei a cor do home.svg e arrow-right fill:#FFFFFF para #F18EB1
+//mudei a cor do search.svg fill="#00a198" para #F18EB1
+//mudei a cor do user2.svg e close2.svg arrow-left-circle fill="#FFFFFF para #008CD1
+
+
+$menu-color-primary: white;
+$menu-color-secondary: #008CD1;
+
+$accent-color: #F18EB1;
+$accent-color-secondary:#F18EB1;
+
+$font-color-primary: #008CD1;
+$font-color-secondary:#008CD1;
+
+$card-font-color:white;
 $card-font-color-hover:white;
+$card-border-color:white;
 
-$card-color: white;
-$border-color: white;
+$card-color: #008CD1;
+$border-color: #008CD1;
 
-
-
+// antiga - rosa:#f561de azul:#299EEB
+// nova - rosa: #F18EB1 azul:#008CD1
 
 body {
   margin: 0;

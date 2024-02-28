@@ -1,6 +1,9 @@
+@import '~src/styles.scss';
+
 ::ng-deep .app-profile{
+  background: $menu-color-secondary;
   .title {
-    color: #fff;
+    color: $font-color-primary;
     padding: 20px 50px 0 0;
     position: absolute;
     margin-top: -4.1rem;
@@ -13,6 +16,7 @@
     margin-top: 1rem;
     flex-direction: column;
     align-items: stretch;
+    color: $card-font-color;
     label {
       width: 100%;
     }
@@ -23,6 +27,7 @@
 
   .autentication {
     margin: 3rem 0;
+    color: $card-font-color;
     .external, .internal {
       display: flex;
       flex-wrap: wrap;
@@ -96,19 +101,21 @@
     margin-bottom: 1.8rem;
     display: flex;
     align-items: center;
+    color: $card-font-color;
     label {
       margin-left: 0.8rem;
     }
     .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
-      background-color: #00a198;
+      background-color: $accent-color;
       &:hover {
-        background-color: #00a198;
+        background-color: $accent-color;
       }
     }
   }
   .btn-primary, .btn-secondary {
     width: 10rem;
     font-family: 'Roboto', sans-serif;
+    background: $accent-color !important;
     font-size: 1rem;
   }
 }

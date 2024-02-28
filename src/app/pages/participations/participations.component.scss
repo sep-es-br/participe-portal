@@ -92,7 +92,7 @@
     }
   }
   .title-container {
-    color: white;
+    color: $font-color-primary;
     .title {
       font-size: 1.5rem;
       font-weight: 500;
@@ -247,9 +247,10 @@
         .top {
           display: flex;
           align-items: center;
+          color: $card-font-color;
 
           .title {
-            color: $accent-color;
+            color: $card-font-color;
             font-size: 1.1rem;
             font-weight: 600;
             margin-right: 5px;
@@ -261,16 +262,19 @@
           margin: 5px 0;
 
           .item {
+            background-color: $accent-color;
             display: flex;
             flex: 1 0 23%;
-            border: 1px solid $accent-color;
+            border: 1px solid $card-border-color;
             margin: 5px;
+            color: $card-font-color;
             .structure-item {
+              background-color: $accent-color;
               display: flex;
               justify-content: center;
               align-items: center;
               flex-direction: column;
-              border-right: 1px solid $accent-color;
+              border-right: 1px solid $card-border-color;
               color: $accent-color;
               text-align: center;
               padding: 5px 0;
@@ -278,9 +282,11 @@
               img {
                 width: 40px;
                 height: 40px;
+                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
               }
               .name {
                 font-size: .6rem;
+                color: $card-border-color;
               }
             }
             > .name {

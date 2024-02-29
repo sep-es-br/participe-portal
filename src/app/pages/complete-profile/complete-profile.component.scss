@@ -1,6 +1,9 @@
+@import '~src/styles.scss';
+
 .stacked {
   label {
     min-width: 122px;
+    color: $card-font-color;
   }
 }
 input[readOnly] {

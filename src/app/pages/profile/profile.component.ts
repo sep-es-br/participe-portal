@@ -69,6 +69,7 @@ export class ProfileComponent implements OnInit {
 
   async loadPerson() {
     const {data, success} = await this.personSvr.getPersonById(this.authSrv.getUserInfo.id, this.conferenceSrv.ConferenceActiveId);
+    console.log(data)
     if (success) {
       this.person = data;
       this.statusLogin = this.findAuthentication(LoginNameEnum.PARTICIPE) ? 'ATIVO' : 'DESATIVADO';
@@ -117,8 +118,9 @@ export class ProfileComponent implements OnInit {
       localityId: [_.get(value, 'localityId', null)],
       newPassword: [_.get(value, 'newPassword', null), this.passwordValidator],
       confirmNewPassword: [_.get(value, 'confirmNewPassword', null), this.passwordValidator],
-      receiveInformational: [_.get(value, 'receiveInformational', true)],
+      receiveInformational: [_.get(value, 'receiveInformational')],
     });
+    console.log(this.userForm.value)
   }
 
   findAuthentication(value: string, key: string = 'loginName'): IAutentication | undefined {

@@ -22,6 +22,11 @@
         [placeholder]="'Selecione o seu ' + localityType">
       </p-dropdown>
     </div>
+    <div class="p-col-12 form-group field-switch">
+      <p-inputSwitch class="inputSwitch" id="informational" formControlName="receiveInformational">
+      </p-inputSwitch>
+      <label for="informational">Desejo receber mensagens informativas</label>
+    </div>
     <div class="actions p-col-12 align-right">
       <button type="button" class="btn-primary" (click)="cancel()">
         Cancelar

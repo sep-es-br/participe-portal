@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   subQueryParams: Subscription;
   isOpen = false;
   backgroundImageUrl: string = '/assets/images/background.png';
+  calendarImageUrl:string = '';
   displayCalendar: Boolean;
   
 
@@ -91,6 +92,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (success) {
 
       this.displayCalendar = data.showCalendar;
+      console.log("Display |||",this.displayCalendar);
+
+      console.log("DATA |||",data);
+      
+
+      if(this.displayCalendar){
+        this.calendarImageUrl = _.get(data, 'calendarImageUrl.url', '');
+        console.log("Url image",this.calendarImageUrl);
+      }
 
       if (data.status === 'PRE_OPENING') {
         this.router.navigate([`${this.conferenceId}/pre-opening`]);

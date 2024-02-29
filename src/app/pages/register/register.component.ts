@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
       name, contactEmail, confirmEmail, telephone,
       selfDeclaration: {
         conference: this.conferenceSrv.ConferenceActiveId,
-        locality: _.get(locality, 'value')
+        locality: _.get(locality, 'value'),
       }
     };
 

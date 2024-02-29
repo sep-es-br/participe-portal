@@ -46,6 +46,12 @@ export class MeetingService extends BaseService<any> {
     ).toPromise();
   }
 
+  findByPersonAndMeeting(personId: number, meetingId: number){
+    return this.http.get<IResultHttp<any>>(`${this.urlBase}/checkIn/${meetingId}`, {
+      params: { personId: personId.toString() }
+    }).toPromise();
+  }
+
   
 
 }

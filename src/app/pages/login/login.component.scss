@@ -1,3 +1,5 @@
+@import '~src/styles.scss';
+
 
 $startTop: 40px;
 $backgroundWindow: rgba(255,255,255,0.85);
@@ -10,8 +12,8 @@ $darkColorOr: rgba(0,0,0,0.16);
   flex-wrap: wrap;
 
   .background-page {
-    background: var(--primaryColor);
-    background: linear-gradient(140deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
+    background: $menu-color-primary;
+    background: linear-gradient(140deg, $menu-color-primary 0%, $menu-color-secondary 100%);
     background-size: cover;
     width: 101%;
     height: 100vh;
@@ -22,18 +24,28 @@ $darkColorOr: rgba(0,0,0,0.16);
 
   @media (max-width: 600px)
   {
-    .background-page
-    {
-      //background-image: none!important;
-      background-color:  #296d8033;
-    }
+    // .background-page
+    // {
+    //   //background-image: none!important;
+    //   background-color:  #296d8033;
+    // }
     .agenda-mobile {
       display: flex !important;
       max-width: 100%;
-      padding-left: 30px;
-      padding-right: 30px;
-      margin-bottom: 30px;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-bottom: 12px;
     }
+    .calendar-container{
+      display: none !important;
+    }
+    
+    // .teste {
+    //   padding-left: 12px !important;
+    //   padding-right: 12px !important;
+    //   margin-bottom: 12px !important;
+    // }
+
   }
 
   .agenda-mobile {
@@ -42,8 +54,9 @@ $darkColorOr: rgba(0,0,0,0.16);
 
   .auth-box {
     max-width: 450px;
-    background: $backgroundWindow;
-    margin: $startTop 0 $startTop 60px;
+    border-radius: 1rem;
+    background-color: rgba(241, 142, 177, 0.9);
+    margin: 250px 0 $startTop 60px;
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
@@ -63,7 +76,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       h2, p {
         margin-block-start: 0;
         margin-block-end: 0;
-        color: var(--textColorDark);
+        color: $card-font-color;
       }
       p {
         margin-top: 5px;
@@ -76,7 +89,9 @@ $darkColorOr: rgba(0,0,0,0.16);
       flex-direction: column;
       button {
         padding: 2px 10px;
+        height: 7vh;
         margin-bottom: 5px;
+        border-radius: 10px;
         border: none;
         display: flex;
         align-items: center;
@@ -85,23 +100,6 @@ $darkColorOr: rgba(0,0,0,0.16);
           background: #016A88;
           img {
             width: 26px;
-          }
-          cursor: pointer;
-        }
-        &.google {
-          background: #dc4e41;
-          padding: 7px 10px;
-          img {
-            width: 20px !important;
-            margin-right: 15px !important;
-          }
-          cursor: pointer;
-        }
-        &.facebook {
-          background: #3b5998;
-          img {
-            margin-left: -5px !important;
-            margin-right: 10px !important;
           }
           cursor: pointer;
         }
@@ -172,8 +170,9 @@ $darkColorOr: rgba(0,0,0,0.16);
       width: 100%;
       display: flex;
       justify-content: center;
-      margin-top: 20px;
-      color: var(--textColorDark);
+      margin-top: 10px;
+      margin-bottom: 10px;
+      color: $card-font-color;
       cursor: pointer;
       :hover {
         color: white !important;
@@ -214,7 +213,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       }
     }
   }
-  .calender-container {
+  .calendar-container {
     max-width: 450px;
     margin: $startTop 20px 0 0;
     display: flex;
@@ -439,7 +438,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       float: none;
     }
 
-    .calender-container {
+    .calendar-container {
       margin: 0 auto 0 auto;
       float: none;
     }
@@ -480,3 +479,4 @@ $darkColorOr: rgba(0,0,0,0.16);
   text-align: center;
   margin: 0 auto 0 auto;
 }
+

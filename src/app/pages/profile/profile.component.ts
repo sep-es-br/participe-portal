@@ -117,7 +117,7 @@ export class ProfileComponent implements OnInit {
       localityId: [_.get(value, 'localityId', null)],
       newPassword: [_.get(value, 'newPassword', null), this.passwordValidator],
       confirmNewPassword: [_.get(value, 'confirmNewPassword', null), this.passwordValidator],
-      receiveInformational: [_.get(value, 'receiveInformational', true)],
+      receiveInformational: [_.get(value, 'receiveInformational')],
     });
   }
 
@@ -125,32 +125,15 @@ export class ProfileComponent implements OnInit {
     return this.person.authentications ? this.person.authentications.find(auth => auth[key] === value) : undefined;
   }
 
-  addAuthFacebook() {
-    this.backupData();
-    this.authSrv.signInFacebookProfile();
-  }
-
   addAuthCidadao() {
     this.backupData();
     this.authSrv.signInAcessoCidadaoProfile();
-  }
-
-  addAuthGoogle() {
-    this.backupData();
-    this.authSrv.signInGoogleProfile();
-  }
-
-  deleteAuthFacebook() {
-    this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.FACEBOOK);
   }
 
   deleteAuthCidadao() {
     this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.ACESSO_CIDADAO);
   }
 
-  deleteAuthGoogle() {
-    this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.GOOGLE);
-  }
 
   addAuthParticipe() {
     this.statusLogin = 'ANDAMENTO';

@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   externalLinksMenuItems: MenuItem[];
   researchUrl: string;
   estimatedTimeResearch: string;
+  displayExternalLinks: Boolean;
 
   constructor(
     private authSrv: AuthService,
@@ -97,6 +98,7 @@ export class HeaderComponent implements OnInit {
   async loadConferenceExternalLinks() {
     const result = await this.conferenceSrv.GetById(this.conferenceSrv.ConferenceActiveId);
     if (result.success) {
+      this.displayExternalLinks = result.data.showExternalLinks;
       this.conference = result.data;
       this.loadExternalLinksMenuItems();
     }

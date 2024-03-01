@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   subQueryParams: Subscription;
   isOpen = false;
   backgroundImageUrl: string = '/assets/images/background.png';
+  calendarImageUrl:string = '';
+  displayCalendar: Boolean;
+  
 
   constructor(
     private authSrv: AuthService,
@@ -81,28 +84,45 @@ export class LoginComponent implements OnInit, OnDestroy {
   onResize(event) {
     this.dialogWidth = event.target.innerWidth;
   }
+
+
   async loadConference(conferenceId: number) {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
     if (success) {
 
+      this.displayCalendar = data.showCalendar;
+      console.log("Display |||",this.displayCalendar);
+
+      console.log("DATA |||",data);
+      
+
+      if(this.displayCalendar){
+        this.calendarImageUrl = _.get(data, 'calendarImageUrl.url', '');
+        console.log("Url image",this.calendarImageUrl);
+      }
+
       if (data.status === 'PRE_OPENING') {
         this.router.navigate([`${this.conferenceId}/pre-opening`]);
       } else if (data.status === 'POST_CLOSURE') {
         this.router.navigate([`${this.conferenceId}/post-closure`]);
-      } else {
+      } else if(data.showStatistics == false) {
         this.isOpen = true;
         this.conferenceData = data;
-        this.statistics = [];
-        this.statistics.push({ value: data.participations, label: 'Participantes' });
-        this.statistics.push({ value: data.proposal, label: 'Propostas' });
-        this.statistics.push({ value: data.highlights, label: 'Destaques' });
-        this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
 
         this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
+        } else {
+          this.isOpen = true;
+          this.conferenceData = data;
+          this.statistics = [];
+          this.statistics.push({ value: data.participations, label: 'Participantes' });
+          this.statistics.push({ value: data.proposal, label: 'Propostas' });
+          this.statistics.push({ value: data.highlights, label: 'Destaques' });
+          this.statistics.push({ value: data.numberOfLocalities, label: 'Municípios já participaram' });
+          this.backgroundImageUrl = _.get(data, 'backgroundImageUrl.url', '/assets/images/background.png');
+        }
       }
     }
-  }
 
   async loadMeeting(conferenceId: number) {
     const { success, data: { content, totalPages, first, last, empty } } = await this.meetingSrv.getMeetingsByIdConference(
@@ -200,14 +220,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  signInFacebook() {
-    this.authSrv.signInFacebook();
-  }
-
-  signInGoogle() {
-    this.authSrv.signInGoogle();
-  }
-
   signInAcessoCidadao() {
     this.authSrv.signInAcessoCidadao();
   }
@@ -258,4 +270,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.pagination.page = data.page;
     }
   }
+
+  
 }

@@ -8,9 +8,11 @@
   </div>
   <div class="actions" *ngIf="isAuthenticated">
     <p-menu #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
-    <div class="action-item" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
-      {{conference.externalLinksMenuLabel}}
-      <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
+    <div class="action-item" *ngIf="displayExternalLinks">
+      <div class="action-item" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
+        {{conference.externalLinksMenuLabel}}
+        <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
+      </div>
     </div>
     <div class="action-item" *ngIf="userInfo?.name" (click)="navigate('/profile')">
       {{ userInfo.name }}

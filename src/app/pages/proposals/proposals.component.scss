@@ -1,3 +1,5 @@
+@import '~src/styles.scss';
+
 .search-container{
   display: flex;
   flex-direction: column;
@@ -11,7 +13,7 @@
       color: white;
       outline:none;
       border-radius: 60px;
-      background: linear-gradient(to right, var(--accentColorStart), var(--accentColorEnd));
+      background: linear-gradient(to right, $accent-color, $accent-color-secondary);
       padding: 6px;
       width: 6rem;
       text-align: center;
@@ -106,11 +108,11 @@
       }
 
       input:checked ~ label{
-        color: var(--accentColorEnd);
-        border-color: var(--accentColorEnd);
+        color: $accent-color-secondary;
+        border-color: $accent-color-secondary;
         .arrow{
-          border-right: 2px solid var(--accentColorEnd);
-          border-top: 2px solid var(--accentColorEnd);
+          border-right: 2px solid $accent-color-secondary;
+          border-top: 2px solid $accent-color-secondary;
         }
       }
       input:checked ~ .checkmark:after {
@@ -175,7 +177,7 @@
           height: 15px;
           width: 15px;
           border: 1px;
-          border-color:var(--accentColorEnd);
+          border-color:$accent-color-secondary;
           border-style: solid;
         }
 
@@ -186,7 +188,7 @@
 
         .checkmark-all {
           border: 3px;
-          border-color: var(--accentColorEnd);
+          border-color: $accent-color-secondary;
           border-style: solid;
           height: 19px;
           width: 19px;
@@ -208,7 +210,7 @@
          // top: 2px;
           width: 4px;
           height: 8px;
-          border: solid var(--accentColorEnd);
+          border: solid $accent-color-secondary;
           border-width: 0 2px 2px 0;
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
@@ -245,7 +247,7 @@
       grid-row-gap: 10px;
       padding: 1rem;
       margin-top: 3rem;
-      background-color: white;
+      background-color: $card-color;
       .proposal{
         display: block;
         width: 50%;
@@ -262,7 +264,7 @@
         }
         .person{
           margin-top: 10px;
-          color: var(--accentColorStart);
+          color: $accent-color;
           font-size: 10px;
         }
         .how-long-ago {
@@ -295,7 +297,7 @@
         .likesAfter{
           max-height: 20px;
           .number{
-            color: var(--accentColorStart);
+            color: $accent-color;
             margin-right: 3px;
             margin-top: 1px;
             font-size: 20px;
@@ -305,7 +307,7 @@
             margin-bottom: 2px;
             margin-left: 1px;
             .pi{
-              color: var(--accentColorStart);
+              color: $accent-color;
             }
           }
         }

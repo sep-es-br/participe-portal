@@ -1,6 +1,8 @@
+@import '~src/styles.scss';
 .stacked {
   label {
     min-width: 122px;
+    color: $card-font-color;
   }
 }
 input[readOnly] {
@@ -33,3 +35,20 @@ input[readOnly] {
 .locality-dropbox {
   width: 230px;
 }
+
+::ng-deep .field-switch {
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  color: $card-font-color;
+  label {
+    margin-left: 0.8rem;
+  }
+  .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+    background-color: $accent-color !important;
+    &:hover {
+      background-color: $accent-color;
+    }
+  }
+}
+

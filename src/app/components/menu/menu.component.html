@@ -1,5 +1,6 @@
 <div class="menu-wrapper">
-  <div [routerLink]="item.route" [ngClass]="{'active': isActive(item)}" class="button-item" *ngFor="let item of menu">
+  <!-- 'visibility: 'hidden' -->
+  <div [routerLink]="item.route" [ngClass]="{'active': isActive(item)}" [ngClass]=" {'visibility': 'hideButton'}" class="button-item" *ngFor="let item of menu">
     {{item.label}}
   </div>
 </div>
@@ -12,22 +13,22 @@
 <div #sidemenu class="sidenav">
   <a  class="closebtn" (click)="closeSidemenu()">&times;</a>
   <a class="btn-default btn-participar"  (click)="navigate('/conference-map')">Participar</a>
-  <a class="btn-default" (click)="navigate('/proposals')">Propostas</a>
+  <!-- <a class="btn-default" (click)="navigate('/proposals')">Propostas</a> -->
   <a class="btn-default" (click)="navigate('/participations')">Minhas Participações</a>
   <a class="btn-default" (click)="navigate('/how-it-works')">Como Funciona</a>
-  <a class="btn-default" (click)="navigate('/statistics')">Estatísticas</a>
+  <a class="btn-default" (click)="navigate('/statistics')" *ngIf="displayStatisticsPanel" >Estatísticas</a>
   <div class="header-menu">
     <div class="action-group">
       <a class="btn-default action-button" (click)="navigate('/profile')">
         {{ userInfo?.name }}
         <img src="assets/icons/user2.svg" alt=""/>
       </a>
-      <p-menu class="pmenu" #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
+      <!-- <p-menu class="pmenu" #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
       <a class="btn-default action-button" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
         {{conference.externalLinksMenuLabel}}
         <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
       </a>
-    </div>
+    </div> -->
     <a class="btn-default btn-sair" (click)="logout()">Sair</a>
   </div>
 </div>

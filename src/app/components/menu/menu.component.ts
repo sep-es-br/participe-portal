@@ -1,5 +1,5 @@
 import { ConferenceService } from '../../shared/services/conference.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
@@ -16,17 +16,18 @@ export class MenuComponent implements OnInit {
 
   menu: Array<any> = [
     { label: 'Participar', route: '/conference-map', activeWhen: ['conference-map', 'strategic-area'] },
-    { label: 'Propostas', route: '/proposals', activeWhen: ['proposals'] },
+    //{ label: 'Propostas', route: '/proposals', activeWhen: ['proposals'] },
     { label: 'Minhas Participações', route: '/participations', activeWhen: ['participations'] },
     { label: 'Como Funciona', route: '/how-it-works', activeWhen: ['how-it-works'] },
     { label: 'Estatísticas', route: '/statistics', activeWhen: ['statistics'] },
   ];
 
-  @ViewChild('sidemenu') sidemenu: ElementRef;
+  @ViewChild('sidemenu', {static: false}) sidemenu: ElementRef;
 
   conference: IConference;
   userInfo: IPerson;
   externalLinksMenuItems: MenuItem[];
+  displayStatisticsPanel: Boolean;
 
   constructor(
     private authSrv: AuthService,
@@ -44,6 +45,7 @@ export class MenuComponent implements OnInit {
     const activeWhen = _.get(item, 'activeWhen', []);
     return activeWhen.some(url => location.href.indexOf(url) > -1);
   }
+
 
   openSidemenu() {
     this.sidemenu.nativeElement.style.left = '0';
@@ -64,6 +66,15 @@ export class MenuComponent implements OnInit {
   async loadConference() {
     const result = await this.conferenceSrv.GetById(this.conferenceSrv.ConferenceActiveId);
     if (result.success) {
+      this.displayStatisticsPanel = result.data.showStatisticsPanel;
+      if (!this.displayStatisticsPanel){
+        this.menu.splice(this.menu.findIndex((item) => item.label == 'Estatísticas'), 1)
+        this.router.events.subscribe((event) => {
+          if(event instanceof NavigationStart && event.url == "/statistics"){
+            this.router.navigate(['/#', '/conference-map'])
+          }
+        })
+      }
       this.conference = result.data;
       if (this.conference.displayStatusConference !== 'OPEN') {
         this.menu.shift();

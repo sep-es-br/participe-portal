@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   private getUrlForSocialAuth(origin: string) {
+    console.log('COnferência |||',this.conferenceSrv.ConferenceActiveId);
     return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${
       AuthService.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
   }

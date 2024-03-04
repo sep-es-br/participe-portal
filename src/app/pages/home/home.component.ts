@@ -63,8 +63,14 @@ export class HomeComponent implements OnInit {
         this.authSrv.saveToken(userInfo);
         this.authSrv.saveUserInfo(userInfo.person);
 
+        const urlRedirect = localStorage.getItem(StoreKeys.REDIRECT_URL);
+
+
         if (userInfo.completed) {
-          if (this.conference.displayStatusConference === 'OPEN') {
+          if(urlRedirect != ''){
+            console.log('Vai fazer redirect',urlRedirect);
+            await this.router.navigate([urlRedirect]);
+          }else if (this.conference.displayStatusConference === 'OPEN') {
             const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
             if (data.regionalization) {
               await this.router.navigate(['/conference-map']);

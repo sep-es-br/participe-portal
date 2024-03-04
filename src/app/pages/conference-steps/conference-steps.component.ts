@@ -123,6 +123,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
       });
       this.breadcrumbSrv.addOrUpdate({title: data.structureitem.name});
       this.participationStateSrv.removeBeforeNavigation(data.structureitem.name);
+      console.log("COndition |||",this.conferenceStepItem);
     }
   }
 

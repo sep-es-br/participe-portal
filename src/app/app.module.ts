@@ -54,6 +54,7 @@ import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { HeatMapComponent } from './pages/statistics/graphs/heat-map/heat-map.component';
 import { HorizontalBarGraphComponent } from './pages/statistics/graphs/horizontal-bar-graph/horizontal-bar-graph.component';
 import { StartComponent } from './pages/start/start.component';
+import { PreRegistrationComponent } from './pages/pre-registration/pre-registration.component';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import { TriStateCheckboxModule } from 'primeng/components/tristatecheckbox/tristatecheckbox';
@@ -93,6 +94,7 @@ registerLocaleData(localePtBr);
     HeatMapComponent,
     HorizontalBarGraphComponent,
     SafeHTMLPipe,
+    PreRegistrationComponent
   ],
   imports: [
     FontAwesomeModule,

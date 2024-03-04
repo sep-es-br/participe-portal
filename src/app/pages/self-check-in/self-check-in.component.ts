@@ -20,16 +20,10 @@ export class SelfCheckInComponent implements OnInit {
 
     
     async ngOnInit() {
-      // const test = JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN))
-      // console.log(test)
-      // console.log(typeof test)
       await this.getPersonAndMeeting(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
-      //await this.checkin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
-
-      sessionStorage.removeItem(StoreKeys.CHECK_IN);
     }
 
-    checkin(meeting, personId){
+    toCheckin(meeting, personId){
       var now = new Date();
       var timeZone = now.toString().split(' ')[5];
       this.meetingSrv.postCheckIn(meeting, personId, timeZone)
@@ -37,9 +31,16 @@ export class SelfCheckInComponent implements OnInit {
 
     async getPersonAndMeeting(personId, meeting){
       await this.meetingSrv.findByPersonAndMeeting(personId, meeting).then(
-        (res) => {console.log(res)}
+        (res) => {
+          const checkInData = Object.entries(res.data)
+          if(checkInData.length > 0){
+            sessionStorage.removeItem(StoreKeys.CHECK_IN);
+            console.log("ja fiz check-in")
+          } else {
+            this.toCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
+            sessionStorage.removeItem(StoreKeys.CHECK_IN);
+          }
+        }
       )
     }
-
-
   }

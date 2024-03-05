@@ -1,21 +1,19 @@
 @import '~src/styles.scss';
 
-// .background-linear {
-//   background: $menu-color-primary;
-//   background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 100%);
-//   height: 100vh;
-//   width: 100%;
-//   position: fixed;
-//   z-index: 0;
-//   top: 0px;
-// }
+.background-linear {
+  background: $menu-color-primary;
+  background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 150%);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 0;
+  top: 0px;
+}
 .how-it-works-area-container {
   display: flex;
   padding: 80px;
   justify-content: center;
   z-index: 1;
-  background: $menu-color-primary;
-  background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 100%);
   .cards-container {
     width: 100%;
     display: grid;
@@ -30,7 +28,7 @@
       text-align: center;
       flex-direction: column;
 
-      border: 3px solid white;
+      border: 3px solid $border-color;
 
       padding: 1rem;
 
@@ -39,7 +37,7 @@
       background: transparent;
 
       .number{
-          color: white;
+          color: $font-color-primary;
           font-size: 50px;
           text-align: center;
 
@@ -52,14 +50,14 @@
           padding-right: 1rem;
 
         border-radius: 100%;
-        border: 2px solid white;
+        border: 2px solid $border-color;
 
         background: linear-gradient(to right, $accent-color, $accent-color-secondary);
 
       }
 
       .header{
-          color: white;
+          color: $font-color-primary;
           font-size: 2rem;
           text-align: center;
 
@@ -68,13 +66,14 @@
       }
 
       .body{
-          color: white;
+          color: $font-color-primary;
           font-size: 1.2rem;
           text-align: center;
       }
     }
   }
 }
+
 
 @media (max-width: 600px) {
   .how-it-works-area-container {

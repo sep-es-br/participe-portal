@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { StoreKeys } from "src/app/shared/commons/contants";
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
     selector: 'app-pre-registration',
@@ -17,13 +16,12 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private authService: AuthService,
         private location: Location,
+        private router: Router
       ) {
       }
     
     ngOnInit() {
-        console.log('FULL URL',window.location.href);
         this.checkRouteServices();
     }
 
@@ -35,14 +33,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
             localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);    
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
-            this.signInAcessoCidadao();
+            this.router.navigate(['/login', this.conferenceId]);
         }else if(!this.meetingId){
-            this.signInAcessoCidadao();
+            this.router.navigate(['/login', this.conferenceId]);
         }
     }
 
-    signInAcessoCidadao() {
-        this.authService.signInAcessoCidadao();
-    }
 
   }

@@ -150,7 +150,10 @@ button.btn-secondary {
   cursor: default !important;
 }
 app-pre-registration {
-  .floatingPlaintextInput::after{
+  .floatingPlaintextInput:after{
+    background-color: unset !important;
+  }
+  .no-background:after{
     background-color: unset !important;
   }
 }

@@ -103,6 +103,22 @@ $darkColorOr: rgba(0,0,0,0.16);
           }
           cursor: pointer;
         }
+        &.google {
+          background: #dc4e41;
+          img {
+            width: 20px !important;
+          }
+          cursor: pointer;
+        }
+        &.facebook {
+          background: #3b5998;
+          img {
+            margin-left: -5px !important;
+            margin-right: 10px !important;
+          }
+          cursor: pointer;
+        }
+
         img {
           width: 30px;
           margin-right: 9px;

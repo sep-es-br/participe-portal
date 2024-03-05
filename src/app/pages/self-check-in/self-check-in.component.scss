@@ -3,9 +3,14 @@
       min-width: 122px;
     }
   }
-  input[readOnly] {
-    background-color: var(--light) !important;
-  }
+
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+  
   @media(min-width: 800px) {
     form {
       width: 50%;
@@ -34,18 +39,4 @@
     width: 230px;
   }
 
-  ::ng-deep .field-switch {
-    margin-bottom: 1.8rem;
-    display: flex;
-    align-items: center;
-    label {
-      margin-left: 0.8rem;
-    }
-    .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
-      background-color: #00a198 !important;
-      &:hover {
-        background-color: #00a198 !important;
-      }
-    }
-  }
   

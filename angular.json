@@ -34,7 +34,9 @@
               "node_modules/primeflex/primeflex.css",
               "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

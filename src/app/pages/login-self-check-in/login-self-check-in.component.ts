@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { StoreKeys } from "src/app/shared/commons/contants";
+import { IConference } from "src/app/shared/interfaces/IConference";
 import { AuthService } from "src/app/shared/services/auth.service";
+import { ConferenceService } from "src/app/shared/services/conference.service";
 
 
 @Component({
@@ -11,19 +13,28 @@ import { AuthService } from "src/app/shared/services/auth.service";
 })
 export class LoginSelfCheckInComponent implements OnInit {
 
+    conference: IConference;
+
     constructor(
-        private authSrv: AuthService,
+      private conferenceSrv: ConferenceService,
         private route: ActivatedRoute,
+        private router: Router
     ){}
 
     
     async ngOnInit() {
       sessionStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
-      this.signInAcessoCidadao();
+      this.login();
     }
 
-    signInAcessoCidadao() {
-        this.authSrv.signInAcessoCidadao();
+    login() {
+        this.conferenceSrv.GetByUrl(document.location.href)
+          .then((result) => {
+            if (result.success && !(result.data instanceof Array)) {
+              this.conference = result.data;
+              this.router.navigate(['/login', this.conference.id]);
+            }
+          });
       }
 
 }

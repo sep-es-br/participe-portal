@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StoreKeys } from "src/app/shared/commons/contants";
 import { IConference } from "src/app/shared/interfaces/IConference";
@@ -18,16 +18,16 @@ export class LoginSelfCheckInComponent implements OnInit {
       private conferenceSrv: ConferenceService,
         private route: ActivatedRoute,
         private router: Router
-    ){}
-
-    
-    ngOnInit() {
-      sessionStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
-      this.login();
+    ){
     }
 
-    login() {
-        this.conferenceSrv.GetByUrl(document.location.href)
+    async ngOnInit() {
+      sessionStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
+      await this.login();
+    }
+
+    async login() {
+        await this.conferenceSrv.GetByUrl(document.location.href)
           .then((result) => {
             if (result.success && !(result.data instanceof Array)) {
               this.conference = result.data;

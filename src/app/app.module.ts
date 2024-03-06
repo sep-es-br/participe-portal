@@ -68,6 +68,7 @@ registerLocaleData(localePtBr);
 @NgModule({
   declarations: [
     AppComponent,
+    LoginSelfCheckInComponent,
     StartComponent,
     LoginComponent,
     CompleteProfileComponent,
@@ -96,7 +97,6 @@ registerLocaleData(localePtBr);
     HeatMapComponent,
     HorizontalBarGraphComponent,
     SafeHTMLPipe,
-    LoginSelfCheckInComponent,
     SelfCheckInComponent,
   ],
   imports: [

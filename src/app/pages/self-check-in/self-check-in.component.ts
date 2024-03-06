@@ -16,8 +16,8 @@ export class SelfCheckInComponent implements OnInit {
 
     userForm: FormGroup;
     loading = true;
-    teste = [{}]
-    verifique = false
+    checkInData = [{}]
+    isNotEmptyCheckInObject = false
 
     constructor(
       private formBuilder: FormBuilder,
@@ -26,8 +26,8 @@ export class SelfCheckInComponent implements OnInit {
     ){}
 
     
-    async ngOnInit() {
-      await this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
+    ngOnInit() {
+      this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
     }
 
     async isCheckin(meeting, personId){
@@ -39,25 +39,20 @@ export class SelfCheckInComponent implements OnInit {
     async getPersonAndMeeting(personId, meeting){
       await this.meetingSrv.findByPersonAndMeeting(personId, meeting).then(
         (res) => {
-          this.teste = res
-          const checkInData = Object.entries(res.data)
-          if(checkInData.length > 0){
-            this.verifique = true;
-          } else {
-            this.verifique = false;
-          }
+          this.checkInData = res
+          this.isNotEmptyCheckInObject = Object.entries(res.data).length > 0
         }
       )
     }
 
     async registerAttendance(personId, meeting){
       await this.getPersonAndMeeting(personId, meeting)
-      if(this.verifique == true){
-        this.setForm(this.teste)
+      if(this.isNotEmptyCheckInObject){
+        this.setForm(this.checkInData)
       }else{
         await this.isCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
         await this.getPersonAndMeeting(personId, meeting)
-        this.setForm(this.teste)
+        this.setForm(this.checkInData)
       }
       this.loading = false;
     }

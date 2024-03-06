@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StoreKeys } from "src/app/shared/commons/contants";
 import { IConference } from "src/app/shared/interfaces/IConference";
-import { AuthService } from "src/app/shared/services/auth.service";
 import { ConferenceService } from "src/app/shared/services/conference.service";
 
 
@@ -22,7 +21,7 @@ export class LoginSelfCheckInComponent implements OnInit {
     ){}
 
     
-    async ngOnInit() {
+    ngOnInit() {
       sessionStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
       this.login();
     }

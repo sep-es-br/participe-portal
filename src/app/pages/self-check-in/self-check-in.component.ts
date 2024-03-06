@@ -16,6 +16,8 @@ export class SelfCheckInComponent implements OnInit {
 
     userForm: FormGroup;
     loading = true;
+    teste = [{}]
+    verifique = false
 
     constructor(
       private formBuilder: FormBuilder,
@@ -25,30 +27,39 @@ export class SelfCheckInComponent implements OnInit {
 
     
     async ngOnInit() {
-      await this.getPersonAndMeeting(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
+      await this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
     }
 
-    isCheckin(meeting, personId){
+    async isCheckin(meeting, personId){
       var now = new Date();
       var timeZone = now.toString().split(' ')[5];
-      this.meetingSrv.postCheckIn(meeting, personId, timeZone)
+     await this.meetingSrv.postCheckIn(meeting, personId, timeZone)
     }
 
     async getPersonAndMeeting(personId, meeting){
       await this.meetingSrv.findByPersonAndMeeting(personId, meeting).then(
         (res) => {
-          console.log(res.data) //OK
+          this.teste = res
           const checkInData = Object.entries(res.data)
           if(checkInData.length > 0){
-            //sessionStorage.removeItem(StoreKeys.CHECK_IN);
-            this.setForm(res)
+            this.verifique = true;
           } else {
-            this.isCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
-            sessionStorage.removeItem(StoreKeys.CHECK_IN);
+            this.verifique = false;
           }
-          this.loading = false
         }
       )
+    }
+
+    async registerAttendance(personId, meeting){
+      await this.getPersonAndMeeting(personId, meeting)
+      if(this.verifique == true){
+        this.setForm(this.teste)
+      }else{
+        await this.isCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
+        await this.getPersonAndMeeting(personId, meeting)
+        this.setForm(this.teste)
+      }
+      this.loading = false;
     }
 
     async setForm(value) {

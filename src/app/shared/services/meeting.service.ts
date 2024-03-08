@@ -8,6 +8,7 @@ import { IResultPaginated } from '../interfaces/IResultPaginated';
 import {IQueryOptions} from '../interfaces/IQueryOptions';
 import * as qs from 'qs';
 
+
 @Injectable({ providedIn: 'root' })
 export class MeetingService extends BaseService<any> {
 
@@ -50,4 +51,23 @@ export class MeetingService extends BaseService<any> {
     };
     return this.http.post<IResultHttp<any>>(`${this.urlBase}/pre-registration`,sender).toPromise();
   }
+  postCheckIn(meetingId: number, personId: number, timeZone: string): Promise<any> {
+    return this.http.post(
+      `${this.urlBase}/checkIn`,
+      {
+        meetingId,
+        personId,
+        timeZone
+      },
+    ).toPromise();
+  }
+
+  findByPersonAndMeeting(personId: number, meetingId: number): Promise<any>{
+    return this.http.get<IResultHttp<any>>(`${this.urlBase}/checkIn/${meetingId}`, {
+      params: { personId: personId.toString() }
+    }).toPromise();
+  }
+
+  
+
 }

@@ -66,7 +66,15 @@ export class HomeComponent implements OnInit {
         const urlRedirect = localStorage.getItem(StoreKeys.REDIRECT_URL);
 
 
-        if (userInfo.completed) {
+        if(localStorage.getItem(StoreKeys.CHECK_IN)){
+          if (userInfo.completed) {
+            await this.router.navigate(['/self-check-in'])
+          }else{
+            localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
+            await this.router.navigate(['/complete-profile']);
+          }
+        }
+        else if (userInfo.completed) {
           if(urlRedirect != '' && urlRedirect != null){
             localStorage.removeItem(StoreKeys.REDIRECT_URL);
             await this.router.navigate([urlRedirect]);

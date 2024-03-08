@@ -51,8 +51,9 @@
       .search-container {
         flex-direction: row;
         display: flex;
-        // width: 100%;
+        width: 100%;
         justify-content: center;
+        align-items: center;
         .info-search-container {
           flex-direction: column;
           display: flex;

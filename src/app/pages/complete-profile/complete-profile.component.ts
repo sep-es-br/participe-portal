@@ -72,8 +72,15 @@ export class CompleteProfileComponent implements OnInit {
 
     const {success} = await this.personSrv.complementPerson(sender);
     if (success) {
-      localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
-      await this.router.navigate(['/conference-map']);
+
+      if(localStorage.getItem(StoreKeys.CHECK_IN)){
+        localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
+        await this.router.navigate(['/self-check-in']);
+      }else{
+        localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
+        await this.router.navigate(['/conference-map']);
+      }
+
     }
   }
 

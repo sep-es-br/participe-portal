@@ -22,7 +22,7 @@ export class LoginSelfCheckInComponent implements OnInit {
     }
 
     async ngOnInit() {
-      sessionStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
+      localStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
       await this.login();
     }
 

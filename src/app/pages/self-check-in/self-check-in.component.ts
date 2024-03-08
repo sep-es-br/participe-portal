@@ -27,7 +27,7 @@ export class SelfCheckInComponent implements OnInit {
 
     
     ngOnInit() {
-      this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
+      this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(localStorage.getItem(StoreKeys.CHECK_IN)))
     }
 
     async isCheckin(meeting, personId){
@@ -49,8 +49,9 @@ export class SelfCheckInComponent implements OnInit {
       await this.getPersonAndMeeting(personId, meeting)
       if(this.isNotEmptyCheckInObject){
         this.setForm(this.checkInData)
+        localStorage.removeItem(StoreKeys.CHECK_IN);
       }else{
-        await this.isCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
+        await this.isCheckin(localStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
         await this.getPersonAndMeeting(personId, meeting)
         this.setForm(this.checkInData)
       }

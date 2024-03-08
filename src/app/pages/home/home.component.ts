@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
         this.authSrv.saveToken(userInfo);
         this.authSrv.saveUserInfo(userInfo.person);
 
-        if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
+        if(localStorage.getItem(StoreKeys.CHECK_IN)){
           if (userInfo.completed) {
             await this.router.navigate(['/self-check-in'])
           }else{

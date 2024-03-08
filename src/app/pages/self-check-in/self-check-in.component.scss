@@ -1,0 +1,42 @@
+.stacked {
+    label {
+      min-width: 122px;
+    }
+  }
+
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+  
+  @media(min-width: 800px) {
+    form {
+      width: 50%;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 800px) {
+    form {
+      width: 80%;
+    }
+  }
+  @media (max-width: 600px) {
+    .stacked {
+      flex-direction: column;
+      align-items: stretch;
+      label {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    .actions {
+      padding-right: 0px !important;
+    }
+  }
+  
+  .locality-dropbox {
+    width: 230px;
+  }
+
+  

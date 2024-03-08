@@ -1,0 +1,47 @@
+app-pre-registration {
+    .cursor-normal{
+        cursor: default !important;
+    }
+    .no-background::after{
+        background-color: none !important;
+    }
+}
+
+button{
+    color: #fff;
+    border-radius: 25px;
+    // height: 31px;
+    // width: 100px;
+    padding: 5px 20px;
+    &.btn-green{
+        background-color: #00a198;
+    }
+    &.btn-blue{
+        background-color: #107fcf;
+    }
+}
+.no-resize{
+    resize: none;
+}
+.qr-code{
+    margin: 1rem 0;
+    border-radius: 15px;
+}
+p{
+    color: #fff;
+}
+
+.iconText{
+    padding-right: 0.5rem;
+}
+
+@media print{
+    * {
+        display: none;
+    }
+
+    .print-visible {
+        display: block;
+    }
+    
+}

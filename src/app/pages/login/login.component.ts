@@ -220,6 +220,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+  signInFacebook() {
+    this.authSrv.signInFacebook();
+  }
+
+  signInGoogle() {
+    this.authSrv.signInGoogle();
+  }
+
   signInAcessoCidadao() {
     this.authSrv.signInAcessoCidadao();
   }

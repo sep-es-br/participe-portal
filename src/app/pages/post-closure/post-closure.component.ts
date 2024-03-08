@@ -55,6 +55,14 @@ export class PostClosureComponent implements OnInit, OnDestroy {
     document.getElementById('right-side').style.display = 'flex';
   }
 
+  signInFacebook() {
+    this.authSrv.signInFacebook();
+  }
+
+  signInGoogle() {
+    this.authSrv.signInGoogle();
+  }
+  
   signInAcessoCidadao() {
     this.authSrv.signInAcessoCidadao();
   }

@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit {
 
 
         if (userInfo.completed) {
-          if(urlRedirect != ''){
-            console.log('Vai fazer redirect',urlRedirect);
+          if(urlRedirect != '' && urlRedirect != null){
+            localStorage.removeItem(StoreKeys.REDIRECT_URL);
             await this.router.navigate([urlRedirect]);
           }else if (this.conference.displayStatusConference === 'OPEN') {
             const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);

@@ -20,3 +20,28 @@ button{
         background-color: #107fcf;
     }
 }
+.no-resize{
+    resize: none;
+}
+.qr-code{
+    margin: 1rem 0;
+    border-radius: 15px;
+}
+p{
+    color: #fff;
+}
+
+.iconText{
+    padding-right: 0.5rem;
+}
+
+@media print{
+    * {
+        display: none;
+    }
+
+    .print-visible {
+        display: block;
+    }
+    
+}

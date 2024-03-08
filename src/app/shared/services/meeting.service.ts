@@ -6,6 +6,7 @@ import { BaseService } from './base.service';
 import { PrepareHttpQuery } from '../utils/query.utils';
 import { IResultPaginated } from '../interfaces/IResultPaginated';
 import {IQueryOptions} from '../interfaces/IQueryOptions';
+import * as qs from 'qs';
 
 @Injectable({ providedIn: 'root' })
 export class MeetingService extends BaseService<any> {
@@ -32,5 +33,21 @@ export class MeetingService extends BaseService<any> {
       ...options,
       search: filter,
     })}`).toPromise();
+  }
+
+  getSingleMeeting(meetingId: number): Promise<any>{
+    return  this.http.get<any>(
+      `${this.urlBase}${qs.stringify({
+        meetingId: meetingId
+      }, { addQueryPrefix: true })}`
+    ).toPromise();
+  }
+
+  preRegistration(meetingId: number,personId: number){
+    const sender = {
+      meetingId: meetingId,
+      personId: personId
+    };
+    return this.http.post<IResultHttp<any>>(`${this.urlBase}/pre-registration`,sender).toPromise();
   }
 }

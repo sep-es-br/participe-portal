@@ -1,7 +1,6 @@
-<div class="footer-container">
-  <div class="block-item"></div>
-  <div class="block-item align-center">
-    <a *ngIf="researchStatus === 'ACTIVE' && researchUrl" (click)="researchRedirect()">
+<div *ngIf="researchStatus === 'ACTIVE' && researchUrl"  class="footer-container ">
+  <div class="block-item align-center ">
+    <a  (click)="researchRedirect()">
       <div class="research">
         <i class="fas fa-clipboard-list"></i>
         <div class="research-text">
@@ -10,12 +9,20 @@
         </div>
       </div>
     </a>
-    <img class="footer_img" src="assets/images/footer_branco.png" alt="">
   </div>
-  <div class="block-item align-right">
-    <img src="assets/images/poweredBy_branco.svg" alt="">
-    <div class="policy-container">
-      <a class="policy-link" target="blank" href="assets/docs/privacy-policy.html">Política de Privacidade</a>
+</div>
+<div class="container">
+  <div class="row col-md-8 m-auto">
+    <div class="col-6 col-md-6 d-flex ">
+      <img class="img-fluid float-start" src="assets/images/footer_branco.png" alt="">
+    </div>
+    <div class="col-6 col-md-6 d-flex">
+      <img class="img-fluid" src="assets/images/poweredBy_branco.svg" alt="">
+    </div>
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="policy-container">
+        <a class="policy-link" target="blank" href="assets/docs/privacy-policy.html">Política de Privacidade</a>
+      </div>
     </div>
   </div>
 </div>

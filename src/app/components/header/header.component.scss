@@ -1,3 +1,5 @@
+@import '~src/styles.scss';
+
 .header-container {
   padding: 20px 50px;
   display: flex;
@@ -18,7 +20,7 @@
       font-weight: lighter;
     }
     img {
-      max-height: 115px;
+      max-height: 120px;
       margin-right: 10px;
     }
   }
@@ -29,7 +31,7 @@
     // color: white;
     display: flex;
     .action-item {
-      color: white;
+      color: $font-color-primary;
       align-items: center;
       display: flex;
       margin-right: 20px;
@@ -125,8 +127,8 @@
     font-size: 2.5rem;
   }
   .ui-button{
-    background: var(--accentColorStart);
-    border: 1px solid var(--accentColorStart) !important;
+    background: $accent-color;
+    border: 1px solid $accent-color !important;
   }
   .ui-button-icon-left {
     left: 1.5em;
@@ -153,9 +155,9 @@
     font-size: 1.2rem;
   }
   .ui-button:hover {
-    background: var(--accentColorStart) !important;
+    background: $accent-color !important;
   }
   .ui-button:active {
-    background: var(--accentColorStart) !important;
+    background: $accent-color !important;
   }
 }

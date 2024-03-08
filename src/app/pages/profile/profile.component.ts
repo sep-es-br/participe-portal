@@ -117,7 +117,7 @@ export class ProfileComponent implements OnInit {
       localityId: [_.get(value, 'localityId', null)],
       newPassword: [_.get(value, 'newPassword', null), this.passwordValidator],
       confirmNewPassword: [_.get(value, 'confirmNewPassword', null), this.passwordValidator],
-      receiveInformational: [_.get(value, 'receiveInformational', true)],
+      receiveInformational: [_.get(value, 'receiveInformational')],
     });
   }
 

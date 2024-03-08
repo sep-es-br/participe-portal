@@ -56,17 +56,19 @@ export class CompleteProfileComponent implements OnInit {
       name: [_.get(value, 'name', ''), Validators.required],
       contactEmail: [_.get(value, 'contactEmail', ''), Validators.required],
       telephone: [_.get(value, 'telephone', '')],
-      locality: [_.get(value, 'locality', ''), Validators.required]
+      locality: [_.get(value, 'locality', ''), Validators.required],
+      receiveInformational: false,
     });
   }
 
 
-  async save({id, name, contactEmail, telephone, locality}) {
+  async save({id, name, contactEmail, telephone, locality, receiveInformational}) {
     const sender: IPerson = {
       id, name, contactEmail, telephone,
       selfDeclaration: {
         conference: this.conferenceSrv.ConferenceActiveId,
-        locality: _.get(locality, 'id')
+        locality: _.get(locality, 'id'),
+        receiveInformational,
       }
     };
 

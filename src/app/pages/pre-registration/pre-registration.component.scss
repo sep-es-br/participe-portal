@@ -35,13 +35,3 @@ p{
     padding-right: 0.5rem;
 }
 
-@media print{
-    * {
-        display: none;
-    }
-
-    .print-visible {
-        display: block;
-    }
-    
-}

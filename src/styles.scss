@@ -302,3 +302,19 @@ app-pre-registration {
   opacity: 8%;
 }
 }
+
+@media print {
+  img.print-visible:not(.qr-code ){
+    height: 65px;
+  }
+  .print-visible {
+  //   display: block;
+    font-size: 1rem;
+    visibility: visible;
+  }
+
+  :not(.print-visible) {
+  //   display: none;
+    visibility: hidden;
+  }
+}

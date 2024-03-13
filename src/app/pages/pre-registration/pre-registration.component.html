@@ -8,49 +8,41 @@
                 <tbody>
                     <tr>
                         <td>
-                            <div class="form-floating">
+                            <div class="">
+                                <small for="eventName" class=" no-background">Encontro Presencial</small>
                                 <input type="text" readonly class="form-control-plaintext cursor-normal" id="eventName" placeholder="Encontro Presencial" value="{{meetindData.name}}">
-                                <label for="eventName" class="no-background">Encontro Presencial</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-floating">
-                                <!-- <div class="row" >
-                                    <div class="col-6">
-                                        <input type="datetime-local" readonly class="form-control-plaintext cursor-normal" placeholder="Data" value="{{meetindData.beginDate}}">
-                                    </div>
-                                    <div class="col-6">
-                                    </div>
-                                </div> -->
+                            <div class="">
+                                <small for="data" class="no-background">Data</small>
                                 <input type="text" readonly class="form-control-plaintext cursor-normal" placeholder="Data" value="{{meetindData.beginDate}} - {{meetindData.endDate}}">
-                                <!-- <input type="text" readonly id="data" placeholder="Data" value="" > -->
-                                <label for="data" class="no-background">Data</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-floating">
+                            <div class="">
+                                <small for="city" class="no-background">Cidade</small>
                                 <input type="text" readonly class="form-control-plaintext cursor-normal" id="city" placeholder="Cidade" value="{{meetindData.localityPlace['name']}}">
-                                <label for="city" class="no-background">Cidade</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-floating">
+                            <div class="">
+                                <small for="place" class="no-background">Local</small>
                                 <input type="text" readonly class="form-control-plaintext cursor-normal" id="place" placeholder="Local" value="{{meetindData.place}}">
-                                <label for="place" class="no-background">Local</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-floating">
+                            <div class="">
+                                <small for="address" class="no-background">Endereço</small>
                                 <textarea readonly  class="form-control-plaintext cursor-normal no-resize h-auto">{{meetindData.address}}</textarea>
-                                <label for="address" class="no-background">Endereço</label>
                             </div>
                         </td>
                     </tr>

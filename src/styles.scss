@@ -5,28 +5,10 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
-// $menu-color-primary: rgba(21,57,97,1);
-// $menu-color-secondary: rgba(21,57,97,1);
-
-// $accent-color: #00a198;
-// $accent-color:#00a198;
-
-// $font-color-primary: white;
-// $font-color-secondary:white;
-
-// $card-font-color:black;
-// $card-font-color-hover:white;
-
-// $card-color: white;
-// $border-color: white;
-
 //mudei a cor do home.svg e arrow-right fill:#FFFFFF para #F18EB1
 //mudei a cor do search.svg fill="#00a198" para #F18EB1
 //mudei a cor do user2.svg e close2.svg arrow-left-circle fill="#FFFFFF para #008CD1
 
-
-// antiga - rosa:#f561de azul:#299EEB
-// nova - rosa: #F18EB1 azul:#008CD1
 
 body {
   margin: 0;
@@ -92,14 +74,14 @@ button.btn-secondary {
 }
 .custom-button-autocomplete {
   .ui-button {
-    background: var(--accentColorStart) !important;
+    background: var(--accent-color) !important;
     border-color: #a6a6a6 !important;
     color: var(--light);
     .ui-button-icon-left:before {
       content: "\e902";
     }
     &:enabled:hover {
-      color: var(--accentColorEnd);
+      color: var(--accent-color);
     }
     margin: 0;
     position: absolute;
@@ -157,6 +139,7 @@ button.btn-secondary {
 }
 
 :root {
+  //ES500
   --background: white;
   --accent-color:#F18EB1;
   --font-color: #008CD1;
@@ -167,12 +150,16 @@ button.btn-secondary {
   --card-border-color:white;
   --border-color: #008CD1;
 
-  
+  // --background: rgba(21,57,97,1);
+  // --accent-color:#00a198;
+  // --font-color: white;
+  // --card-font-color:black;
+  // --card-font-color-hover:white;
+  // --card-color:white;
+  // --card-color-hover:#00a198;
+  // --card-border-color:white;
+  // --border-color: white;
 
-  --primaryColor:rgba(21,57,97,1);
-  --secondaryColor: rgba(21,57,97,1);
-  --accentColorStart: #00a198;
-  --accentColorEnd: #00a198;
   --tertiaryColor:#3F5291;
   --textColorDark: #343333;
   --light: #F0F0F3;

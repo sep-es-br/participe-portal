@@ -194,6 +194,7 @@
             background-color: var(--accent-color);
             margin: 5px;
             height: 64px;
+            color: var(--card-font-color-hover);
 
             .structure-item {
               display: flex;
@@ -201,7 +202,7 @@
               align-items: center;
               flex-direction: column;
               border-right: 1px solid var(--card-border-color);
-              color: var(--card-font-color);
+              color: var(--card-font-color-hover);
               background-color: var(--accent-color);
               text-align: center;
               padding: 5px 0;
@@ -247,7 +248,6 @@
         flex-direction: column;
         flex: 1;
         background-color: var(--card-color);
-        border: 1px solid var(--card-border-color);
         padding: 15px;
         flex-wrap: wrap;
         border-radius: 3px;
@@ -275,7 +275,7 @@
             flex: 1 0 23%;
             border: 1px solid var(--card-border-color);
             margin: 5px;
-            color: var(--card-font-color);
+            color: var(--card-font-color-hover);
             .structure-item {
               background-color: var(--accent-color);
               display: flex;

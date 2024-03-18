@@ -16,7 +16,7 @@
       color: white;
       outline: none;
       border-radius: 60px;
-      background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+      background: var(--accent-color);
       padding: 6px;
       width: 6rem;
       text-align: center;
@@ -40,7 +40,7 @@
       right: 50px;
       width: 27px;
       height: 27px;
-      color: $accent-color;
+      color: var(--accent-color);
 
       img {
         margin-left: 6px;
@@ -125,12 +125,12 @@
       }
 
       input:checked ~ label {
-        color: $accent-color-secondary;
-        border-color: $accent-color-secondary;
+        color: var(--accent-color);
+        border-color: var(--accent-color);
 
         .arrow {
-          border-right: 2px solid $accent-color-secondary;
-          border-top: 2px solid $accent-color-secondary;
+          border-right: 2px solid var(--accent-color);
+          border-top: 2px solid var(--accent-color);
         }
       }
 
@@ -193,7 +193,7 @@
           height: 15px;
           width: 15px;
           border: 1px;
-          border-color: $accent-color-secondary;
+          border-color: var(--accent-color);
           border-style: solid;
         }
 
@@ -212,7 +212,7 @@
           top: 2px;
           width: 4px;
           height: 8px;
-          border: solid $accent-color-secondary;
+          border: solid var(--accent-color);
           border-width: 0 2px 2px 0;
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
@@ -245,14 +245,15 @@
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 
     .card-item {
-      background: $card-color no-repeat -20px;
+      background: var(--card-color) no-repeat -20px;
       min-height: 140px;
       display: flex;
       justify-content: space-between;
       text-align: left;
       flex-direction: column;
       overflow: hidden;
-      color:$card-font-color;
+      color:var(--card-font-color);
+      border: 1px solid var(--card-border-color);
 
 
       &.clickable {
@@ -260,18 +261,18 @@
 
         &:hover {
           h2 {
-            color: $card-font-color-hover;
+            color: var(--card-font-color-hover);
           }
         }
       }
 
       &.checked {
-        color: $card-font-color-hover;
-        background: linear-gradient(45deg, $accent-color, $accent-color-secondary) !important;
+        color: var(--card-font-color-hover);
+        background: var(--card-color-hover) !important;
 
         &:hover {
           h2 {
-            color: white;
+            color: var(--card-font-color-hover);
           }
         }
       }
@@ -298,14 +299,14 @@
 
         .card-actions-item {
           padding: 10px 10px 0;
-          color: $accent-color-secondary;
+          color: var(--accent-color);
 
           &:hover {
-            color: $accent-color;
+            color: var(--accent-color);
           }
 
           &.checked {
-            color: $card-font-color-hover;
+            color: var(--card-font-color-hover);
           }
         }
 
@@ -323,7 +324,7 @@
           .icon {
             width: 30px;
             height: 30px;
-            border: 2px solid $accent-color-secondary;
+            border: 2px solid var(--accent-color);
             border-radius: 50%;
             margin-right: 10px;
           }

@@ -15,7 +15,7 @@
     }
   }
   .breadcrumb-item {
-    color: $font-color-primary;
+    color: var(--font-color);
     margin-right: 10px;
     max-width: 210px;
     display: flex;
@@ -40,7 +40,7 @@
      h2 {
       font-size: 1.0rem;
       font-weight: normal;
-      background: $accent-color;
+      background: var(--accent-color);
       padding: 5px 30px;
       text-align: center;
       border-radius: 60px;

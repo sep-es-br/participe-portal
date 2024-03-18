@@ -1,8 +1,7 @@
 @import '~src/styles.scss';
 
 .background-linear {
-  background: $menu-color-primary;
-  background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 150%);
+  background: var(--background);
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -28,7 +27,7 @@
       text-align: center;
       flex-direction: column;
 
-      border: 3px solid $border-color;
+      border: 3px solid var(--border-color);
 
       padding: 1rem;
 
@@ -37,7 +36,7 @@
       background: transparent;
 
       .number{
-          color: $font-color-primary;
+          color: var(--font-color);
           font-size: 50px;
           text-align: center;
 
@@ -50,14 +49,14 @@
           padding-right: 1rem;
 
         border-radius: 100%;
-        border: 2px solid $border-color;
+        border: 2px solid var(--border-color);
 
-        background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+        background: var(--accent-color);
 
       }
 
       .header{
-          color: $font-color-primary;
+          color: var(--font-color);
           font-size: 2rem;
           text-align: center;
 
@@ -66,7 +65,7 @@
       }
 
       .body{
-          color: $font-color-primary;
+          color: var(--font-color);
           font-size: 1.2rem;
           text-align: center;
       }

@@ -5,6 +5,7 @@ import { AuthService } from "src/app/shared/services/auth.service";
 import { MeetingService } from "src/app/shared/services/meeting.service";
 import 'moment-timezone';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -23,11 +24,12 @@ export class SelfCheckInComponent implements OnInit {
       private formBuilder: FormBuilder,
       private authSrv: AuthService,
       protected meetingSrv: MeetingService,
+      private router: Router
     ){}
 
     
     ngOnInit() {
-      this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(localStorage.getItem(StoreKeys.CHECK_IN)))
+      this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
     }
 
     async isCheckin(meeting, personId){
@@ -49,9 +51,8 @@ export class SelfCheckInComponent implements OnInit {
       await this.getPersonAndMeeting(personId, meeting)
       if(this.isNotEmptyCheckInObject){
         this.setForm(this.checkInData)
-        localStorage.removeItem(StoreKeys.CHECK_IN);
       }else{
-        await this.isCheckin(localStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
+        await this.isCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
         await this.getPersonAndMeeting(personId, meeting)
         this.setForm(this.checkInData)
       }
@@ -66,4 +67,9 @@ export class SelfCheckInComponent implements OnInit {
         localityPlace: [_.get(value.data.meeting.localityPlace, 'name', ''), Validators.required]
       });
     }
+
+    cancel(){
+      sessionStorage.removeItem(StoreKeys.CHECK_IN);
+      this.router.navigate(['/conference-map']);
+  }
   }

@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
         const urlRedirect = localStorage.getItem(StoreKeys.REDIRECT_URL);
 
 
-        if(localStorage.getItem(StoreKeys.CHECK_IN)){
+        if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
           if (userInfo.completed) {
             await this.router.navigate(['/self-check-in'])
           }else{

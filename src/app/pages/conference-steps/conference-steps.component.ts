@@ -123,7 +123,6 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
       });
       this.breadcrumbSrv.addOrUpdate({title: data.structureitem.name});
       this.participationStateSrv.removeBeforeNavigation(data.structureitem.name);
-      console.log("COndition |||",this.conferenceStepItem);
     }
   }
 
@@ -154,7 +153,6 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     const {success, data} = await this.participationSrv
       .commentAndHighlights(this.localityId ? this.localityId : null, item.id, this.conferenceSrv.ConferenceActiveId);
 
-    console.log(data);
 
     if (success) {
       if (item.checked === false && data.votes === true) {
@@ -244,7 +242,6 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   async backNavigation() {
     this.populateState();
-    console.log(this.navigation.length);
     if (this.navigation.length >= 2) {
       const lastStep2 = this.navigation[this.navigation.length - 2];
       this.participationStateSrv.removeLast();

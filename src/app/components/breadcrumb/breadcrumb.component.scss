@@ -22,13 +22,14 @@
     align-items: flex-start;
 
     &:last-child {
-      img {
+      .arrow-right{
         display: none;
       }
     }
 
-    img {
+    .arrow-right {
       width: 12px;
+      align-items: center;
       margin-top: 10px;
       margin-left: 10px;
       opacity: 0.5;
@@ -61,3 +62,7 @@
     display: none !important;
   }
 }
+
+
+
+

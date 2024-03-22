@@ -138,6 +138,15 @@ button.btn-secondary {
   flex-direction: column;
 }
 
+#Capa_1, #svg10, #svg11{
+  width: 100%;
+  height: 100%;
+}
+
+.active-path, #path7{
+  fill: var(--font-color);
+}
+
 :root {
   //ES500
   --background: white;

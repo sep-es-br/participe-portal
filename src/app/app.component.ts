@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponsiveService } from './shared/services/responsive.service';
+import { ColorService } from './shared/services/color.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,16 @@ export class AppComponent implements OnInit {
   isMobileView: boolean;
 
   constructor(
-    private responsiveSrv: ResponsiveService
-  ) {}
+    private responsiveSrv: ResponsiveService,
+    private colorService: ColorService,
+  ) {
+  }
 
   ngOnInit(): void {
+    this.colorService.setPrimaryColor(this.colorService.color)
+    this.colorService.getSVG()
     this.detectViewMode(window.innerWidth);
-  }
+    }
 
   detectViewMode(width: number) {
     if (!this.isMobileView && width <= 768) {

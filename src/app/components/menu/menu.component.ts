@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
     { label: 'Estatísticas', route: '/statistics', activeWhen: ['statistics'] },
   ];
 
-  @ViewChild('sidemenu', {static: false}) sidemenu: ElementRef;
+  @ViewChild('sidemenu') sidemenu: ElementRef;
 
   conference: IConference;
   userInfo: IPerson;

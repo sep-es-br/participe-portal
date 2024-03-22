@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import {Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
 import {ConferenceService} from '../../shared/services/conference.service';
 import {ILocality} from '../../shared/interfaces/ILocality';
@@ -19,7 +19,7 @@ import {environment} from '../../../environments/environment';
 })
 export class RegisterComponent implements OnInit {
 
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   localities: ILocality[] = [];
   filteredLocalities: SelectItem[];
   localityType: string;
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   siteKey: string = _.get(environment, 'siteKey') ? _.get(environment, 'siteKey') : '6LfvfAEVAAAAAFEiE8bzs3d47SKNl3iJFxvAfV83';
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private localitySrv: LocalityService,
     private personSrv: PersonService,
     private conferenceSrv: ConferenceService,

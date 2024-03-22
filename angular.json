@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["lodash","moment","qs","moment-timezone","heatmap.js","jwt-decode"],
             "outputPath": "dist/portal-participe",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,7 +29,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/themes/nova/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css",

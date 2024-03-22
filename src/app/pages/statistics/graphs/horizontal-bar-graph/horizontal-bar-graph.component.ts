@@ -60,7 +60,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       await this.loadConfig();
       await this.loadPlugins();
     });
-    Chart.plugins.register(ChartDataLabels);
+    Chart.register(ChartDataLabels);
     this.loadData();
     this.loadPlugins();
   }
@@ -76,9 +76,11 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       return Math.max(a, b);
     });
     this.config = {
+      indexAxis: 'y',
       onClick: (e, item) => this.graphClicked.next(item),
       plugins: {
         datalabels: {
+
           align: this.align,
           anchor: this.anchor,
           clamp: 'true',
@@ -103,7 +105,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
         display: false,
       },
       scales: {
-        xAxes: [{
+        x: {
           offset: true,
           gridLines: {
             display: false,
@@ -114,8 +116,8 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
             display: false,
             max: maxData * 1.15,
           }
-        }],
-        yAxes: [{
+        },
+        y: {
           // barPercentage: 1,
           // categoryPercentage: 0.7,
           gridLines: {
@@ -148,7 +150,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
             fontColor: this.labelColor,
           },
           offset: true
-        }],
+        },
       },
     };
     this.height = (data.length * 60) < 100 ? 100 : (data.length * 60);
@@ -164,6 +166,8 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
     this.data = {
       labels: this.labels,
       datasets: [{
+        axis: 'x',
+        label: this.labels,
         data: this.chartData && this.chartData.map(item => item.quantity),
         barPercentage: 0.9,
         categoryPercentage: 0.8,
@@ -199,7 +203,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
         gradient.addColorStop(0, '#00a198');
         gradient.addColorStop(1, '#00a198');
         data.datasets.forEach((dataset, i) => {
-          const meta = chartInstance.controller.getDatasetMeta(i);
+          const meta = chartInstance.getDatasetMeta(i);
           meta.data.forEach((bar, index) => {
             if (!bar._model) { return; }
             const valor = +dataset.data[index];

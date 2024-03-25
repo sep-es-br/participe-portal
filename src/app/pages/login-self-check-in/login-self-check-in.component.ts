@@ -13,28 +13,33 @@ import { ConferenceService } from "src/app/shared/services/conference.service";
 export class LoginSelfCheckInComponent implements OnInit {
 
     conference: IConference;
+    checkIn: string = ''
 
     constructor(
       private conferenceSrv: ConferenceService,
         private route: ActivatedRoute,
         private router: Router
     ){
+      
+
     }
 
     async ngOnInit() {
-      localStorage.setItem(StoreKeys.CHECK_IN, String(this.route.snapshot.params['meeting']));
-      await this.login();
+      await this.login().then(
+        data => {
+          this.router.navigate(['/login', this.conference.id]);
+        }
+      );
     }
-
-    async login() {
+      
+      async login() {
         await this.conferenceSrv.GetByUrl(document.location.href)
-          .then((result) => {
-            if (result.success && !(result.data instanceof Array)) {
+        .then((result) => {
+          if (result.success && !(result.data instanceof Array)) {
               this.conference = result.data;
-              this.router.navigate(['/login', this.conference.id]);
+              sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting'])
             }
           });
       }
-
 }
 

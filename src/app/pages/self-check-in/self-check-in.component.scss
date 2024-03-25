@@ -39,4 +39,20 @@
     width: 230px;
   }
 
+  button{
+    color: #fff;
+    border-radius: 25px;
+    padding: 5px 50px;
+    &.btn-green{
+        background-color: #00a198;
+    }
+    &.btn-green:hover{
+      color: #fff;
+    }
+}
+
+.table tbody td{
+  padding: 15px;
+}
+
   

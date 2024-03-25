@@ -92,14 +92,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (success) {
 
       this.displayCalendar = data.showCalendar;
-      console.log("Display |||",this.displayCalendar);
-
-      console.log("DATA |||",data);
-      
 
       if(this.displayCalendar){
         this.calendarImageUrl = _.get(data, 'calendarImageUrl.url', '');
-        console.log("Url image",this.calendarImageUrl);
       }
 
       if (data.status === 'PRE_OPENING') {
@@ -156,7 +151,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (meeting.typeMeetingEnum !== this.typeMeeting.VIRTUAL) {
       return meeting.localityPlace.name;
     } else {
-      console.log(meeting);
       return meeting.localityCovers.map(covers => covers.name).join(', ');
     }
   }

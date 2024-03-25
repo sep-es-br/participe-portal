@@ -34,6 +34,12 @@
             <img src="assets/icons/cidadao.svg" alt=""/>
             <i [class]="findAuthentication('AcessoCidadao') ? 'icon-times' : 'icon-plus'"></i>
           </button>
+          <button [class]="findAuthentication('Google') ? 'google active' : 'google'" type="button"
+                  (click)="findAuthentication('Google') ? deleteAuthGoogle() : addAuthGoogle() "
+          >
+            <img src="assets/icons/google.svg" alt=""/>
+            <i [class]="findAuthentication('Google') ? 'icon-times' : 'icon-plus'"></i>
+          </button>
         </div>
       </section>
       <div class="p-col-12 form-group field-switch">

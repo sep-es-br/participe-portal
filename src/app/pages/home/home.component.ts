@@ -63,8 +63,22 @@ export class HomeComponent implements OnInit {
         this.authSrv.saveToken(userInfo);
         this.authSrv.saveUserInfo(userInfo.person);
 
-        if (userInfo.completed) {
-          if (this.conference.displayStatusConference === 'OPEN') {
+        const urlRedirect = localStorage.getItem(StoreKeys.REDIRECT_URL);
+
+
+        if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
+          if (userInfo.completed) {
+            await this.router.navigate(['/self-check-in'])
+          }else{
+            localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
+            await this.router.navigate(['/complete-profile']);
+          }
+        }
+        else if (userInfo.completed) {
+          if(urlRedirect != '' && urlRedirect != null){
+            localStorage.removeItem(StoreKeys.REDIRECT_URL);
+            await this.router.navigate([urlRedirect]);
+          }else if (this.conference.displayStatusConference === 'OPEN') {
             const { data } = await this.conferenceSrv.getRegionalization(this.conferenceSrv.ConferenceActiveId);
             if (data.regionalization) {
               await this.router.navigate(['/conference-map']);

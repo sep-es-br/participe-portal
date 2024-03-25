@@ -54,7 +54,8 @@
         flex-direction: row;
         display: flex;
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
+        align-items: center;
         .info-search-container {
           flex-direction: column;
           display: flex;
@@ -75,6 +76,12 @@
       }
       .actions {
         display: none;
+      }
+      img.img-center-sm{
+        text-align: center;
+        margin: auto;
+        justify-content: center;
+        display: flex;
       }
   }
 }

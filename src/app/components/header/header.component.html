@@ -11,7 +11,7 @@
     <div class="action-item" *ngIf="displayExternalLinks">
       <div class="action-item" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
         {{conference.externalLinksMenuLabel}}
-        <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
+        <!-- <img src="assets/icons/external-link-alt-solid.svg" alt=""/> -->
         <div [innerHTML]="colorService.svgList.external_link_alt_solid_svg.htmlText" class="external-link-alt-solid"></div>
       </div>
     </div>

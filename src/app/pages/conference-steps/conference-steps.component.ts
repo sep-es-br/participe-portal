@@ -12,6 +12,7 @@ import {INavigation} from '../../shared/interfaces/INavigation';
 import * as _ from 'lodash';
 import {MessageService} from 'primeng/api';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-conference-steps',
@@ -69,7 +70,9 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     private route: Router,
     private activeRoute: ActivatedRoute,
     private participationStateSrv: ParticipationStateService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private colorService: ColorService,
+
   ) {
   }
 

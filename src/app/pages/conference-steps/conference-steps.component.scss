@@ -42,9 +42,9 @@
       height: 27px;
       color: var(--accent-color);
 
-      img {
+      img, .search-svg {
         margin-left: 6px;
-        margin-top: 6px;
+        margin-top: 1px;
         width: 15px;
         height: 15px;
       }
@@ -315,7 +315,7 @@
           align-items: center;
           cursor: pointer;
 
-          img {
+          img, .check-circle {
             width: 30px;
             height: 30px;
             margin-right: 10px;
@@ -345,7 +345,7 @@
             transform: translate(1px, -3px);
           }
 
-          img {
+          img, .comment-svg {
             width: 30px;
             height: 30px;
             margin-right: 10px;

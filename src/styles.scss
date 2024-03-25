@@ -144,7 +144,13 @@ button.btn-secondary {
 }
 
 .active-path, #path7{
-  fill: var(--font-color);
+  fill: var(--font-color) !important;
+}
+.search-svg, .check-circle{
+  fill: var(--accent-color) !important;
+}
+.check-circle{
+  fill: var(--card-font-color-hover) !important;
 }
 
 :root {

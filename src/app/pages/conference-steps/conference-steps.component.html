@@ -58,10 +58,10 @@
   <div class="actions-footer">
     <!-- <img class="action-back" (click)="backNavigation()" src="assets/icons/arrow-left-circle.svg" alt=""/> -->
     <div [innerHTML]="colorService.svgList.arrow_left_circle_svg.htmlText" class="action-back" (click)="backNavigation()"></div>
-    <div class="help-container" *ngIf="conferenceStepItem?.structureitem?.parentLink"
-         (click)="openAlternativeProposal()">
-      <span>{{conferenceStepItem?.structureitem?.parentLink?.textLink}}</span>
-      <img src="assets/icons/help-circle.svg" alt=""/>
+    <div class="help-container" *ngIf="conferenceStepItem?.structureitem?.parentLink" (click)="openAlternativeProposal()">
+      <span class="action-back">{{conferenceStepItem?.structureitem?.parentLink?.textLink}}</span>
+      <!-- <img src="assets/icons/help-circle.svg" alt=""/> -->
+      <div [innerHTML]="colorService.svgList.help_circle_svg.htmlText" class="action-back"></div>
     </div>
   </div>
   <app-modal class="modalComment" [show]="showModalComment" (onCallback)="modalOnCallback($event)">

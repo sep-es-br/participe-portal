@@ -72,7 +72,6 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     private participationStateSrv: ParticipationStateService,
     private messageService: MessageService,
     private colorService: ColorService,
-
   ) {
   }
 

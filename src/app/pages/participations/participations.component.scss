@@ -142,10 +142,10 @@
                   filter: grayscale(1);
                 }
               }
-              img {
+              img, .quote-svg {
                 width: 20px;
                 height: 20px;
-                margin: 3px 5px 3px 0;
+                margin: 0 5px 3px 0;
               }
             }
           }
@@ -155,7 +155,10 @@
           }
           .likes {
             color: var(--card-font-color);
-            img {
+            span{
+              margin-right: 5px;
+            }
+            img, .like-svg{
               width: 15px;
               height: 15px;
               min-width: 2%;
@@ -207,13 +210,13 @@
               text-align: center;
               padding: 5px 0;
               min-width: 75px;
-              img {
+              img, .structure-img {
                 width: 40px;
                 height: 40px;
-                filter: invert(100%);
               }
               .name {
                 font-size: .6rem;
+                color: var(--card-font-color-hover);
               }
             }
             > .name {
@@ -227,13 +230,13 @@
               .structure-item {
                 background-color: var(--accent-color);
                 color: white;
-                border-right: 1px solid #f8f8f8;
+                border-right: 1px solid var(--card-border-color);;
                 img {
                   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
                 }
               }
               > .name {
-                color: white;
+                color: var(--card-font-color-hover);
                 background: var(--accent-color);
               }
             }
@@ -287,14 +290,13 @@
               text-align: center;
               padding: 5px 0;
               min-width: 75px;
-              img {
+              img, .structure-img  {
                 width: 40px;
                 height: 40px;
-                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
               }
               .name {
                 font-size: .6rem;
-                color: var(--card-border-color);
+                color: var(--card-font-color-hover);
               }
             }
             > .name {
@@ -308,13 +310,13 @@
               .structure-item {
                 background-color: var(--accent-color);
                 color: white;
-                border-right: 1px solid #f8f8f8;
+                border-right: 1px solid var(--card-border-color);;
                 img {
                   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
                 }
               }
               > .name {
-                color: white;
+                color: var(--card-font-color-hover);
                 background: var(--accent-color);
               }
             }
@@ -379,7 +381,7 @@
       .vertical-line {
         width: 1px;
         height: calc(100% + .5em);
-        border: 0.5px solid white;
+        border: 0.5px solid var(--card-color);
         &.top {
           margin-top: -0.5em;
           margin-bottom: 1em;
@@ -402,7 +404,7 @@
         width: 60px;
         height: 60px;
 
-        img {
+        img, .svg-line {
           width: 50px;
           height: 50px;
         }

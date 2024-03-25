@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { IHorizontalBarChartItem } from 'src/app/shared/interfaces/IStatisticsDashboardData';
 import { ResponsiveService } from 'src/app/shared/services/responsive.service';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-horizontal-bar-graph',
@@ -31,6 +32,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
 
   constructor(
     private responsiveSrv: ResponsiveService,
+    private colorService: ColorService,
   ) {
   }
 
@@ -51,7 +53,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       this.responsive = value;
       this.align = this.responsive ? 'end' : 'end';
       this.anchor = this.responsive ? 'center' : 'end';
-      this.labelColor = this.responsive ? '#000000' : '#ffffff';
+      this.labelColor = this.colorService.getCssVariableValue('--card-font-color')
       this.data = undefined;
       this.config = undefined;
       this.plugins = undefined;
@@ -204,7 +206,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
             if (!bar._model) { return; }
             const valor = +dataset.data[index];
             // bar._view.backgroundColor = gradient;
-            bar._view.backgroundColor = '#F18EB1';
+            bar._view.backgroundColor = this.colorService.getCssVariableValue('--accent-color');
           });
         });
       }

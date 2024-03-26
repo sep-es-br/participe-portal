@@ -13,18 +13,26 @@
           <button class="cidadao" (click)="signInAcessoCidadao()">
             <span style="width: 100%; justify-content: center;display: flex;align-items: center;">  
               <img src="assets/icons/cidadao.svg" alt=""/>
-              Entrar com Acesso Cidadão ou gov.br
+              Entrar com GOV.BR <br> 
+              ou ACESSO CIDADÃO
             </span>
           </button>
-        </div>
-        <div class="or">
-          <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
+          <a class="google" (click)="signInGoogle()">Ou usar minha conta Google...</a>
+          
+          <!-- <button class="facebook" (click)="signInFacebook()">
+            <img src="assets/icons/facebook.svg" alt=""/>
+            Entrar com Facebook
+
+          </button> -->
         </div>
         <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como
           participar</a>
-        <div class="policy-container">
-          <a class="policy-link" target="blank" href="assets/docs/privacy-policy.html">Política de Privacidade</a>
-        </div>
+          <div class="policy-container">
+            <a class="policy-link" target="blank" href="assets/docs/privacy-policy.html">Política de Privacidade</a>
+          </div>
+          <div class="or">
+            <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
+          </div>
       </div>
     </div>
     <div  *ngIf="displayCalendar && calendarImageUrl != '' " >

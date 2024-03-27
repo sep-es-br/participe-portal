@@ -12,17 +12,17 @@ import { StoreKeys } from '../commons/contants';
 })
 export class ColorService extends BaseService<any> {
     private rootStyle: HTMLStyleElement = document.createElement("style")
-    color: IColor = {
-      background: 'rgba(21,57,97,1)',
-      accentColor: '#00a198',
-      fontColor: 'white',
-      cardFontColor: 'black',
-      cardFontColorHover: 'white',
-      cardColor: 'white',
-      cardColorHover: '#00a198',
-      cardBorderColor: 'white',
-      borderColor: 'white'
-    };
+    // color: IColor = {
+    //   background: 'rgba(21,57,97,1)',
+    //   accentColor: '#00a198',
+    //   fontColor: 'white',
+    //   cardFontColor: 'black',
+    //   cardFontColorHover: 'white',
+    //   cardColor: 'white',
+    //   cardColorHover: '#00a198',
+    //   cardBorderColor: 'white',
+    //   borderColor: 'white'
+    // };
 
     svgList: ISvgList = {
       home_svg: {htmlText: '', url: 'assets/icons/home.svg'},
@@ -59,23 +59,24 @@ export class ColorService extends BaseService<any> {
     }
 
 
-    async setPrimaryColor(color: IColor) {
+    async setPrimaryColor() {
 
       const result = await this.getConferenceColor(parseInt(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)))
+      console.log(result.data)
 
-      if(!(Object.entries(result.data).length == 0)){
+      if((Object.entries(result.data).length == 0)){
         this.rootStyle.textContent = 
         `
         :root {
-          --background: ${color.background};
-          --accent-color: ${color.accentColor};
-          --font-color: ${color.fontColor};
-          --card-font-color: ${color.cardFontColor};
-          --card-font-color-hover: ${color.cardFontColorHover};
-          --card-color: ${color.cardColor};
-          --card-color-hover: ${color.cardColorHover};
-          --card-border-color: ${color.cardBorderColor};
-          --border-color: ${color.borderColor};
+          --background: ${result.data.background};
+          --accent-color: ${result.data.accentColor};
+          --font-color: ${result.data.fontColor};
+          --card-font-color: ${result.data.cardFontColor};
+          --card-font-color-hover: ${result.data.cardFontColorHover};
+          --card-color: ${result.data.cardColor};
+          --card-color-hover: ${result.data.cardColorHover};
+          --card-border-color: ${result.data.cardBorderColor};
+          --border-color: ${result.data.borderColor};
         }
         `
       }
@@ -92,7 +93,6 @@ export class ColorService extends BaseService<any> {
           console.error('Erro ao buscar o arquivo SVG: ' + `${svgItem.url}`)
         } finally {
           svgItem.htmlText = this.sanitizer.bypassSecurityTrustHtml(svgText)
-          console.log(svgItem)
         }
       }
     }

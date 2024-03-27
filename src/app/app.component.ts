@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.colorService.setPrimaryColor(this.colorService.color)
+    this.colorService.setPrimaryColor()
     this.colorService.getSVG()
     this.detectViewMode(window.innerWidth);
     }

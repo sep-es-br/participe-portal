@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { IColor } from '../interfaces/IColor';
 import { ISvgList } from '../interfaces/ISvgList';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IResultHttp } from '../interfaces/IResultHttp';
+import { IResultPerson } from '../interfaces/IResultPerson';
+import { BaseService } from './base.service';
+import { StoreKeys } from '../commons/contants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ColorService {
+export class ColorService extends BaseService<any> {
     private rootStyle: HTMLStyleElement = document.createElement("style")
-    private teste = true
     color: IColor = {
       background: 'rgba(21,57,97,1)',
       accentColor: '#00a198',
@@ -44,14 +47,23 @@ export class ColorService {
     }
 
     constructor(
-      private sanitizer: DomSanitizer
+      private sanitizer: DomSanitizer,
+      @Inject(Injector) injector: Injector,
     ) {
+      super('color', injector);
       document.head.appendChild(this.rootStyle)
     }
 
+    getConferenceColor(idConference: number): Promise<IResultHttp<IColor>> {
+      return this.http.get<IResultHttp<IColor>>(`${this.urlBase}/${idConference}`).toPromise();
+    }
 
-    setPrimaryColor(color: IColor) {
-      if(this.teste == true){
+
+    async setPrimaryColor(color: IColor) {
+
+      const result = await this.getConferenceColor(parseInt(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)))
+
+      if(!(Object.entries(result.data).length == 0)){
         this.rootStyle.textContent = 
         `
         :root {

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import { ProposalService } from 'src/app/shared/services/proposal.service';
 //import { ISelectItem } from 'src/app/shared/interfaces/ISelectItem';
@@ -6,9 +6,7 @@ import { ISelectCheckItem } from 'src/app/shared/interfaces/ISelectCheckItem';
 import { IProposal } from 'src/app/shared/interfaces/IProposal';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
-import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 
 @Component({
   selector: 'app-proposals',

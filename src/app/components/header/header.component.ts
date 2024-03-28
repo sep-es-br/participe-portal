@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   externalLinksMenuItems: MenuItem[];
   researchUrl: string;
   estimatedTimeResearch: string;
-  displayExternalLinks: Boolean;
+  displayExternalLinks: boolean;
 
   constructor(
     private authSrv: AuthService,

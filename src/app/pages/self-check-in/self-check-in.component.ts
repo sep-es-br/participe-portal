@@ -33,8 +33,8 @@ export class SelfCheckInComponent implements OnInit {
     }
 
     async isCheckin(meeting, personId){
-      var now = new Date();
-      var timeZone = now.toString().split(' ')[5];
+      const now = new Date();
+      const timeZone = now.toString().split(' ')[5];
      await this.meetingSrv.postCheckIn(meeting, personId, timeZone)
     }
 

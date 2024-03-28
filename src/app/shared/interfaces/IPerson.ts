@@ -7,7 +7,7 @@ export interface IPerson {
   confirmEmail?: string;
   cpf?: string;
   telephone?: string;
-  receiveInformational?: Boolean;
+  receiveInformational?: boolean;
   selfDeclaration?: ISelfDeclarations;
 }
 

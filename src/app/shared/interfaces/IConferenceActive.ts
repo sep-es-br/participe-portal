@@ -2,10 +2,10 @@ import { IImage } from './IImage';
 
 export interface ILoginScreenInfo {
   localityType: string;
-  showStatistics: Boolean;
-  showCalendar: Boolean;
-  showStatisticsPanel: Boolean;
-  showExternalLinks: Boolean;
+  showStatistics: boolean;
+  showCalendar: boolean;
+  showStatisticsPanel: boolean;
+  showExternalLinks: boolean;
   titleAuthentication: string;
   subtitleAuthentication: string;
   fileAuthentication: IImage;

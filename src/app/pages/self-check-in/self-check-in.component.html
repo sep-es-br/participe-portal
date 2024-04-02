@@ -6,30 +6,20 @@
                 <tbody>
                     <tr>
                         <td>
-                            <h2>Presença Registrada !</h2>
+                            <h2>Bem vindo(a)</h2>
+                            <h5>{{ userForm.value.personName }}</h5>
+                            <div>Obrigado por sua presença</div>
+                            <div >{{ userForm.value.date }}</div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                             <div >{{ userForm.value.date }}</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4>{{ userForm.value.personName }}</h4>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                            <h5>{{ userForm.value.conferenceName }}</h5>
+                            <div>Encontro presencial</div>
                             <div>{{ userForm.value.meetingName }}</div>
+                            <div>{{ userForm.value.localityPlace }}</div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div>{{ userForm.value.localityPlace }}, ES</div>
-                        </td>
-                    </tr>
-                    <tr>
                 </tbody>
             </table>
             <div class="text-center">

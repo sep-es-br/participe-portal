@@ -71,7 +71,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private participationStateSrv: ParticipationStateService,
     private messageService: MessageService,
-    private colorService: ColorService,
+    protected colorService: ColorService,
   ) {
   }
 

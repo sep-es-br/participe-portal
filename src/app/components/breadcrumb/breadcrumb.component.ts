@@ -25,7 +25,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
   constructor(
     private breadcrumbSrv: BreadcrumbService,
     private router: Router,
-    private colorService: ColorService,
+    protected colorService: ColorService,
   ) { 
     
   }

@@ -322,3 +322,7 @@ app-pre-registration {
     visibility: hidden;
   }
 }
+
+.p-dropdown-items, .p-multiselect-items{
+  padding: 0;
+}

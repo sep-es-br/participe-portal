@@ -11,13 +11,13 @@
     grid-template-columns: repeat(auto-fill,minmax(180px, 1fr));
     .card-item {
       //width: 180px;
-      border: 1px solid $border-color;
-      background: $card-color;
+      border: 1px solid var(--card-border-color);
+      background: var(--card-color);
       padding: 20px;
       border-radius: 4px;
-      color: $card-font-color;
+      color: var(--card-font-color);
       h2 {
-        color: $card-font-color;
+        color: var(--card-font-color);
         font-size: 20px;
       }
       ul {
@@ -33,18 +33,18 @@
       .line {
         width: 50px;
         height: 4px;
-        background: linear-gradient(45deg, $accent-color, $accent-color-secondary);
+        background: var(--accent-color);
         margin: 10px 0;
       }
       &:hover {
         cursor: pointer;
-        color: $card-font-color-hover;
-        background: linear-gradient(45deg, $accent-color, $accent-color-secondary);
+        color: var(--card-font-color-hover);
+        background: var(--card-color-hover);
         h2 {
-          color: $card-font-color-hover;
+          color: var(--card-font-color-hover);
         }
         .line {
-          background: #008CD1; //$card-font-color-hover
+          background: var(--card-font-color-hover);
         }
       }
     }

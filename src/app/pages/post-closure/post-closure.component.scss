@@ -1,7 +1,5 @@
 @import 'src/styles.scss';
 
-
-$backgroundWindow: $accent-color-secondary;
 $darkColorOr: rgba(0,0,0,0.16);
 
 .page-post-closure {
@@ -10,11 +8,7 @@ $darkColorOr: rgba(0,0,0,0.16);
   flex-direction: row;
 
     .background-page {
-        //background: $menu-color-primary;
-        //background: linear-gradient(140deg, $menu-color-primary 0%, $menu-color-secondary 100%);
-        //background-image: url(src/assets/images/background.png);
-        background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 100%);
-        //background: rgba(21,57,97,0.93);
+        background: var(--background);
         background-size: cover;
         width: 100%;
         height: 100vh;
@@ -26,11 +20,11 @@ $darkColorOr: rgba(0,0,0,0.16);
         width: 100%;
         .conference-warning-block {
             margin: 40px 0 0 95px;
-            background: $card-color;
-            border-top: 10px solid $accent-color-secondary;
+            background: var(--card-color);
+            border-top: 10px solid var(--accent-color);
             .conference-warning-message {
                 padding: 40px 45px 30px 45px;
-                background: $card-color;
+                background: var(--card-color);
             }
         }
     }
@@ -60,7 +54,7 @@ $darkColorOr: rgba(0,0,0,0.16);
                 h2, p {
                     margin-block-start: 0;
                     margin-block-end: 0;
-                    color: $card-font-color;
+                    color: var(--card-font-color);
                 }
                 p {
                     margin-top: 5px;
@@ -173,7 +167,7 @@ $darkColorOr: rgba(0,0,0,0.16);
                 display: flex;
                 justify-content: center;
                 margin-top: 20px;
-                color: $card-font-color;
+                color: var(--card-font-color);
                 cursor: pointer;
                 :hover {
                     color: white !important;
@@ -224,7 +218,7 @@ $darkColorOr: rgba(0,0,0,0.16);
         justify-content: center;
     }
     .submit {
-        background: $accent-color-secondary;
+        background: var(--accent-color);
         border: 0;
         color: white;
         padding: 2.5vw 39vw;

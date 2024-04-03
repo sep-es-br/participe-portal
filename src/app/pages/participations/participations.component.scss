@@ -25,7 +25,7 @@
         color: white;
         outline:none;
         border-radius: 60px;
-        background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+        background: var(--accent-color);
         margin-right: 10px;
         padding: 6px;
         width: 6rem;
@@ -55,7 +55,7 @@
         margin-right: 1vw;
         border-radius: 50%;
         background-color: #d6deea;
-        color: $accent-color;
+        color: var(--accent-color);
       }
       @media screen and (max-width: 768px) {
         width: 100%;
@@ -92,7 +92,7 @@
     }
   }
   .title-container {
-    color: $font-color-primary;
+    color: var(--font-color);
     .title {
       font-size: 1.5rem;
       font-weight: 500;
@@ -106,21 +106,25 @@
         display: flex;
         flex-direction: row;
         flex: 1;
-        background-color: $card-color;
+        background-color: var(--card-color);
+        border: 1px solid var(--card-border-color);
         padding: 15px;
         flex-wrap: wrap;
         border-radius: 3px;
+        color: var(--card-font-color);
 
         .comment {
           display: flex;
           flex-basis: 60%;
           flex-direction: column;
           justify-content: space-evenly;
+          color: var(--card-font-color);
 
           .top {
             display: flex;
             flex-direction: row;
             align-items: center;
+            color: var(--card-font-color);
             flex-wrap: wrap;
 
             .status {
@@ -130,18 +134,18 @@
               margin-right: 5px;
 
               &.published {
-                color: $accent-color;
+                color: var(--accent-color);
               }
               &.pending {
-                color: #737373;
+                color: var(--card-font-color);
                 img {
                   filter: grayscale(1);
                 }
               }
-              img {
+              img, .quote-svg {
                 width: 20px;
                 height: 20px;
-                margin: 3px 5px 3px 0;
+                margin: 0 5px 3px 0;
               }
             }
           }
@@ -150,14 +154,17 @@
             white-space: pre-wrap;
           }
           .likes {
-            color: #737373;
-            img {
+            color: var(--card-font-color);
+            span{
+              margin-right: 5px;
+            }
+            img, .like-svg{
               width: 15px;
               height: 15px;
               min-width: 2%;
             }
             &.has-like {
-              color: $accent-color;
+              color: var(--accent-color);
             }
           }
 
@@ -186,26 +193,30 @@
             display: flex;
             flex: 0 1 45%;
             flex-direction: row;
-            border: 1px solid $accent-color;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--accent-color);
             margin: 5px;
             height: 64px;
+            color: var(--card-font-color-hover);
 
             .structure-item {
               display: flex;
               justify-content: center;
               align-items: center;
               flex-direction: column;
-              border-right: 1px solid $accent-color;
-              color: $accent-color;
+              border-right: 1px solid var(--card-border-color);
+              color: var(--card-font-color-hover);
+              background-color: var(--accent-color);
               text-align: center;
               padding: 5px 0;
               min-width: 75px;
-              img {
+              img, .structure-img {
                 width: 40px;
                 height: 40px;
               }
               .name {
                 font-size: .6rem;
+                color: var(--card-font-color-hover);
               }
             }
             > .name {
@@ -217,16 +228,16 @@
             }
             &:last-of-type {
               .structure-item {
-                background-color: $accent-color;
+                background-color: var(--accent-color);
                 color: white;
-                border-right: 1px solid #f8f8f8;
+                border-right: 1px solid var(--card-border-color);;
                 img {
                   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
                 }
               }
               > .name {
-                color: white;
-                background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+                color: var(--card-font-color-hover);
+                background: var(--accent-color);
               }
             }
           }
@@ -239,7 +250,7 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-        background-color: $card-color;
+        background-color: var(--card-color);
         padding: 15px;
         flex-wrap: wrap;
         border-radius: 3px;
@@ -247,10 +258,10 @@
         .top {
           display: flex;
           align-items: center;
-          color: $card-font-color;
+          color: var(--card-font-color);
 
           .title {
-            color: $card-font-color;
+            color: var(--card-font-color);
             font-size: 1.1rem;
             font-weight: 600;
             margin-right: 5px;
@@ -262,31 +273,30 @@
           margin: 5px 0;
 
           .item {
-            background-color: $accent-color;
+            background-color: var(--accent-color);
             display: flex;
             flex: 1 0 23%;
-            border: 1px solid $card-border-color;
+            border: 1px solid var(--card-border-color);
             margin: 5px;
-            color: $card-font-color;
+            color: var(--card-font-color-hover);
             .structure-item {
-              background-color: $accent-color;
+              background-color: var(--accent-color);
               display: flex;
               justify-content: center;
               align-items: center;
               flex-direction: column;
-              border-right: 1px solid $card-border-color;
-              color: $accent-color;
+              border-right: 1px solid var(--card-border-color);
+              color: var(--accent-color);
               text-align: center;
               padding: 5px 0;
               min-width: 75px;
-              img {
+              img, .structure-img  {
                 width: 40px;
                 height: 40px;
-                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
               }
               .name {
                 font-size: .6rem;
-                color: $card-border-color;
+                color: var(--card-font-color-hover);
               }
             }
             > .name {
@@ -298,22 +308,22 @@
             }
             &:last-of-type {
               .structure-item {
-                background-color: $accent-color;
+                background-color: var(--accent-color);
                 color: white;
-                border-right: 1px solid #f8f8f8;
+                border-right: 1px solid var(--card-border-color);;
                 img {
                   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(53deg) brightness(104%) contrast(112%);
                 }
               }
               > .name {
-                color: white;
-                background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+                color: var(--card-font-color-hover);
+                background: var(--accent-color);
               }
             }
           }
         }
         .action {
-          color: $accent-color;
+          color: var(--accent-color);
           cursor: pointer;
 
           img {
@@ -371,7 +381,7 @@
       .vertical-line {
         width: 1px;
         height: calc(100% + .5em);
-        border: 0.5px solid white;
+        border: 0.5px solid var(--card-color);
         &.top {
           margin-top: -0.5em;
           margin-bottom: 1em;
@@ -394,7 +404,7 @@
         width: 60px;
         height: 60px;
 
-        img {
+        img, .svg-line {
           width: 50px;
           height: 50px;
         }

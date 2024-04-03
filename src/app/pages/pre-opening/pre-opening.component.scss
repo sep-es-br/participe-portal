@@ -7,11 +7,7 @@
     flex-direction: column;
 
     .background-page {
-      //background: $menu-color-primary;
-      //background: linear-gradient(140deg, $menu-color-primary 0%, $menu-color-secondary 100%);
-      //background-image: url(src/assets/images/background.png);
-      background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 100%);
-      //background: rgba(21,57,97,0.93);
+      background: var(--background);
       background-size: cover;
       width: 101%;
       height: 101vh;
@@ -25,18 +21,18 @@
         .counter-title {
             font-size: 24px;
             font-weight: bold;
-            color: $font-color-primary;
+            color: var(--font-color);
             padding-left: 2px;
         }
         .counter {
             margin-top: 5px;
             display: flex;
             flex-direction: row;
-            color: $menu-color-primary;
+            color: var(--card-font-color);
             .date-block {
                 width: 85px;
                 height: 80px;
-                background-color: $font-color-primary;
+                background-color: var(--font-color);
                 border-radius: 10px;
                 margin: 0 2px;
                 display: flex;
@@ -60,8 +56,8 @@
     }
     .conference-warning-block {
         margin: 0 65px 40px;
-        background: $card-color;
-        border-top: 10px solid $accent-color-secondary;
+        background: var(--card-color);
+        border-top: 10px solid var(--accent-color);
         // min-height: 380px;
         .conference-warning-message {
             padding: 40px 80px 30px 50px;

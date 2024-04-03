@@ -1,9 +1,7 @@
 @import 'src/styles.scss';
 
 .background-linear {
-  // background: $menu-color-primary;
-  background: $menu-color-primary;
-  background: linear-gradient(140deg, $menu-color-primary 35%, $menu-color-secondary 150%);
+  background: var(--background);
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -19,7 +17,7 @@
   position: relative;
 
   .layout-container-card {
-    background: $menu-color-secondary;
+    background: var(--card-color);
     min-height: 100px;
     margin: 20px;
     border-radius: 10px;
@@ -27,7 +25,7 @@
   }
 
   .title-container {
-    color: $font-color-secondary;
+    color: var(--font-color);
     padding: 20px 50px;
     display: flex;
     flex-direction: column;

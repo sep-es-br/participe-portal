@@ -14,7 +14,7 @@
       color: white;
       outline:none;
       border-radius: 60px;
-      background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+      background: var(--accent-color);
       padding: 6px;
       width: 6rem;
       text-align: center;
@@ -109,11 +109,11 @@
       }
 
       input:checked ~ label{
-        color: $accent-color-secondary;
-        border-color: $accent-color-secondary;
+        color: var(--accent-color);
+        border-color: var(--accent-color);
         .arrow{
-          border-right: 2px solid $accent-color-secondary;
-          border-top: 2px solid $accent-color-secondary;
+          border-right: 2px solid var(--accent-color);
+          border-top: 2px solid var(--accent-color);
         }
       }
       input:checked ~ .checkmark:after {
@@ -174,7 +174,7 @@
           height: 15px;
           width: 15px;
           border: 1px;
-          border-color:$accent-color-secondary;
+          border-color:var(--accent-color);
           border-style: solid;
         }
         .checkmark:after {
@@ -192,7 +192,7 @@
           top: 2px;
           width: 4px;
           height: 8px;
-          border: solid $accent-color-secondary;
+          border: solid var(--accent-color);
           border-width: 0 2px 2px 0;
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
@@ -229,7 +229,7 @@
       }
       &:hover {
         h2 {
-          color: $accent-color;
+          color: var(--accent-color);
         }
       }
     }

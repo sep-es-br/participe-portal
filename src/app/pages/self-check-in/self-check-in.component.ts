@@ -6,6 +6,8 @@ import { MeetingService } from "src/app/shared/services/meeting.service";
 import 'moment-timezone';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { ConferenceService } from "src/app/shared/services/conference.service";
+import { IConference } from "src/app/shared/interfaces/IConference";
 
 
 @Component({
@@ -19,8 +21,10 @@ export class SelfCheckInComponent implements OnInit {
     loading = true;
     checkInData = [{}]
     isNotEmptyCheckInObject = false
+    conference: IConference
 
     constructor(
+      private conferenceSrv: ConferenceService,
       private formBuilder: FormBuilder,
       private authSrv: AuthService,
       protected meetingSrv: MeetingService,
@@ -48,6 +52,10 @@ export class SelfCheckInComponent implements OnInit {
     }
 
     async registerAttendance(personId, meeting){
+      await this.conferenceSrv.GetById(parseInt(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))).then(
+        (res) => {
+          this.conference = res.data
+      })
       await this.getPersonAndMeeting(personId, meeting)
       if(this.isNotEmptyCheckInObject){
         this.setForm(this.checkInData)
@@ -64,7 +72,8 @@ export class SelfCheckInComponent implements OnInit {
         personName: [_.get(value.data.person, 'name', ''), Validators.required],
         date: [_.get(value.data, 'time', ''), Validators.required],
         meetingName: [_.get(value.data.meeting, 'name', ''), Validators.required],
-        localityPlace: [_.get(value.data.meeting.localityPlace, 'name', ''), Validators.required]
+        localityPlace: [_.get(value.data.meeting.localityPlace, 'name', ''), Validators.required],
+        conferenceName:[_.get(this.conference, 'name', ''), Validators.required]
       });
     }
 

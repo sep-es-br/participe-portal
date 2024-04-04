@@ -9,13 +9,13 @@
         <input id="nome" pInputText formControlName="name" type="text">
         <app-input-message [form]="userForm" field="name"></app-input-message>
       </div>
-      <div class="p-col-12 p-md-7 form-group stacked">
+      <div class="p-col-12 p-md-6 form-group stacked">
         <label for="contactEmail">E-mail de contato*</label>
         <p-dropdown id="contactEmail" [options]="optionsContactEmail"
                     formControlName="contactEmail"></p-dropdown>
         <app-input-message [form]="userForm" field="contactEmail"></app-input-message>
       </div>
-      <div class="p-col-12 p-md-5 form-group stacked">
+      <div class="p-col-12 col-md-6 form-group stacked">
         <label for="telephone">Telefone</label>
         <p-inputMask mask="(99) 99999-9999" formControlName="telephone"></p-inputMask>
         <app-input-message [form]="userForm" field="telephone"></app-input-message>

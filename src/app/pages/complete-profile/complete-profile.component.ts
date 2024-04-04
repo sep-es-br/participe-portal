@@ -67,7 +67,7 @@ export class CompleteProfileComponent implements OnInit {
       id, name, contactEmail, telephone, receiveInformational,
       selfDeclaration: {
         conference: this.conferenceSrv.ConferenceActiveId,
-        locality: _.get(locality, 'id'),
+        locality: locality,
       }
     };
 

@@ -109,7 +109,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
 
   async populateState() {
     const participationState = this.participationStateSrv.getSync();
-    this.localityId = _.get(participationState, 'locality.id');
+    this.localityId = _.get(participationState, 'locality.id') as number;
     this.navigation = _.get(participationState, 'navigation', []);
   }
 

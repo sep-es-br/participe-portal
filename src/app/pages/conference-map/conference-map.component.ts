@@ -49,7 +49,7 @@ export class ConferenceMapComponent implements OnInit {
         if (this.regionalization) {
           const { success, data } = await this.localitySrv.getConferenceCards(this.conferenceSrv.ConferenceActiveId);
           if (success) {
-            let localidadesExibicao = ['Central Sul','Caparaó','Nordeste','Rio Doce','Noroeste'];
+            let localidadesExibicao = ['Central Sul','Caparaó','Nordeste','Rio Doce','Noroeste', 'Centro Oeste'];
             data.localities = data.localities.filter(obj => localidadesExibicao.filter(n => n === obj.name).length > 0 );
             this.conference = data;
             this.breadcrumbSrv.add({ title: data.regionalizable});

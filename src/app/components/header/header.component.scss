@@ -21,7 +21,6 @@
     }
     img {
       max-height: 120px;
-      margin-right: 10px;
     }
   }
   .menu-container {
@@ -69,17 +68,11 @@
           }
 
         }
-
-        img {
-          max-width: 230px;
-        }
       }
       .actions {
         display: none;
       }
       img.img-center-sm{
-        text-align: center;
-        margin: auto;
         justify-content: center;
         display: flex;
       }

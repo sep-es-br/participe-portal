@@ -1,5 +1,5 @@
 import { ConferenceService } from '../../shared/services/conference.service';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
@@ -22,12 +22,12 @@ export class MenuComponent implements OnInit {
     { label: 'Estatísticas', route: '/statistics', activeWhen: ['statistics'] },
   ];
 
-  @ViewChild('sidemenu', {static: false}) sidemenu: ElementRef;
+  @ViewChild('sidemenu') sidemenu: ElementRef;
 
   conference: IConference;
   userInfo: IPerson;
   externalLinksMenuItems: MenuItem[];
-  displayStatisticsPanel: Boolean;
+  displayStatisticsPanel: boolean;
 
   constructor(
     private authSrv: AuthService,

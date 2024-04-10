@@ -28,8 +28,7 @@
           <div class="link-line">
             <div class="vertical-line top" [class.hidden]="!i"></div>
             <div class="bg-icon">
-              <img [src]="'assets/icons/' + (participation.highlight ?  'check-circle2.svg': 'logomark-white2.svg')"
-                alt="Ìcone item da timeline">
+              <div class="svg-line" [innerHTML]="participation.highlight ? colorService.svgList.check_circle2_svg.htmlText : colorService.svgList.logomark_white2_svg.htmlText" alt="Ìcone item da timeline" ></div>
             </div>
             <div class="vertical-line bottom" [class.hidden]="listParticipations?.length === (i + 1)"></div>
           </div>
@@ -42,23 +41,20 @@
               <div class="plan-items">
                 <div class="item" *ngIf="regionalization">
                   <div class="structure-item">
-                    <img src="assets/icons/locality-without-map-gradient.svg" alt="">
+                    <div [innerHTML]="colorService.svgList.locality_without_map_gradient_svg.htmlText" class="structure-img"></div>
                     <div class="name">{{ participation.localityDto?.type?.name}}</div>
                   </div>
                   <div class="name">{{ participation.localityDto?.name }}</div>
                 </div>
                 <div class="item" *ngFor="let item of participation.planItems; last as isLast">
                   <div class="structure-item">
-                    <img *ngIf="!isLast" src="assets/icons/{{item.fileName}}-gradient.svg" alt="">
-                    <img *ngIf="isLast" src="assets/icons/{{item.fileName}}.svg" alt="">
+                    <div *ngIf="!isLast" [innerHTML]="colorService.svgList.area_tematica_gradient_svg.htmlText" class="structure-img"></div>
+                    <div *ngIf="isLast" [innerHTML]="colorService.svgList.desafio_svg.htmlText" class="structure-img"></div>
                     <div class="name">{{ item.structureItemName }}</div>
                   </div>
                   <div class="name">{{ item.name }}</div>
                 </div>
               </div>
-              <!-- <div class="action" (click)="handleNewProposal(participation)">
-                <img src="/assets/icons/comment2.svg" alt="Ícone inserir proposta">Inserir Proposta
-              </div> -->
             </div>
           </ng-container>
           <ng-template #proposal>
@@ -67,7 +63,7 @@
                 <div class="top">
                   <span class="status" [class.published]="participation.status === 'pub'"
                     [class.pending]="participation.status === 'pen'">
-                    <img src="/assets/icons/quote2.svg" alt="Ícone aspas">
+                    <div [innerHTML]="colorService.svgList.quote2_svg.htmlText" class="quote-svg"></div>
                     {{ participation.status === 'pub' ? 'PROPOSTA PUBLICADA' : 'PROPOSTA PENDENTE'}}
                   </span>
                   <span class="moderated-by" *ngIf="!!participation.moderatorName && !participation.moderated"> em moderação por <span class="moderator-name">{{ participation.moderatorName }}</span></span>
@@ -75,15 +71,19 @@
                 </div>
                 <p class="text" style="font-size: 18px;">{{ participation.text }}</p>
 
-                <a class="likes" [class.has-like]="!!participation.qtdLiked" style="font-size: 12px;">
-                  {{ participation.qtdLiked || 0 }}
-                  <img src="assets/icons/like2.svg" alt="">
-                </a>
+                <a class="likes" [class.has-like]="!!participation.qtdLiked" style="font-size: 12px; display: inline-block;">
+                  <span style="display: inline-block;">
+                      {{ participation.qtdLiked || 0 }}
+                  </span>
+                  <span style="display: inline-block;">
+                      <div [innerHTML]="colorService.svgList.like2_svg.htmlText" class="like-svg"></div>
+                  </span>
+              </a>
               </div>
               <div class="info-plan">
                 <div class="item" *ngIf="regionalization">
                   <div class="structure-item">
-                    <img src="assets/icons/locality-without-map-gradient.svg" alt="">
+                    <div [innerHTML]="colorService.svgList.locality_without_map_gradient_svg.htmlText" class="structure-img"></div>
                     <div class="name">{{ participation.localityDto?.type?.name}}</div>
                   </div>
                   <div class="name">{{ participation.localityDto?.name }}</div>
@@ -91,8 +91,8 @@
                 <div class="item" *ngFor="let item of participation.planItems; let i = index; last as isLast"
                   [ngStyle]="{ order: item.structureItemName === 'Área Estratégica' ? ( i === 0 ? 2 : 1 ) : i }">
                   <div class="structure-item">
-                    <img *ngIf="!isLast" src="assets/icons/{{item.fileName}}-gradient.svg" alt="">
-                    <img *ngIf="isLast" src="assets/icons/{{item.fileName}}.svg" alt="">
+                    <div *ngIf="!isLast" [innerHTML]="colorService.svgList.area_tematica_gradient_svg.htmlText" class="structure-img"></div>
+                    <div *ngIf="isLast" [innerHTML]="colorService.svgList.desafio_svg.htmlText" class="structure-img"></div>
                     <div class="name">{{ item.structureItemName }}</div>
                   </div>
                   <div class="name">{{ item.name }}</div>

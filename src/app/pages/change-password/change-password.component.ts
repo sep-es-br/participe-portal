@@ -1,6 +1,6 @@
 import { ConferenceService } from '../../shared/services/conference.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { PersonService } from '../../shared/services/person.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -14,10 +14,10 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private personSrv: PersonService,
     private conferenceSrv: ConferenceService,
     private router: Router,

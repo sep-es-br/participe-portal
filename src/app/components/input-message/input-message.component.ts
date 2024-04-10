@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input-message',
@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class InputMessageComponent {
 
-  @Input() form: FormGroup;
+  @Input() form: UntypedFormGroup;
   @Input() field: string;
 
   constructor(

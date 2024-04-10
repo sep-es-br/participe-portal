@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import {Component, OnInit} from '@angular/core';
 import {MessageService, SelectItem} from 'primeng/api';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../../shared/services/auth.service';
 import {ConferenceService} from '../../shared/services/conference.service';
@@ -20,13 +20,13 @@ import {StoreKeys} from '../../shared/commons/contants';
 })
 export class CompleteProfileComponent implements OnInit {
 
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   localities: ILocality[] = [];
   filteredLocalities: SelectItem[];
   localityType: string;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private localitySrv: LocalityService,
     private authSrv: AuthService,
     private personSrv: PersonService,
@@ -67,7 +67,7 @@ export class CompleteProfileComponent implements OnInit {
       id, name, contactEmail, telephone, receiveInformational,
       selfDeclaration: {
         conference: this.conferenceSrv.ConferenceActiveId,
-        locality: _.get(locality, 'id'),
+        locality: locality,
       }
     };
 

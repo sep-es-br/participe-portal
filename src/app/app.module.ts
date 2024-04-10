@@ -57,9 +57,9 @@ import { StartComponent } from './pages/start/start.component';
 import { PreRegistrationComponent } from './pages/pre-registration/pre-registration.component';
 import { registerLocaleData } from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
-import { TriStateCheckboxModule } from 'primeng/components/tristatecheckbox/tristatecheckbox';
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { SafeHTMLPipe } from './shared/pipes/safeHTML/safe-html.pipe';
-import { ButtonModule } from 'primeng/components/button/button';
+import { ButtonModule } from 'primeng/button';
 import { LoginSelfCheckInComponent } from './pages/login-self-check-in/login-self-check-in.component';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
 

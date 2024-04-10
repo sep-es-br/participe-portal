@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { IHorizontalBarChartItem } from 'src/app/shared/interfaces/IStatisticsDashboardData';
 import { ResponsiveService } from 'src/app/shared/services/responsive.service';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-horizontal-bar-graph',
@@ -31,6 +32,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
 
   constructor(
     private responsiveSrv: ResponsiveService,
+    private colorService: ColorService,
   ) {
   }
 
@@ -51,7 +53,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       this.responsive = value;
       this.align = this.responsive ? 'end' : 'end';
       this.anchor = this.responsive ? 'center' : 'end';
-      this.labelColor = this.responsive ? '#000000' : '#ffffff';
+      this.labelColor = this.colorService.getCssVariableValue('--card-font-color')
       this.data = undefined;
       this.config = undefined;
       this.plugins = undefined;
@@ -60,9 +62,8 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       await this.loadConfig();
       await this.loadPlugins();
     });
-    Chart.plugins.register(ChartDataLabels);
-    this.loadData();
-    this.loadPlugins();
+    Chart.defaults.borderColor = 'rgba(0, 0, 0, 0)';
+    Chart.register(ChartDataLabels);
   }
 
   ngOnDestroy(): void {
@@ -76,8 +77,11 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       return Math.max(a, b);
     });
     this.config = {
+      events: ['click'],
+      indexAxis: 'y',
       onClick: (e, item) => this.graphClicked.next(item),
       plugins: {
+        legend: false,
         datalabels: {
           align: this.align,
           anchor: this.anchor,
@@ -99,11 +103,8 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
       tooltips: {
         enabled: false
       },
-      legend: {
-        display: false,
-      },
       scales: {
-        xAxes: [{
+        x: {
           offset: true,
           gridLines: {
             display: false,
@@ -114,15 +115,14 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
             display: false,
             max: maxData * 1.15,
           }
-        }],
-        yAxes: [{
-          // barPercentage: 1,
-          // categoryPercentage: 0.7,
+        },
+        y: {
           gridLines: {
             display: false
           },
           ticks: {
             callback: (label) => {
+              label = this.chartData[label].description
               const maxValue = this.responsive ? 15 : 20;
               if (/\s/.test(label) && label.length > maxValue) {
                 const labelText = label.split(' ');
@@ -148,7 +148,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
             fontColor: this.labelColor,
           },
           offset: true
-        }],
+        },
       },
     };
     this.height = (data.length * 60) < 100 ? 100 : (data.length * 60);
@@ -164,7 +164,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
     this.data = {
       labels: this.labels,
       datasets: [{
-        data: this.chartData && this.chartData.map(item => item.quantity),
+        data: this.chartData.map(item => item.quantity),
         barPercentage: 0.9,
         categoryPercentage: 0.8,
         onClick: (e, item) => this.graphClicked.next(item),
@@ -184,11 +184,11 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
         },
       }],
     };
-    // this.height = this.data.labels.length * 60;
   }
 
   async loadPlugins() {
     const gradientLenght = this.responsive ? 200 : 400;
+    Chart.defaults.plugins.tooltip.enabled = false;
     this.plugins = [{
       beforeDatasetDraw: (chart) => {
         const chartInstance = chart;
@@ -199,12 +199,10 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
         gradient.addColorStop(0, '#00a198');
         gradient.addColorStop(1, '#00a198');
         data.datasets.forEach((dataset, i) => {
-          const meta = chartInstance.controller.getDatasetMeta(i);
-          meta.data.forEach((bar, index) => {
-            if (!bar._model) { return; }
-            const valor = +dataset.data[index];
-            // bar._view.backgroundColor = gradient;
-            bar._view.backgroundColor = '#F18EB1';
+          const meta = chartInstance.getDatasetMeta(i);
+          meta.data.forEach((bar) => {
+            bar.options.backgroundColor = this.colorService.getCssVariableValue('--accent-color');
+            bar.options.borderColor = this.colorService.getCssVariableValue('--accent-color');
           });
         });
       }

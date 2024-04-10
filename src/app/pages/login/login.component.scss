@@ -1,4 +1,4 @@
-@import '~src/styles.scss';
+@import 'src/styles.scss';
 
 
 $startTop: 40px;
@@ -12,8 +12,7 @@ $darkColorOr: rgba(0,0,0,0.16);
   flex-wrap: wrap;
 
   .background-page {
-    background: $menu-color-primary;
-    background: linear-gradient(140deg, $menu-color-primary 0%, $menu-color-secondary 100%);
+    background: var(--background);
     background-size: cover;
     width: 101%;
     height: 100vh;
@@ -55,7 +54,7 @@ $darkColorOr: rgba(0,0,0,0.16);
   .auth-box {
     max-width: 450px;
     border-radius: 1rem;
-    background-color: rgba(241, 142, 177, 0.9);
+    background-color: var(--card-color);
     margin: 250px 0 $startTop 60px;
     display: flex;
     flex-direction: column;
@@ -76,7 +75,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       h2, p {
         margin-block-start: 0;
         margin-block-end: 0;
-        color: $card-font-color;
+        color: var(--card-font-color);
       }
       p {
         margin-top: 5px;
@@ -202,7 +201,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       justify-content: center;
       margin-top: 10px;
       margin-bottom: 10px;
-      color: $card-font-color;
+      color: var(--card-font-color);
       cursor: pointer;
       :hover {
         color: white !important;

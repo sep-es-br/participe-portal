@@ -1,10 +1,16 @@
 <app-template *ngIf="loadedServices" [useCard]="false" [footerVisible]="true" >
     <div class="container">
         <div class="text-center">
-            <h2 class="text-dark">Pré-credenciamento</h2>
         </div>
         <div class="card col-10 col-md-6 col-lg-4 m-auto shadow mt-3 p-2">
             <table class="table table-striped table-borderless" >
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            <h2 class="text-dark">Pré-credenciamento</h2>
+                        </th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <td>
@@ -77,14 +83,14 @@
     </div>
 </app-template>
 <app-template *ngIf="preRegistrationCompleted" [useCard]="false" [footerVisible]="true" >
-    <div class="container">
-        <div class="text-center print-visible">
-            <h2 class="text-dark print-visible">Pré-credenciamento<br>Concluído</h2>
-        </div>
-        <div class="col-10 col-md-6 col-lg-4 m-auto text-center  mt-3 p-2">
+    <div class="container mb-3">
+        <div class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 bg-dark" style="border-radius:20px">
+            <div class="text-center print-visible">
+                <h2 class="text-light print-visible">Pré-credenciamento<br>Concluído</h2>
+            </div>
             <div>
                 <em class="informacoes print-visible" style="color: #cdcdcd;" >Apresente o QR Code na entrada e registre sua presença</em>
-                <img src="data:image/png;base64,{{preRegistrationData.qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code print-visible">
+                <img src="data:image/png;base64,{{preRegistrationData.qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
             </div>
 
             <a href="data:image/png;base64,{{preRegistrationData.qrcode}}" download="Confirmação de Presença - Encontro Presencial - {{preRegistrationData.meeting.name}}" class="btn btn-sm btn-outline-primary ms-2" target="_blank">
@@ -95,11 +101,11 @@
                 <span class="iconText">Imprimir</span>
                 <i class="fas fa-print"></i>
             </a>
-            <p class="print-visible" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
-            <p class="print-visible" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
-            <p class="print-visible">{{preRegistrationData.meeting.place}}</p>
-            <p class="print-visible">{{preRegistrationData.meeting.address}}</p>
-            <p class="print-visible">{{preRegistrationData.meeting.localityPlace.name}}</p>
+            <p class="print-visible text-justify" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
+            <p class="print-visible text-justify" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
+            <p class="print-visible text-justify">{{preRegistrationData.meeting.place}}</p>
+            <p class="print-visible text-justify">{{preRegistrationData.meeting.address}}</p>
+            <p class="print-visible text-justify">{{preRegistrationData.meeting.localityPlace.name}}</p>
         </div>
     </div>
 </app-template>

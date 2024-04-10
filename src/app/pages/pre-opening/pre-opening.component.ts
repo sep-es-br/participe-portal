@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ConferenceService} from 'src/app/shared/services/conference.service';
 import { SafeHtml } from '@angular/platform-browser';
-import {ButtonModule} from 'primeng/components/button/button';
+import {ButtonModule} from 'primeng/button';
 import * as moment from 'moment';
 import 'moment-timezone';
 

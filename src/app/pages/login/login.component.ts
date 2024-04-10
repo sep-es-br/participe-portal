@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isOpen = false;
   backgroundImageUrl: string = '/assets/images/background.png';
   calendarImageUrl:string = '';
-  displayCalendar: Boolean;
+  displayCalendar: boolean;
   
 
   constructor(

@@ -8,6 +8,7 @@ import { StatusParticipationEnum } from 'src/app/shared/enums/StatusParticipatio
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { ParticipationService } from 'src/app/shared/services/participation.service';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-participations',
@@ -57,7 +58,8 @@ export class ParticipationsComponent implements OnInit {
   constructor(
     private participationSrv: ParticipationService,
     private conferenceSrv: ConferenceService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private colorService: ColorService,
   ) { }
 
   async ngOnInit() {

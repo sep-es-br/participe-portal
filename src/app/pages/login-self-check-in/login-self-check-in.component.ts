@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StoreKeys } from "src/app/shared/commons/contants";
 import { IConference } from "src/app/shared/interfaces/IConference";
@@ -26,7 +26,7 @@ export class LoginSelfCheckInComponent implements OnInit {
 
     async ngOnInit() {
       await this.login().then(
-        data => {
+        () => {
           this.router.navigate(['/login', this.conference.id]);
         }
       );

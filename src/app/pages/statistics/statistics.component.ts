@@ -382,8 +382,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   async handleStrategicAreaChartClicked(event) {
-    const selectedIndex = (event && event !== [] && event[0]) ? event[0]._index : undefined;
-    if (selectedIndex >= 0) {
+    const selectedIndex = Array.isArray(event) && event.length >= 0 ? event[0].index : undefined;
+    if (selectedIndex != undefined) {
       const indexStructureItemSelected =
         this.strategicAreaChartStructureLevels.findIndex(item => item.id === this.itemStructureSelected.id);
       if (indexStructureItemSelected > -1) {
@@ -415,8 +415,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   async handleMicroregionChartClicked(event) {
-    const selectedIndex = (event && event !== [] && event[0]) ? event[0]._index : undefined;
-    if (selectedIndex >= 0) {
+    const selectedIndex = Array.isArray(event) && event.length >= 0 ? event[0].index : undefined;
+    if (selectedIndex != undefined) {
       const indexGroupSelected =
         this.microregionChartAgroupOptions.findIndex(option => option.value === this.microregionChartAgroupSelected);
       if (indexGroupSelected > -1) {

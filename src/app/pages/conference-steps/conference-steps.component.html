@@ -1,14 +1,11 @@
 <app-template [title]="conferenceStepItem?.structureitem?.title"
               [subTitle]="conferenceStepItem?.structureitem?.subtitle" [footerVisible]="true" [fullLayout]="true">
-  <!-- <img class="action-back-header" *ngIf="conferenceStepItem?.structureitem" (click)="backNavigation()"
-       src="assets/icons/arrow-left-circle.svg" alt=""/> -->
        <div [innerHTML]="colorService.svgList.arrow_left_circle_svg.htmlText" *ngIf="conferenceStepItem?.structureitem" class="action-back-header" (click)="backNavigation()"></div>
   <div class="search-container">
     <div class="search-area">
       <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
       <input [@rotatedState]='state' [(ngModel)]="textSearch" minlength="3" *ngIf="disable">
       <div class="search-img" (click)="showHide()">
-        <!-- <img src="/assets/icons/{{imageName}}.svg" alt=""> -->
         <div [innerHTML]="colorService.svgList.search_svg.htmlText" class="search-svg"></div>
       </div>
     </div>
@@ -38,13 +35,11 @@
             <div class="check card-actions-item" [ngClass]="{'checked': stepItem.checked}"
                 *ngIf="conferenceStepItem?.structureitem?.votes" (click)="checkItem(stepItem)">
               <div class="icon" *ngIf="!stepItem.checked"></div>
-              <!-- <img src="assets/icons/check-circle.svg" *ngIf="stepItem.checked" alt=""> -->
               <div [innerHTML]="colorService.svgList.check_circle_svg.htmlText" class="check-circle"  *ngIf="stepItem.checked"></div>
               Destacar
             </div>
             <div class="comment card-actions-item" [ngClass]="{'checked': stepItem.checked}"
                 *ngIf="conferenceStepItem?.structureitem?.comments" (click)="comment(stepItem)">
-              <!-- <img [src]="!stepItem.checked ? 'assets/icons/comment2.svg' : 'assets/icons/comment2 white.svg'" alt=""> -->
               <div [innerHTML]="!stepItem.checked ?  colorService.svgList.comment2_svg.htmlText : colorService.svgList.comment2_white_svg.htmlText" class="comment-svg"></div>
               <div class="count" *ngIf="stepItem.comment || stepItem.commentsMade > 0">{{ stepItem.commentsMade || 1 }}
               </div>
@@ -56,11 +51,9 @@
     </div>
   </div>
   <div class="actions-footer">
-    <!-- <img class="action-back" (click)="backNavigation()" src="assets/icons/arrow-left-circle.svg" alt=""/> -->
     <div [innerHTML]="colorService.svgList.arrow_left_circle_svg.htmlText" class="action-back" (click)="backNavigation()"></div>
     <div class="help-container" *ngIf="conferenceStepItem?.structureitem?.parentLink" (click)="openAlternativeProposal()">
       <span class="action-back">{{conferenceStepItem?.structureitem?.parentLink?.textLink}}</span>
-      <!-- <img src="assets/icons/help-circle.svg" alt=""/> -->
       <div [innerHTML]="colorService.svgList.help_circle_svg.htmlText" class="action-back"></div>
     </div>
   </div>

@@ -12,17 +12,6 @@ import { StoreKeys } from '../commons/contants';
 })
 export class ColorService extends BaseService<any> {
     private rootStyle: HTMLStyleElement = document.createElement("style")
-    // color: IColor = {
-    //   background: 'rgba(21,57,97,1)',
-    //   accentColor: '#00a198',
-    //   fontColor: 'white',
-    //   cardFontColor: 'black',
-    //   cardFontColorHover: 'white',
-    //   cardColor: 'white',
-    //   cardColorHover: '#00a198',
-    //   cardBorderColor: 'white',
-    //   borderColor: 'white'
-    // };
 
     svgList: ISvgList = {
       home_svg: {htmlText: '', url: 'assets/icons/home.svg'},

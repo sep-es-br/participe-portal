@@ -27,7 +27,6 @@
 
   }
   .actions {
-    // color: white;
     display: flex;
     .action-item {
       color: var(--font-color);
@@ -108,9 +107,6 @@
     .option {
       margin: 10px 20px;
       cursor: pointer;
-      // a {
-      //   color: black;
-      // }
     }
   }
 }

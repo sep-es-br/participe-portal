@@ -15,6 +15,7 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
     title: string = '';
     subtitle: string = '';
     meetingName: string = '';
+    conferenceName: string = '';
     meetingData;
 
     constructor(
@@ -26,15 +27,15 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
       if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)){
         await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)));
         this.title = 'Pré-credenciamento'
-        this.subtitle = 'Acesse agora para realizar o pré-credenciamento'
-        this.meetingName =`do encontro ${this.meetingData.name}`
-        console.log(this.meetingData.name)
+        this.subtitle = 'Acesse agora e efetue seu pré-credenciamento para o encontro presencial'
+        this.conferenceName = `${this.meetingData.conference.name}`
+        this.meetingName =`${this.meetingData.name}`
       }else if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
         await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.CHECK_IN)));
         this.title = 'Auto Check-in'
-        this.subtitle = 'Acesse agora para confirmar sua presença'
-        this.meetingName =`no encontro ${this.meetingData.name}`
-        console.log(this.meetingData.name)
+        this.subtitle = 'Acesse agora para registrar sua presença no encontro'
+        this.conferenceName = `${this.meetingData.conference.name}`
+        this.meetingName =`${this.meetingData.name}`
       }
     }
 

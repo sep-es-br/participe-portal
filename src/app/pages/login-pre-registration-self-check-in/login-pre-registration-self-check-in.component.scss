@@ -25,7 +25,7 @@ $darkColorOr: rgba(0,0,0,0.16);
       text-align: center;
       margin-bottom: 20px;
       margin-top: 20px;
-      h2, p {
+      .title-login {
         margin-block-start: 0;
         margin-block-end: 0;
         color: var(--card-font-color);
@@ -163,40 +163,6 @@ $darkColorOr: rgba(0,0,0,0.16);
       }
     }
   }
-  .statistics-container {
-    margin: $startTop 20px 0 0;
-    max-width: 450px;
-    display: flex;
-    flex: 0 1 50%;
-    flex-wrap: wrap;
-    float: right;
-
-    .statistics-item-container {
-      background: $backgroundWindow;
-      text-align: center;
-      padding: 20px;
-      margin-bottom: 18px;
-      min-height: 120px;
-      display: flex;
-      flex: 0 1 48%;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      h2 {
-        margin-block-start: 0;
-        margin-block-end: 0;
-        font-size: 2rem;
-        margin-bottom: 10px;
-        color: var(--textColorDark);
-      }
-      span {
-        font-weight: lighter;
-      }
-      &:nth-child(even) {
-        margin-left: 18px;
-      }
-    }
-  }
 
   @media (max-width: 992px) {
 
@@ -250,8 +216,9 @@ $darkColorOr: rgba(0,0,0,0.16);
   display: inline-block;
   align-self: flex-end;
   text-align: center;
-  margin: 0 auto 0 auto;
+  margin: 20px auto 0 auto;
 }
+
 
   .background-linear {
     background: var(--background);

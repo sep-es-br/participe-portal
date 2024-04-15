@@ -19,8 +19,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { StartComponent } from './pages/start/start.component';
 import { PreRegistrationComponent } from './pages/pre-registration/pre-registration.component';
-import { LoginSelfCheckInComponent } from './pages/login-self-check-in/login-self-check-in.component';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
+import { LoginPreRegistrationSelfCheckInComponent } from './pages/login-pre-registration-self-check-in/login-pre-registration-self-check-in.component';
 
 
 const routes: Routes = [
@@ -42,8 +42,8 @@ const routes: Routes = [
   { path: ':conference/post-closure', component: PostClosureComponent },
   { path: ':conference/pre-opening', component: PreOpeningComponent },
   { path: 'statistics', component: StatisticsComponent },
-  { path: 'self-check-in/:meeting', component: LoginSelfCheckInComponent},
-  { path: 'self-check-in', component: SelfCheckInComponent},
+  { path: 'login-pre-registration-self-check-in', component: LoginPreRegistrationSelfCheckInComponent},
+  { path: 'self-check-in/:conference/meeting/:meeting', component: SelfCheckInComponent},
   { path: 'registration/:conference/meeting/:meeting', component: PreRegistrationComponent}
   
 ];

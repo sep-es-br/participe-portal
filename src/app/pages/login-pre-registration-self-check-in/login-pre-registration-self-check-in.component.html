@@ -1,0 +1,30 @@
+<div class="background-linear"></div>
+<div class="page-login">
+    <div class="sides p-grid p-col-12">
+        <div class="left-side p-col-12">
+            <div class="auth-box">
+                <div class="header">    
+                    <h2 class="title-login">{{title}}</h2>
+                    <div class="title-login">{{conferenceName}}</div><br>
+                    <div class="title-login">{{subtitle}} <strong>{{meetingName}}</strong></div>
+                </div>
+                <div class="social-login">
+                    <button class="cidadao" (click)="signInAcessoCidadao()">
+                        <span style="width: 100%; justify-content: center;display: flex;align-items: center; font-size: 15px;">
+                            <img src="assets/images/govbrbranco.png"  />
+                            <img src="assets/icons/cidadao.svg" alt=""/>
+                            Acessar com GOV.BR ou ACESSO CIDADÃO
+                        </span>
+                    </button>
+                    <a class="google" (click)="signInGoogle()">prefiro usar minha conta Google...</a>
+                </div>
+                <div class="policy-container">
+                  <a class="policy-link" target="blank" href="assets/docs/privacy-policy.html">Política de Privacidade</a>
+                </div>
+                    <div class="or">
+                        <img class="poweredBy" src="assets/images/poweredBy.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+  

@@ -5,7 +5,7 @@ import { AuthService } from "src/app/shared/services/auth.service";
 import { MeetingService } from "src/app/shared/services/meeting.service";
 import 'moment-timezone';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ConferenceService } from "src/app/shared/services/conference.service";
 import { IConference } from "src/app/shared/interfaces/IConference";
 
@@ -28,12 +28,21 @@ export class SelfCheckInComponent implements OnInit {
       private formBuilder: FormBuilder,
       private authSrv: AuthService,
       protected meetingSrv: MeetingService,
-      private router: Router
+      private router: Router,
+      private route: ActivatedRoute,
     ){}
 
     
     ngOnInit() {
-      this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
+      if(!localStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
+        sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting'])
+        localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
+        localStorage.setItem(StoreKeys.LOGIN_CHECK_IN, 'true');
+        this.router.navigate(['/login-pre-registration-self-check-in']);
+      }else{
+        localStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
+        this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
+      }
     }
 
     async isCheckin(meeting, personId){

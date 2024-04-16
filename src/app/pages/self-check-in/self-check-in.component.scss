@@ -40,19 +40,23 @@
   }
 
   button{
-    color: #fff;
+    color: var(--card-font-color-hover);
     border-radius: 25px;
     padding: 5px 50px;
     &.btn-green{
-        background-color: #00a198;
+        background-color: var(--accent-color);
     }
     &.btn-green:hover{
-      color: #fff;
+      color: var(--card-font-color-hover);
     }
 }
 
 .table tbody td{
   padding: 15px;
+  color: var(--card-font-color)
 }
 
+.cardSelfCheckin, td{
+  background:var(--card-color);
+}
   

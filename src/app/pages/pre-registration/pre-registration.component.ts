@@ -61,7 +61,7 @@ import { IPreRegistration } from 'src/app/shared/interfaces/IPreRegistration';
             localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);    
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
-            this.router.navigate(['/login', this.conferenceId]);
+            this.router.navigate(['/login-pre-registration-self-check-in']);
         }else if(!this.meetingId){
             this.router.navigate(['/login', this.conferenceId]);
         }else{

@@ -48,9 +48,10 @@ export class ColorService extends BaseService<any> {
     }
 
 
-    async setPrimaryColor() {
-
-      const result = await this.getConferenceColor(parseInt(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)))
+    async setPrimaryColor(activeConference: string) {
+      const activeConferenceAsNumber = parseInt(activeConference)
+      const result = await this.getConferenceColor(activeConferenceAsNumber)
+      
 
       if(!(Object.entries(result.data).length == 0)){
         this.rootStyle.textContent = 

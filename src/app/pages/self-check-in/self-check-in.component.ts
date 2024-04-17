@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ConferenceService } from "src/app/shared/services/conference.service";
 import { IConference } from "src/app/shared/interfaces/IConference";
+import { ColorService } from "src/app/shared/services/color.service";
 
 
 @Component({
@@ -30,6 +31,7 @@ export class SelfCheckInComponent implements OnInit {
       protected meetingSrv: MeetingService,
       private router: Router,
       private route: ActivatedRoute,
+      private colorService: ColorService
     ){}
 
     
@@ -38,6 +40,7 @@ export class SelfCheckInComponent implements OnInit {
         sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting'])
         localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
         localStorage.setItem(StoreKeys.LOGIN_CHECK_IN, 'true');
+        this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
         this.router.navigate(['/login-pre-registration-self-check-in']);
       }else{
         localStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)

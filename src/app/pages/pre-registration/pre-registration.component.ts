@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { PreRegistrationService } from 'src/app/shared/services/pre-registration.service';
 import { IPreRegistration } from 'src/app/shared/interfaces/IPreRegistration';
+import { ColorService } from 'src/app/shared/services/color.service';
 // import * as moment from 'moment';
 // import * as L from 'leaflet';
 
@@ -35,7 +36,8 @@ import { IPreRegistration } from 'src/app/shared/interfaces/IPreRegistration';
         private loadingService: LoadingService,
         private meetingService: MeetingService,
         private authService: AuthService,
-        private preRegistrationService: PreRegistrationService
+        private preRegistrationService: PreRegistrationService,
+        private colorService: ColorService
       ) {
       }
     
@@ -61,6 +63,7 @@ import { IPreRegistration } from 'src/app/shared/interfaces/IPreRegistration';
             localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);    
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
+            this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
             this.router.navigate(['/login-pre-registration-self-check-in']);
         }else if(!this.meetingId){
             this.router.navigate(['/login', this.conferenceId]);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponsiveService } from './shared/services/responsive.service';
 import { ColorService } from './shared/services/color.service';
+import { StoreKeys } from './shared/commons/contants';
 
 
 @Component({
@@ -16,11 +17,12 @@ export class AppComponent implements OnInit {
   constructor(
     private responsiveSrv: ResponsiveService,
     private colorService: ColorService,
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-    this.colorService.setPrimaryColor()
+  async ngOnInit() {
+    if(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)){
+      await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
+    }
     this.colorService.getSVG()
     this.detectViewMode(window.innerWidth);
     }

@@ -125,6 +125,7 @@ export class ProfileComponent implements OnInit {
     return this.person.authentications ? this.person.authentications.find(auth => auth[key] === value) : undefined;
   }
 
+
   addAuthCidadao() {
     this.backupData();
     this.authSrv.signInAcessoCidadaoProfile();
@@ -187,8 +188,8 @@ export class ProfileComponent implements OnInit {
   }
 
   async cancel() {
-    this.location.back();
-    //await this.router.navigate(['/conference-map']);
+    // this.location.back();
+    await this.router.navigate(['/conference-map']);
   }
 
   private processSocialLoginProfile() {
@@ -261,7 +262,8 @@ export class ProfileComponent implements OnInit {
         life: 15000
       });
     });
-    this.location.back();
+    // this.location.back();
+    this.router.navigateByUrl('conference-map')
   }
 
   async wannaMergeProfile(param: { answer: boolean }) {

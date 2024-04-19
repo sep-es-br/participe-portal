@@ -32,13 +32,15 @@
                   type="button"
                   (click)="findAuthentication('AcessoCidadao') ? deleteAuthCidadao() : addAuthCidadao()">
             <img src="assets/icons/cidadao.svg" alt=""/>
-            <i [class]="findAuthentication('AcessoCidadao') ? 'icon-times' : 'icon-plus'"></i>
+            <i [class]="findAuthentication('AcessoCidadao') && findAuthentication('Google') ? 'icon-times' : ''"></i>
+            <i [class]="!findAuthentication('AcessoCidadao') && findAuthentication('Google') ? 'icon-plus' : ''"></i>
           </button>
           <button [class]="findAuthentication('Google') ? 'google active' : 'google'" type="button"
                   (click)="findAuthentication('Google') ? deleteAuthGoogle() : addAuthGoogle() "
           >
             <img src="assets/icons/google.svg" alt=""/>
-            <i [class]="findAuthentication('Google') ? 'icon-times' : 'icon-plus'"></i>
+            <i [class]="findAuthentication('Google') && findAuthentication('AcessoCidadao') ? 'icon-times' : ''"></i>
+            <i [class]="!findAuthentication('Google') && findAuthentication('AcessoCidadao')  ? 'icon-plus' : ''"></i>
           </button>
         </div>
       </section>

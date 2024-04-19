@@ -35,17 +35,21 @@ export class SelfCheckInComponent implements OnInit {
     ){}
 
     
-    ngOnInit() {
-      if(!localStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
-        sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting'])
-        localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
-        localStorage.setItem(StoreKeys.LOGIN_CHECK_IN, 'true');
-        this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
+    async ngOnInit() {
+      if(!sessionStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
+        await this.loadingVariable()
+        await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
         this.router.navigate(['/login-pre-registration-self-check-in']);
       }else{
-        localStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
-        this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(sessionStorage.getItem(StoreKeys.CHECK_IN)))
+        sessionStorage.removeItem(StoreKeys.CHECK_IN)
+        this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(this.route.snapshot.params['meeting']))
       }
+    }
+
+    async loadingVariable(){
+      await sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting'])
+      await sessionStorage.setItem(StoreKeys.LOGIN_CHECK_IN, 'true');
+      await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
     }
 
     async isCheckin(meeting, personId){
@@ -64,7 +68,7 @@ export class SelfCheckInComponent implements OnInit {
     }
 
     async registerAttendance(personId, meeting){
-      await this.conferenceSrv.GetById(parseInt(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))).then(
+      await this.conferenceSrv.GetById(parseInt(this.route.snapshot.params['conference'])).then(
         (res) => {
           this.conference = res.data
       })
@@ -72,7 +76,7 @@ export class SelfCheckInComponent implements OnInit {
       if(this.isNotEmptyCheckInObject){
         this.setForm(this.checkInData)
       }else{
-        await this.isCheckin(sessionStorage.getItem(StoreKeys.CHECK_IN), this.authSrv.getUserInfo.id)
+        await this.isCheckin(meeting, this.authSrv.getUserInfo.id)
         await this.getPersonAndMeeting(personId, meeting)
         this.setForm(this.checkInData)
       }
@@ -90,7 +94,7 @@ export class SelfCheckInComponent implements OnInit {
     }
 
     cancel(){
-      sessionStorage.removeItem(StoreKeys.CHECK_IN);
+      sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
       this.router.navigate(['/conference-map']);
   }
   }

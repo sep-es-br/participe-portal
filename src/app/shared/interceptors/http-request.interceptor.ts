@@ -17,9 +17,12 @@ import * as _ from 'lodash';
 import {AuthService} from '../services/auth.service';
 import {LoadingService} from '../services/loading.service';
 import {IResultHttp} from '../interfaces/IResultHttp';
+import { StoreKeys } from '../commons/contants';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
+
+  conference: string;
 
   constructor(
     private authService: AuthService,
@@ -95,8 +98,15 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         case 500:
           if (_.get(error, 'error.message').startsWith('JWT expired ')) {
             message = 'Sua sessão expirou. Por favor entre novamente.';
-            this.router.navigate([`/`]).then();
-            this.authService.clearTokens();
+
+            if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) || sessionStorage.getItem(StoreKeys.CHECK_IN)){
+              this.conference = localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)
+              this.router.navigate(['/login-pre-registration-self-check-in'])
+              this.authService.clearTokens(true);
+            }else{
+              this.router.navigate([`/`]).then();
+              this.authService.clearTokens();
+            }
           }
           else {
             message = 'Houve um erro ao processar sua solicitação';

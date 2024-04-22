@@ -119,12 +119,15 @@ export class AuthService {
     localStorage.setItem(StoreKeys.USER_INFO, JSON.stringify(data));
   }
 
-  clearTokens() {
+  clearTokens(ignoreConference?: boolean) {
+    
     localStorage.removeItem(StoreKeys.ACCESS_TOKEN);
     localStorage.removeItem(StoreKeys.REFRESH_TOKE);
     localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
-    localStorage.removeItem(StoreKeys.CONFERENCE_ACTIVE);
     localStorage.removeItem(StoreKeys.LOGOUT_URI);
+    if(!ignoreConference){
+      localStorage.removeItem(StoreKeys.CONFERENCE_ACTIVE);
+    }
   }
 
   getAccessToken() {

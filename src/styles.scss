@@ -312,13 +312,11 @@ app-pre-registration {
     height: 65px;
   }
   .print-visible {
-  //   display: block;
     font-size: 1rem;
     visibility: visible;
   }
 
   :not(.print-visible) {
-  //   display: none;
     visibility: hidden;
   }
 }
@@ -329,4 +327,8 @@ app-pre-registration {
 
 .text-justify{
   text-align: justify !important;
+}
+
+.c-pointer{
+  cursor: pointer;
 }

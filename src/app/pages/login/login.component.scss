@@ -433,6 +433,10 @@
     }
   }
 
+  .statistics-container{
+    max-width: 450px;
+  }
+
   ::ng-deep {
     .waze {
       display: none;

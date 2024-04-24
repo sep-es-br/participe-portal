@@ -36,37 +36,37 @@
       </div>
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-6 justify-content-end" >
-      <div class="row">
+      <div class="row statistics-container">
         <div class="col-6 col-md-6 p-2 text-center" *ngFor="let item of statistics">
           <div class="bg-theme pt-3 pb-3 ps-1 pe-1">
             <h2>{{item.value}}</h2>
             <span>{{item.label}}</span>
           </div>
         </div>
-      </div>
-      <div *ngIf="displayCalendar" class="col-12 col-md-12 text-center">
-            <img class="icon mt-2 align-content-center" src="assets/icons/up.svg" (click)="meetingPreviousPage()"  [class.hidden-arrow]="pagination.empty" alt=""/>
-
-            <div class="row w-100">
-              <div class="col-12 g-0 p-0  row c-pointer " *ngFor="let meeting of meetings" (click)="showModalDetailMeeting(meeting.id)">
-                <div class="col-auto col-sm-auto col-md-auto mt-1 h-auto ms-1 me-0 bg-theme  ps-0 p-md-3 pe-0">
-                  <img class="tiny-icon" src="assets/icons/calendar.svg" alt=""/>
-                  {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MMM' }}
-                </div>
-                <div class="col-7 col-sm-7 col-md-8 col-lg-8 mt-1 ms-1 bg-theme h-auto p-3 ps-0 pe-0 text-start">
-                  <img class="tiny-icon" src="assets/icons/pin.svg"
-                      *ngIf="meeting?.typeMeetingEnum !== typeMeeting.VIRTUAL" alt=""/>
-                  <i class="fas fa-desktop"
-                    *ngIf="meeting?.typeMeetingEnum !== typeMeeting.PRESENCIAL"></i>
-                  <span>{{ meeting?.name }}</span>
+        <div *ngIf="displayCalendar" class="col-12 col-md-12 text-center">
+              <img class="icon mt-2 align-content-center" src="assets/icons/up.svg" (click)="meetingPreviousPage()"  [class.hidden-arrow]="pagination.empty" alt=""/>
+  
+              <div class="row w-100">
+                <div class="col-12 g-0 p-0  row c-pointer " *ngFor="let meeting of meetings" (click)="showModalDetailMeeting(meeting.id)">
+                  <div class="col-auto col-sm-auto col-md-auto mt-1 h-auto ms-1 me-0 bg-theme  ps-0 p-md-3 pe-0">
+                    <img class="tiny-icon" src="assets/icons/calendar.svg" alt=""/>
+                    {{ getDateFromAPIStr(meeting.beginDate) | date: 'dd/MMM' }}
+                  </div>
+                  <div class="col-7 col-sm-7 col-md-8 col-lg-8 mt-1 ms-1 bg-theme h-auto p-3 ps-0 pe-0 text-start">
+                    <img class="tiny-icon" src="assets/icons/pin.svg"
+                        *ngIf="meeting?.typeMeetingEnum !== typeMeeting.VIRTUAL" alt=""/>
+                    <i class="fas fa-desktop"
+                      *ngIf="meeting?.typeMeetingEnum !== typeMeeting.PRESENCIAL"></i>
+                    <span>{{ meeting?.name }}</span>
+                  </div>
                 </div>
               </div>
+  
+              <img class="icon" src="assets/icons/down.svg" (click)="meetingNextPage()"
+                  [class.hidden-arrow]="pagination.empty"
+              alt=""/>
             </div>
-
-            <img class="icon" src="assets/icons/down.svg" (click)="meetingNextPage()"
-                [class.hidden-arrow]="pagination.empty"
-            alt=""/>
-          </div>
+      </div>
     </div>
     <div class="col-12" [hidden]="!displayCalendar && calendarImageUrl == '' "  >
       <img class="agenda-mobile " src="{{calendarImageUrl}}" alt=""/>

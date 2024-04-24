@@ -1,3 +1,10 @@
+// @import 'src/styles.scss';
+
+
+$startTop: 40px;
+$backgroundWindow: rgba(255,255,255,0.85);
+$darkColorOr: rgba(0,0,0,0.16);
+
 ::ng-deep .page-login {
   display: flex;
   min-height: 100vh;
@@ -16,6 +23,11 @@
 
   @media (max-width: 600px)
   {
+    // .background-page
+    // {
+    //   //background-image: none!important;
+    //   background-color:  #296d8033;
+    // }
     .agenda-mobile {
       display: flex !important;
       max-width: 100%;
@@ -26,6 +38,12 @@
     .calendar-container{
       display: none !important;
     }
+    
+    // .teste {
+    //   padding-left: 12px !important;
+    //   padding-right: 12px !important;
+    //   margin-bottom: 12px !important;
+    // }
 
   }
 
@@ -37,6 +55,7 @@
     max-width: 450px;
     border-radius: 1rem;
     background-color: var(--card-color);
+    margin: 250px 0 $startTop 60px;
     display: flex;
     flex-direction: column;
     padding: 20px 40px;
@@ -122,7 +141,7 @@
       padding: 16px 0;
       text-align: center;
       justify-content: right;
-      color: var(--card-font-color);
+      color: $darkColorOr;
       display: flex;
       .text {
         padding: 0 7px;
@@ -132,7 +151,7 @@
         height: 1px;
         align-self: center;
         flex: 1;
-        background: var(--card-font-color);
+        background: $darkColorOr;
       }
     }
     .form-login {
@@ -189,19 +208,16 @@
       }
     }
   }
-
-  .bg-theme{
-    background-color: var(--card-color);
-  }
-
   .statistics-container {
+    margin: $startTop 20px 0 0;
+    max-width: 450px;
     display: flex;
     flex: 0 1 50%;
     flex-wrap: wrap;
     float: right;
 
     .statistics-item-container {
-      background-color: var(--card-color);
+      background: $backgroundWindow;
       text-align: center;
       padding: 20px;
       margin-bottom: 18px;
@@ -227,6 +243,8 @@
     }
   }
   .calendar-container {
+    max-width: 450px;
+    margin: $startTop 20px 0 0;
     display: flex;
     flex: 0 1 50%;
     flex-direction: column;
@@ -256,7 +274,7 @@
           margin-bottom: 0;
         }
         .date {
-          background-color: var(--card-color);
+          background: $backgroundWindow;
           margin-right: 5px;
           padding: 10px;
           align-self: center;
@@ -269,7 +287,7 @@
           }
         }
         .place {
-          background-color: var(--card-color);
+          background: $backgroundWindow;
           padding: 10px;
           width: 100%;
           align-self: center;
@@ -433,10 +451,6 @@
     }
   }
 
-  .statistics-container{
-    max-width: 450px;
-  }
-
   ::ng-deep {
     .waze {
       display: none;
@@ -444,6 +458,10 @@
   }
 
   @media (max-width: 992px) {
+    .auth-box {
+      margin: $startTop auto $startTop auto;
+    }
+
     .statistics-container {
       margin: 0 auto 0 auto;
       float: none;
@@ -481,7 +499,7 @@
     width: 40px !important;
     height: 40px !important;
   }
-
+  
   .tiny-icon {
     font-size: 25px !important;
     width: 25px !important;
@@ -501,5 +519,9 @@
   align-self: flex-end;
   text-align: center;
   margin: 0 auto 0 auto;
+}
+
+.bg-theme{
+  background-color: var(--card-color);
 }
 

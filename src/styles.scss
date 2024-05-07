@@ -161,25 +161,25 @@ button.btn-secondary {
 
 :root {
   //ES500
-  --background: white;
-  --accent-color:#F18EB1;
-  --font-color: #008CD1;
-  --card-font-color:white;
-  --card-font-color-hover:white;
-  --card-color:#008CD1;
-  --card-color-hover:#F18EB1;
-  --card-border-color:white;
-  --border-color: #008CD1;
-
-  // --background: rgba(21,57,97,1);
-  // --accent-color:#00a198;
-  // --font-color: white;
-  // --card-font-color:black;
+  // --background: white;
+  // --accent-color:#F18EB1;
+  // --font-color: #008CD1;
+  // --card-font-color:white;
   // --card-font-color-hover:white;
-  // --card-color:white;
-  // --card-color-hover:#00a198;
+  // --card-color:#008CD1;
+  // --card-color-hover:#F18EB1;
   // --card-border-color:white;
-  // --border-color: white;
+  // --border-color: #008CD1;
+
+  --background: rgba(21,57,97,1);
+  --accent-color:#00a198;
+  --font-color: white;
+  --card-font-color:black;
+  --card-font-color-hover:white;
+  --card-color:white;
+  --card-color-hover:#00a198;
+  --card-border-color:white;
+  --border-color: white;
 
   --tertiaryColor:#3F5291;
   --textColorDark: #343333;

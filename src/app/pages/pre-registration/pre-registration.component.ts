@@ -26,7 +26,7 @@ import html2canvas  from 'html2canvas';
     loadedServices:boolean = false;
     preRegistrationCompleted:boolean = false;
     preRegistrationData: IPreRegistration;
-    meetindData;
+    meetingData;
     meetingLocationMap;
     userInfo: IPerson;
 
@@ -82,7 +82,7 @@ import html2canvas  from 'html2canvas';
     loadDataPreRegistration(){
         this.meetingService.getSingleMeeting(Number(this.meetingId)).then(
             data => {
-                this.meetindData = data.data;
+                this.meetingData = data.data;
                 this.loadedServices = true;
             }
         );
@@ -160,6 +160,16 @@ import html2canvas  from 'html2canvas';
 
     treatNameExibition(name:string){
         return name.trim().toLowerCase().replace(/ /g, '_'); 
+    }
+
+    meetingDate(){
+        const beginDate = this.meetingData.beginDate.split(" ");
+        const endDate = this.meetingData.endDate.split(" ");
+        if(beginDate[0] == endDate[0]){
+            return `${this.meetingData.beginDate} - ${endDate[1]}`
+        }else{
+            return `${this.meetingData.beginDate} - ${this.meetingData.endDate}`
+        }
     }
 
 

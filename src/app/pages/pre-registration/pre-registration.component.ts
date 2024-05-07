@@ -25,7 +25,7 @@ import { ColorService } from 'src/app/shared/services/color.service';
     loadedServices:boolean = false;
     preRegistrationCompleted:boolean = false;
     preRegistrationData: IPreRegistration;
-    meetindData;
+    meetingData;
     meetingLocationMap;
     userInfo: IPerson;
 
@@ -76,7 +76,7 @@ import { ColorService } from 'src/app/shared/services/color.service';
     loadDataPreRegistration(){
         this.meetingService.getSingleMeeting(Number(this.meetingId)).then(
             data => {
-                this.meetindData = data.data;
+                this.meetingData = data.data;
                 this.loadedServices = true;
             }
         );
@@ -109,6 +109,16 @@ import { ColorService } from 'src/app/shared/services/color.service';
 
     print(){
         window.print();
+    }
+
+    meetingDate(){
+        const beginDate = this.meetingData.beginDate.split(" ");
+        const endDate = this.meetingData.endDate.split(" ");
+        if(beginDate[0] == endDate[0]){
+            return `${this.meetingData.beginDate} - ${endDate[1]}`
+        }else{
+            return `${this.meetingData.beginDate} - ${this.meetingData.endDate}`
+        }
     }
 
 

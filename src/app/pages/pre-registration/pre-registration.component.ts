@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -10,8 +10,7 @@ import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { PreRegistrationService } from 'src/app/shared/services/pre-registration.service';
 import { IPreRegistration } from 'src/app/shared/interfaces/IPreRegistration';
 import { ColorService } from 'src/app/shared/services/color.service';
-// import * as moment from 'moment';
-// import * as L from 'leaflet';
+import html2canvas  from 'html2canvas';
 
 @Component({
     selector: 'app-pre-registration',
@@ -19,6 +18,8 @@ import { ColorService } from 'src/app/shared/services/color.service';
     styleUrls: ['./pre-registration.component.scss']
   })
   export class PreRegistrationComponent implements OnInit {
+    @ViewChild('confirmationCard', { static: false }) content: ElementRef;
+    @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
 
     meetingId:string;
     conferenceId:string;
@@ -45,11 +46,16 @@ import { ColorService } from 'src/app/shared/services/color.service';
         this.startServices();
     }
 
+    ngAfterViewInit() {
+        console.log(this.content.nativeElement); // Verifique se isso retorna o elemento desejado
+    }
+
     startServices(){
         const dados = sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_ACTIVE);
         this.preRegistrationData = JSON.parse(dados);
         if(this.preRegistrationData){
             this.preRegistrationCompleted = true;
+            this.userInfo = this.authService.getUserInfo;
         }else{
             this.checkRouteServices();
         }
@@ -109,6 +115,51 @@ import { ColorService } from 'src/app/shared/services/color.service';
 
     print(){
         window.print();
+    }
+
+    protectExibitionEmail(email?:string){
+        if(!email){
+            return '*****';
+        }
+        const emailSplit = email.split('@');
+        const emailProtected = emailSplit[0].slice(0,2) + '*****@' + emailSplit[1];
+        return emailProtected;
+    }
+
+    saveImage() {
+        const buttons = this.content.nativeElement.querySelectorAll('.action-buttons');
+        buttons.forEach(button => {
+          button.classList.add('hide-buttons');
+        });
+
+        const width = this.content.nativeElement.offsetWidth;
+        const height = this.content.nativeElement.offsetHeight;
+
+        const canvas: HTMLCanvasElement = this.canvas.nativeElement;
+        canvas.width = width;
+        canvas.height = height;
+
+        html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
+          // Convertendo o canvas para uma imagem
+        //   canvas.width = width;
+        //   canvas.height = height;
+          console.log(canvas);
+          const imgData = canvas.toDataURL('image/png');
+    
+          // Criando um link temporário para fazer o download
+          const link = document.createElement('a');
+          link.href = imgData;
+          link.download = 'confirmacao_inscricao_'+ this.treatNameExibition(this.preRegistrationData.meeting.name)+ '_' +this.treatNameExibition(this.userInfo.name)+'.png';
+          link.click();
+        });
+
+        buttons.forEach(button => {
+            button.classList.remove('hide-buttons');
+        });
+    }
+
+    treatNameExibition(name:string){
+        return name.trim().toLowerCase().replace(/ /g, '_'); 
     }
 
     meetingDate(){

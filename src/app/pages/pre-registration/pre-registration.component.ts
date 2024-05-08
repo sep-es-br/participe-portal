@@ -132,8 +132,21 @@ import html2canvas  from 'html2canvas';
           button.classList.add('hide-buttons');
         });
 
-        html2canvas(this.content.nativeElement).then(canvas => {
+        const width = this.content.nativeElement.offsetWidth;
+        const height = this.content.nativeElement.offsetHeight;
+
+        const canvas: HTMLCanvasElement = this.canvas.nativeElement;
+        canvas.width = 904;
+        canvas.height = 1440;
+
+        html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
+          // Convertendo o canvas para uma imagem
+        //   canvas.width = 904;
+        //   canvas.height = 1440;
+          console.log(canvas);
           const imgData = canvas.toDataURL('image/png');
+    
+          // Criando um link temporário para fazer o download
           const link = document.createElement('a');
           link.href = imgData;
           link.download = 'confirmacao_inscricao_'+ this.treatNameExibition(this.preRegistrationData.meeting.name)+ '_' +this.treatNameExibition(this.userInfo.name)+'.png';

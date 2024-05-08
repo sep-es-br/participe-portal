@@ -65,7 +65,7 @@ import html2canvas  from 'html2canvas';
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
         if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) && this.meetingId){
-            let urlAtual = this.location.path();
+            const urlAtual = this.location.path();
             localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);    
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
@@ -132,21 +132,8 @@ import html2canvas  from 'html2canvas';
           button.classList.add('hide-buttons');
         });
 
-        const width = this.content.nativeElement.offsetWidth;
-        const height = this.content.nativeElement.offsetHeight;
-
-        const canvas: HTMLCanvasElement = this.canvas.nativeElement;
-        canvas.width = width;
-        canvas.height = height;
-
-        html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
-          // Convertendo o canvas para uma imagem
-        //   canvas.width = width;
-        //   canvas.height = height;
-          console.log(canvas);
+        html2canvas(this.content.nativeElement).then(canvas => {
           const imgData = canvas.toDataURL('image/png');
-    
-          // Criando um link temporário para fazer o download
           const link = document.createElement('a');
           link.href = imgData;
           link.download = 'confirmacao_inscricao_'+ this.treatNameExibition(this.preRegistrationData.meeting.name)+ '_' +this.treatNameExibition(this.userInfo.name)+'.png';

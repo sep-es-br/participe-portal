@@ -139,7 +139,7 @@ import html2canvas  from 'html2canvas';
         // canvas.width = 1808;
         // canvas.height = 2880;
         canvas.width = width < 850 ?  850 : width;
-        canvas.height = height < 1366 ?  1366 : height;
+        canvas.height = height < 1680 ?  1680 : height;
 
         html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
           // Convertendo o canvas para uma imagem

@@ -138,7 +138,7 @@ import html2canvas  from 'html2canvas';
         const canvas: HTMLCanvasElement = this.canvas.nativeElement;
         // canvas.width = 1808;
         // canvas.height = 2880;
-        canvas.width = width < 850 ?  581 : width;
+        canvas.width = width < 850 ?  850 : width;
         canvas.height = height < 1330 ?  1330 : height;
 
         html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
@@ -146,7 +146,7 @@ import html2canvas  from 'html2canvas';
         //   canvas.width = 904;
         //   canvas.height = 1440;
           console.log(canvas);
-          const imgData = canvas.toDataURL('image/png', 1.0);
+          const imgData = canvas.toDataURL('image/png');
     
           // Criando um link temporário para fazer o download
           const link = document.createElement('a');

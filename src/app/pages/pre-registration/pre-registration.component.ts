@@ -144,13 +144,14 @@ import html2canvas  from 'html2canvas';
         //   canvas.width = 904;
         //   canvas.height = 1440;
           console.log(canvas);
-          const imgData = canvas.toDataURL('image/png');
+          const imgData = canvas.toDataURL('image/png', 1.0);
     
           // Criando um link temporário para fazer o download
           const link = document.createElement('a');
           link.href = imgData;
           link.download = 'confirmacao_inscricao_'+ this.treatNameExibition(this.preRegistrationData.meeting.name)+ '_' +this.treatNameExibition(this.userInfo.name)+'.png';
           link.click();
+          console.log(canvas);
         });
 
         buttons.forEach(button => {

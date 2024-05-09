@@ -138,8 +138,8 @@ import html2canvas  from 'html2canvas';
         const canvas: HTMLCanvasElement = this.canvas.nativeElement;
         // canvas.width = 1808;
         // canvas.height = 2880;
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = width * 5;
+        canvas.height = height * 5;
         
 
         html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {

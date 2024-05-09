@@ -131,13 +131,10 @@ import html2canvas  from 'html2canvas';
         buttons.forEach(button => {
           button.classList.add('hide-buttons');
         });
-
         const width = this.content.nativeElement.offsetWidth;
         const height = this.content.nativeElement.offsetHeight;
-
         const canvas: HTMLCanvasElement = this.canvas.nativeElement;
-        // canvas.width = 1808;
-        // canvas.height = 2880;
+        
         if(window.innerWidth < 768 ){
             canvas.width =  850;
             canvas.height = 1780;
@@ -147,13 +144,7 @@ import html2canvas  from 'html2canvas';
         }
 
         html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
-          // Convertendo o canvas para uma imagem
-        //   canvas.width = 904;
-        //   canvas.height = 1440;
-          console.log(canvas);
           const imgData = canvas.toDataURL('image/png');
-    
-          // Criando um link temporário para fazer o download
           const link = document.createElement('a');
           link.href = imgData;
           link.download = 'confirmacao_inscricao_'+ this.treatNameExibition(this.preRegistrationData.meeting.name)+ '_' +this.treatNameExibition(this.userInfo.name)+'.png';

@@ -16,7 +16,7 @@
                         <td>
                             <div class="textCard">
                                 <small for="eventName" class=" no-background">Encontro Presencial</small>
-                                <input type="text" readonly class="form-control-plaintext cursor-normal" id="eventName" placeholder="Encontro Presencial" value="{{meetindData.name}}">
+                                <input type="text" readonly class="form-control-plaintext cursor-normal" id="eventName" placeholder="Encontro Presencial" value="{{meetingData.name}}">
                             </div>
                         </td>
                     </tr>
@@ -24,7 +24,7 @@
                         <td>
                             <div class="textCard">
                                 <small for="data" class="no-background">Data</small>
-                                <input type="text" readonly class="form-control-plaintext cursor-normal" placeholder="Data" value="{{meetindData.beginDate}} - {{meetindData.endDate}}">
+                                <input type="text" readonly class="form-control-plaintext cursor-normal" placeholder="Data" [value]="meetingDate()">
                             </div>
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
                         <td>
                             <div class="">
                                 <small for="city" class="no-background">Cidade</small>
-                                <input type="text" readonly class="form-control-plaintext cursor-normal" id="city" placeholder="Cidade" value="{{meetindData.localityPlace['name']}}">
+                                <input type="text" readonly class="form-control-plaintext cursor-normal" id="city" placeholder="Cidade" value="{{meetingData.localityPlace['name']}}">
                             </div>
                         </td>
                     </tr>
@@ -40,7 +40,7 @@
                         <td>
                             <div class="">
                                 <small for="place" class="no-background">Local</small>
-                                <input type="text" readonly class="form-control-plaintext cursor-normal" id="place" placeholder="Local" value="{{meetindData.place}}">
+                                <input type="text" readonly class="form-control-plaintext cursor-normal" id="place" placeholder="Local" value="{{meetingData.place}}">
                             </div>
                         </td>
                     </tr>
@@ -48,7 +48,7 @@
                         <td>
                             <div class="">
                                 <small for="address" class="no-background">Endereço</small>
-                                <textarea readonly  class="form-control-plaintext cursor-normal no-resize h-auto">{{meetindData.address}}</textarea>
+                                <textarea readonly  class="form-control-plaintext cursor-normal no-resize h-auto">{{meetingData.address}}</textarea>
                             </div>
                         </td>
                     </tr>
@@ -82,30 +82,36 @@
 
     </div>
 </app-template>
-<app-template *ngIf="preRegistrationCompleted" [useCard]="false" >
+<app-template   *ngIf="preRegistrationCompleted" [useCard]="false" >
     <div class="container mb-3">
-        <div class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 cardPreRegistration" style="border-radius:20px">
+        <div #confirmationCard class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 cardPreRegistration" style="border-radius:20px">
             <div class="text-center print-visible">
                 <h2 class="print-visible">Pré-credenciamento<br>Concluído</h2>
             </div>
-            <div>
+            <div class="mt-0">
                 <em class="informacoes print-visible">Apresente o QR Code na entrada e registre sua presença</em>
                 <img src="data:image/png;base64,{{preRegistrationData.qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
             </div>
-
-            <a href="data:image/png;base64,{{preRegistrationData.qrcode}}" download="Confirmação de Presença - Encontro Presencial - {{preRegistrationData.meeting.name}}" class="btn btn-sm btn-outline-primary ms-2" target="_blank">
+            <div class="mb-3">
+                <em class="informacoes-adicionais mb-3 print-visible p-2">Já o encaminhamos para o seu e-mail {{protectExibitionEmail(userInfo.contactEmail ?? null)}}, mas você pode também:</em><br/>
+            </div>
+            <a type="button" (click)="saveImage()" class="btn btn-sm btn-outline-primary ms-2 action-buttons">
                 <span class="iconText">Salvar</span>
                 <i class="fas fa-download"></i>
             </a>
-            <a type="button" (click)="print()" class="btn btn-sm btn-outline-primary ms-2">
+            <a type="button" (click)="print()" class="btn btn-sm btn-outline-primary ms-2 action-buttons">
                 <span class="iconText">Imprimir</span>
                 <i class="fas fa-print"></i>
             </a>
-            <p class="print-visible text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
-            <p class="print-visible text-center" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
-            <p class="print-visible text-center">{{preRegistrationData.meeting.place}}</p>
-            <p class="print-visible text-center">{{preRegistrationData.meeting.address}}</p>
-            <p class="print-visible text-center">{{preRegistrationData.meeting.localityPlace.name}}</p>
+            <p class="print-visible mb-0 text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
+            <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
+            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.place}}</p>
+            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.address}}</p>
+            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.localityPlace.name}}</p>
+            <p class="print-visible mb-0 text-center">
+                <img class="img-fluid print-visible img-logo-es" src="assets/images/brasao.png" >
+            </p>
         </div>
     </div>
 </app-template>
+<canvas #canvas style="display: none;"></canvas>

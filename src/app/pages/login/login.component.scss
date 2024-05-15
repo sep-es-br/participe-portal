@@ -1,4 +1,4 @@
-@import 'src/styles.scss';
+// @import 'src/styles.scss';
 
 
 $startTop: 40px;
@@ -494,6 +494,18 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
   }
 
+  i, .icon {
+    font-size: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .tiny-icon {
+    font-size: 25px !important;
+    width: 25px !important;
+    height: 25px !important;
+  }
+
 }
 
 .policy-container {
@@ -507,5 +519,9 @@ $darkColorOr: rgba(0,0,0,0.16);
   align-self: flex-end;
   text-align: center;
   margin: 0 auto 0 auto;
+}
+
+.bg-theme{
+  background-color: var(--card-color);
 }
 

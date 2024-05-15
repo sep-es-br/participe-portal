@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -10,8 +10,7 @@ import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { PreRegistrationService } from 'src/app/shared/services/pre-registration.service';
 import { IPreRegistration } from 'src/app/shared/interfaces/IPreRegistration';
 import { ColorService } from 'src/app/shared/services/color.service';
-// import * as moment from 'moment';
-// import * as L from 'leaflet';
+import html2canvas  from 'html2canvas';
 
 @Component({
     selector: 'app-pre-registration',
@@ -19,13 +18,15 @@ import { ColorService } from 'src/app/shared/services/color.service';
     styleUrls: ['./pre-registration.component.scss']
   })
   export class PreRegistrationComponent implements OnInit {
+    @ViewChild('confirmationCard', { static: false }) content: ElementRef;
+    @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
 
     meetingId:string;
     conferenceId:string;
     loadedServices:boolean = false;
     preRegistrationCompleted:boolean = false;
     preRegistrationData: IPreRegistration;
-    meetindData;
+    meetingData;
     meetingLocationMap;
     userInfo: IPerson;
 
@@ -45,11 +46,16 @@ import { ColorService } from 'src/app/shared/services/color.service';
         this.startServices();
     }
 
+    ngAfterViewInit() {
+        console.log(this.content.nativeElement); // Verifique se isso retorna o elemento desejado
+    }
+
     startServices(){
         const dados = sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_ACTIVE);
         this.preRegistrationData = JSON.parse(dados);
         if(this.preRegistrationData){
             this.preRegistrationCompleted = true;
+            this.userInfo = this.authService.getUserInfo;
         }else{
             this.checkRouteServices();
         }
@@ -59,7 +65,7 @@ import { ColorService } from 'src/app/shared/services/color.service';
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
         if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) && this.meetingId){
-            let urlAtual = this.location.path();
+            const urlAtual = this.location.path();
             localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);    
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
@@ -76,7 +82,7 @@ import { ColorService } from 'src/app/shared/services/color.service';
     loadDataPreRegistration(){
         this.meetingService.getSingleMeeting(Number(this.meetingId)).then(
             data => {
-                this.meetindData = data.data;
+                this.meetingData = data.data;
                 this.loadedServices = true;
             }
         );
@@ -109,6 +115,60 @@ import { ColorService } from 'src/app/shared/services/color.service';
 
     print(){
         window.print();
+    }
+
+    protectExibitionEmail(email?:string){
+        if(!email){
+            return '*****';
+        }
+        const emailSplit = email.split('@');
+        const emailProtected = emailSplit[0].slice(0,2) + '*****@' + emailSplit[1];
+        return emailProtected;
+    }
+
+    saveImage() {
+        const buttons = this.content.nativeElement.querySelectorAll('.action-buttons');
+        buttons.forEach(button => {
+          button.classList.add('hide-buttons');
+        });
+        const width = this.content.nativeElement.offsetWidth;
+        const height = this.content.nativeElement.offsetHeight;
+        const canvas: HTMLCanvasElement = this.canvas.nativeElement;
+        
+        if(window.innerWidth < 768 ){
+            canvas.width =  850;
+            canvas.height = 1780;
+        }else{
+            canvas.width =  width;
+            canvas.height = height;
+        }
+
+        html2canvas(this.content.nativeElement,{ canvas }).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = imgData;
+          link.download = 'confirmacao_inscricao_'+ this.treatNameExibition(this.preRegistrationData.meeting.name)+ '_' +this.treatNameExibition(this.userInfo.name)+'.png';
+          link.click();
+          console.log(canvas);
+        });
+
+        buttons.forEach(button => {
+            button.classList.remove('hide-buttons');
+        });
+    }
+
+    treatNameExibition(name:string){
+        return name.trim().toLowerCase().replace(/ /g, '_'); 
+    }
+
+    meetingDate(){
+        const beginDate = this.meetingData.beginDate.split(" ");
+        const endDate = this.meetingData.endDate.split(" ");
+        if(beginDate[0] == endDate[0]){
+            return `${this.meetingData.beginDate} - ${endDate[1]}`
+        }else{
+            return `${this.meetingData.beginDate} - ${this.meetingData.endDate}`
+        }
     }
 
 

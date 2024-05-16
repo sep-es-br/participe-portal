@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.displayCalendar = data.showCalendar;
 
-      if(this.displayCalendar){
+      if(!this.displayCalendar){
         this.calendarImageUrl = _.get(data, 'calendarImageUrl.url', '');
       }
 

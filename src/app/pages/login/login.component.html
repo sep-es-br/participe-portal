@@ -35,7 +35,7 @@
           </div>
       </div>
     </div>
-    <div  *ngIf="displayCalendar && calendarImageUrl != '' " >
+    <div  *ngIf=" calendarImageUrl != '' " >
       <img class="agenda-mobile" src="{{calendarImageUrl}}" alt=""/>
     </div>
     <div class="right-side p-col-12 p-lg-6 " >
@@ -113,7 +113,9 @@
             *ngIf="meetingDetail.typeMeetingEnum !== typeMeeting.VIRTUAL" class="row" >
             <div class="locality col-12">{{meetingDetail?.place}}</div>
             <div class="adreess col-12">{{meetingDetail?.address}}</div>
-            <div class="icons-locality col-12">
+            <div class="icons-locality col-12 mt-2">
+              <img src="assets/icons/gmaps.svg" alt="google-maps" width="40px" height="40px"
+              (click)="goToLink('https://maps.google.com/?q=' + meetingDetail.place + '+' + meetingDetail.address)">
               <img src="assets/icons/waze.svg"  class="icon" alt="waze" width="40px" height="40px" class="waze"
                    (click)="goToLink('waze://?q==' + meetingDetail.place + '+' + meetingDetail.address)">
             </div>

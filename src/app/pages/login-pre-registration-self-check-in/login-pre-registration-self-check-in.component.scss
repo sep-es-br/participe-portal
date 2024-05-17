@@ -229,3 +229,30 @@ $darkColorOr: rgba(0,0,0,0.16);
     top: 0px;
   }
 
+@media screen and (max-width: 768px) {
+  .cidadao{
+    font-size: 0.9rem;
+  }
+  
+}
+
+@media screen and (max-width: 600px) {
+  .cidadao{
+    font-size: 0.8rem;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .cidadao{
+    font-size: 0.7rem;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+  .cidadao{
+    font-size: 0.6rem;
+  }
+  
+}

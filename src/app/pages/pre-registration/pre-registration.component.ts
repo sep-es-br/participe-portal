@@ -26,6 +26,7 @@ import html2canvas  from 'html2canvas';
     loadedServices:boolean = false;
     preRegistrationCompleted:boolean = false;
     preRegistrationData: IPreRegistration;
+    previousRegistration: boolean = false;
     meetingData;
     meetingLocationMap;
     userInfo: IPerson;
@@ -44,26 +45,58 @@ import html2canvas  from 'html2canvas';
     
     ngOnInit() {
         this.startServices();
+        setTimeout(() => {
+            this.increaseBrightness();
+        }, 1000); 
     }
 
-    ngAfterViewInit() {
-        console.log(this.content.nativeElement); // Verifique se isso retorna o elemento desejado
-    }
-
-    startServices(){
-        const dados = sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_ACTIVE);
-        this.preRegistrationData = JSON.parse(dados);
-        if(this.preRegistrationData){
-            this.preRegistrationCompleted = true;
-            this.userInfo = this.authService.getUserInfo;
-        }else{
-            this.checkRouteServices();
+    increaseBrightness() {
+        console.log('increaseBrightness',window.screen);
+        (window.screen as any).brightness = 1.2;
+        const brightness = (window.screen as any).brightness;
+        if (brightness < 1) {
+            (window.screen as any).brightness = brightness + 0.1;
         }
     }
 
-    checkRouteServices(){//verificar nome da função
+    async startServices(){
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
+        // debugger
+        const userAutenticated = await this.authService.isAuthenticated();
+        if(userAutenticated !== false){
+            this.userInfo = this.authService.getUserInfo;
+            this.checkConfirmed();
+        }
+        if(!this.previousRegistration){
+            const dados = sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_ACTIVE);
+            this.preRegistrationData = JSON.parse(dados);
+            if(this.preRegistrationData){
+                this.preRegistrationCompleted = true;
+            }else{
+                this.checkRouteServices();
+            }
+        }
+    }
+
+    checkConfirmed(){
+
+        
+        this.preRegistrationService.preRegistrationConfirmed(Number(this.meetingId), this.userInfo.id).then(
+            response => {
+                if(response.data !== null){
+                    sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_ACTIVE, JSON.stringify(response.data));
+                    this.preRegistrationData = response.data;
+                    this.preRegistrationCompleted = true;
+                    this.loadedServices = false;
+                    this.previousRegistration = true;
+                }
+            }
+        );
+    }
+
+    checkRouteServices(){//verificar nome da função
+        
         if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) && this.meetingId){
             const urlAtual = this.location.path();
             localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);    
@@ -127,6 +160,7 @@ import html2canvas  from 'html2canvas';
     }
 
     saveImage() {
+        this.loadingService.loading(true);
         const buttons = this.content.nativeElement.querySelectorAll('.action-buttons');
         buttons.forEach(button => {
           button.classList.add('hide-buttons');
@@ -155,6 +189,10 @@ import html2canvas  from 'html2canvas';
         buttons.forEach(button => {
             button.classList.remove('hide-buttons');
         });
+
+        setTimeout(() => {
+            this.loadingService.loading(false);
+        }, 1000);
     }
 
     treatNameExibition(name:string){

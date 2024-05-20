@@ -26,7 +26,6 @@ export class PreRegistrationService extends BaseService<any> {
   }
   
   preRegistrationConfirmed(meetingId: number,personId: number){
-    console.log(`${this.urlBase}/${meetingId}/${personId}`)
     return this.http.get<IResultHttp<IPreRegistration>>(`${this.urlBase}/${meetingId}/${personId}`).toPromise();
   }
 

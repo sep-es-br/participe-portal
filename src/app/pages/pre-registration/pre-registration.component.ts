@@ -45,24 +45,11 @@ import html2canvas  from 'html2canvas';
     
     ngOnInit() {
         this.startServices();
-        setTimeout(() => {
-            this.increaseBrightness();
-        }, 1000); 
-    }
-
-    increaseBrightness() {
-        console.log('increaseBrightness',window.screen);
-        (window.screen as any).brightness = 1.2;
-        const brightness = (window.screen as any).brightness;
-        if (brightness < 1) {
-            (window.screen as any).brightness = brightness + 0.1;
-        }
     }
 
     async startServices(){
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
-        // debugger
         const userAutenticated = await this.authService.isAuthenticated();
         if(userAutenticated !== false){
             this.userInfo = this.authService.getUserInfo;
@@ -80,8 +67,6 @@ import html2canvas  from 'html2canvas';
     }
 
     checkConfirmed(){
-
-        
         this.preRegistrationService.preRegistrationConfirmed(Number(this.meetingId), this.userInfo.id).then(
             response => {
                 if(response.data !== null){

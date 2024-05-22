@@ -13,13 +13,16 @@
 </div>
 <div class="container print-visible">
   <div class="row col-md-5 m-auto print-visible">
-    <div class="col-6 d-flex print-visible">
-      <!-- <img class="img-fluid float-start" src="assets/images/footer_branco.png" alt=""> -->
-      <img class="footer_img print-visible" src="assets/images/ES-ACAO_20anos_transparente.png" alt="">
+    <div *ngIf="!image" class="row print-visible">
+      <div class="col-6 d-flex print-visible">
+        <img class="img-fluid float-start" src="assets/images/footer_branco.png" alt="">
+      </div>
+      <div class="col-6 d-flex print-visible">
+        <img class="img-fluid" src="assets/images/poweredBy_branco.svg" alt="">
+      </div>
     </div>
-    <div class="col-6 d-flex print-visible">
-      <!-- <img class="img-fluid" src="assets/images/poweredBy_branco.svg" alt=""> -->
-      <img class="footer_img print-visible" src="assets/images/Logo_Gov_ES_transparente.png" alt="">
+    <div class="col-12 d-flex print-visible justify-content-center">
+      <img *ngIf="image" class="footer_img" [src]="image" alt="">
     </div>
     <div class="col-md-12 d-flex justify-content-center">
       <div class="policy-container">

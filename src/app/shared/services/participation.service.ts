@@ -24,6 +24,12 @@ export class ParticipationService extends BaseService<any> {
     ).toPromise();
   }
 
+  getFooterImage(conferenceId: number) {
+    return this.http.get<IResultHttp<Object>>(
+      `${this.urlBase}/portal-footer-image/${conferenceId}`
+    ).toPromise();
+  }
+
   setSurvey(conferenceId: number, answerSurvey: boolean) {
     return this.http.post<any>(`${this.urlBase}/portal-header/${conferenceId}/selfdeclarations/decline`, answerSurvey).toPromise();
   }

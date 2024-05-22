@@ -66,6 +66,7 @@ export class ColorService extends BaseService<any> {
           --card-color-hover: ${result.data.cardColorHover};
           --card-border-color: ${result.data.cardBorderColor};
           --border-color: ${result.data.borderColor};
+          --card-login-color: ${result.data.cardLoginColor};
         }
         `
       }

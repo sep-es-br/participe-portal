@@ -12,11 +12,15 @@
     flex-direction: row;
 
     .search-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      color: white;
-      outline: none;
+      color: var(--font-color);
+      outline:none;
       border-radius: 60px;
       background: var(--accent-color);
+      margin-right: 10px;
       padding: 6px;
       width: 6rem;
       text-align: center;
@@ -26,6 +30,7 @@
     input {
       padding: 0 0 0 8px;
       outline: none;
+      background-color: var(--card-color);
       opacity: 0.8;
       width: 30em;
       border: 0;
@@ -36,7 +41,7 @@
       cursor: pointer;
       position: absolute;
       border-radius: 50%;
-      background-color: white;
+      background-color: var(--card-color);
       right: 50px;
       width: 27px;
       height: 27px;

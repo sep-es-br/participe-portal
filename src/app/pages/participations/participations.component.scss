@@ -6,23 +6,20 @@
 
   .search-container {
     display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: flex-end;
     flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10px;
 
     .search-area {
       display: flex;
       flex-direction: row;
-      position: relative;
-      min-width: 34px;
 
       .search-button {
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        color: white;
+        color: var(--font-color);
         outline:none;
         border-radius: 60px;
         background: var(--accent-color);
@@ -32,30 +29,29 @@
         text-align: center;
         font-size: 12px;
       }
+      .search-svg {
+        margin-left: 6px;
+        margin-top: 1px;
+        width: 15px;
+        height: 15px;
+      }
       input {
-        background-color: white;
-        padding: 5px 35px 5px 7px;
-        outline: none;
+        padding: 0 0 0 8px;
+        outline:none;
         opacity: 0.8;
-        height: calc(10px + 1.25rem + 3px);
-        width: 30vw;
-        max-width: 500px;
+        width: 30em;
         border: 0;
         border-radius: 60px;
-        margin-right: 1vw;
 
       }
       .action-icon {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        max-width: 100%;
-        cursor: pointer;
-        padding: 5px 7px;
-        margin-right: 1vw;
-        border-radius: 50%;
-        background-color: #d6deea;
-        color: var(--accent-color);
+      cursor: pointer;
+      position: absolute;
+      border-radius: 50%;
+      background-color: var(--card-color);
+      right: 30px;
+      width: 27px;
+      height: 27px;
       }
       @media screen and (max-width: 768px) {
         width: 100%;

@@ -48,7 +48,7 @@
                 </div>
                 <div class="item" *ngFor="let item of participation.planItems; last as isLast">
                   <div class="structure-item">
-                    <div *ngIf="!isLast" [innerHTML]="colorService.svgList.area_tematica_gradient_svg.htmlText" class="structure-img"></div>
+                    <div *ngIf="!isLast" [innerHTML]="colorService.svgList.area_tematica_svg.htmlText" class="structure-img"></div>
                     <div *ngIf="isLast" [innerHTML]="colorService.svgList.desafio_svg.htmlText" class="structure-img"></div>
                     <div class="name">{{ item.structureItemName }}</div>
                   </div>
@@ -91,7 +91,7 @@
                 <div class="item" *ngFor="let item of participation.planItems; let i = index; last as isLast"
                   [ngStyle]="{ order: item.structureItemName === 'Área Estratégica' ? ( i === 0 ? 2 : 1 ) : i }">
                   <div class="structure-item">
-                    <div *ngIf="!isLast" [innerHTML]="colorService.svgList.area_tematica_gradient_svg.htmlText" class="structure-img"></div>
+                    <div *ngIf="!isLast" [innerHTML]="colorService.svgList.area_tematica_svg.htmlText" class="structure-img"></div>
                     <div *ngIf="isLast" [innerHTML]="colorService.svgList.desafio_svg.htmlText" class="structure-img"></div>
                     <div class="name">{{ item.structureItemName }}</div>
                   </div>

@@ -152,7 +152,7 @@ button.btn-secondary {
 #path7, .active-path{
   fill: var(--font-color) !important;
 }
-.home, .search-svg, .check-circle, #path22{
+.home, .search-svg, .close, .check-circle, #path22{
   fill: var(--accent-color) !important;
 }
 .check-circle, #path23, .fil0, .fil00{
@@ -167,15 +167,16 @@ button.btn-secondary {
 
 :root {
   //ES500
-  // --background: white;
-  // --accent-color:#F18EB1;
-  // --font-color: #008CD1;
-  // --card-font-color:white;
-  // --card-font-color-hover:white;
-  // --card-color:#008CD1;
-  // --card-color-hover:#F18EB1;
-  // --card-border-color:white;
-  // --border-color: #008CD1;
+  --background: white;
+  --accent-color:#F18EB1;
+  --font-color: #008CD1;
+  --card-font-color:white;
+  --card-font-color-hover:white;
+  --card-color:#008CD1;
+  --card-color-hover:#F18EB1;
+  --card-border-color:white;
+  --border-color: #008CD1;
+  --card-login-color: #F18EB1;
 
   --background: rgba(21,57,97,1);
   --accent-color:#00a198;

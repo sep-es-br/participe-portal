@@ -6,7 +6,7 @@
       <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
       <input [@rotatedState]='state' [(ngModel)]="textSearch" minlength="3" *ngIf="disable">
       <div class="search-img" (click)="showHide()">
-        <div [innerHTML]="colorService.svgList.search_svg.htmlText" class="search-svg"></div>
+        <div [innerHTML]="colorService.svgList[imageName].htmlText" class="search-svg"></div>
       </div>
     </div>
     <div class="{{classMsg}}" *ngIf="showMessage">

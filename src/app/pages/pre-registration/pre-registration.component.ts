@@ -50,7 +50,7 @@ import html2canvas  from 'html2canvas';
     async startServices(){
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
-        const preRegistrationIsOpen = await this.meetingService.getSelfCheckInOrPreRegistrationOpen(parseInt(this.meetingId),"PREREGISTRATION")
+        const preRegistrationIsOpen = await this.meetingService.getSelfCheckInOrPreRegistrationOpen(parseInt(this.meetingId),"pre-registration")
       if(preRegistrationIsOpen.data.length == 0){
         await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_OFF, this.meetingId);
         await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);

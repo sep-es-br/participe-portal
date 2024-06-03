@@ -36,7 +36,7 @@ export class SelfCheckInComponent implements OnInit {
 
     
     async ngOnInit() {
-      const selfcheckInIsOpen = await this.meetingSrv.getSelfCheckInOrPreRegistrationOpen(this.route.snapshot.params['meeting'],"SELFCHECKIN")
+      const selfcheckInIsOpen = await this.meetingSrv.getSelfCheckInOrPreRegistrationOpen(this.route.snapshot.params['meeting'],"self-check-in")
       if(selfcheckInIsOpen.data.length == 0){
         await sessionStorage.setItem(StoreKeys.CHECK_IN_OFF, this.route.snapshot.params['meeting']);
         await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);

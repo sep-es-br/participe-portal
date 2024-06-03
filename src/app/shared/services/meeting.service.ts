@@ -69,6 +69,8 @@ export class MeetingService extends BaseService<any> {
     }).toPromise();
   }
 
-  
+  getSelfCheckInOrPreRegistrationOpen(meetingId: number, participationType: string): Promise<any>{
+    return this.http.get<IResultHttp<any>>(`${this.urlBase}/${meetingId}/${participationType}`).toPromise();
+  }
 
 }

@@ -16,7 +16,7 @@
       <app-input-message [form]="userForm" field="telephone"></app-input-message>
     </div>
     <div class="p-col-12 form-group stacked ui-fluid">
-      <label for="locality">{{localityType}} *</label>
+      <label class="locality-label" for="locality">{{localityType}} de Residência? *</label>
       <p-dropdown class="locality-dropbox" [options]="localities"
         formControlName="locality" field="label" optionLabel="name" optionValue="id"
         [placeholder]="'Selecione o seu ' + localityType">

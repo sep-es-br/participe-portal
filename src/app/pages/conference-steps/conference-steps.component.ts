@@ -56,7 +56,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   hide: string = 'default';
   textSearch: string = '';
   state: string = 'default';
-  imageName: string = 'search';
+  imageName: string = 'search_svg';
   wasFound: boolean = false;
   searchMessage: string;
   disable: boolean = false;
@@ -266,10 +266,10 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
     if (this.hide === 'default') {
       await this.delay(600);
-      this.imageName = 'search';
+      this.imageName = 'search_svg';
       this.disable = false;
     } else {
-      this.imageName = 'close';
+      this.imageName = 'close_svg';
     }
     const {success, data} = await this.participationSrv
       .getPlanItem(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);

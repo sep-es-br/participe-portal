@@ -5,11 +5,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-//mudei a cor do home.svg e arrow-right fill:#FFFFFF para #F18EB1
-//mudei a cor do search.svg fill="#00a198" para #F18EB1
-//mudei a cor do user2.svg e close2.svg arrow-left-circle fill="#FFFFFF para #008CD1
-
-
 body {
   margin: 0;
   padding: 0;
@@ -152,7 +147,7 @@ button.btn-secondary {
 #path7, .active-path{
   fill: var(--font-color) !important;
 }
-.home, .search-svg, .check-circle, #path22{
+.home, .search-svg, .close, .check-circle, #path22{
   fill: var(--accent-color) !important;
 }
 .check-circle, #path23, .fil0, .fil00{
@@ -167,7 +162,7 @@ button.btn-secondary {
 
 :root {
   //ES500
-  // --background: white;
+  // --background: linear-gradient(140deg , #ffffff 35%, #008cd1 150%);
   // --accent-color:#F18EB1;
   // --font-color: #008CD1;
   // --card-font-color:white;
@@ -176,6 +171,7 @@ button.btn-secondary {
   // --card-color-hover:#F18EB1;
   // --card-border-color:white;
   // --border-color: #008CD1;
+  // --card-login-color: #F18EB1;
 
   --background: rgba(21,57,97,1);
   --accent-color:#00a198;

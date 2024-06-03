@@ -42,6 +42,7 @@ export class ParticipationsComponent implements OnInit {
   localityIds: number[] = [];
   planItemIds: number[] = [];
   searchIconClass = 'pi pi-search';
+  searchSvg = 'search_svg';
   hide: string = 'default';
   textSearch: string = '';
   state: string = 'default';
@@ -59,7 +60,7 @@ export class ParticipationsComponent implements OnInit {
     private participationSrv: ParticipationService,
     private conferenceSrv: ConferenceService,
     private messageService: MessageService,
-    private colorService: ColorService,
+    public colorService: ColorService,
   ) { }
 
   async ngOnInit() {
@@ -134,10 +135,12 @@ export class ParticipationsComponent implements OnInit {
     if (this.hide === 'default') {
       this.textSearch = '';
       this.searchIconClass = 'pi pi-search';
+      this.searchSvg = 'search_svg'
       await this.search(true);
       await this.closeMessage();
     } else {
       this.searchIconClass = 'pi pi-times';
+      this.searchSvg = 'close_svg'
     }
   }
 

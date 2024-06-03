@@ -28,7 +28,7 @@ export class SelfCheckInComponent implements OnInit {
       private conferenceSrv: ConferenceService,
       private formBuilder: FormBuilder,
       private authSrv: AuthService,
-      protected meetingSrv: MeetingService,
+      private meetingSrv: MeetingService,
       private router: Router,
       private route: ActivatedRoute,
       private colorService: ColorService
@@ -36,7 +36,13 @@ export class SelfCheckInComponent implements OnInit {
 
     
     async ngOnInit() {
-      if(!sessionStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
+      const selfcheckInIsOpen = await this.meetingSrv.getSelfCheckInOrPreRegistrationOpen(this.route.snapshot.params['meeting'],"self-check-in")
+      if(selfcheckInIsOpen.data.length == 0){
+        await sessionStorage.setItem(StoreKeys.CHECK_IN_OFF, this.route.snapshot.params['meeting']);
+        await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
+        await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
+        this.router.navigate(['/login-pre-registration-self-check-in']);
+      }else if(!sessionStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
         await this.loadingVariable()
         await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
         this.router.navigate(['/login-pre-registration-self-check-in']);
@@ -47,7 +53,7 @@ export class SelfCheckInComponent implements OnInit {
     }
 
     async loadingVariable(){
-      await sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting'])
+      await sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting']);
       await sessionStorage.setItem(StoreKeys.LOGIN_CHECK_IN, 'true');
       await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
     }

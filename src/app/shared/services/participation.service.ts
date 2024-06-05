@@ -44,6 +44,16 @@ export class ParticipationService extends BaseService<any> {
     ).toPromise();
   }
 
+  getPlanItemChildren(conferenceId: number, localityId?: number, planItemId?: number,text?: string) {
+    return this.http.get<IResultHttp<IParticipationPlanItem>>(
+      `${this.urlBase}/plan-item-children/${conferenceId}${qs.stringify({
+        idLocality: localityId,
+        idPlanItem: planItemId,
+        text: text
+      }, { addQueryPrefix: true })}`
+    ).toPromise();
+  }
+
   commentAndHighlights(localityId: number, planItemId: number, conferenceId: number, comment?: string) {
     const sender = {
       planItem: planItemId,

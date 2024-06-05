@@ -36,6 +36,12 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
         this.subtitle = 'Acesse agora para registrar sua presença no encontro'
         this.conferenceName = `${this.meetingData.conference.name}`
         this.meetingName =`${this.meetingData.name}`
+      }else if(sessionStorage.getItem(StoreKeys.CHECK_IN_OFF)) {
+        this.title = 'Auto Check-in'
+        this.subtitle = 'Check-in encerrado. Para participar da audiência, faça login clicando no botão abaixo.'
+      }else if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_OFF)) {
+        this.title = 'Pré-credenciamento'
+        this.subtitle = 'Pré-credenciamento encerrado. Procure a recepção para fazer seu check-in. Para participar da audiência, faça login clicando no botão abaixo.'
       }
     }
 
@@ -50,10 +56,14 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
       
 
       signInGoogle() {
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_OFF);
+        sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
         this.authSrv.signInGoogle();
       }
     
       signInAcessoCidadao() {
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_OFF);
+        sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
         this.authSrv.signInAcessoCidadao();
       }
 }

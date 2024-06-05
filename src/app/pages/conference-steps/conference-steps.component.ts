@@ -56,7 +56,7 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   hide: string = 'default';
   textSearch: string = '';
   state: string = 'default';
-  imageName: string = 'search';
+  imageName: string = 'search_svg';
   wasFound: boolean = false;
   searchMessage: string;
   disable: boolean = false;
@@ -114,17 +114,30 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
   }
 
   async loadConferenceStep() {
-    const {success, data} = await this.participationSrv.getPlanItem(
-//      this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId ? this.stepId : null, ''
-      this.conference.id, this.localityId, this.stepId ? this.stepId : null, ''
-    );
-    if (success) {
-      this.conferenceStepItem = data;
-      this.conferenceStepItem.itens.forEach(item => {
-        item.checked = (item.votes || item.commentsMade > 0);
-      });
-      this.breadcrumbSrv.addOrUpdate({title: data.structureitem.name});
-      this.participationStateSrv.removeBeforeNavigation(data.structureitem.name);
+
+    if (this.stepId) {
+      const { success, data } = await this.participationSrv.getPlanItemChildren(
+        this.conference.id, this.localityId, this.stepId);
+      if (success) {
+        this.conferenceStepItem = data;
+        this.conferenceStepItem.itens.forEach(item => {
+          item.checked = (item.votes || item.commentsMade > 0);
+        });
+        this.breadcrumbSrv.addOrUpdate({ title: data.structureitem.name });
+        this.participationStateSrv.removeBeforeNavigation(data.structureitem.name);
+      }
+    } else {
+      const { success, data } = await this.participationSrv.getPlanItem(
+        this.conference.id, this.localityId, null, ''
+      );
+      if (success) {
+        this.conferenceStepItem = data;
+        this.conferenceStepItem.itens.forEach(item => {
+          item.checked = (item.votes || item.commentsMade > 0);
+        });
+        this.breadcrumbSrv.addOrUpdate({ title: data.structureitem.name });
+        this.participationStateSrv.removeBeforeNavigation(data.structureitem.name);
+      }
     }
   }
 
@@ -266,22 +279,19 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
     if (this.hide === 'default') {
       await this.delay(600);
-      this.imageName = 'search';
+      this.imageName = 'search_svg';
       this.disable = false;
     } else {
-      this.imageName = 'close';
+      this.imageName = 'close_svg';
     }
-    const {success, data} = await this.participationSrv
-      .getPlanItem(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);
 
-    if (success) {
-      this.renderList(data.itens);
-    }
   }
 
   async search() {
-    const {success, data} = await this.participationSrv
-      .getPlanItem(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);
+
+    if(this.stepId){
+      const {success, data} = await this.participationSrv
+      .getPlanItemChildren(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);
 
     if (success) {
       if (!data.itens || data.itens.length < 1) {
@@ -297,6 +307,26 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
       this.showMessage = true;
       this.classMsg = 'animate__animated animate__fadeInRightBig';
     }
+    }else{
+      const {success, data} = await this.participationSrv
+        .getPlanItem(this.conferenceSrv.ConferenceActiveId, this.localityId, this.stepId, this.textSearch);
+  
+      if (success) {
+        if (!data.itens || data.itens.length < 1) {
+          this.searchMessage = 'Hummm... Não estou encontrando esse termo. Que tal tentar um sinônimo ou algo menos específico?';
+          this.wasFound = false;
+          this.renderList([]);
+        } else {
+          this.searchMessage = 'Oba! Encontrei alguma coisa nos itens abaixo!';
+          this.wasFound = true;
+          this.renderList(data.itens);
+        }
+  
+        this.showMessage = true;
+        this.classMsg = 'animate__animated animate__fadeInRightBig';
+      }
+    }
+    
   }
 
   renderList(data: IItem[]) {

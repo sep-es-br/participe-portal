@@ -5,11 +5,6 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-//mudei a cor do home.svg e arrow-right fill:#FFFFFF para #F18EB1
-//mudei a cor do search.svg fill="#00a198" para #F18EB1
-//mudei a cor do user2.svg e close2.svg arrow-left-circle fill="#FFFFFF para #008CD1
-
-
 body {
   margin: 0;
   padding: 0;
@@ -114,8 +109,9 @@ button.btn-secondary {
     span {
       color: var(--font-color);
       margin-right: 10px;
+      width: 340px;
       text-align: right;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: lighter;
     }
     img {
@@ -138,15 +134,20 @@ button.btn-secondary {
   flex-direction: column;
 }
 
+#arrow{
+  width: 12px;
+  height: 12px;
+}
+
 #Capa_1, #svg10, #svg11, #svg833{
   width: 100%;
   height: 100%;
 }
 
-.active-path, #path7{
+#path7, .active-path{
   fill: var(--font-color) !important;
 }
-.search-svg, .check-circle, #path22{
+.home, .search-svg, .close, .check-circle, #path22{
   fill: var(--accent-color) !important;
 }
 .check-circle, #path23, .fil0, .fil00{
@@ -161,7 +162,7 @@ button.btn-secondary {
 
 :root {
   //ES500
-  // --background: white;
+  // --background: linear-gradient(140deg , #ffffff 35%, #008cd1 150%);
   // --accent-color:#F18EB1;
   // --font-color: #008CD1;
   // --card-font-color:white;
@@ -170,6 +171,7 @@ button.btn-secondary {
   // --card-color-hover:#F18EB1;
   // --card-border-color:white;
   // --border-color: #008CD1;
+  // --card-login-color: #F18EB1;
 
   --background: rgba(21,57,97,1);
   --accent-color:#00a198;
@@ -180,6 +182,7 @@ button.btn-secondary {
   --card-color-hover:#00a198;
   --card-border-color:white;
   --border-color: white;
+  --card-login-color: white;
 
   --tertiaryColor:#3F5291;
   --textColorDark: #343333;

@@ -8,5 +8,6 @@ export interface IColor {
     cardColorHover: string;
     cardBorderColor: string;
     borderColor: string;
+    cardLoginColor: string;
   }
    

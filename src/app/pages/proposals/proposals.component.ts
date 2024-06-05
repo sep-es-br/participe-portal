@@ -6,6 +6,7 @@ import { IProposal } from 'src/app/shared/interfaces/IProposal';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-proposals',
@@ -45,7 +46,7 @@ export class ProposalsComponent implements OnInit {
   hide: string = 'default';
   textSearch: string = '';
   state: string = 'default';
-  imageName: string = 'search';
+  imageName: string = 'search_svg';
   classMsg: string;
   searchMessage: string ;
   regionName: string;
@@ -71,6 +72,7 @@ export class ProposalsComponent implements OnInit {
     private proposalSrv: ProposalService,
     private conferenceSrv: ConferenceService,
     private authSrv: AuthService,
+    public colorService: ColorService
   ) { }
 
   async ngOnInit() {
@@ -96,7 +98,7 @@ export class ProposalsComponent implements OnInit {
             data.proposals.forEach(proposal => {
               proposal.planItens.forEach(planItem => {
                 planItem.fileName = planItem.structureItemName.normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '').replace(' ', '-').trim().toLowerCase();
+                .replace(/[\u0300-\u036f]/g, '').replace(' ', '_').trim().toLowerCase();
               });
               this.listProposals.push(proposal);
             });
@@ -169,7 +171,7 @@ export class ProposalsComponent implements OnInit {
       this.listProposals.forEach(proposal => {
         proposal.planItens.forEach(planItem => {
           planItem.fileName = planItem.structureItemName.normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '').replace(' ', '-').trim().toLowerCase();
+          .replace(/[\u0300-\u036f]/g, '').replace(' ', '_').trim().toLowerCase();
         });
       });
     }
@@ -268,12 +270,18 @@ export class ProposalsComponent implements OnInit {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
     if (this.hide === 'default') {
       await this.delay(600);
-      this.imageName = 'search';
+      this.imageName = 'search_svg';
       this.disable =  false;
     } else {
-      this.imageName = 'close';
+      this.imageName = 'close_svg';
     }
 
+  }
+
+  getSvgHtml(imageName: string): string {
+    const teste = this.colorService.svgList.imageName.htmlText
+    console.log(teste)
+    return "this.colorService.svgList[imageName].htmlText"
   }
 
   private delay(ms: number): Promise<boolean> {
@@ -311,7 +319,7 @@ export class ProposalsComponent implements OnInit {
     this.listProposals.forEach(proposal => {
       proposal.planItens.forEach(planItem => {
         planItem.fileName = planItem.structureItemName.normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '').replace(' ', '-').trim().toLowerCase();
+        .replace(/[\u0300-\u036f]/g, '').replace(' ', '_').trim().toLowerCase();
       });
     });
   }

@@ -7,7 +7,7 @@
     <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
     <input [@rotatedState]='state' [(ngModel)]="textSearch"  minlength="3" *ngIf="disable">
     <div class="search-img" (click)="showHide()">
-      <img  src="/assets/icons/{{imageName}}.svg" alt="">
+      <div [innerHTML]="colorService.svgList[imageName].htmlText" class="search-svg"></div>
     </div>
   </div>
   <div class="{{classMsg}}" *ngIf="showMessage">
@@ -69,7 +69,9 @@
     <div class="card-item" *ngFor="let item of listProposals; let i = index" >
 
         <div class="proposal">
-          <img src="assets/icons/quote2.svg" alt="">
+          <div class="quote">
+            <div [innerHTML]="colorService.svgList.quote2_svg.htmlText" class="quote-svg"></div>
+          </div>
 
           <div class="comment"><strong>{{ item.comment }}</strong></div>
 
@@ -81,7 +83,7 @@
 
             (click)="likeProposal(i, item)" id="{{i}}">
             <div class="number">{{ item.likes || 0}}</div>
-            <img src="assets/icons/like2.svg" style="min-width: 2%; width: 20px; height: 20px;" alt="">
+            <div [innerHTML]="colorService.svgList.like2_svg.htmlText" class="like-svg"></div>
           </a>
         </div>
 
@@ -89,7 +91,9 @@
           <div class="p-item" *ngIf="regionalization">
 
             <div class="image">
-              <img src="assets/icons/locality2.svg" alt="">
+              <div class="planItem">
+                <div [innerHTML]="colorService.svgList.locality_without_map_gradient_svg.htmlText" class="locality-svg"></div>
+              </div>
               <p>{{item.localityTypeName}}</p>
             </div>
 
@@ -100,7 +104,9 @@
 
           <div class="p-item" *ngFor="let planitem of item.planItens">
             <div class="image">
-                <img src="assets/icons/{{planitem.fileName}}2.svg" alt="">
+              <div class="planItem">
+                <div [innerHTML]="colorService.svgList[planitem.fileName + '_svg'].htmlText" class="planItem-svg"></div>
+              </div>
                 <p>{{planitem.structureItemName}}</p>
               </div>
             <div class="nameItem">

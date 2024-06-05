@@ -6,7 +6,7 @@
       <div class="search-button" [@hide]='hide' (click)="search()" *ngIf="disable">Pesquisar</div>
       <input [@rotatedState]='state' [(ngModel)]="textSearch" minlength="3" *ngIf="disable">
       <div class="search-img" (click)="showHide()">
-        <div [innerHTML]="colorService.svgList.search_svg.htmlText" class="search-svg"></div>
+        <div [innerHTML]="colorService.svgList[imageName].htmlText" class="search-svg"></div>
       </div>
     </div>
     <div class="{{classMsg}}" *ngIf="showMessage">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class=" conference-step-container" *ngIf="conferenceStepItem?.itens">
+  <div class="conference-step-container" *ngIf="conferenceStepItem?.itens">
     <div class="card-item-empty" *ngIf="conferenceStepItem.itens.length === 0">
       Não existe nenhum {{conferenceStepItem?.structureitem?.name}} para ser exibido
     </div>
@@ -28,7 +28,7 @@
       }" *ngFor="let stepItem of conferenceStepItem?.itens" (click)="selectNextStep(stepItem)">
         <div class="item-image-container" [style.backgroundImage]="stepItem.image ? 'url(' + stepItem.image + ')': ''">
           <div class="card-item-content" [class.center-container]="!stepItem.description">
-            <h2 [class.center]="!stepItem.description">{{stepItem.name}}</h2>
+            <h4 [class.center]="!stepItem.description">{{stepItem.name}}</h4>
             <p>{{stepItem.description}}</p>
           </div>
           <div class="card-actions">

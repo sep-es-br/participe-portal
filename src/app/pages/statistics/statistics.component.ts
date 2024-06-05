@@ -24,7 +24,7 @@ interface IItem {
 export class StatisticsComponent implements OnInit, OnDestroy {
 
   filters = {
-    selectedResult: 'HIGHLIGHTS',
+    selectedResult: 'PROPOSALS',
     selectedOrigin: '',
     selectedMeeting: []
   };
@@ -121,7 +121,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   async loadRegionStructureConference() {
-    if (this.filters.selectedResult === 'HIGHLIGHTS') {
+    if (this.filters.selectedResult === 'PROPOSALS') {
       await this.loadLocalityCitizenItems();
     } else {
       await this.loadRegionalizationItems();
@@ -237,7 +237,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       selectedMeeting: []
     };
     if (clearResult) {
-      this.filters.selectedResult = 'HIGHLIGHTS';
+      this.filters.selectedResult = 'PROPOSALS';
     }
     this.microregionChartAgroupSelected = this.microregionChartAgroupOptions[0].value;
     this.microregionAgroupLocalityTypeSelected = {

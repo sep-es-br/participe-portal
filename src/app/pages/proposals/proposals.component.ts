@@ -96,14 +96,8 @@ export class ProposalsComponent implements OnInit {
           this.totalPages = data.totalPages;
           if (data.proposals) {
             data.proposals.forEach(proposal => {
-              let quant = 0;
-              proposal.planItens.forEach(planItem => {
-                if (quant == 0) {
-                  planItem.fileName = "area_tematica";
-                } else if (quant == 1) {
-                  planItem.fileName = "desafio"
-                }
-                quant += 1
+              proposal.planItens.forEach((planItem, index) => {
+                planItem.fileName = index == 0 ? "area_tematica" : "desafio"
               });
               this.listProposals.push(proposal);
             });
@@ -174,14 +168,8 @@ export class ProposalsComponent implements OnInit {
       this.listProposals = [];
       this.listProposals = data.proposals ? data.proposals : [];
       this.listProposals.forEach(proposal => {
-        let quant = 0;
-        proposal.planItens.forEach(planItem => {
-          if(quant == 0){
-            planItem.fileName = "area_tematica";
-          }else if(quant == 1){
-            planItem.fileName = "desafio"
-          }
-          quant+=1
+        proposal.planItens.forEach((planItem, index) => {
+          planItem.fileName = index == 0 ? "area_tematica" : "desafio"
         });
       });
     }
@@ -327,14 +315,8 @@ export class ProposalsComponent implements OnInit {
   renderList(data: IProposal[]) {
     this.listProposals = data;
     this.listProposals.forEach(proposal => {
-      let quant = 0;
-        proposal.planItens.forEach(planItem => {
-          if(quant == 0){
-            planItem.fileName = "area_tematica";
-          }else if(quant == 1){
-            planItem.fileName = "desafio"
-          }
-          quant+=1
+        proposal.planItens.forEach((planItem, index) => {
+          planItem.fileName = index == 0 ? "area_tematica" : "desafio"
       });
     });
   }

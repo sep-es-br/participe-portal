@@ -347,8 +347,4 @@ export class ConferenceStepsComponent implements OnInit, OnDestroy {
     });
   }
 
-  teste(){
-
-  }
-
 }

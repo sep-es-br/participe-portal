@@ -91,14 +91,19 @@ export class ProposalsComponent implements OnInit {
       if (this.indexPage <= this.totalPages) {
         this.indexPage = this.indexPage + 1;
         const { success, data } = await this.proposalSrv
-        .getPoposals(this.conferenceSrv.ConferenceActiveId, this.indexPage, this.textSearch, this.localityIds, this.planItemIds );
+          .getPoposals(this.conferenceSrv.ConferenceActiveId, this.indexPage, this.textSearch, this.localityIds, this.planItemIds);
         if (success) {
           this.totalPages = data.totalPages;
           if (data.proposals) {
             data.proposals.forEach(proposal => {
+              let quant = 0;
               proposal.planItens.forEach(planItem => {
-                planItem.fileName = planItem.structureItemName.normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '').replace(' ', '_').trim().toLowerCase();
+                if (quant == 0) {
+                  planItem.fileName = "area_tematica";
+                } else if (quant == 1) {
+                  planItem.fileName = "desafio"
+                }
+                quant += 1
               });
               this.listProposals.push(proposal);
             });
@@ -169,9 +174,14 @@ export class ProposalsComponent implements OnInit {
       this.listProposals = [];
       this.listProposals = data.proposals ? data.proposals : [];
       this.listProposals.forEach(proposal => {
+        let quant = 0;
         proposal.planItens.forEach(planItem => {
-          planItem.fileName = planItem.structureItemName.normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '').replace(' ', '_').trim().toLowerCase();
+          if(quant == 0){
+            planItem.fileName = "area_tematica";
+          }else if(quant == 1){
+            planItem.fileName = "desafio"
+          }
+          quant+=1
         });
       });
     }
@@ -317,9 +327,14 @@ export class ProposalsComponent implements OnInit {
   renderList(data: IProposal[]) {
     this.listProposals = data;
     this.listProposals.forEach(proposal => {
-      proposal.planItens.forEach(planItem => {
-        planItem.fileName = planItem.structureItemName.normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '').replace(' ', '_').trim().toLowerCase();
+      let quant = 0;
+        proposal.planItens.forEach(planItem => {
+          if(quant == 0){
+            planItem.fileName = "area_tematica";
+          }else if(quant == 1){
+            planItem.fileName = "desafio"
+          }
+          quant+=1
       });
     });
   }

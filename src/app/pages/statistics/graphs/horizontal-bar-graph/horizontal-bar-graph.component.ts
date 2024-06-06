@@ -145,7 +145,7 @@ export class HorizontalBarGraphComponent implements OnInit, OnDestroy, OnChanges
               }
             },
             fontSize: this.responsive ? 10 : 10,
-            fontColor: this.labelColor,
+            color: this.labelColor,
           },
           offset: true
         },

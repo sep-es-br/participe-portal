@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { MessageService } from "primeng/api";
 import { StoreKeys } from "src/app/shared/commons/contants";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { MeetingService } from "src/app/shared/services/meeting.service";
@@ -20,49 +21,102 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
 
     constructor(
       private authSrv: AuthService,
-      private meetingSrv: MeetingService
+      private meetingSrv: MeetingService,
+      private messageService: MessageService
     ){}
 
     async ngOnInit() {
-      if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)){
-        await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)));
-        this.title = 'Pré-credenciamento'
-        this.subtitle = 'Acesse agora e efetue seu pré-credenciamento para o encontro presencial'
-        this.conferenceName = `${this.meetingData.conference.name}`
-        this.meetingName =`${this.meetingData.name}`
-      }else if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
-        await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.CHECK_IN)));
-        this.title = 'Auto Check-in'
-        this.subtitle = 'Acesse agora para registrar sua presença no encontro'
-        this.conferenceName = `${this.meetingData.conference.name}`
-        this.meetingName =`${this.meetingData.name}`
-      }else if(sessionStorage.getItem(StoreKeys.CHECK_IN_OFF)) {
-        this.title = 'Auto Check-in'
-        this.subtitle = 'Check-in encerrado. Para participar da audiência, faça login clicando no botão abaixo.'
-      }else if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_OFF)) {
-        this.title = 'Pré-credenciamento'
-        this.subtitle = 'Pré-credenciamento encerrado. Procure a recepção para fazer seu check-in. Para participar da audiência, faça login clicando no botão abaixo.'
+      this.startServices();  
+    }
+
+    async startServices(){
+      const getKeyFromSessionStorage = () => {
+        const keys = [
+          StoreKeys.PRE_REGISTRATION,
+          StoreKeys.CHECK_IN,
+          StoreKeys.CHECK_IN_OFF,
+          StoreKeys.PRE_REGISTRATION_MEETING_STARTED,
+          StoreKeys.PRE_REGISTRATION_MEETING_CLOSED
+        ];
+      
+        return keys.find(key => sessionStorage.getItem(key)) || null;
+      };
+      
+      const key = getKeyFromSessionStorage();
+      
+      switch (key) {
+        case StoreKeys.PRE_REGISTRATION:
+          await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)));
+          this.title = 'Pré-credenciamento';
+          this.subtitle = 'Acesse agora e efetue seu pré-credenciamento para o encontro presencial';
+          this.conferenceName = this.meetingData.conference.name;
+          this.meetingName = this.meetingData.name;
+          break;
+      
+        case StoreKeys.CHECK_IN:
+          await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.CHECK_IN)));
+          this.title = 'Auto Check-in';
+          this.subtitle = 'Acesse agora para registrar sua presença no encontro';
+          this.conferenceName = this.meetingData.conference.name;
+          this.meetingName = this.meetingData.name;
+          break;
+      
+        case StoreKeys.CHECK_IN_OFF:
+          this.title = 'Auto Check-in';
+          this.subtitle = 'Encontro presencial encerrado. Acesse abaixo para participar online.';
+          break;
+      
+        case StoreKeys.PRE_REGISTRATION_MEETING_STARTED:
+          this.title = 'Pré-credenciamento';
+          this.subtitle = 'O período de pré-credenciamento já está encerrado, pois este encontro já começou. Procure a recepção para se credenciar e registrar a sua presença. Acesse abaixo para participar online.';
+          break;
+      
+        case StoreKeys.PRE_REGISTRATION_MEETING_CLOSED:
+          this.title = 'Pré-credenciamento';
+          this.subtitle = 'Este encontro já terminou. Acesse abaixo para participar online.';
+          break;
+      
+        default:
+          this.title = 'Ocorreu um erro';
+          this.subtitle = 'favor verificar o link e tentar novamente.';
+          let element = document.querySelector('.social-login') as HTMLLIElement
+          element.style.display = 'none'
+          break;
       }
     }
 
-    async meeting(meeting: number){
-      await this.meetingSrv.getSingleMeeting(meeting).then(
-        meeting => {
-          this.meetingData = meeting.data
+
+
+    async meeting(meetingId: number) {
+      try {
+        const response = await this.meetingSrv.getSingleMeeting(meetingId);
+        this.meetingData = response.data;
+      } catch (error) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Não foi possível encontrar a reunião'
+        });
+        this.title = 'Ocorreu um erro';
+        this.subtitle = 'favor verificar o link e tentar novamente.';
+        let element = document.querySelector('.social-login') as HTMLLIElement
+        element.style.display = 'none'
+        throw error;
       }
-      )
     }
 
       
 
       signInGoogle() {
-        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_OFF);
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
         sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
         this.authSrv.signInGoogle();
       }
     
       signInAcessoCidadao() {
-        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_OFF);
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
         sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
         this.authSrv.signInAcessoCidadao();
       }

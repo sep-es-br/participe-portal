@@ -28,6 +28,7 @@ export class MenuComponent implements OnInit {
   userInfo: IPerson;
   externalLinksMenuItems: MenuItem[];
   displayStatisticsPanel: boolean;
+  displayProposalsPanel: boolean;
 
   constructor(
     private authSrv: AuthService,
@@ -71,6 +72,15 @@ export class MenuComponent implements OnInit {
         this.menu.splice(this.menu.findIndex((item) => item.label == 'Estatísticas'), 1)
         this.router.events.subscribe((event) => {
           if(event instanceof NavigationStart && event.url == "/statistics"){
+            this.router.navigate(['/#', '/conference-map'])
+          }
+        })
+      }
+      this.displayProposalsPanel = result.data.showProposalsPanel;
+      if (!this.displayProposalsPanel){
+        this.menu.splice(this.menu.findIndex((item) => item.label == 'Propostas'), 1)
+        this.router.events.subscribe((event) => {
+          if(event instanceof NavigationStart && event.url == "/proposals"){
             this.router.navigate(['/#', '/conference-map'])
           }
         })

@@ -51,11 +51,17 @@ import html2canvas  from 'html2canvas';
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
         const preRegistrationIsOpen = await this.meetingService.getSelfCheckInOrPreRegistrationOpen(parseInt(this.meetingId),"pre-registration")
-      if(preRegistrationIsOpen.data.length == 0){
-        await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_OFF, this.meetingId);
-        await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);
-        await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
-        this.router.navigate(['/login-pre-registration-self-check-in']);
+        if(preRegistrationIsOpen.data.preRegistrationMeetingStarted == false){
+            await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);
+            if(preRegistrationIsOpen.data.preRegistrationMeetingClosed == false){
+                console.log(preRegistrationIsOpen.data.preRegistrationMeetingClosed)
+                await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED, this.meetingId);
+                this.router.navigate(['/login-pre-registration-self-check-in']);
+            }else{
+                console.log(preRegistrationIsOpen.data.preRegistrationMeetingStarted)
+                await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED, this.meetingId);
+                this.router.navigate(['/login-pre-registration-self-check-in']);
+            }
         }else{
             const userAutenticated = await this.authService.isAuthenticated();
             if(userAutenticated !== false){

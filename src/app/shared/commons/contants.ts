@@ -12,6 +12,7 @@ export const StoreKeys = {
   CHECK_IN: '@portal-participe/CHECK_IN',
   LOGIN_CHECK_IN: '@portal-participe/LOGIN_CHECK_IN',
   CHECK_IN_OFF: '@portal-participe/CHECK_IN_OFF',
-  PRE_REGISTRATION_OFF: '@portal-participe/PRE_REGISTRATION_OFF'
+  PRE_REGISTRATION_MEETING_STARTED: '@portal-participe/PRE_REGISTRATION_MEETING_STARTED',
+  PRE_REGISTRATION_MEETING_CLOSED: '@portal-participe/PRE_REGISTRATION_MEETING_CLOSED'
 };
 

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponsiveService } from './shared/services/responsive.service';
+import { ColorService } from './shared/services/color.service';
+import { StoreKeys } from './shared/commons/contants';
+
 
 @Component({
   selector: 'app-root',
@@ -12,12 +15,17 @@ export class AppComponent implements OnInit {
   isMobileView: boolean;
 
   constructor(
-    private responsiveSrv: ResponsiveService
+    private responsiveSrv: ResponsiveService,
+    private colorService: ColorService,
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    if(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)){
+      await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
+    }
+    this.colorService.getSVG()
     this.detectViewMode(window.innerWidth);
-  }
+    }
 
   detectViewMode(width: number) {
     if (!this.isMobileView && width <= 768) {

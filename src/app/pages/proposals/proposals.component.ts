@@ -1,14 +1,12 @@
-import { Component, OnInit, HostListener, NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import { ProposalService } from 'src/app/shared/services/proposal.service';
-//import { ISelectItem } from 'src/app/shared/interfaces/ISelectItem';
 import { ISelectCheckItem } from 'src/app/shared/interfaces/ISelectCheckItem';
 import { IProposal } from 'src/app/shared/interfaces/IProposal';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
-import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-proposals',
@@ -48,7 +46,7 @@ export class ProposalsComponent implements OnInit {
   hide: string = 'default';
   textSearch: string = '';
   state: string = 'default';
-  imageName: string = 'search';
+  imageName: string = 'search_svg';
   classMsg: string;
   searchMessage: string ;
   regionName: string;
@@ -74,6 +72,7 @@ export class ProposalsComponent implements OnInit {
     private proposalSrv: ProposalService,
     private conferenceSrv: ConferenceService,
     private authSrv: AuthService,
+    public colorService: ColorService
   ) { }
 
   async ngOnInit() {
@@ -92,14 +91,13 @@ export class ProposalsComponent implements OnInit {
       if (this.indexPage <= this.totalPages) {
         this.indexPage = this.indexPage + 1;
         const { success, data } = await this.proposalSrv
-        .getPoposals(this.conferenceSrv.ConferenceActiveId, this.indexPage, this.textSearch, this.localityIds, this.planItemIds );
+          .getPoposals(this.conferenceSrv.ConferenceActiveId, this.indexPage, this.textSearch, this.localityIds, this.planItemIds);
         if (success) {
           this.totalPages = data.totalPages;
           if (data.proposals) {
             data.proposals.forEach(proposal => {
-              proposal.planItens.forEach(planItem => {
-                planItem.fileName = planItem.structureItemName.normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '').replace(' ', '-').trim().toLowerCase();
+              proposal.planItens.forEach((planItem, index) => {
+                planItem.fileName = index == 0 ? "area_tematica" : "desafio"
               });
               this.listProposals.push(proposal);
             });
@@ -170,9 +168,8 @@ export class ProposalsComponent implements OnInit {
       this.listProposals = [];
       this.listProposals = data.proposals ? data.proposals : [];
       this.listProposals.forEach(proposal => {
-        proposal.planItens.forEach(planItem => {
-          planItem.fileName = planItem.structureItemName.normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '').replace(' ', '-').trim().toLowerCase();
+        proposal.planItens.forEach((planItem, index) => {
+          planItem.fileName = index == 0 ? "area_tematica" : "desafio"
         });
       });
     }
@@ -271,12 +268,18 @@ export class ProposalsComponent implements OnInit {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
     if (this.hide === 'default') {
       await this.delay(600);
-      this.imageName = 'search';
+      this.imageName = 'search_svg';
       this.disable =  false;
     } else {
-      this.imageName = 'close';
+      this.imageName = 'close_svg';
     }
 
+  }
+
+  getSvgHtml(imageName: string): string {
+    const teste = this.colorService.svgList.imageName.htmlText
+    console.log(teste)
+    return "this.colorService.svgList[imageName].htmlText"
   }
 
   private delay(ms: number): Promise<boolean> {
@@ -312,9 +315,8 @@ export class ProposalsComponent implements OnInit {
   renderList(data: IProposal[]) {
     this.listProposals = data;
     this.listProposals.forEach(proposal => {
-      proposal.planItens.forEach(planItem => {
-        planItem.fileName = planItem.structureItemName.normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '').replace(' ', '-').trim().toLowerCase();
+        proposal.planItens.forEach((planItem, index) => {
+          planItem.fileName = index == 0 ? "area_tematica" : "desafio"
       });
     });
   }

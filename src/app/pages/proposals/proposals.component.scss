@@ -1,4 +1,4 @@
-@import '~src/styles.scss';
+@import 'src/styles.scss';
 
 .search-container{
   display: flex;
@@ -9,11 +9,15 @@
     display: flex;
     flex-direction: row;
     .search-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      color: white;
+      color: var(--font-color);
       outline:none;
       border-radius: 60px;
-      background: linear-gradient(to right, $accent-color, $accent-color-secondary);
+      background: var(--accent-color);
+      margin-right: 10px;
       padding: 6px;
       width: 6rem;
       text-align: center;
@@ -31,13 +35,13 @@
       cursor: pointer;
       position: absolute;
       border-radius: 50%;
-      background-color: white;
+      background-color: var(--card-color);
       right: 50px;
       width: 27px;
       height: 27px;
-      img{
+      img, .search-svg {
         margin-left: 6px;
-        margin-top: 6px;
+        margin-top: 1px;
         width: 15px;
         height: 15px;
       }
@@ -78,12 +82,12 @@
       margin-right: 2rem;
       input{display:none}
       label{
-        color: white;
+        color: var(--font-color);
         font-size: 1.2rem;
         margin-top: 20px;
         margin-right: 10px;
         padding: 5px 30px;
-        border: 2px solid white;
+        border: 2px solid var(--border-color);
         border-radius: 60px;
         font-weight: bold;
         cursor: pointer;
@@ -94,8 +98,8 @@
           top: -4px;
           width: 10px;
           height: 10px;
-          border-right: 2px solid white;
-          border-top: 2px solid white;
+          border-right: 2px solid var(--font-color);
+          border-top: 2px solid var(--font-color);
           transform: rotate(135deg);
           margin-top: 0.5em;
           margin-left: 1.6em;
@@ -108,12 +112,7 @@
       }
 
       input:checked ~ label{
-        color: $accent-color-secondary;
-        border-color: $accent-color-secondary;
-        .arrow{
-          border-right: 2px solid $accent-color-secondary;
-          border-top: 2px solid $accent-color-secondary;
-        }
+        background-color: var(--accent-color);
       }
       input:checked ~ .checkmark:after {
         display: block;
@@ -177,7 +176,7 @@
           height: 15px;
           width: 15px;
           border: 1px;
-          border-color:$accent-color-secondary;
+          border-color:var(--accent-color);
           border-style: solid;
         }
 
@@ -188,7 +187,7 @@
 
         .checkmark-all {
           border: 3px;
-          border-color: $accent-color-secondary;
+          border-color: var(--accent-color);
           border-style: solid;
           height: 19px;
           width: 19px;
@@ -210,7 +209,7 @@
          // top: 2px;
           width: 4px;
           height: 8px;
-          border: solid $accent-color-secondary;
+          border: solid var(--accent-color);
           border-width: 0 2px 2px 0;
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
@@ -247,15 +246,19 @@
       grid-row-gap: 10px;
       padding: 1rem;
       margin-top: 3rem;
-      background-color: $card-color;
+      background-color: var(--card-color);
       .proposal{
         display: block;
         width: 50%;
         margin-right: 1px;
+        color: var(--card-font-color);
         position: relative;
-        img{
+        .quote{
+          display: flex;
+          justify-content: center;
+        }
+        .quote-svg{
           width: 15%;
-          margin-bottom: 1rem;
         }
         .comment{
           word-wrap: break-word;
@@ -264,12 +267,12 @@
         }
         .person{
           margin-top: 10px;
-          color: $accent-color;
+          color: var(--card-font-color);
           font-size: 10px;
         }
         .how-long-ago {
           font-size: 10px;
-          color: rgb(132, 134, 136);
+          color: var(--card-font-color);
           margin-bottom: 10px;
         }
         .likes{
@@ -280,7 +283,7 @@
         .likesBefore{
           max-height: 20px;
           .number{
-            color: rgb(132, 134, 136);
+            color: var(--card-font-color);
             margin-right: 3px;
             margin-top: 1px;
             font-size: 20px;
@@ -297,7 +300,7 @@
         .likesAfter{
           max-height: 20px;
           .number{
-            color: $accent-color;
+            color: var(--card-font-color);
             margin-right: 3px;
             margin-top: 1px;
             font-size: 20px;
@@ -307,7 +310,7 @@
             margin-bottom: 2px;
             margin-left: 1px;
             .pi{
-              color: $accent-color;
+              color: var(--accent-color);
             }
           }
         }
@@ -325,7 +328,7 @@
           flex-direction: row;
           justify-content: center;
           margin-bottom: 5px;
-          background-color: rgb(238, 232, 232);
+          background-color: var(--card-color-hover);
 
           .nameItem{
             display: flex;
@@ -333,20 +336,35 @@
             align-items: center;
             padding: 0;
             width: 70%;
+            border-top: 1px solid var(--card-border-color);
+            border-right: 1px solid var(--card-border-color);
+            border-bottom: 1px solid var(--card-border-color);
             font-size: 10px;
+            color: var(--card-font-color-hover);
           }
           .image{
             display: block;
             padding: 0;
             width: 40%;
             height: 100%;
-            background-color: rgb(218, 212, 212);
-            img{
+            border: 1px solid var(--card-border-color);
+            background-color: var(--card-color-hover);
+            .planItem{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+            .locality-svg{
+              width: 30%;
+              margin-top: 5px;
+            }
+            img, .planItem-svg{
               width: 50%;
               margin-top: 5px;
             }
             p{
               font-size: 10px;
+              color: var(--card-font-color-hover);
               margin: 0;
               padding: 0;
             }
@@ -355,6 +373,12 @@
       }
     }
   }
+}
+
+.like-svg{
+  min-width: 2%; 
+  width: 20px; 
+  height: 20px;
 }
 
 @media (max-width: 600px) {

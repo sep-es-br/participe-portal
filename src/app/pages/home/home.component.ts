@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
         if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
           if (userInfo.completed) {
-            await this.router.navigate(['/self-check-in'])
+            await this.router.navigateByUrl(`/self-check-in/${localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)}/meeting/${sessionStorage.getItem(StoreKeys.CHECK_IN)}`)
           }else{
             localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
             await this.router.navigate(['/complete-profile']);

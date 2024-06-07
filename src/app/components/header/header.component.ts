@@ -9,6 +9,7 @@ import {StoreKeys} from '../../shared/commons/contants';
 import {IConference} from 'src/app/shared/interfaces/IConference';
 import {MenuItem} from 'primeng/api';
 import {ResearchService} from "../../shared/services/research.service";
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-header',
@@ -26,14 +27,15 @@ export class HeaderComponent implements OnInit {
   externalLinksMenuItems: MenuItem[];
   researchUrl: string;
   estimatedTimeResearch: string;
-  displayExternalLinks: Boolean;
+  displayExternalLinks: boolean;
 
   constructor(
     private authSrv: AuthService,
     private router: Router,
     private participationSrv: ParticipationService,
     private conferenceSrv: ConferenceService,
-    private researchSrv: ResearchService
+    private researchSrv: ResearchService,
+    private colorService: ColorService,
   ) {
   }
 

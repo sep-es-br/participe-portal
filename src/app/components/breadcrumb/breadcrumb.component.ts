@@ -1,7 +1,9 @@
-import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BreadcrumbService } from '../../shared/services/breadcrumb.service';
+import { ColorService } from 'src/app/shared/services/color.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface IBreadcrumbItem {
   title: string;
@@ -22,16 +24,19 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 
   constructor(
     private breadcrumbSrv: BreadcrumbService,
-    private router: Router
-  ) { }
-
+    private router: Router,
+    protected colorService: ColorService,
+  ) { 
+    
+  }
+  
   ngOnDestroy(): void {
     if (this.sub) {
       this.sub.unsubscribe();
     }
   }
-
-  ngOnInit() {
+  
+  async ngOnInit() {
     this.sub = this.breadcrumbSrv.get().subscribe(items => {
       this.items = items;
     });
@@ -44,5 +49,6 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
       await this.router.navigate(route);
     }
   }
+
 
 }

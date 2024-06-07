@@ -1,8 +1,8 @@
-@import '~src/styles.scss';
+@import 'src/styles.scss';
 .stacked {
   label {
     min-width: 122px;
-    color: $card-font-color;
+    color: var(--card-font-color);
   }
 }
 input[readOnly] {
@@ -32,6 +32,10 @@ input[readOnly] {
   }
 }
 
+.locality-label{
+  padding-right: 10px;
+}
+
 .locality-dropbox {
   width: 230px;
 }
@@ -40,14 +44,14 @@ input[readOnly] {
   margin-bottom: 1.8rem;
   display: flex;
   align-items: center;
-  color: $card-font-color;
+  color: var(--card-font-color);
   label {
     margin-left: 0.8rem;
   }
   .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
-    background-color: $accent-color !important;
+    background-color: var(--accent-color) !important;
     &:hover {
-      background-color: $accent-color;
+      background-color: var(--accent-color);
     }
   }
 }

@@ -1,6 +1,6 @@
 import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
 import {AuthenticationTypeEnum, LoginNameEnum} from 'src/app/shared/enums/LoginNameEnum';
 import {IAutentication, IResultPerson} from 'src/app/shared/interfaces/IResultPerson';
@@ -20,7 +20,7 @@ import {Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   person: IResultPerson;
-  userForm: FormGroup;
+  userForm: UntypedFormGroup;
   regionName: string;
   optionsLocality: SelectItem[] = [];
   optionsContactEmail: SelectItem[] = [];
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
     private conferenceSrv: ConferenceService,
     private authSrv: AuthService,
     private messageSrv: MessageService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router,
     private location: Location,
   ) {
@@ -125,6 +125,7 @@ export class ProfileComponent implements OnInit {
     return this.person.authentications ? this.person.authentications.find(auth => auth[key] === value) : undefined;
   }
 
+
   addAuthCidadao() {
     this.backupData();
     this.authSrv.signInAcessoCidadaoProfile();
@@ -187,8 +188,8 @@ export class ProfileComponent implements OnInit {
   }
 
   async cancel() {
-    this.location.back();
-    //await this.router.navigate(['/conference-map']);
+    // this.location.back();
+    await this.router.navigate(['/conference-map']);
   }
 
   private processSocialLoginProfile() {
@@ -261,7 +262,8 @@ export class ProfileComponent implements OnInit {
         life: 15000
       });
     });
-    this.location.back();
+    // this.location.back();
+    this.router.navigateByUrl('conference-map')
   }
 
   async wannaMergeProfile(param: { answer: boolean }) {

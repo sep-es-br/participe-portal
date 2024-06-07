@@ -12,30 +12,56 @@ small{
 }
 
 button{
-    color: #fff;
+    color: var(--card-font-color-hover);
     border-radius: 25px;
     // height: 31px;
     // width: 100px;
     padding: 5px 20px;
     &.btn-green{
-        background-color: #00a198;
+        background-color: var(--accent-color);
     }
-    &.btn-blue{
-        background-color: #107fcf;
-    }
+    &.btn-green:hover{
+        color: var(--card-font-color-hover);
+      }
+
 }
 .no-resize{
     resize: none;
 }
 .qr-code{
-    margin: 1rem 0;
+    margin: -1rem;
     border-radius: 15px;
-}
-p{
-    color: #fff;
 }
 
 .iconText{
     padding-right: 0.5rem;
 }
 
+.cardPreRegistration, td{
+    background:var(--card-color)
+}
+
+p, h2, em, .table tbody td, input, textarea{
+    color: var(--card-font-color);
+}
+
+.teste{
+    font-weight: bold;
+}
+
+.img-logo-es{
+    width: 50%;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.informacoes{
+    position: relative;
+}
+// .informacoes-adicionais{
+   
+// }
+
+.hide-buttons {
+    display: none;
+}

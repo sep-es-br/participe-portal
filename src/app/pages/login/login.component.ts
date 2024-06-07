@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 import { StoreKeys } from '../../shared/commons/contants';
 import { typeMeetingEnum } from 'src/app/shared/enums/TypeMeetingEnum';
 import * as _ from 'lodash';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isOpen = false;
   backgroundImageUrl: string = '/assets/images/background.png';
   calendarImageUrl:string = '';
-  displayCalendar: Boolean;
+  displayCalendar: boolean;
   
 
   constructor(
@@ -54,7 +55,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private conferenceSrv: ConferenceService,
     private messageSrv: MessageService,
     private meetingSrv: MeetingService,
-    private router: Router
+    private router: Router,
+    private colorService: ColorService
   ) {}
 
   async ngOnInit() {
@@ -88,12 +90,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   async loadConference(conferenceId: number) {
     localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId.toString());
+    this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
     const { success, data } = await this.conferenceSrv.getConferenceScreenInfo(conferenceId);
     if (success) {
 
       this.displayCalendar = data.showCalendar;
 
-      if(this.displayCalendar){
+      if(!this.displayCalendar){
         this.calendarImageUrl = _.get(data, 'calendarImageUrl.url', '');
       }
 

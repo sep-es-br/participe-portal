@@ -1,20 +1,19 @@
 <app-template [disablebreadcrumb]=true [fullLayout]="true" [footerVisible]="true">
-  >
   <div class="app-dashboard">
     <div class="p-grid p-fluid">
       <div class="p-col-12 p-xl-2 item-filter">
         <label>Resultado</label>
-        <p-dropdown [options]="resultOptions" [disabled]="true" (onChange)="loadChartsSelectedResult()"
+        <p-dropdown [options]="resultOptions"  (onChange)="loadChartsSelectedResult()"
           [(ngModel)]="filters.selectedResult" [autoDisplayFirst]="false"></p-dropdown>
       </div>
       <div class="p-col-12 p-xl-2 item-filter">
         <label>Origem</label>
-        <p-dropdown [options]="originOptions" [disabled]="true" (onChange)="handleOriginSelected()" [(ngModel)]="filters.selectedOrigin"
-          [autoDisplayFirst]="false"  defaultLabel="All"></p-dropdown>
+        <p-dropdown [options]="originOptions"  (onChange)="handleOriginSelected()" [(ngModel)]="filters.selectedOrigin"
+          [autoDisplayFirst]="false"  placeholder="All"></p-dropdown>
       </div>
       <div class="p-col-12 p-xl-2 item-filter">
         <label>Presencial</label>
-        <p-multiSelect [options]="meetingListOptions" [(ngModel)]="filters.selectedMeeting" defaultLabel="Selecione"
+        <p-multiSelect [options]="meetingListOptions" [(ngModel)]="filters.selectedMeeting" placeholder="Selecione"
           [disabled]="validateOriginSelectedPresential()" [filter]="true" (onChange)="loadCharts()">
         </p-multiSelect>
       </div>

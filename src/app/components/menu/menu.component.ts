@@ -1,5 +1,5 @@
 import { ConferenceService } from '../../shared/services/conference.service';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
@@ -16,18 +16,19 @@ export class MenuComponent implements OnInit {
 
   menu: Array<any> = [
     { label: 'Participar', route: '/conference-map', activeWhen: ['conference-map', 'strategic-area'] },
-    //{ label: 'Propostas', route: '/proposals', activeWhen: ['proposals'] },
+    { label: 'Propostas', route: '/proposals', activeWhen: ['proposals'] },
     { label: 'Minhas Participações', route: '/participations', activeWhen: ['participations'] },
     { label: 'Como Funciona', route: '/how-it-works', activeWhen: ['how-it-works'] },
     { label: 'Estatísticas', route: '/statistics', activeWhen: ['statistics'] },
   ];
 
-  @ViewChild('sidemenu', {static: false}) sidemenu: ElementRef;
+  @ViewChild('sidemenu') sidemenu: ElementRef;
 
   conference: IConference;
   userInfo: IPerson;
   externalLinksMenuItems: MenuItem[];
-  displayStatisticsPanel: Boolean;
+  displayStatisticsPanel: boolean;
+  displayProposalsPanel: boolean;
 
   constructor(
     private authSrv: AuthService,
@@ -71,6 +72,15 @@ export class MenuComponent implements OnInit {
         this.menu.splice(this.menu.findIndex((item) => item.label == 'Estatísticas'), 1)
         this.router.events.subscribe((event) => {
           if(event instanceof NavigationStart && event.url == "/statistics"){
+            this.router.navigate(['/#', '/conference-map'])
+          }
+        })
+      }
+      this.displayProposalsPanel = result.data.showProposalsPanel;
+      if (!this.displayProposalsPanel){
+        this.menu.splice(this.menu.findIndex((item) => item.label == 'Propostas'), 1)
+        this.router.events.subscribe((event) => {
+          if(event instanceof NavigationStart && event.url == "/proposals"){
             this.router.navigate(['/#', '/conference-map'])
           }
         })

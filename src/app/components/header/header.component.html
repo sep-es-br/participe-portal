@@ -1,26 +1,22 @@
 <div class="header-container print-visible">
   <div class="search-container print-visible">
     <img *ngIf="header" class="img-fluid img-center-sm print-visible" [src]="header?.image" alt="">
-    <!--div class="info-search-container">
-      <h2>{{header?.title}}</h2>
-      <span>{{header?.subtitle}}</span>
-    <div-->
   </div>
   <div class="actions" *ngIf="isAuthenticated">
     <p-menu #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
     <div class="action-item" *ngIf="displayExternalLinks">
       <div class="action-item" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">
         {{conference.externalLinksMenuLabel}}
-        <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
+        <div [innerHTML]="colorService.svgList.external_link_alt_solid_svg.htmlText" class="external-link-alt-solid"></div>
       </div>
     </div>
     <div class="action-item" *ngIf="userInfo?.name" (click)="navigate('/profile')">
       {{ userInfo.name }}
-      <img src="assets/icons/user2.svg" alt=""/>
+      <div [innerHTML]="colorService.svgList.user2_svg.htmlText" class="user2"></div>
     </div>
     <div class="action-item" (click)="showDialog()">
       Sair
-      <img src="assets/icons/close2.svg" alt=""/>
+      <div [innerHTML]="colorService.svgList.close2_svg.htmlText" class="close2"></div>
     </div>
   </div>
 </div>

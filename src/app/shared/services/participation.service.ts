@@ -24,6 +24,12 @@ export class ParticipationService extends BaseService<any> {
     ).toPromise();
   }
 
+  getFooterImage(conferenceId: number) {
+    return this.http.get<IResultHttp<Object>>(
+      `${this.urlBase}/portal-footer-image/${conferenceId}`
+    ).toPromise();
+  }
+
   setSurvey(conferenceId: number, answerSurvey: boolean) {
     return this.http.post<any>(`${this.urlBase}/portal-header/${conferenceId}/selfdeclarations/decline`, answerSurvey).toPromise();
   }
@@ -31,6 +37,16 @@ export class ParticipationService extends BaseService<any> {
   getPlanItem(conferenceId: number, localityId?: number, planItemId?: number, text?: string) {
     return this.http.get<IResultHttp<IParticipationPlanItem>>(
       `${this.urlBase}/plan-item/${conferenceId}${qs.stringify({
+        idLocality: localityId,
+        idPlanItem: planItemId,
+        text: text
+      }, { addQueryPrefix: true })}`
+    ).toPromise();
+  }
+
+  getPlanItemChildren(conferenceId: number, localityId?: number, planItemId?: number,text?: string) {
+    return this.http.get<IResultHttp<IParticipationPlanItem>>(
+      `${this.urlBase}/plan-item-children/${conferenceId}${qs.stringify({
         idLocality: localityId,
         idPlanItem: planItemId,
         text: text

@@ -8,6 +8,7 @@ import { StatusParticipationEnum } from 'src/app/shared/enums/StatusParticipatio
 import { howLongAgo } from 'src/app/shared/utils/date.utils';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { ParticipationService } from 'src/app/shared/services/participation.service';
+import { ColorService } from 'src/app/shared/services/color.service';
 
 @Component({
   selector: 'app-participations',
@@ -41,6 +42,7 @@ export class ParticipationsComponent implements OnInit {
   localityIds: number[] = [];
   planItemIds: number[] = [];
   searchIconClass = 'pi pi-search';
+  searchSvg = 'search_svg';
   hide: string = 'default';
   textSearch: string = '';
   state: string = 'default';
@@ -57,7 +59,8 @@ export class ParticipationsComponent implements OnInit {
   constructor(
     private participationSrv: ParticipationService,
     private conferenceSrv: ConferenceService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public colorService: ColorService,
   ) { }
 
   async ngOnInit() {
@@ -132,10 +135,12 @@ export class ParticipationsComponent implements OnInit {
     if (this.hide === 'default') {
       this.textSearch = '';
       this.searchIconClass = 'pi pi-search';
+      this.searchSvg = 'search_svg'
       await this.search(true);
       await this.closeMessage();
     } else {
       this.searchIconClass = 'pi pi-times';
+      this.searchSvg = 'close_svg'
     }
   }
 

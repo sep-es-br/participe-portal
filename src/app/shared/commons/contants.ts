@@ -9,6 +9,10 @@ export const StoreKeys = {
   PRE_REGISTRATION: '@portal-participe/PRE_REGISTRATION',
   PRE_REGISTRATION_ACTIVE: '@portal-participe/PRE_REGISTRATION_ACTIVE',
   REDIRECT_URL:'@portal-participe/REDIRECT_URL',
-  CHECK_IN: '@portal-participe/CHECK_IN'
+  CHECK_IN: '@portal-participe/CHECK_IN',
+  LOGIN_CHECK_IN: '@portal-participe/LOGIN_CHECK_IN',
+  CHECK_IN_OFF: '@portal-participe/CHECK_IN_OFF',
+  PRE_REGISTRATION_MEETING_STARTED: '@portal-participe/PRE_REGISTRATION_MEETING_STARTED',
+  PRE_REGISTRATION_MEETING_CLOSED: '@portal-participe/PRE_REGISTRATION_MEETING_CLOSED'
 };
 

@@ -9,21 +9,21 @@
         <input id="nome" pInputText formControlName="name" type="text">
         <app-input-message [form]="userForm" field="name"></app-input-message>
       </div>
-      <div class="p-col-12 p-md-7 form-group stacked">
+      <div class="p-col-12 p-md-8 form-group stacked">
         <label for="contactEmail">E-mail de contato*</label>
-        <p-dropdown id="contactEmail" [options]="optionsContactEmail"
+        <p-dropdown [styleClass]="'d-flex'"  id="contactEmail" [options]="optionsContactEmail"
                     formControlName="contactEmail"></p-dropdown>
         <app-input-message [form]="userForm" field="contactEmail"></app-input-message>
       </div>
-      <div class="p-col-12 p-md-5 form-group stacked">
+      <div class="p-col-12 col-md-4 form-group stacked">
         <label for="telephone">Telefone</label>
-        <p-inputMask mask="(99) 99999-9999" formControlName="telephone"></p-inputMask>
+        <p-inputMask [styleClass]="'d-flex'"   mask="(99) 99999-9999" formControlName="telephone"></p-inputMask>
         <app-input-message [form]="userForm" field="telephone"></app-input-message>
       </div>
-      <div class="p-col-12 p-md-8 form-group stacked">
+      <div class="p-col-12 p-md-6 form-group stacked">
         <label for="locality">{{localityType}}</label>
-        <p-dropdown id="locality" [options]="optionsLocality" formControlName="localityId"></p-dropdown>
-        <app-input-message [form]="userForm" field="localityId"></app-input-message>
+        <p-dropdown [styleClass]="'d-flex'" id="locality" [options]="optionsLocality" formControlName="localityId"></p-dropdown>
+        <app-input-message  [form]="userForm" field="localityId"></app-input-message>
       </div>
       <section class="autentication p-col-12">
         <h3>Autenticação</h3>
@@ -32,13 +32,15 @@
                   type="button"
                   (click)="findAuthentication('AcessoCidadao') ? deleteAuthCidadao() : addAuthCidadao()">
             <img src="assets/icons/cidadao.svg" alt=""/>
-            <i [class]="findAuthentication('AcessoCidadao') ? 'icon-times' : 'icon-plus'"></i>
+            <i [class]="findAuthentication('AcessoCidadao') && findAuthentication('Google') ? 'icon-times' : ''"></i>
+            <i [class]="!findAuthentication('AcessoCidadao') && findAuthentication('Google') ? 'icon-plus' : ''"></i>
           </button>
           <button [class]="findAuthentication('Google') ? 'google active' : 'google'" type="button"
                   (click)="findAuthentication('Google') ? deleteAuthGoogle() : addAuthGoogle() "
           >
             <img src="assets/icons/google.svg" alt=""/>
-            <i [class]="findAuthentication('Google') ? 'icon-times' : 'icon-plus'"></i>
+            <i [class]="findAuthentication('Google') && findAuthentication('AcessoCidadao') ? 'icon-times' : ''"></i>
+            <i [class]="!findAuthentication('Google') && findAuthentication('AcessoCidadao')  ? 'icon-plus' : ''"></i>
           </button>
         </div>
       </section>

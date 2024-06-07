@@ -53,7 +53,7 @@ export class MeetingService extends BaseService<any> {
   }
   postCheckIn(meetingId: number, personId: number, timeZone: string): Promise<any> {
     return this.http.post(
-      `${this.urlBase}/checkIn`,
+      `${this.urlBase}/selfcheckIn`,
       {
         meetingId,
         personId,
@@ -62,12 +62,15 @@ export class MeetingService extends BaseService<any> {
     ).toPromise();
   }
 
+
   findByPersonAndMeeting(personId: number, meetingId: number): Promise<any>{
     return this.http.get<IResultHttp<any>>(`${this.urlBase}/checkIn/${meetingId}`, {
       params: { personId: personId.toString() }
     }).toPromise();
   }
 
-  
+  getSelfCheckInOrPreRegistrationOpen(meetingId: number, participationType: string): Promise<any>{
+    return this.http.get<IResultHttp<any>>(`${this.urlBase}/${meetingId}/${participationType}`).toPromise();
+  }
 
 }

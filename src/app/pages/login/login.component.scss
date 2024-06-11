@@ -96,8 +96,9 @@ $darkColorOr: rgba(0,0,0,0.16);
         color: white;
         &.cidadao {
           background: #016A88;
+          height: 11vh;
           img {
-            margin-right: 50px;
+            margin-left: 10px;
             width: 50px;
           }
           cursor: pointer;
@@ -512,3 +513,30 @@ $darkColorOr: rgba(0,0,0,0.16);
   background-color: var(--card-color);
 }
 
+@media screen and (max-width: 768px) {
+  .cidadao{
+    font-size: 0.9rem;
+  }
+  
+}
+
+@media screen and (max-width: 600px) {
+  .cidadao{
+    font-size: 0.8rem;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .cidadao{
+    font-size: 0.7rem;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+  .cidadao{
+    font-size: 0.6rem;
+  }
+  
+}

@@ -83,11 +83,11 @@
             showEffect="fade" [resizable]="false" [draggable]="false" [responsive]="true"
             class="dialog-detail">
 
-    <div class=" row">
+    <div class="row">
       <div class="col-1 float-end align-content-center ">
            <i class="far tiny-icon fa-arrow-alt-circle-left" (click)="previousMeetingDetail()" *ngIf="meetingDetail?.hasPreviousMeeting"></i>
       </div>
-      <div class="col-10">
+      <div class="col-10 meeting">
         <h2 class="title col-12">{{meetingDetail.name}}</h2>
         <h5 class="description col-12">{{labelDescriptionDetailMeeting(meetingDetail)}}</h5>
 
@@ -96,7 +96,7 @@
             <div class="date d-flex col-12 col-sm-5">
               <img class="tiny-icon" src="assets/icons/calendar2.svg" alt="calendario">
               <div class="date-text">
-              {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'dd'}}/{{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMM'}}
+              {{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'dd'}}/{{getDateFromAPIStr(meetingDetail?.beginDate) | date: 'MMMM'}}
               </div>
             </div>
             <div class="time col-12 col-sm-7">

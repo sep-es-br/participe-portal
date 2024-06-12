@@ -78,7 +78,7 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
       
         default:
           this.title = 'Ocorreu um erro';
-          this.subtitle = 'favor verificar o link e tentar novamente.';
+          this.subtitle = 'Por favor, verifique o link e tente novamente.';
           let element = document.querySelector('.social-login') as HTMLLIElement
           element.style.display = 'none'
           break;
@@ -101,24 +101,26 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
         this.subtitle = 'favor verificar o link e tentar novamente.';
         let element = document.querySelector('.social-login') as HTMLLIElement
         element.style.display = 'none'
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION);
+        sessionStorage.removeItem(StoreKeys.CHECK_IN);
         throw error;
       }
     }
+  
+  removeSessionStorage(){
+    sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
+    sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
+    sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
+  }
 
-      
+  signInGoogle() {
+    this.removeSessionStorage()
+    this.authSrv.signInGoogle();
+  }
 
-      signInGoogle() {
-        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
-        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
-        sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
-        this.authSrv.signInGoogle();
-      }
-    
-      signInAcessoCidadao() {
-        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
-        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
-        sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
-        this.authSrv.signInAcessoCidadao();
-      }
+  signInAcessoCidadao() {
+    this.removeSessionStorage()
+    this.authSrv.signInAcessoCidadao();
+  }
 }
 

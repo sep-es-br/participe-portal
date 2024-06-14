@@ -11,11 +11,11 @@
         </div>
         <div class="social-login">
           <button class="cidadao" (click)="signInAcessoCidadao()">
-            <span style="width: 100%; justify-content: center;display: flex;align-items: center;">  
+            <span style="width: 100%; justify-content: center;display: flex;align-items: center;">
+              <img src="assets/images/govbrbranco.png"  />
               <img src="assets/icons/cidadao.svg" alt=""/>
-              Entrar com GOV.BR <br> 
-              ou ACESSO CIDADÃO
-            </span>
+              Acessar com GOV.BR ou ACESSO CIDADÃO
+          </span>
           </button>
           <a class="google" (click)="signInGoogle()">Ou usar minha conta Google...</a>
           
@@ -83,11 +83,11 @@
             showEffect="fade" [resizable]="false" [draggable]="false" [responsive]="true"
             class="dialog-detail">
 
-    <div class=" row">
+    <div class="row">
       <div class="col-1 float-end align-content-center ">
            <i class="far tiny-icon fa-arrow-alt-circle-left" (click)="previousMeetingDetail()" *ngIf="meetingDetail?.hasPreviousMeeting"></i>
       </div>
-      <div class="col-10">
+      <div class="col-10 meeting">
         <h2 class="title col-12">{{meetingDetail.name}}</h2>
         <h5 class="description col-12">{{labelDescriptionDetailMeeting(meetingDetail)}}</h5>
 

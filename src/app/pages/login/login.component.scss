@@ -96,8 +96,9 @@ $darkColorOr: rgba(0,0,0,0.16);
         color: white;
         &.cidadao {
           background: #016A88;
+          height: 11vh;
           img {
-            margin-right: 50px;
+            margin-left: 10px;
             width: 50px;
           }
           cursor: pointer;
@@ -238,7 +239,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     align-items: center;
     width: 100%;
     float: right;
-    padding: 0;;
+    padding: 0;
 
     > img {
       width: 30px;
@@ -297,6 +298,9 @@ $darkColorOr: rgba(0,0,0,0.16);
     }
   }
  .dialog-detail {
+    .p-dialog-header {
+      padding: 0.3rem;
+    }
     .ui-dialog  {
       background: white;
       .ui-dialog-titlebar {
@@ -318,7 +322,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     .p-grid {
       margin-top: 0;
     }
-    .modal-detail {
+    .row {
       justify-content: space-between;
       margin-top: 0px;
       .icon-navigate {
@@ -335,7 +339,7 @@ $darkColorOr: rgba(0,0,0,0.16);
           cursor: pointer;
         }
       }
-      .modal-content {
+      .meeting {
         .title {
           font-size: 2em;
           margin: 0;
@@ -370,11 +374,14 @@ $darkColorOr: rgba(0,0,0,0.16);
               font-size: 1.1em;
               color: #00a198;
               margin-top: -3px;
-              margin-right: 3px;
+              margin-right: 5px;
             }
             .time-text {
               vertical-align: middle;
               display: contents;
+              i{
+                margin-right: 5px;
+              }
             }
           }
         }
@@ -383,7 +390,7 @@ $darkColorOr: rgba(0,0,0,0.16);
           .locality-container {
             .locality {
               font-weight: bold;
-              max-width: 250px;
+              max-width: 350px;
               font-size: 1.2em;
             }
             .adreess {
@@ -491,6 +498,7 @@ $darkColorOr: rgba(0,0,0,0.16);
     font-size: 25px !important;
     width: 25px !important;
     height: 25px !important;
+    cursor: pointer;
   }
 
 }
@@ -512,3 +520,30 @@ $darkColorOr: rgba(0,0,0,0.16);
   background-color: var(--card-color);
 }
 
+@media screen and (max-width: 768px) {
+  .cidadao{
+    font-size: 0.9rem;
+  }
+  
+}
+
+@media screen and (max-width: 600px) {
+  .cidadao{
+    font-size: 0.8rem;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  .cidadao{
+    font-size: 0.7rem;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+  .cidadao{
+    font-size: 0.6rem;
+  }
+  
+}

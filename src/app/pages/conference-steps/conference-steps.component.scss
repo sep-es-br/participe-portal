@@ -258,6 +258,9 @@
       overflow: hidden;
       color:var(--card-font-color);
       border: 1px solid var(--card-border-color);
+      h4{
+        font-weight: bold;
+      }
 
 
       &.clickable {

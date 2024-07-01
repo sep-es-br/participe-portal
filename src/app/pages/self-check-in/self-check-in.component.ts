@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ConferenceService } from "src/app/shared/services/conference.service";
 import { IConference } from "src/app/shared/interfaces/IConference";
 import { ColorService } from "src/app/shared/services/color.service";
+import { IPerson } from "src/app/shared/interfaces/IPerson";
 
 
 @Component({
@@ -23,6 +24,8 @@ export class SelfCheckInComponent implements OnInit {
     checkInData = [{}]
     isNotEmptyCheckInObject = false
     conference: IConference
+    userInfo: IPerson;
+    tokenAccess: string;
 
     constructor(
       private conferenceSrv: ConferenceService,
@@ -32,10 +35,19 @@ export class SelfCheckInComponent implements OnInit {
       private router: Router,
       private route: ActivatedRoute,
       private colorService: ColorService
-    ){}
+    ){
+      
+    }
 
     
     async ngOnInit() {
+      this.verifyCheckIn().then(()=>{
+        if(this.isNotEmptyCheckInObject){
+          sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
+          sessionStorage.removeItem(StoreKeys.CHECK_IN)
+          this.router.navigate(['/']);
+        }
+      });
       const selfcheckInIsOpen = await this.meetingSrv.getSelfCheckInOrPreRegistrationOpen(this.route.snapshot.params['meeting'],"self-check-in")
       if(selfcheckInIsOpen.data.length == 0){
         await sessionStorage.setItem(StoreKeys.CHECK_IN_OFF, this.route.snapshot.params['meeting']);
@@ -48,7 +60,8 @@ export class SelfCheckInComponent implements OnInit {
         this.router.navigate(['/login-pre-registration-self-check-in']);
       }else{
         sessionStorage.removeItem(StoreKeys.CHECK_IN)
-        this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(this.route.snapshot.params['meeting']))
+        sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
+        await this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(this.route.snapshot.params['meeting']))
       }
     }
 
@@ -73,6 +86,16 @@ export class SelfCheckInComponent implements OnInit {
       )
     }
 
+    async verifyCheckIn(){
+      const userAutenticated = await this.authSrv.isAuthenticated();
+      if(userAutenticated !== false){
+        this.userInfo = this.authSrv.getUserInfo;
+      }
+      if(this.userInfo){
+      await this.getPersonAndMeeting(this.userInfo.id, JSON.parse(this.route.snapshot.params['meeting']))
+    }
+  }
+
     async registerAttendance(personId, meeting){
       await this.conferenceSrv.GetById(parseInt(this.route.snapshot.params['conference'])).then(
         (res) => {
@@ -80,7 +103,7 @@ export class SelfCheckInComponent implements OnInit {
       })
       await this.getPersonAndMeeting(personId, meeting)
       if(this.isNotEmptyCheckInObject){
-        this.setForm(this.checkInData)
+        this.router.navigate(['/']);
       }else{
         await this.isCheckin(meeting, this.authSrv.getUserInfo.id)
         await this.getPersonAndMeeting(personId, meeting)

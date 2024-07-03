@@ -35,7 +35,6 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
           StoreKeys.PRE_REGISTRATION,
           StoreKeys.CHECK_IN,
           StoreKeys.CHECK_IN_OFF,
-          StoreKeys.PRE_REGISTRATION_MEETING_STARTED,
           StoreKeys.PRE_REGISTRATION_MEETING_CLOSED
         ];
       
@@ -64,11 +63,6 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
         case StoreKeys.CHECK_IN_OFF:
           this.title = 'Auto Check-in';
           this.subtitle = 'Encontro presencial encerrado. Acesse abaixo para participar online.';
-          break;
-      
-        case StoreKeys.PRE_REGISTRATION_MEETING_STARTED:
-          this.title = 'Pré-credenciamento';
-          this.subtitle = 'O período de pré-credenciamento já está encerrado, pois este encontro já começou. Procure a recepção para se credenciar e registrar a sua presença. Acesse abaixo para participar online.';
           break;
       
         case StoreKeys.PRE_REGISTRATION_MEETING_CLOSED:
@@ -108,7 +102,6 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
     }
   
   removeSessionStorage(){
-    sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
     sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
     sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
   }

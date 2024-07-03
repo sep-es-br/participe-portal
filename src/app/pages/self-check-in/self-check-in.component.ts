@@ -26,6 +26,8 @@ export class SelfCheckInComponent implements OnInit {
     conference: IConference
     userInfo: IPerson;
     tokenAccess: string;
+    meetingId:string;
+    conferenceId:string;
 
     constructor(
       private conferenceSrv: ConferenceService,
@@ -41,6 +43,8 @@ export class SelfCheckInComponent implements OnInit {
 
     
     async ngOnInit() {
+      this.meetingId = this.route.snapshot.paramMap.get('meeting');
+      this.conferenceId = this.route.snapshot.paramMap.get('conference');
       this.verifyCheckIn().then(()=>{
         if(this.isNotEmptyCheckInObject){
           sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
@@ -50,25 +54,25 @@ export class SelfCheckInComponent implements OnInit {
       });
       const selfcheckInIsOpen = await this.meetingSrv.getSelfCheckInOrPreRegistrationOpen(this.route.snapshot.params['meeting'],"self-check-in")
       if(selfcheckInIsOpen.data.length == 0){
-        await sessionStorage.setItem(StoreKeys.CHECK_IN_OFF, this.route.snapshot.params['meeting']);
-        await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
+        await sessionStorage.setItem(StoreKeys.CHECK_IN_OFF, this.meetingId);
+        await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, this.conferenceId);
         await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
         this.router.navigate(['/login-pre-registration-self-check-in']);
       }else if(!sessionStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
-        await this.loadingVariable()
+        await this.loadingVariable(this.meetingId, this.conferenceId)
         await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
         this.router.navigate(['/login-pre-registration-self-check-in']);
       }else{
         sessionStorage.removeItem(StoreKeys.CHECK_IN)
         sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
-        await this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(this.route.snapshot.params['meeting']))
+        await this.registerAttendance(this.authSrv.getUserInfo.id, JSON.parse(this.meetingId))
       }
     }
 
-    async loadingVariable(){
-      await sessionStorage.setItem(StoreKeys.CHECK_IN, this.route.snapshot.params['meeting']);
+    async loadingVariable(meetingId: string, conferenceId: string){
+      await sessionStorage.setItem(StoreKeys.CHECK_IN, meetingId);
       await sessionStorage.setItem(StoreKeys.LOGIN_CHECK_IN, 'true');
-      await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.route.snapshot.params['conference']);
+      await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId);
     }
 
     async isCheckin(meeting, personId){

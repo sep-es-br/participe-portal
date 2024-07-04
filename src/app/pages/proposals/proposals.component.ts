@@ -278,7 +278,6 @@ export class ProposalsComponent implements OnInit {
 
   getSvgHtml(imageName: string): string {
     const teste = this.colorService.svgList.imageName.htmlText
-    console.log(teste)
     return "this.colorService.svgList[imageName].htmlText"
   }
 

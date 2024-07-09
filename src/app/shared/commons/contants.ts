@@ -8,6 +8,7 @@ export const StoreKeys = {
   LOGOUT_URI: '@portal-participe/LOGOUT_URI',
   PRE_REGISTRATION: '@portal-participe/PRE_REGISTRATION',
   PRE_REGISTRATION_ACTIVE: '@portal-participe/PRE_REGISTRATION_ACTIVE',
+  REGISTRATION_ACTIVE: '@portal-participe/REGISTRATION_ACTIVE',
   REDIRECT_URL:'@portal-participe/REDIRECT_URL',
   CHECK_IN: '@portal-participe/CHECK_IN',
   LOGIN_CHECK_IN: '@portal-participe/LOGIN_CHECK_IN',

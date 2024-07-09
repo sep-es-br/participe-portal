@@ -1,4 +1,4 @@
-<app-template [useCard]="true" title="Complemente seu Cadastro">
+<app-template [useCard]="true" title="Complemente seu Cadastro" *ngIf="!accreditation">
   <form class="p-grid" [formGroup]="userForm" (submit)="save(userForm.value)">
     <div class="p-col-12 form-group stacked ui-fluid">
       <label for="nome">Nome *</label>
@@ -36,4 +36,35 @@
       </button>
     </div>
   </form>
+</app-template>
+
+<app-template [useCard]="false" title="Complemente seu Cadastro" *ngIf="accreditation">
+  <div class="card-info">
+      <form class="p-grid" [formGroup]="userForm" (submit)="save(userForm.value)">
+        <div class="p-col-12 form-group ui-fluid font-color">
+          <h4 class="text-accreditation">{{userForm.get('name').value}}</h4>
+          <h6 class="text-accreditation">{{userForm.get('contactEmail').value}}</h6>
+        </div>
+        <div class="p-col-12 form-group stacked ui-fluid">
+          <label class="locality-label" for="locality">{{localityType}} de Residência: <span class="valid">*</span></label>
+          <p-dropdown class="locality-dropbox" [options]="localities"
+          formControlName="locality" field="label" optionLabel="name" optionValue="id"
+          [placeholder]="'Selecione o seu ' + localityType">
+        </p-dropdown>
+      </div>
+      <div class="p-col-12 form-group field-switch align-center">
+        <p-inputSwitch class="inputSwitch p-2" id="informational" formControlName="receiveInformational">
+        </p-inputSwitch>
+        <label class="font-color" for="informational">Desejo receber mensagens informativas</label>
+      </div>
+      <div class="actions p-col-12 align-center">
+        <button type="button" class="btn-primary button-primary" (click)="cancel()">
+          Cancelar
+        </button>
+        <button class="btn-primary button-primary" type="submit" [disabled]="userForm.invalid">
+          OK
+        </button>
+      </div>
+    </form>
+  </div>
 </app-template>

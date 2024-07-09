@@ -101,7 +101,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
             if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) || sessionStorage.getItem(StoreKeys.CHECK_IN)){
               this.conference = localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)
-              this.router.navigate(['/login-pre-registration-self-check-in'])
+              this.router.navigate(['/login-registration'])
               this.authService.clearTokens(true);
             }else{
               this.router.navigate([`/`]).then();

@@ -27,6 +27,45 @@ input[readOnly] {
       margin-bottom: 10px;
     }
   }
+  .card-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between !important;
+    align-items: center;
+    padding-left: 0px !important;
+    padding: 5px !important;
+    h1,h4{
+      font-weight: bold;
+    }
+    .stacked{
+      align-items: center !important;
+      label{
+        color: var(--font-color);
+      }
+    }
+    ::ng-deep .field-switch {
+      margin-bottom: 1.8rem;
+      color: var(--card-font-color);
+      justify-content: center;
+      label {
+        margin-left: 0rem !important;
+      }
+      .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+        background-color: var(--accent-color) !important;
+        &:hover {
+          background-color: var(--accent-color);
+        }
+      }
+    }
+    .text-accreditation{
+      text-align: center;
+    }
+    .locality-label{
+      text-align: center;
+      font-size: larger;
+      font-weight: bold;
+    }
+  }
   .actions {
     padding-right: 0px !important;
   }
@@ -37,7 +76,7 @@ input[readOnly] {
 }
 
 .locality-dropbox {
-  width: 230px;
+  width: 245px;
 }
 
 ::ng-deep .field-switch {
@@ -55,4 +94,19 @@ input[readOnly] {
     }
   }
 }
+.font-color{
+  color: var(--font-color);
+}
+.valid{
+  color: red;
+}
+.card-info{
+  padding-left: 50px;
+}
+.button-primary{
+  width: 150px;
+}
 
+.card-info .stacked label{
+  color: var(--font-color);
+}

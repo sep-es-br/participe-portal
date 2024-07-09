@@ -114,4 +114,23 @@
         </div>
     </div>
 </app-template>
+
+<app-template  *ngIf="accreditation" [useCard]="false" >
+    <div class="container mb-3">
+        <div class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 cardAccreditation" style="border-radius:20px">
+            <div class="text-center print-visible">
+                <h2 class="print-visible">Credenciamento<br>Concluído</h2>
+            </div>
+            <div class="mt-0">
+                <h4 class="informacoes print-visible"  style="margin-top: 20px; margin-bottom: 30px;">Apresente o QR Code na recepção</h4>
+                <img src="data:image/png;base64,{{preRegistrationData.qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
+            </div>
+            <p class="print-visible mb-0 text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
+            <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
+            <p class="print-visible mb-0 text-center">
+                <img class="img-fluid print-visible img-logo-es" src="assets/images/footer_branco.png" >
+            </p>
+        </div>
+    </div>
+</app-template>
 <canvas #canvas style="display: none;"></canvas>

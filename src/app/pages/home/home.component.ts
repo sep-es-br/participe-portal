@@ -90,7 +90,11 @@ export class HomeComponent implements OnInit {
           }
         } else {
           localStorage.setItem(StoreKeys.IS_PROFILE_INCOMPLETED, String(!userInfo.completed));
-          await this.router.navigate(['/complete-profile']);
+          if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)){
+            await this.router.navigate(['/complete-profile'], {queryParams: { accreditation: true} });
+          }else{
+            await this.router.navigate(['/complete-profile'])
+          }
         }
       }
     } catch (error) {

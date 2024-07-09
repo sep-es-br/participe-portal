@@ -2,7 +2,7 @@
   <div class="search-container print-visible">
     <img *ngIf="header" class="img-fluid img-center-sm print-visible" [src]="header?.image" alt="">
   </div>
-  <div class="actions" *ngIf="isAuthenticated">
+  <div class="actions" *ngIf="isAuthenticated && showActions">
     <p-menu #menuExternalLinks [popup]="true" [model]="externalLinksMenuItems"></p-menu>
     <div class="action-item" *ngIf="displayExternalLinks">
       <div class="action-item" (click)="menuExternalLinks.toggle($event)" *ngIf="conference?.externalLinks && conference.externalLinks.length > 0">

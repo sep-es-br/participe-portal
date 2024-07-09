@@ -20,7 +20,7 @@ import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { StartComponent } from './pages/start/start.component';
 import { PreRegistrationComponent } from './pages/pre-registration/pre-registration.component';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
-import { LoginPreRegistrationSelfCheckInComponent } from './pages/login-pre-registration-self-check-in/login-pre-registration-self-check-in.component';
+import { LoginRegistrationComponent } from './pages/login-registration/login-registration.component';
 
 
 const routes: Routes = [
@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: ':conference/post-closure', component: PostClosureComponent },
   { path: ':conference/pre-opening', component: PreOpeningComponent },
   { path: 'statistics', component: StatisticsComponent },
-  { path: 'login-pre-registration-self-check-in', component: LoginPreRegistrationSelfCheckInComponent},
+  { path: 'login-registration', component: LoginRegistrationComponent},
   { path: 'self-check-in/:conference/meeting/:meeting', component: SelfCheckInComponent},
   { path: 'registration/:conference/meeting/:meeting', component: PreRegistrationComponent}
   

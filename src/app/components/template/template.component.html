@@ -1,6 +1,6 @@
-<div class="layout-wrapper">
+<div class="layout-wrapper" [ngClass]="{'cleanMobile': !fullLayout}">
   <p-toast position="top-right"></p-toast>
-  <app-header></app-header>
+  <app-header [showActions]="fullLayout"></app-header>
   <app-menu *ngIf="fullLayout"></app-menu>
   <app-breadcrumb *ngIf="fullLayout && !disablebreadcrumb"></app-breadcrumb>
   <div class="title-container">

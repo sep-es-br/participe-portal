@@ -61,7 +61,7 @@ import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
 import { SafeHTMLPipe } from './shared/pipes/safeHTML/safe-html.pipe';
 import { ButtonModule } from 'primeng/button';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
-import { LoginPreRegistrationSelfCheckInComponent } from './pages/login-pre-registration-self-check-in/login-pre-registration-self-check-in.component';
+import { LoginRegistrationComponent } from './pages/login-registration/login-registration.component';
 
 
 registerLocaleData(localePtBr);
@@ -70,7 +70,7 @@ registerLocaleData(localePtBr);
   declarations: [
     AppComponent,
     StartComponent,
-    LoginPreRegistrationSelfCheckInComponent,
+    LoginRegistrationComponent,
     LoginComponent,
     CompleteProfileComponent,
     TemplateComponent,

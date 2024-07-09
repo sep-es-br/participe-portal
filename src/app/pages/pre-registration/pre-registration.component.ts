@@ -58,15 +58,14 @@ import html2canvas  from 'html2canvas';
                 await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED, this.meetingId);
                 this.router.navigate(['/login-registration']);
             }else{
-                const userAutenticated = await this.authService.isAuthenticated();
-                if(userAutenticated !== false){
-                    this.checkAccreditation();
-                    sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
-                }else if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)){
-                    const urlAtual = this.location.path();
-                    await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED, this.meetingId);
-                    localStorage.setItem(StoreKeys.REDIRECT_URL, urlAtual);
-                    this.router.navigate(['/login-registration']);
+                if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)){
+                const urlAtual = this.location.path();
+                await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED, this.meetingId);
+                localStorage.setItem(StoreKeys.REDIRECT_URL, urlAtual);
+                this.router.navigate(['/login-registration']);
+                }else{
+                this.checkAccreditation();
+                sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
                 }
             }
         }else{

@@ -49,6 +49,7 @@ input[readOnly] {
       justify-content: center;
       label {
         margin-left: 0rem !important;
+        font-size: small;
       }
       .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
         background-color: var(--accent-color) !important;
@@ -68,6 +69,15 @@ input[readOnly] {
   }
   .actions {
     padding-right: 0px !important;
+  }
+}
+@media (max-width: 310px) {
+  .card-info{
+    ::ng-deep .field-switch {
+      label {
+        font-size: 11px;
+      }
+    }
   }
 }
 
@@ -104,7 +114,7 @@ input[readOnly] {
   padding-left: 50px;
 }
 .button-primary{
-  width: 150px;
+  width: 120px;
 }
 
 .card-info .stacked label{

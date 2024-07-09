@@ -103,6 +103,7 @@ export class CompleteProfileComponent implements OnInit {
 
   async cancel() {
     localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
+    sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
     await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
 

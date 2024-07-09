@@ -73,3 +73,7 @@ p, h2, em, .table tbody td, input, textarea{
 .hide-buttons {
     display: none;
 }
+
+::ng-deep .title-container{
+    display: none;
+}

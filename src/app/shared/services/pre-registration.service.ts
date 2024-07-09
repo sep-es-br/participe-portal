@@ -24,6 +24,14 @@ export class PreRegistrationService extends BaseService<any> {
     };
     return this.http.post<IResultHttp<IPreRegistration>>(`${this.urlBase}`,sender).toPromise();
   }
+
+  accreditation(meetingId: number,personId: number){
+    const sender = {
+      meetingId: meetingId,
+      personId: personId
+    };
+    return this.http.post<IResultHttp<IPreRegistration>>(`${this.urlBase}/accreditation`,sender).toPromise();
+  }
   
   preRegistrationConfirmed(meetingId: number,personId: number){
     return this.http.get<IResultHttp<IPreRegistration>>(`${this.urlBase}/${meetingId}/${personId}`).toPromise();

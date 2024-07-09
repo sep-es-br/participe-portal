@@ -25,6 +25,7 @@ import html2canvas  from 'html2canvas';
     conferenceId:string;
     loadedServices:boolean = false;
     preRegistrationCompleted:boolean = false;
+    accreditation: boolean = false;
     preRegistrationData: IPreRegistration;
     previousRegistration: boolean = false;
     meetingData;
@@ -51,11 +52,22 @@ import html2canvas  from 'html2canvas';
         this.meetingId = this.activatedRoute.snapshot.paramMap.get('meeting');
         this.conferenceId = this.activatedRoute.snapshot.paramMap.get('conference');
         const preRegistrationIsOpen = await this.meetingService.getSelfCheckInOrPreRegistrationOpen(parseInt(this.meetingId),"pre-registration")
-        console.log(preRegistrationIsOpen)
-        if(preRegistrationIsOpen.data.length == 0){
+        if(preRegistrationIsOpen.data.preRegistrationMeetingStarted == false){
             await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);
-            await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED, this.meetingId);
-            this.router.navigate(['/login-pre-registration-self-check-in']);
+            if(preRegistrationIsOpen.data.preRegistrationMeetingClosed == false){
+                await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED, this.meetingId);
+                this.router.navigate(['/login-registration']);
+            }else{
+                if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)){
+                const urlAtual = this.location.path();
+                await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED, this.meetingId);
+                localStorage.setItem(StoreKeys.REDIRECT_URL, urlAtual);
+                this.router.navigate(['/login-registration']);
+                }else{
+                this.checkAccreditation();
+                sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
+                }
+            }
         }else{
             const userAutenticated = await this.authService.isAuthenticated();
             if(userAutenticated !== false){
@@ -72,6 +84,23 @@ import html2canvas  from 'html2canvas';
                 }
             }
         }
+    }
+
+    checkAccreditation(){
+        this.loadingService.loading(true);
+        this.userInfo = this.authService.getUserInfo;
+        this.preRegistrationService.accreditation(Number(this.meetingId), this.userInfo.id).then(
+            response => {
+                sessionStorage.setItem(StoreKeys.REGISTRATION_ACTIVE, JSON.stringify(response.data));
+                this.preRegistrationData = response.data;
+                this.accreditation = true;
+            }
+        ).finally(
+            () =>{
+                this.loadingService.loading(false);
+            }
+        );
+       
     }
 
     checkConfirmed(){
@@ -96,7 +125,7 @@ import html2canvas  from 'html2canvas';
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
             this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
-            this.router.navigate(['/login-pre-registration-self-check-in']);
+            this.router.navigate(['/login-registration']);
         }else if(!this.meetingId){
             this.router.navigate(['/login', this.conferenceId]);
         }else{

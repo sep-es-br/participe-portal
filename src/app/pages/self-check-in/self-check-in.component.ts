@@ -57,11 +57,11 @@ export class SelfCheckInComponent implements OnInit {
         await sessionStorage.setItem(StoreKeys.CHECK_IN_OFF, this.meetingId);
         await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, this.conferenceId);
         await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
-        this.router.navigate(['/login-pre-registration-self-check-in']);
+        this.router.navigate(['/login-registration']);
       }else if(!sessionStorage.getItem(StoreKeys.LOGIN_CHECK_IN)){
         await this.loadingVariable(this.meetingId, this.conferenceId)
         await this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
-        this.router.navigate(['/login-pre-registration-self-check-in']);
+        this.router.navigate(['/login-registration']);
       }else{
         sessionStorage.removeItem(StoreKeys.CHECK_IN)
         sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)

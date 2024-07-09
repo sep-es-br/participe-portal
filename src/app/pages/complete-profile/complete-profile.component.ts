@@ -10,7 +10,7 @@ import {ILocality} from '../../shared/interfaces/ILocality';
 import {IPerson} from '../../shared/interfaces/IPerson';
 import {LocalityService} from '../../shared/services/locality.service';
 import {PersonService} from 'src/app/shared/services/person.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {StoreKeys} from '../../shared/commons/contants';
 
 @Component({
@@ -24,6 +24,7 @@ export class CompleteProfileComponent implements OnInit {
   localities: ILocality[] = [];
   filteredLocalities: SelectItem[];
   localityType: string;
+  accreditation: boolean = false;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -32,8 +33,11 @@ export class CompleteProfileComponent implements OnInit {
     private personSrv: PersonService,
     private conferenceSrv: ConferenceService,
     private messageSrv: MessageService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
+
+    this.accreditation = Boolean(this.route.snapshot.queryParams['accreditation']) ?? false
   }
 
   async ngOnInit() {
@@ -77,10 +81,11 @@ export class CompleteProfileComponent implements OnInit {
       if(sessionStorage.getItem(StoreKeys.CHECK_IN)){
         localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
         await this.router.navigate([`/self-check-in/${localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)}/meeting/${sessionStorage.getItem(StoreKeys.CHECK_IN)}`]);
-      }else if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)){
+      }else if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) || sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)){
         localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
         localStorage.removeItem(StoreKeys.REDIRECT_URL)
-        await this.router.navigate([`/registration/${localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)}/meeting/${sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)}`]);
+        const meeting = sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) ?? sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
+        await this.router.navigate([`/registration/${localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)}/meeting/${meeting}`]);
       }else{
         localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
         await this.router.navigate(['/conference-map']);
@@ -98,6 +103,7 @@ export class CompleteProfileComponent implements OnInit {
 
   async cancel() {
     localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
+    sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
     await this.router.navigate(['/login', this.conferenceSrv.ConferenceActiveId]);
   }
 

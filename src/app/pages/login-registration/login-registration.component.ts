@@ -7,11 +7,11 @@ import { MeetingService } from "src/app/shared/services/meeting.service";
 
 
 @Component({
-    selector: 'app-login-pre-registration-self-check-in',
-    templateUrl: './login-pre-registration-self-check-in.component.html',
-    styleUrls: ['./login-pre-registration-self-check-in.component.scss']
+    selector: 'app-login-registration',
+    templateUrl: './login-registration.component.html',
+    styleUrls: ['./login-registration.component.scss']
 })
-export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
+export class LoginRegistrationComponent implements OnInit {
 
     title: string = '';
     subtitle: string = '';
@@ -35,6 +35,7 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
           StoreKeys.PRE_REGISTRATION,
           StoreKeys.CHECK_IN,
           StoreKeys.CHECK_IN_OFF,
+          StoreKeys.PRE_REGISTRATION_MEETING_STARTED,
           StoreKeys.PRE_REGISTRATION_MEETING_CLOSED
         ];
       
@@ -56,6 +57,14 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
           await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.CHECK_IN)));
           this.title = 'Auto Check-in';
           this.subtitle = 'Acesse agora para registrar sua presença no encontro';
+          this.conferenceName = this.meetingData.conference.name;
+          this.meetingName = this.meetingData.name;
+          break;
+
+        case StoreKeys.PRE_REGISTRATION_MEETING_STARTED:
+          await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)));
+          this.title = 'Credenciamento';
+          this.subtitle = 'Acesse agora e efetue seu credenciamento para o encontro presencial';
           this.conferenceName = this.meetingData.conference.name;
           this.meetingName = this.meetingData.name;
           break;
@@ -95,6 +104,7 @@ export class LoginPreRegistrationSelfCheckInComponent implements OnInit {
         this.subtitle = 'favor verificar o link e tentar novamente.';
         let element = document.querySelector('.social-login') as HTMLLIElement
         element.style.display = 'none'
+        sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED);
         sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION);
         sessionStorage.removeItem(StoreKeys.CHECK_IN);
         throw error;

@@ -41,6 +41,14 @@ button{
     background:var(--card-color)
 }
 
+.cardAccreditation{
+    background:var(--background);
+
+    p, h2, h4, em, .table tbody td, input, textarea{
+        color: var(--font-color);
+    }
+}
+
 p, h2, em, .table tbody td, input, textarea{
     color: var(--card-font-color);
 }
@@ -63,5 +71,9 @@ p, h2, em, .table tbody td, input, textarea{
 // }
 
 .hide-buttons {
+    display: none;
+}
+
+::ng-deep .title-container{
     display: none;
 }

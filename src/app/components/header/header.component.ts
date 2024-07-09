@@ -4,7 +4,7 @@ import {ParticipationService} from '../../shared/services/participation.service'
 import {Router} from '@angular/router';
 import {IPerson} from '../../shared/interfaces/IPerson';
 import {AuthService} from '../../shared/services/auth.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {StoreKeys} from '../../shared/commons/contants';
 import {IConference} from 'src/app/shared/interfaces/IConference';
 import {MenuItem} from 'primeng/api';
@@ -17,6 +17,7 @@ import { ColorService } from 'src/app/shared/services/color.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input() showActions: boolean = true;
 
   userInfo: IPerson;
   isAuthenticated: boolean;

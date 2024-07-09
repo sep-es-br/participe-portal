@@ -38,7 +38,7 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 850px) {
     top: 60px;
     .title-container {
       text-align: center;
@@ -46,4 +46,8 @@
     }
   }
 
+}
+
+.cleanMobile{
+  top: 10px !important;
 }

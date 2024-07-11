@@ -35,7 +35,6 @@ export class LoginRegistrationComponent implements OnInit {
 
     loadingStorage(){
       const conferenceId = this.route.snapshot.queryParams['conference'];
-      console.log(conferenceId)
       const url = this.route.snapshot.queryParams['url'];
       if(url){
         const regex = /\/registration\/(\d+)/;

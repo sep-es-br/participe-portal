@@ -256,5 +256,17 @@ $darkColorOr: rgba(0,0,0,0.16);
   .cidadao{
     font-size: 0.6rem;
   }
+
+  .google{
+    font-size: 0.8rem;
+  }
+  
+}
+
+@media screen and (max-width: 280px) {
+
+  .google{
+    font-size: 0.6rem;
+  }
   
 }

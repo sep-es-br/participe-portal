@@ -26,11 +26,11 @@ export class LoginRegistrationComponent implements OnInit {
       private messageService: MessageService,
       private route: ActivatedRoute
     ){
-      this.loadingStorage();
     }
-
+    
     async ngOnInit() {
-      this.startServices();  
+      this.loadingStorage();
+        
     }
 
     loadingStorage(){
@@ -50,6 +50,8 @@ export class LoginRegistrationComponent implements OnInit {
           localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId)
         }
       }
+
+      this.startServices();
     }
 
     async startServices(){

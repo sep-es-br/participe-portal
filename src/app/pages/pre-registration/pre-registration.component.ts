@@ -56,13 +56,13 @@ import html2canvas  from 'html2canvas';
             await localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE,this.conferenceId);
             if(preRegistrationIsOpen.data.preRegistrationMeetingClosed == false){
                 await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED, this.meetingId);
-                this.router.navigate(['/login-registration']);
+                this.router.navigate(['/login-registration'], {queryParams: { conference:this.conferenceId} });
             }else{
                 if(!sessionStorage.getItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)){
                 const urlAtual = this.location.path();
                 await sessionStorage.setItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED, this.meetingId);
                 localStorage.setItem(StoreKeys.REDIRECT_URL, urlAtual);
-                this.router.navigate(['/login-registration']);
+                this.router.navigate(['/login-registration'], {queryParams: { url:urlAtual} });
                 }else{
                 this.checkAccreditation();
                 sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_STARTED)
@@ -125,7 +125,7 @@ import html2canvas  from 'html2canvas';
             sessionStorage.setItem(StoreKeys.PRE_REGISTRATION, String(this.meetingId));
             localStorage.setItem(StoreKeys.REDIRECT_URL,urlAtual);
             this.colorService.setPrimaryColor(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE))
-            this.router.navigate(['/login-registration']);
+            this.router.navigate(['/login-registration'], {queryParams: { url:urlAtual} });
         }else if(!this.meetingId){
             this.router.navigate(['/login', this.conferenceId]);
         }else{

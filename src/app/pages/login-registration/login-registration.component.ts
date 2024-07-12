@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { StoreKeys } from "src/app/shared/commons/contants";
 import { AuthService } from "src/app/shared/services/auth.service";
@@ -22,11 +23,35 @@ export class LoginRegistrationComponent implements OnInit {
     constructor(
       private authSrv: AuthService,
       private meetingSrv: MeetingService,
-      private messageService: MessageService
-    ){}
-
+      private messageService: MessageService,
+      private route: ActivatedRoute
+    ){
+    }
+    
     async ngOnInit() {
-      this.startServices();  
+      this.loadingStorage();
+        
+    }
+
+    loadingStorage(){
+      const conferenceId = this.route.snapshot.queryParams['conference'];
+      const url = this.route.snapshot.queryParams['url'];
+      if(url){
+        const regex = /\/registration\/(\d+)/;
+        const match = url.match(regex);
+        if(!localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)){
+          localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, match[1])
+        }
+        if(!localStorage.getItem(StoreKeys.REDIRECT_URL)){
+          localStorage.setItem(StoreKeys.REDIRECT_URL, url)
+        }
+      }else if(conferenceId){
+        if(!localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE)){
+          localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, conferenceId)
+        }
+      }
+
+      this.startServices();
     }
 
     async startServices(){

@@ -37,9 +37,7 @@ export class ConferenceService extends BaseService<any> {
       }else{
         return Number(conferenceActiveId);
       }
-      // return Number(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE));
     } catch (error) {
-      console.log("Erro aqui -->",error)
       return 0;
     }
   }

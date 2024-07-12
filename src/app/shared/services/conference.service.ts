@@ -25,7 +25,7 @@ export class ConferenceService extends BaseService<any> {
       let conferenceActiveId = 0;
       const conferenceId =  this.activatedRoute.snapshot.queryParams['conference'];
       const currentUrl = this.activatedRoute.snapshot.queryParams['url'];
-      if(conferenceId != null ){
+      if(conferenceId != null && conferenceId != undefined ){
         conferenceActiveId =  conferenceId;
       }else if(currentUrl != null){
         const regex = /\/registration\/(\d+)/;

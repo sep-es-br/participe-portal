@@ -1,4 +1,5 @@
 import {environment} from '../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
 import {IResultHttp} from '../interfaces/IResultHttp';
 import {Inject, Injectable, Injector} from '@angular/core';
 import {BaseService} from './base.service';
@@ -13,15 +14,32 @@ import {IConference} from '../interfaces/IConference';
 export class ConferenceService extends BaseService<any> {
 
   constructor(
-    @Inject(Injector) injector: Injector
+    @Inject(Injector) injector: Injector,
+    private activatedRoute: ActivatedRoute
   ) {
     super('conferences', injector);
   }
 
   get ConferenceActiveId(): number {
     try {
-      return Number(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE));
+      let conferenceActiveId = 0;
+      const conferenceId =  this.activatedRoute.snapshot.queryParams['conference'];
+      const currentUrl = this.activatedRoute.snapshot.queryParams['url'];
+      if(conferenceId != null ){
+        conferenceActiveId =  conferenceId;
+      }else if(currentUrl != null){
+        const regex = /\/registration\/(\d+)/;
+        const match = currentUrl.match(regex);
+        conferenceActiveId =  match[1];
+      }
+      if(conferenceActiveId == 0){
+        return Number(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE));
+      }else{
+        return Number(conferenceActiveId);
+      }
+      // return Number(localStorage.getItem(StoreKeys.CONFERENCE_ACTIVE));
     } catch (error) {
+      console.log("Erro aqui -->",error)
       return 0;
     }
   }

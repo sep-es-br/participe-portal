@@ -60,9 +60,9 @@
   <app-modal class="modalComment" [show]="showModalComment" (onCallback)="modalOnCallback($event)">
     <h2>{{itemSelect?.name}}</h2>
     <p>{{itemSelect?.description}}</p>
-    <textarea [maxlength]="200" rows="6" *ngIf="itemSelect" [(ngModel)]="itemSelect.comment"></textarea>
+    <textarea [maxlength]="280" rows="6" *ngIf="itemSelect" [(ngModel)]="itemSelect.comment"></textarea>
     <span class="count-characters" *ngIf="itemSelect">Caracteres restantes
-      {{itemSelect?.comment?.length || 0}}/200</span>
+      {{itemSelect?.comment?.length || 0}}/280</span>
   </app-modal>
   <app-modal class="modalComment" [show]="showModalAlternativeProposal"
              (onCallback)="modalAlternativeProposalCallback($event)">

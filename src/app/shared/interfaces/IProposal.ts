@@ -11,5 +11,6 @@ export interface IProposal {
     localityTypeName: string;
     localityPerson: string;
     localityName: string;
+    localityMicro: string;
     likes?: number;
 }

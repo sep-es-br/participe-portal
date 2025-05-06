@@ -119,7 +119,7 @@ export class ProposalsComponent implements OnInit {
         this.localityDropdow = await data.localities.map(locality => {
           return {check: true, value: locality.id, label: locality.name};
         });
-        this.localityIds = await data.localities.map(locality => locality.id);
+        this.localityIds = [];
         this.localityDropdow.sort((a, b) => (a.label.toUpperCase().localeCompare(b.label.toUpperCase(), 'pt')));
         this.selectAllLocalities = true;
       }
@@ -150,11 +150,7 @@ export class ProposalsComponent implements OnInit {
     this.localityDropdow.forEach(dropLocality => {
       dropLocality.check = this.selectAllLocalities;
     });
-    this.localityIds = this.localityDropdow.map(locality => {
-      if (locality.check) {
-        return locality.value;
-      }
-    });
+    this.localityIds = [];
     this.loadProposals(0);
   }
 

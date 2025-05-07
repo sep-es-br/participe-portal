@@ -6,20 +6,27 @@
 </div>
 <div class="menu-mobile-wrapper">
   <div class="mobile-bar">
-    <img (click)="openSidemenu()" src="/assets/icons/open-menu.svg" alt=""/>
+    <img (click)="openSidemenu()" src="/assets/icons/open-menu.svg" aria-label="Abrir menu" role="button"
+    [attr.tabindex]="menuAberto ? '-1' : '0'" [attr.aria-hidden]="menuAberto" [style.pointer-events]="menuAberto ? 'none' : 'auto'"/>
   </div>
 </div>
 
-<div #sidemenu class="sidenav">
-  <a  class="closebtn" (click)="closeSidemenu()">&times;</a>
-  <a class="btn-default btn-participar"  (click)="navigate('/conference-map')">Participar</a>
-  <a class="btn-default" (click)="navigate('/proposals')" *ngIf="displayProposalsPanel">Propostas</a>
-  <a class="btn-default" (click)="navigate('/participations')">Minhas Participações</a>
-  <a class="btn-default" (click)="navigate('/how-it-works')">Como Funciona</a>
-  <a class="btn-default" (click)="navigate('/statistics')" *ngIf="displayStatisticsPanel" >Estatísticas</a>
+<div [cdkTrapFocus]="menuAberto" #sidemenu class="sidenav" >
+  <a class="closebtn" (click)="closeSidemenu()" aria-label="Fechar menu" [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'" role="button">&times;</a>
+  <a class="btn-default btn-participar"  (click)="navigate('/conference-map')" role="navigation"
+    [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">Participar</a>
+  <a class="btn-default" (click)="navigate('/proposals')" *ngIf="displayProposalsPanel"role="navigation"
+  [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">Propostas</a>
+  <a class="btn-default" (click)="navigate('/participations')"role="navigation"
+  [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">Minhas Participações</a>
+  <a class="btn-default" (click)="navigate('/how-it-works')"role="navigation"
+  [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">Como Funciona</a>
+  <a class="btn-default" (click)="navigate('/statistics')" *ngIf="displayStatisticsPanel" role="navigation"
+  [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">Estatísticas</a>
   <div class="header-menu">
     <div class="action-group">
-      <a class="btn-default action-button" (click)="navigate('/profile')">
+      <a class="btn-default action-button" (click)="navigate('/profile')" role="navigation"
+      [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">
         {{ userInfo?.name }}
         <img src="assets/icons/user2.svg" alt=""/>
       </a>
@@ -29,6 +36,7 @@
         <img src="assets/icons/external-link-alt-solid.svg" alt=""/>
       </a>
     </div> -->
-    <a class="btn-default btn-sair" (click)="logout()">Sair</a>
+    <a class="btn-default btn-sair" (click)="logout()" role="navigation"
+    [attr.tabindex]="menuAberto ? '0' : '-1'" [attr.aria-hidden]="!menuAberto" [style.pointer-events]="menuAberto ? 'auto' : 'none'">Sair</a>
   </div>
 </div>

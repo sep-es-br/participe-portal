@@ -62,6 +62,7 @@ import { SafeHTMLPipe } from './shared/pipes/safeHTML/safe-html.pipe';
 import { ButtonModule } from 'primeng/button';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
 import { LoginRegistrationComponent } from './pages/login-registration/login-registration.component';
+import { A11yModule } from '@angular/cdk/a11y'
 
 
 registerLocaleData(localePtBr);
@@ -126,7 +127,8 @@ registerLocaleData(localePtBr);
     ChartModule,
     MultiSelectModule,
     MenuModule,
-    TriStateCheckboxModule
+    TriStateCheckboxModule,
+    A11yModule
   ],
   providers: [
     MessageService,

@@ -2,10 +2,10 @@
   <div class="conference-map-container">
     <div class="cards-container">
       <div class="card-item" *ngFor="let locality of conference?.localities">
-        <h2>{{locality?.name}}</h2>
+        <h2 tabindex="0">{{locality?.name}}</h2>
         <div class="line"></div>
-        <ul>
-          <li *ngFor="let children of locality?.children" class="locality-child" (click)="selectRegional(children)">
+        <ul role="none">
+          <li role="button" tabindex="0" *ngFor="let children of locality?.children" class="locality-child" (click)="selectRegional(children)">
             {{children.name}}
           </li>
         </ul>

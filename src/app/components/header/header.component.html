@@ -10,11 +10,11 @@
         <div [innerHTML]="colorService.svgList.external_link_alt_solid_svg.htmlText" class="external-link-alt-solid"></div>
       </div>
     </div>
-    <div class="action-item" *ngIf="userInfo?.name" (click)="navigate('/profile')">
+    <div class="action-item" *ngIf="userInfo?.name" tabindex="0" role="button" (click)="navigate('/profile')">
       {{ userInfo.name }}
       <div [innerHTML]="colorService.svgList.user2_svg.htmlText" class="user2"></div>
     </div>
-    <div class="action-item" (click)="showDialog()">
+    <div class="action-item" (click)="showDialog()" tabindex="0" role="button">
       Sair
       <div [innerHTML]="colorService.svgList.close2_svg.htmlText" class="close2"></div>
     </div>

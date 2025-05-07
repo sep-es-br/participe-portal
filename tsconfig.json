@@ -1,5 +1,5 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -13,10 +13,16 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "plugins": [
+      {"name": "@angular/language-service"}
+    ],
     "lib": [
       "es2018",
       "dom"
     ],
     "useDefineForClassFields": false
-  }
+  },
+  "angularCompilerOptions": {
+  "strictTemplates": true
+}
 }

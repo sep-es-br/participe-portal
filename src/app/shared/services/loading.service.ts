@@ -4,13 +4,21 @@ import { Subject, Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class LoadingService {
 
+  private loadingCounter: number = 0;
   private loadingSubject: Subject<boolean> = new Subject<boolean>();
-  private _loading: boolean = false;
   constructor() { }
 
   loading(value: boolean = true) {
-    this._loading = value;
-    this.loadingSubject.next(this._loading);
+
+    if(value) {
+      this.loadingCounter++;
+    } else {
+      this.loadingCounter--;
+    }
+
+    this.loadingCounter = Math.max(this.loadingCounter, 0);
+
+    this.loadingSubject.next(this.loadingCounter > 0);
   }
 
   isLoading(): Observable<boolean> {

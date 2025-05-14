@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
     private participationSrv: ParticipationService,
     private conferenceSrv: ConferenceService,
     private researchSrv: ResearchService,
-    private colorService: ColorService,
+    public colorService: ColorService,
   ) {
   }
 

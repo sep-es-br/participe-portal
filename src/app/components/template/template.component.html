@@ -3,7 +3,7 @@
   <app-header [showActions]="fullLayout"></app-header>
   <app-menu *ngIf="fullLayout"></app-menu>
   <app-breadcrumb *ngIf="fullLayout && !disablebreadcrumb"></app-breadcrumb>
-  <div class="title-container">
+  <div class="title-container" tabindex="0">
     <h2>{{title}}</h2>
     <span>{{subTitle}}</span>
   </div>

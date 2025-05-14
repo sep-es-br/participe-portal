@@ -8,8 +8,7 @@
     "build:test": "ng build --configuration=test",
     "build:prod": "ng build --configuration=production --aot",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -71,7 +70,6 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.1.0",
-    "protractor": "~7.0.0",
     "sass": "^1.49.5",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",

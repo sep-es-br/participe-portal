@@ -75,7 +75,8 @@
 
           <div class="comment"><strong>{{ item.comment }}</strong></div>
 
-          <div class="person"><strong>{{ item.personName }} - {{ item.localityPerson }}</strong></div>
+          
+          <div class="localityCity">{{ item.localityName }}</div>
           <div class="how-long-ago">{{ howLongAgo(item.time) }}</div>
 
           <a [ngClass]= "item.isLiked ? 'likes likesAfter' : 'likes likesBefore'"
@@ -94,11 +95,11 @@
               <div class="planItem">
                 <div [innerHTML]="colorService.svgList.locality_without_map_gradient_svg.htmlText" class="locality-svg"></div>
               </div>
-              <p>{{item.localityTypeName}}</p>
+              <p>Microrregião</p>
             </div>
 
             <div class="nameItem">
-              {{item.localityName}}
+              {{item.localityMicro}}
             </div>
           </div>
 

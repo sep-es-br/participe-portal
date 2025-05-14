@@ -29,6 +29,7 @@ export class MenuComponent implements OnInit {
   externalLinksMenuItems: MenuItem[];
   displayStatisticsPanel: boolean;
   displayProposalsPanel: boolean;
+  menuAberto: boolean = false;
 
   constructor(
     private authSrv: AuthService,
@@ -50,10 +51,12 @@ export class MenuComponent implements OnInit {
 
   openSidemenu() {
     this.sidemenu.nativeElement.style.left = '0';
+    this.menuAberto = true;
   }
 
   closeSidemenu() {
     this.sidemenu.nativeElement.style.left = '-95%';
+    this.menuAberto = false;
   }
 
   async logout() {

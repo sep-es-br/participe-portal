@@ -6,8 +6,8 @@
         <img class="logo" *ngIf="conferenceData?.fileAuthentication?.url"
             [src]="conferenceData?.fileAuthentication?.url" alt=""/>
         <div class="header">
-          <h2>{{ conferenceData?.titleAuthentication }}</h2>
-          <p>{{ conferenceData?.subtitleAuthentication }}</p>
+          <h2 tabindex="0">{{ conferenceData?.titleAuthentication }}</h2>
+          <p tabindex="0">{{ conferenceData?.subtitleAuthentication }}</p>
         </div>
         <div class="social-login">
           <button class="cidadao" (click)="signInAcessoCidadao()">
@@ -15,15 +15,9 @@
               <img src="assets/images/govbrbranco.png"  />
               <img src="assets/icons/cidadao.svg" alt=""/>
               Acessar com GOV.BR ou ACESSO CIDADÃO
-          </span>
+            </span>
           </button>
-          <a class="google" (click)="signInGoogle()">Ou usar minha conta Google...</a>
           
-          <!-- <button class="facebook" (click)="signInFacebook()">
-            <img src="assets/icons/facebook.svg" alt=""/>
-            Entrar com Facebook
-
-          </button> -->
         </div>
         <a href="/#/how-it-works-slim" target="blank" class="how-it-works-container">Saiba como
           participar</a>
@@ -41,8 +35,8 @@
     <div class="right-side p-col-12 p-lg-6 " >
       <div class="statistics-container p-col-12">
         <div class="p-grid">
-          <div class="statistics-item-container p-col-6" *ngFor="let item of statistics">
-            <h2>{{item.value}}</h2>
+          <div class="statistics-item-container p-col-6" tabindex="0" *ngFor="let item of statistics">
+            <h2 role="none">{{item.value}}</h2>
             <span>{{item.label}}</span>
           </div>
         </div>

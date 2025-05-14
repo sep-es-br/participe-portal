@@ -74,29 +74,6 @@ export class ConferenceMapComponent implements OnInit {
     await this.router.navigate(['/conference-steps']);
   }
 
-  /*
-  paintMap(item?: ILocality) {
-    let map: any = document.querySelector('#map');
-    if (map && !map.contentDocument) { return; }
-    map = map.contentDocument.querySelector('svg');
-    if (map) {
-      const paths: any[] = Array.from(map.getElementsByTagName('path'));
-      const mapSplitItems = _.get(item, 'mapSplit', []);
-      paths.forEach(element => {
-        if (mapSplitItems.includes(element.id)) {
-          if (element.classList.contains('fil0')) {
-            element.classList.remove('fil0');
-            element.classList.add('fil1');
-          }
-        } else {
-          if (element.classList.contains('fil1')) {
-            element.classList.remove('fil1');
-            element.classList.add('fil0');
-          }
-        }
-      });
-    }
-  }
-  */
+
 
 }

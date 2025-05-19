@@ -21,6 +21,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MenuModule} from 'primeng/menu';
@@ -63,6 +64,10 @@ import { ButtonModule } from 'primeng/button';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
 import { LoginRegistrationComponent } from './pages/login-registration/login-registration.component';
 import { A11yModule } from '@angular/cdk/a11y'
+import {AuthorityCredentialComponent} from "./pages/authority-credential/authority-credential.component";
+import { StepOneComponent } from './pages/authority-credential/step-one/step-one.component';
+import { StepTwoComponent } from './pages/authority-credential/step-two/step-two.component';
+import { StepThreeComponent } from './pages/authority-credential/step-three/step-three.component';
 
 
 registerLocaleData(localePtBr);
@@ -75,6 +80,7 @@ registerLocaleData(localePtBr);
     LoginComponent,
     CompleteProfileComponent,
     TemplateComponent,
+    AuthorityCredentialComponent,
     HeaderComponent,
     MenuComponent,
     BreadcrumbComponent,
@@ -100,7 +106,10 @@ registerLocaleData(localePtBr);
     HorizontalBarGraphComponent,
     SafeHTMLPipe,
     SelfCheckInComponent,
-    PreRegistrationComponent
+    PreRegistrationComponent,
+    StepOneComponent,
+    StepTwoComponent,
+    StepThreeComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -112,6 +121,7 @@ registerLocaleData(localePtBr);
     InputSwitchModule,
     InputTextModule,
     InputTextareaModule,
+    RadioButtonModule,
     ConfirmDialogModule,
     AutoCompleteModule,
     ListboxModule,
@@ -138,7 +148,7 @@ registerLocaleData(localePtBr);
       useValue: JWT_OPTIONS
     },
     JwtHelperService,
-    { provide: LOCALE_ID, useValue: 'pt' },
+    {provide: LOCALE_ID, useValue: 'pt'},
   ],
   bootstrap: [AppComponent]
 })

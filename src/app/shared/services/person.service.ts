@@ -1,7 +1,7 @@
 import {IChangePassword} from '../interfaces/IChangePassword';
 import {IResultHttp} from '../interfaces/IResultHttp';
 import {IPerson} from '../interfaces/IPerson';
-import {Inject, Injectable, Injector} from '@angular/core';
+import {Inject, Injectable, Injector, signal} from '@angular/core';
 import {BaseService} from './base.service';
 import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
 
@@ -9,6 +9,9 @@ import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
   providedIn: 'root'
 })
 export class PersonService extends BaseService<any> {
+
+
+  public readonly activePerson = signal<IPerson>(undefined);
 
   constructor(
     @Inject(Injector) injector: Injector
@@ -20,8 +23,20 @@ export class PersonService extends BaseService<any> {
     return this.http.post<IResultHttp<any>>(`${this.urlBase}/complement`, data).toPromise();
   }
 
+  getAcRoleById(idPerson: number) : Promise<IResultHttp<{organization: string, role: string}>> {
+    return this.http.get<IResultHttp<{organization: string, role}>>(`${this.urlBase}/${idPerson}/ACRole`).toPromise();
+  }
+
+  findAcInfoByCpf(cpf: string) : Promise<IResultHttp<{name: string, role: string | undefined}>> {
+    return this.http.get<IResultHttp<{name: string, role: string | undefined}>>(`${this.urlBase}/${cpf}/ACInfoByCpf`).toPromise();
+  }
+
   getPersonById(idPerson: number, idConference: number): Promise<IResultHttp<IResultPerson>> {
     return this.http.get<IResultHttp<IResultPerson>>(`${this.urlBase}/profile/${idPerson}?conferenceId=${idConference}`).toPromise();
+  }
+
+  getSubById(idPerson: number): Promise<IResultHttp<string>> {
+    return this.http.get<IResultHttp<string>>(`${this.urlBase}/subById/${idPerson}`).toPromise();
   }
 
   getContactsEmails(idPerson: number): Promise<IResultHttp<IOptionsContactEmail[]>> {

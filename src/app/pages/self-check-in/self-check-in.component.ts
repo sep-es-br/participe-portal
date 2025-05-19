@@ -38,10 +38,10 @@ export class SelfCheckInComponent implements OnInit {
       private route: ActivatedRoute,
       private colorService: ColorService
     ){
-      
+
     }
 
-    
+
     async ngOnInit() {
       this.meetingId = this.route.snapshot.paramMap.get('meeting');
       this.conferenceId = this.route.snapshot.paramMap.get('conference');
@@ -50,6 +50,7 @@ export class SelfCheckInComponent implements OnInit {
           sessionStorage.removeItem(StoreKeys.LOGIN_CHECK_IN)
           sessionStorage.removeItem(StoreKeys.CHECK_IN)
           this.router.navigate(['/']);
+          debugger;
         }
       });
       const selfcheckInIsOpen = await this.meetingSrv.getSelfCheckInOrPreRegistrationOpen(this.route.snapshot.params['meeting'],"self-check-in")
@@ -108,6 +109,7 @@ export class SelfCheckInComponent implements OnInit {
       await this.getPersonAndMeeting(personId, meeting)
       if(this.isNotEmptyCheckInObject){
         this.router.navigate(['/']);
+        debugger;
       }else{
         await this.isCheckin(meeting, this.authSrv.getUserInfo.id)
         await this.getPersonAndMeeting(personId, meeting)

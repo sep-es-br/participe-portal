@@ -21,10 +21,12 @@ import { StartComponent } from './pages/start/start.component';
 import { PreRegistrationComponent } from './pages/pre-registration/pre-registration.component';
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
 import { LoginRegistrationComponent } from './pages/login-registration/login-registration.component';
+import {AuthorityCredentialComponent} from "./pages/authority-credential/authority-credential.component";
 
 
 const routes: Routes = [
   { path: '', component: StartComponent },
+  { path: 'authority-credential/:meeting', component: AuthorityCredentialComponent},
   { path: 'login/:conference', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },
@@ -45,7 +47,7 @@ const routes: Routes = [
   { path: 'login-registration', component: LoginRegistrationComponent},
   { path: 'self-check-in/:conference/meeting/:meeting', component: SelfCheckInComponent},
   { path: 'registration/:conference/meeting/:meeting', component: PreRegistrationComponent}
-  
+
 ];
 
 @NgModule({

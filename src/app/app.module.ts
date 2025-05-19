@@ -138,7 +138,10 @@ registerLocaleData(localePtBr);
       useValue: JWT_OPTIONS
     },
     JwtHelperService,
-    { provide: LOCALE_ID, useValue: 'pt' },
+    {provide: LOCALE_ID, useValue: 'pt'},
+  ],
+  exports: [
+    TemplateComponent
   ],
   bootstrap: [AppComponent]
 })

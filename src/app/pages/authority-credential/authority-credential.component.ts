@@ -29,7 +29,7 @@ export class AuthorityCredentialComponent {
     private router: Router
   ) {
     this.user = this.personService.activePerson;
-    
+
     this.routeSnap.params.subscribe(params => {
 
       const meetingId = params['meeting'];
@@ -67,7 +67,7 @@ export class AuthorityCredentialComponent {
   }
 
   async onRegister(form : INewAuthForm) {
-    
+
   }
 
 }

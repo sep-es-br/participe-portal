@@ -9,6 +9,9 @@ import { PersonService } from 'src/app/shared/services/person.service';
 import { IPerson } from 'src/app/shared/interfaces/IPerson';
 import { INewAuthForm } from './step-two/newAuthForm.interface';
 import { MessageService } from 'primeng/api';
+import {IPreRegistration} from "../../shared/interfaces/IPreRegistration";
+import {AuthorityCredentialService} from "../../shared/services/authority-credential.service";
+import {AuthService} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-authority-credential',
@@ -18,13 +21,16 @@ import { MessageService } from 'primeng/api';
 export class AuthorityCredentialComponent {
 
   meeting = {} as IMeetingDetail;
-  user = signal<IPerson>({} as IPerson)
+  user = signal<IPerson>({} as IPerson);
+  preRegistration = signal<IPreRegistration>(undefined);
   step = 1;
 
   constructor(
+    private authSrv: AuthService,
     private meetingService : MeetingService,
     private messageService : MessageService,
     private personService : PersonService,
+    private authorityCredential : AuthorityCredentialService,
     private routeSnap : ActivatedRoute,
     private router: Router
   ) {
@@ -53,6 +59,9 @@ export class AuthorityCredentialComponent {
 
       if(signInDto){
         const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
+
+        this.authSrv.saveToken(userInfo);
+        this.authSrv.saveUserInfo(userInfo.person);
         this.user.set(userInfo.person);
         this.step = 2;
         this.router.navigate([], {
@@ -68,6 +77,26 @@ export class AuthorityCredentialComponent {
 
   async onRegister(form : INewAuthForm) {
 
+    let preRegistration;
+
+    switch (form.representing) {
+      case "himself":
+        preRegistration = (await this.authorityCredential.registerAuthority(
+          form.id, undefined, undefined, form.name,
+          this.meeting.id, form.organization, form.authorityRole
+        )).data;
+        break;
+      case "other":
+        preRegistration = (await this.authorityCredential.registerAuthority(
+          form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting,
+          this.meeting.id, form.organization, form.authorityRole
+        )).data;
+        break;
+      case "none":
+        return;
+    }
+    this.preRegistration.set(preRegistration);
+    this.step = 3;
   }
 
 }

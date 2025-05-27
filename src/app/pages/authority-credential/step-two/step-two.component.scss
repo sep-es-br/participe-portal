@@ -1,7 +1,7 @@
 main {
   > div{
     padding: 0.5rem;
-    
+
     label.disabled {
       color: gray;
     }
@@ -10,13 +10,13 @@ main {
       margin-right: 0.5rem;
     }
 
-    
+
 
     ::ng-deep {
       p-inputMask {
         &, & > input {
           width: 100% !important;
-        } 
+        }
       }
     }
 
@@ -26,6 +26,10 @@ main {
 
   }
 
+}
+
+.reprInfo {
+  margin-left: 2rem;
 }
 
 button {

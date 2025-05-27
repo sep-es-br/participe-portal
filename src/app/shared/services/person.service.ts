@@ -27,8 +27,8 @@ export class PersonService extends BaseService<any> {
     return this.http.get<IResultHttp<{organization: string, role}>>(`${this.urlBase}/${idPerson}/ACRole`).toPromise();
   }
 
-  findAcInfoByCpf(cpf: string) : Promise<IResultHttp<{name: string, role: string | undefined}>> {
-    return this.http.get<IResultHttp<{name: string, role: string | undefined}>>(`${this.urlBase}/${cpf}/ACInfoByCpf`).toPromise();
+  findAcInfoByCpf(cpf: string) : Promise<IResultHttp<{name: string, role: string | undefined, email: string}>> {
+    return this.http.get<IResultHttp<{name: string, role: string | undefined, email: string}>>(`${this.urlBase}/${cpf}/ACInfoByCpf`).toPromise();
   }
 
   getPersonById(idPerson: number, idConference: number): Promise<IResultHttp<IResultPerson>> {

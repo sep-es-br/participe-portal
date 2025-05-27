@@ -14,14 +14,16 @@ import { INewAuthForm } from './newAuthForm.interface';
 export class StepTwoComponent {
   @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
 
-  @Output() onRegister = new EventEmitter<INewAuthForm>(true);
+  @Output() onRegister = new EventEmitter<INewAuthForm>();
 
   newAuthForm : INewAuthForm = {
+    id: undefined,
     sub: undefined,
     name: undefined,
     organization: undefined,
     representing: 'himself' as 'himself' | 'other' | 'none',
     authorityCpf: undefined,
+    authorityEmail: undefined,
     authorityRepresenting: undefined,
     authorityRole: undefined,
     notRepresentingReason: undefined
@@ -39,7 +41,7 @@ export class StepTwoComponent {
     effect(() => {
         if(!this.user())
             return;
-
+        this.newAuthForm.id = this.user().id;
         this.newAuthForm.name = this.user().name;
 
         this.personService.getSubById(this.user().id).then(
@@ -57,21 +59,21 @@ export class StepTwoComponent {
           this.newAuthForm.authorityRole = acRole.data.role;
           this.fromAc.authorityRole = !!acRole.data.role;
         });
-        
+
       })
   }
 
   async loadAcInfo() {
     if(!this.validarCpf(this.newAuthForm.authorityCpf)){
-      this.messageService.add({ 
-        severity: 'warn', 
-        summary: 'Atenção', 
-        detail: 'Favor inserir um CPF válido', 
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Atenção',
+        detail: 'Favor inserir um CPF válido',
         life: 15000
       });
       return;
     }
-      
+
     const acInfo = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''));
     if(Array.isArray(acInfo.data)) return;
 
@@ -79,6 +81,7 @@ export class StepTwoComponent {
     this.fromAc.authorityRepresenting = acInfo.data.name.includes(' ');
     this.newAuthForm.authorityRole = acInfo.data.role;
     this.fromAc.authorityRole = !!acInfo.data.role;
+    this.newAuthForm.authorityEmail = acInfo.data.email;
   }
 
   validarCpf(cpf: string): boolean {

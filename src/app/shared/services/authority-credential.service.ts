@@ -28,6 +28,6 @@ export class AuthorityCredentialService extends BaseService<any>{
       role: role
     };
     return this.http.put<IResultHttp<IPreRegistration>>(`${this.urlBase}`, body).toPromise();
-  }
+  } 
 
 }

@@ -11,8 +11,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { ConferenceService } from './conference.service';
 
-import * as jwtDecode from 'jwt-decode';
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
@@ -42,30 +40,6 @@ export class AuthService {
   }
 
 
-  signInFacebook() {
-    /*
-    localStorage.setItem(
-      StoreKeys.LOGOUT_URI,
-      environment.logoutURIFacebook
-    );
-    */
-    this.document.location.href = this.getUrlForSocialAuth('facebook');
-  }
-
-  signInFacebookProfile() {
-    this.document.location.href = this.getUrlForSocialAuth('facebook-profile');
-  }
-
-  signInGoogle() {
-    // localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle);
-    this.document.location.href = this.getUrlForSocialAuth('google');
-  }
-
-  signInGoogleProfile() {
-    this.document.location.href = this.getUrlForSocialAuth('google-profile');
-  }
-
-
   signInAcessoCidadao() {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
@@ -91,18 +65,14 @@ export class AuthService {
       }
       return true;
     } catch (err) {
-    }
       return false;
+    }
   }
 
   async signOut() {
-    let logoutURI = localStorage.getItem(StoreKeys.LOGOUT_URI);
-    const accessToken = this.getAccessToken();
+    const logoutURI = localStorage.getItem(StoreKeys.LOGOUT_URI);
     if (logoutURI !== null) {
       this.clearTokens();
-      if (logoutURI.includes(environment.logoutURIFacebook)) {
-        logoutURI += '&access_token=' + accessToken;
-      }
       window.location.href = logoutURI;
     } else {
       await this.router.navigate(['']);
@@ -120,12 +90,12 @@ export class AuthService {
   }
 
   clearTokens(ignoreConference?: boolean) {
-    
+
     localStorage.removeItem(StoreKeys.ACCESS_TOKEN);
     localStorage.removeItem(StoreKeys.REFRESH_TOKE);
     localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);
     localStorage.removeItem(StoreKeys.LOGOUT_URI);
-    if(!ignoreConference){
+    if (!ignoreConference){
       localStorage.removeItem(StoreKeys.CONFERENCE_ACTIVE);
     }
   }
@@ -136,10 +106,6 @@ export class AuthService {
 
   getRefreshToken() {
     return localStorage.getItem(StoreKeys.REFRESH_TOKE);
-  }
-
-  getTokenPayload() {
-    return jwtDecode(this.getAccessToken());
   }
 
   get getUserInfo(): IPerson {

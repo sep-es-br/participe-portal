@@ -135,15 +135,6 @@ export class ProfileComponent implements OnInit {
     this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.ACESSO_CIDADAO);
   }
 
-  addAuthGoogle() {
-    this.backupData();
-    this.authSrv.signInGoogleProfile();
-  }
-
-  deleteAuthGoogle() {
-    this.person.authentications = this.person.authentications.filter(auth => auth.loginName !== LoginNameEnum.GOOGLE);
-  }
-
   addAuthParticipe() {
     this.statusLogin = 'ANDAMENTO';
     if (!this.findAuthentication(LoginNameEnum.PARTICIPE)) {

@@ -25,25 +25,6 @@
         <p-dropdown [styleClass]="'d-flex'" id="locality" [options]="optionsLocality" formControlName="localityId"></p-dropdown>
         <app-input-message  [form]="userForm" field="localityId"></app-input-message>
       </div>
-      <section class="autentication p-col-12">
-        <h3>Autenticação</h3>
-        <div class="external">
-          <button [class]="findAuthentication('AcessoCidadao') ? 'cidadao active' : 'cidadao'"
-                  type="button"
-                  (click)="findAuthentication('AcessoCidadao') ? deleteAuthCidadao() : addAuthCidadao()">
-            <img src="assets/icons/cidadao.svg" alt=""/>
-            <i [class]="findAuthentication('AcessoCidadao') && findAuthentication('Google') ? 'icon-times' : ''"></i>
-            <i [class]="!findAuthentication('AcessoCidadao') && findAuthentication('Google') ? 'icon-plus' : ''"></i>
-          </button>
-          <button [class]="findAuthentication('Google') ? 'google active' : 'google'" type="button"
-                  (click)="findAuthentication('Google') ? deleteAuthGoogle() : addAuthGoogle() "
-          >
-            <img src="assets/icons/google.svg" alt=""/>
-            <i [class]="findAuthentication('Google') && findAuthentication('AcessoCidadao') ? 'icon-times' : ''"></i>
-            <i [class]="!findAuthentication('Google') && findAuthentication('AcessoCidadao')  ? 'icon-plus' : ''"></i>
-          </button>
-        </div>
-      </section>
       <div class="p-col-12 form-group field-switch">
         <p-inputSwitch id="informational" formControlName="receiveInformational">
         </p-inputSwitch>

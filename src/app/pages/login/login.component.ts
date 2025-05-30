@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   backgroundImageUrl: string = '/assets/images/background.png';
   calendarImageUrl:string = '';
   displayCalendar: boolean;
-  
+
 
   constructor(
     private authSrv: AuthService,
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    //this.authSrv.clearTokens();
     this.dialogWidth = window.innerWidth;
     this.subParams = this.activeRoute.params.subscribe(async ({ conference }) => {
       this.conferenceId = +conference;
@@ -217,14 +216,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  signInFacebook() {
-    this.authSrv.signInFacebook();
-  }
-
-  signInGoogle() {
-    this.authSrv.signInGoogle();
-  }
-
   signInAcessoCidadao() {
     this.authSrv.signInAcessoCidadao();
   }
@@ -276,5 +267,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  
+
 }

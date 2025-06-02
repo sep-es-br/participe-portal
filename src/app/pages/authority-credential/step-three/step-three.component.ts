@@ -1,25 +1,32 @@
-import {Component, ElementRef, Input, signal, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, signal, ViewChild} from '@angular/core';
 import {IPreRegistration} from "../../../shared/interfaces/IPreRegistration";
 import html2canvas from "html2canvas";
 import {IPerson} from "../../../shared/interfaces/IPerson";
 import {LoadingService} from "../../../shared/services/loading.service";
+import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistrationAuthority';
 
 @Component({
   selector: 'app-authc-step-three',
   templateUrl: './step-three.component.html',
   styleUrl: './step-three.component.scss'
 })
-export class StepThreeComponent {
-  @Input() preRegistration = signal<IPreRegistration>({} as IPreRegistration);
+export class StepThreeComponent implements OnInit {
+  @Input() preRegistration = signal<IPreRegistrationAuthority>({} as IPreRegistrationAuthority);
 
   @Input()  userInfo = signal<IPerson>({} as IPerson);
 
   @ViewChild('confirmationCard', { static: false }) content: ElementRef;
   @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
 
+  public link : string;
+
   constructor(
     private loadingService: LoadingService,
   ) {
+  }
+
+  ngOnInit(): void {
+      this.link = window.location.href;
   }
 
   protectExibitionEmail(email?:string){

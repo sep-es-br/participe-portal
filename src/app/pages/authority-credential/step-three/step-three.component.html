@@ -1,10 +1,18 @@
 <div class="container mb-3">
   <div #confirmationCard class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 w-100 cardPreRegistration" style="border-radius:20px">
     <div class="text-center print-visible">
-      <h2 class="print-visible">Pré-credenciamento<br>Concluído</h2>
+      <h2 class="print-visible">
+        Presença de representante confirmmada
+        <br>
+        {{preRegistration().person.name}}
+        <br>
+        {{preRegistration().role}}
+        <br>
+        {{preRegistration().organization}}
+      </h2>
     </div>
     <div class="mt-0">
-      <em class="informacoes print-visible">Apresente o QR Code na entrada e registre sua presença</em>
+      <em class="informacoes print-visible">O representante deve apresentar o QR Code na entrada do evento para registrar sua chegada</em>
       <img src="data:image/png;base64,{{preRegistration().qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
     </div>
     <div class="mb-3">
@@ -21,8 +29,10 @@
     <div class="mb-3">
       <em class="informacoes-adicionais mb-3 print-visible p-2">Se quiser corrigir algum dado basta acessar o mesmo link enviado inicialmente</em><br/>
     </div>
+    <i><a href="{{link}}" >{{link}}</a></i>
     <p class="print-visible mb-0 text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
     <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistration().meeting.name}}</p>
+    <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistration().meeting.beginDate}}</p>
     <p class="print-visible mb-0 text-center">{{preRegistration().meeting.place}}</p>
     <p class="print-visible mb-0 text-center">{{preRegistration().meeting.address}}</p>
     <p class="print-visible mb-0 text-center">{{preRegistration().meeting.localityPlace.name}}</p>

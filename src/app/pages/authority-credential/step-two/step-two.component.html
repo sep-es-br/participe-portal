@@ -14,7 +14,7 @@
       <label for="reprHimself">Por mim: {{newAuthForm.name}}</label>
     </div>
     <div class="d-flex flex-row">
-      <p-radioButton value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
+      <p-radioButton (ngModelChange)="otherSelecionado($event)" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
       <label for="reprOther">Por outra pessoa:</label>
     </div>
     <div class="reprInfo">

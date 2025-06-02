@@ -5,6 +5,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import { PersonService } from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
 import { INewAuthForm } from './newAuthForm.interface';
+import { Event } from '@angular/router';
 
 @Component({
   selector: 'app-authc-step-two',
@@ -48,7 +49,7 @@ export class StepTwoComponent {
           resp => {
             if(Array.isArray(resp.data)) return;
 
-            this.newAuthForm.sub = resp.data;
+            this.newAuthForm.sub = resp.data.sub;
           }
         )
 
@@ -61,6 +62,11 @@ export class StepTwoComponent {
         });
 
       })
+  }
+
+  async otherSelecionado(evt : any) {
+    this.newAuthForm.authorityRole = undefined;
+    this.fromAc.authorityRole = false;
   }
 
   async loadAcInfo() {

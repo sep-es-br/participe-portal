@@ -2,6 +2,7 @@ import {Inject, Injectable, Injector} from "@angular/core";
 import {BaseService} from "./base.service";
 import {IPreRegistration} from "../interfaces/IPreRegistration";
 import {IResultHttp} from "../interfaces/IResultHttp";
+import { IPreRegistrationAuthority } from "../interfaces/IPreRegistrationAuthority";
 
 @Injectable({
   providedIn: "root"
@@ -17,7 +18,7 @@ export class AuthorityCredentialService extends BaseService<any>{
   registerAuthority(
     madeBy, representedByCpf, representedEmail, representedByName,
     meetingId, organization, role
-    ) : Promise<IResultHttp<IPreRegistration>> {
+    ) : Promise<IResultHttp<IPreRegistrationAuthority>> {
     const body = {
       madeBy: madeBy,
       representedByCpf: representedByCpf,
@@ -27,7 +28,7 @@ export class AuthorityCredentialService extends BaseService<any>{
       organization: organization,
       role: role
     };
-    return this.http.put<IResultHttp<IPreRegistration>>(`${this.urlBase}`, body).toPromise();
+    return this.http.put<IResultHttp<IPreRegistrationAuthority>>(`${this.urlBase}`, body).toPromise();
   } 
 
 }

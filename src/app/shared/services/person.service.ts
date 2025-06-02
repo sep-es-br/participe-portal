@@ -4,6 +4,7 @@ import {IPerson} from '../interfaces/IPerson';
 import {Inject, Injectable, Injector, signal} from '@angular/core';
 import {BaseService} from './base.service';
 import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,8 @@ export class PersonService extends BaseService<any> {
     return this.http.get<IResultHttp<IResultPerson>>(`${this.urlBase}/profile/${idPerson}?conferenceId=${idConference}`).toPromise();
   }
 
-  getSubById(idPerson: number): Promise<IResultHttp<string>> {
-    return this.http.get<IResultHttp<string>>(`${this.urlBase}/subById/${idPerson}`).toPromise();
+  getSubById(idPerson: number): Promise<IResultHttp<{sub}>> {
+    return this.http.get<IResultHttp<{sub}>>(`${this.urlBase}/subById/${idPerson}`).toPromise();
   }
 
   getContactsEmails(idPerson: number): Promise<IResultHttp<IOptionsContactEmail[]>> {

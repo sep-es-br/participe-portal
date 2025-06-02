@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import {IPreRegistration} from "../../shared/interfaces/IPreRegistration";
 import {AuthorityCredentialService} from "../../shared/services/authority-credential.service";
 import {AuthService} from "../../shared/services/auth.service";
+import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistrationAuthority';
 
 @Component({
   selector: 'app-authority-credential',
@@ -22,7 +23,7 @@ export class AuthorityCredentialComponent {
 
   meeting = {} as IMeetingDetail;
   user = signal<IPerson>({} as IPerson);
-  preRegistration = signal<IPreRegistration>(undefined);
+  preRegistration = signal<IPreRegistrationAuthority>(undefined);
   step = 1;
 
   constructor(
@@ -78,6 +79,23 @@ export class AuthorityCredentialComponent {
   async onRegister(form : INewAuthForm) {
 
     let preRegistration;
+
+    if(
+      !form.authorityRole ||
+      (form.representing == 'other' && (
+        !form.authorityCpf || 
+        !form.authorityRepresenting
+      )) ||
+      !form.name
+    ){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Formulário Imcompleto',
+        detail: 'Favor preencher todos os campos',
+        life: 15000
+      });
+      return;
+    }
 
     switch (form.representing) {
       case "himself":

@@ -4,16 +4,16 @@
     <span>{{meeting.name}}</span>
   </div>
   <div class="d-flex flex-column">
+    <label>Municipio Anfitrião:</label>
+    <span>{{meeting.localityPlace?.name || "A definir"}}</span>
+  </div>
+  <div class="d-flex flex-column">
     <label>Data:</label>
-    <span>{{fullDate}}</span>
+    <span>{{meeting.beginDate}}</span>
   </div>
   <div class="d-flex flex-column">
     <label>Local:</label>
-    <span>{{meeting.place ?? 'A definir'}}</span>
-  </div>
-  <div class="d-flex flex-column">
-    <label>Endereço:</label>
-    <span>{{meeting.address ?? 'A definir'}}</span>
+    <span>{{ (meeting.place && meeting.address) ?  meeting.place + ' - ' + meeting.address : "A defnir" }}</span>
   </div>
 </main>
 <footer>

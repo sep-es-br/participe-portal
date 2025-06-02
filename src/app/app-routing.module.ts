@@ -26,6 +26,7 @@ import {AuthorityCredentialComponent} from "./pages/authority-credential/authori
 
 const routes: Routes = [
   { path: '', component: StartComponent },
+  { path: 'authority-credential/:meeting', component: AuthorityCredentialComponent},
   { path: 'login/:conference', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },
@@ -45,8 +46,7 @@ const routes: Routes = [
   { path: 'statistics', component: StatisticsComponent },
   { path: 'login-registration', component: LoginRegistrationComponent},
   { path: 'self-check-in/:conference/meeting/:meeting', component: SelfCheckInComponent},
-  { path: 'registration/:conference/meeting/:meeting', component: PreRegistrationComponent},
-  { path: 'authority-credential/:meeting', component: AuthorityCredentialComponent}
+  { path: 'registration/:conference/meeting/:meeting', component: PreRegistrationComponent}
 
 ];
 

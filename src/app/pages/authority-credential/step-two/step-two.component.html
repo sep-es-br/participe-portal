@@ -1,0 +1,69 @@
+<main class="d-flex flex-column">
+  <div class="d-flex flex-column">
+    <label>Meu nome</label>
+    <input type="text" pInputText [(ngModel)]="newAuthForm.name" />
+  </div>
+  <div class="d-flex flex-column">
+    <label>Organização/entidade</label>
+    <input type="text" pInputText [(ngModel)]="newAuthForm.organization">
+  </div>
+  <div class="d-flex flex-column">
+    <label>Será representada:</label>
+    <div class="d-flex flex-row">
+      <p-radioButton value="himself" [(ngModel)]="newAuthForm.representing" inputId="reprHimself"/>
+      <label for="reprHimself">Por mim: {{newAuthForm.name}}</label>
+    </div>
+    <div class="d-flex flex-row">
+      <p-radioButton value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
+      <label for="reprOther">Por outra pessoa:</label>
+    </div>
+    <div class="reprInfo">
+      <div class="row">
+        <div class="col" >
+          <label for="reprCpf" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'" >CPF:</label>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center my-2">
+
+        <div class="col-7 px-1">
+          <p-inputMask [disabled]="newAuthForm.representing !== 'other'"
+             mask="999.999.999-99" [(ngModel)]="newAuthForm.authorityCpf" inputId="reprCpf" placeholder="000.000.000-00" />
+        </div>
+        <div class="col px-1">
+          <button [disabled]="newAuthForm.representing !== 'other'" (click)="loadAcInfo()">Procurar</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="reprName" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'">Nome:</label>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center my-2">
+        <div class="col px-1">
+          <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other'"
+             [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100"
+             [readOnly]="fromAc.authorityRepresenting" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div>
+    <label for="reprRole">Cargo do Representante</label>
+    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
+      class="w-100" id="reprRole" [readOnly]="fromAc.authorityRole" />
+  </div>
+<!--  <div>-->
+<!--    <div class="d-flex align-items-center">-->
+<!--      <p-radioButton value="none" [(ngModel)]="newAuthForm.representing" inputId="reprNone" />-->
+<!--      <label for="reprNone">Infelizmente não enviaremos representante,</label>-->
+<!--    </div>-->
+<!--    <label for="noReprReason">porque</label>-->
+<!--    <textarea pInputTextarea [(ngModel)]="newAuthForm.notRepresentingReason"-->
+<!--      [disabled]="newAuthForm.representing !== 'none'" class="w-100" id="noReprReason"-->
+<!--      placeholder="Justifique a ausência da sua organização (opcional)" ></textarea>-->
+<!--  </div>-->
+</main>
+<footer>
+  <button (click)="finishRegister()">Enviar</button>
+</footer>

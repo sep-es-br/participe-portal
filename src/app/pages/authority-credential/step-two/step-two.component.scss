@@ -1,0 +1,48 @@
+main {
+  > div{
+    padding: 0.5rem;
+
+    label.disabled {
+      color: gray;
+    }
+
+    p-radioButton {
+      margin-right: 0.5rem;
+    }
+
+
+
+    ::ng-deep {
+      p-inputMask {
+        &, & > input {
+          width: 100% !important;
+        }
+      }
+    }
+
+    textarea {
+      resize: none;
+    }
+
+  }
+
+}
+
+.reprInfo {
+  margin-left: 2rem;
+}
+
+button {
+  color: white;
+  background-color: #4472C4;
+  border-color: #172C51;
+  border-radius: 0.3rem;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+
+
+

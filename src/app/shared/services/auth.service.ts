@@ -36,9 +36,9 @@ export class AuthService {
     }).toPromise();
   }
 
-  private getUrlForSocialAuth(origin: string) {
+  private getUrlForSocialAuth(origin: string, meetingId?: number) {
     return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${
-      AuthService.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
+      AuthService.getFrontFallbackUrl()}&${ meetingId ? `front_meeting_id=${meetingId}` : `front_conference_id=${this.conferenceSrv.ConferenceActiveId}` }`;
   }
 
 
@@ -66,12 +66,12 @@ export class AuthService {
   }
 
 
-  signInAcessoCidadao() {
+  signInAcessoCidadao(meetingId? : number) {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
       environment.logoutURIAcessoCidadao
     );
-    this.document.location.href = this.getUrlForSocialAuth('portal');
+    this.document.location.href = this.getUrlForSocialAuth('portal', meetingId);
   }
 
   signInAcessoCidadaoProfile() {
@@ -106,6 +106,7 @@ export class AuthService {
       window.location.href = logoutURI;
     } else {
       await this.router.navigate(['']);
+      debugger;
       this.clearTokens();
     }
   }
@@ -120,7 +121,7 @@ export class AuthService {
   }
 
   clearTokens(ignoreConference?: boolean) {
-    
+
     localStorage.removeItem(StoreKeys.ACCESS_TOKEN);
     localStorage.removeItem(StoreKeys.REFRESH_TOKE);
     localStorage.removeItem(StoreKeys.IS_PROFILE_INCOMPLETED);

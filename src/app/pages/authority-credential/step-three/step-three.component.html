@@ -3,14 +3,18 @@
     <div class="text-center print-visible">
       <h2 class="print-visible">
         Presença de representante confirmada
-        <br>
-        {{preRegistration().person.name}}
       </h2>
-      <h6>
-        {{preRegistration().role}}
-        <br>
-        {{preRegistration().organization}}
-      </h6>
+      <div class="infosRepr">
+        <h2 class="print-visible">
+          {{preRegistration().person.name}}
+        </h2>
+        <h6 class="print-visible">
+          {{preRegistration().role}}
+          <br>
+          {{preRegistration().organization}}
+        </h6>
+      </div>
+      
     </div>
     <div class="mt-0">
       <em class="informacoes print-visible">O representante deve apresentar o QR Code na entrada do evento para registrar sua chegada</em><br />

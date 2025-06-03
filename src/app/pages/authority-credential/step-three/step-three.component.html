@@ -2,17 +2,18 @@
   <div #confirmationCard class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 w-100 cardPreRegistration" style="border-radius:20px">
     <div class="text-center print-visible">
       <h2 class="print-visible">
-        Presença de representante confirmmada
+        Presença de representante confirmada
         <br>
         {{preRegistration().person.name}}
-        <br>
+      </h2>
+      <h6>
         {{preRegistration().role}}
         <br>
         {{preRegistration().organization}}
-      </h2>
+      </h6>
     </div>
     <div class="mt-0">
-      <em class="informacoes print-visible">O representante deve apresentar o QR Code na entrada do evento para registrar sua chegada</em>
+      <em class="informacoes print-visible">O representante deve apresentar o QR Code na entrada do evento para registrar sua chegada</em><br />
       <img src="data:image/png;base64,{{preRegistration().qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
     </div>
     <div class="mb-3">

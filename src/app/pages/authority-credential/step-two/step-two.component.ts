@@ -1,13 +1,8 @@
-import {Component, computed, effect, EventEmitter, Input, OnInit, Output, signal, Signal} from '@angular/core';
+import {Component, effect, EventEmitter, Input, Output, signal, Signal} from '@angular/core';
 import {IPerson} from "../../../shared/interfaces/IPerson";
-import {IMeetingDetail} from "../../../shared/interfaces/IMeetingDetail";
-import {AuthService} from "../../../shared/services/auth.service";
 import { PersonService } from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
 import { INewAuthForm } from './newAuthForm.interface';
-import { Event } from '@angular/router';
-import { ILocality } from 'src/app/shared/interfaces/ILocality';
-import { LocalityService } from 'src/app/shared/services/locality.service';
 
 @Component({
   selector: 'app-authc-step-two',
@@ -40,6 +35,25 @@ export class StepTwoComponent {
   fromAc = {
     authorityRepresenting: false,
     authorityRole: false
+  }
+
+  get isAuthValid(): boolean {
+    const firstPart: boolean =
+      this.newAuthForm.representing === 'other' ?
+        (
+          this.newAuthForm.authorityCpf?.length > 0 &&
+          this.newAuthForm.authorityRepresenting?.length > 0
+        )
+      : true;
+    // ↳ Caso o usuário tenha selecionado que outra pessoa será o representante, precisa verificar
+    // ↳ se os campos de CPF e Nome do representante estão preenchidos
+    
+    return (
+      firstPart &&
+      this.newAuthForm.name?.length > 0 &&
+      this.newAuthForm.organization?.length > 0 &&
+      this.newAuthForm.authorityRole?.length > 0
+    );
   }
 
   constructor(
@@ -84,7 +98,7 @@ export class StepTwoComponent {
     })
   }
 
-  async otherSelecionado(evt : any) {
+  async otherSelecionado() {
     this.newAuthForm.authorityRole = undefined;
     this.fromAc.authorityRole = false;
   }

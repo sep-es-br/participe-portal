@@ -1,5 +1,4 @@
-import {Component, Input, signal, Signal} from '@angular/core';
-import {IPerson} from "../../../shared/interfaces/IPerson";
+import {Component, Input} from '@angular/core';
 import {IMeetingDetail} from "../../../shared/interfaces/IMeetingDetail";
 import {AuthService} from "../../../shared/services/auth.service";
 
@@ -11,10 +10,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 export class StepOneComponent {
   @Input() meeting : IMeetingDetail = {} as IMeetingDetail;
 
-  constructor(
-    private authSrv: AuthService
-  ) {
-  }
+  constructor(private authSrv: AuthService) {}
 
   get fullDate() {
     return `${this.meeting.beginDate} - ${this.meeting.endDate?.split(' ')[0].trim() !== this.meeting.beginDate?.split(' ')[0].trim() ? this.meeting.endDate?.split(' ')[0].trim() + ' ' : ''}${this.meeting.endDate?.split(' ')[1]}`;

@@ -1,7 +1,8 @@
-<header>
-  <h1>{{meeting.conference?.name}}</h1>
+<header class="w-100">
+  <!-- <h1>{{meeting.conference?.name}}</h1> -->
+  <p>Acesse com GOV.BR ou Acesso Cidadão para confirmar a presença do representante do seu órgão ou entidade no evento</p>
 </header>
-<main>
+<main class="w-100">
   <div class="d-flex flex-column">
     <label>Encontro Presencial:</label>
     <span>{{meeting.name}}</span>
@@ -19,12 +20,14 @@
     <span>{{ (meeting.place && meeting.address) ?  meeting.place + ' - ' + meeting.address : "A defnir" }}</span>
   </div>
 </main>
-<footer>
+<footer class="w-100 mt-4">
   <button class="cidadao" (click)="signInAcessoCidadao()">
-            <span style="width: 100%; justify-content: center;display: flex;align-items: center;">
-              <img src="assets/images/govbrbranco.png"  />
-              <img src="assets/icons/cidadao.svg" alt=""/>
-              Acessar com GOV.BR ou ACESSO CIDADÃO
-            </span>
+    <span class="d-flex justify-content-center align-items-center w-100 p-2">
+      <img src="assets/images/govbrbranco.png"  />
+      <img src="assets/icons/cidadao.svg" alt=""/>
+      <div class="button-text">
+        Acessar com GOV.BR ou ACESSO CIDADÃO
+      </div>
+    </span>
   </button>
 </footer>

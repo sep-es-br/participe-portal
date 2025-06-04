@@ -7,16 +7,18 @@ header {
   }
 }
 
-div{
-  padding: 0.5rem;
-  & > label {
-    font-weight: bolder;
+main {
+  div{
+    padding: 0.5rem;
+    & > label {
+      font-weight: bolder;
+    }
+  
+    &:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+  
   }
-
-  &:nth-child(odd) {
-    background-color: #f2f2f2;
-  }
-
 }
 
 :host {
@@ -25,16 +27,13 @@ div{
   flex-direction: column;
 }
 
-footer, main {
-  width: 25rem;
-}
-
 footer {
   display: flex;
   justify-content: center;
   button {
     padding: 2px 10px;
     height: 7vh;
+    max-height: 10vh;
     margin-bottom: 5px;
     border-radius: 10px;
     border: none;
@@ -44,14 +43,18 @@ footer {
 
     &.cidadao {
       background: #016A88;
-      height: 11vh;
+      height: 14vh;
 
       img {
         margin-left: 10px;
-        width: 50px;
+        width: 35px;
       }
 
       cursor: pointer;
+    }
+
+    .button-text {
+      font-size: 14px;
     }
   }
 }

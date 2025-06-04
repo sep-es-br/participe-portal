@@ -25,11 +25,11 @@ export class StepTwoComponent {
   newAuthForm : INewAuthForm = {
     madeBy : undefined,
     id: undefined,
-    sub: undefined,
     name: undefined,
     organization: undefined,
     representing: 'himself' as 'himself' | 'other' | 'none',
     authorityCpf: undefined,
+    authoritySub: undefined,
     authorityEmail: undefined,
     authorityLocalityId: undefined,
     authorityRepresenting: undefined,
@@ -39,7 +39,8 @@ export class StepTwoComponent {
 
   fromAc = {
     authorityRepresenting: false,
-    authorityRole: false
+    authorityRole: false,
+    authorityEmail: false
   }
 
   get isAuthValid(): boolean {
@@ -74,23 +75,17 @@ export class StepTwoComponent {
         this.newAuthForm.id = this.user().id;
         this.newAuthForm.name = this.user().name;
 
-        this.personService.getSubById(this.user().id).then(
-          resp => {
-            if(Array.isArray(resp.data)) return;
-
-            this.newAuthForm.sub = resp.data.sub;
-          }
-        )
-
         this.personService.getAcRoleById(this.user().id, this.meeting().conference.id).then(acRole => {
-          if(Array.isArray(acRole.data)) return;
+          if(!acRole.success) return;
 
           this.newAuthForm.organization = acRole.data.organization;
           this.newAuthForm.authorityRole = acRole.data.role;
           this.newAuthForm.authorityEmail = acRole.data.email;
           this.newAuthForm.authorityLocalityId = acRole.data.localityId;
+          this.newAuthForm.authoritySub = acRole.data.sub;
           
           this.fromAc.authorityRole = !!acRole.data.role;
+          this.fromAc.authorityEmail = !!acRole.data.email;
         });
 
       });
@@ -119,17 +114,18 @@ export class StepTwoComponent {
       return;
     }
 
-    const acInfo = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
-    if(Array.isArray(acInfo.data)) return;
+    const {success, data} = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
+    if(!success) return;
 
-    this.newAuthForm.authorityRepresenting = acInfo.data.name;
-    this.newAuthForm.authorityRole = acInfo.data.role;
-    this.newAuthForm.authorityEmail = acInfo.data.email;
-    this.newAuthForm.authorityLocalityId = acInfo.data.localityId;
+    this.newAuthForm.authorityRepresenting = data.name;
+    this.newAuthForm.authorityRole = data.role;
+    this.newAuthForm.authorityEmail = data.email;
+    this.newAuthForm.authorityLocalityId = data.localityId;
+    this.newAuthForm.authoritySub = data.authoritySub;
 
     
-    this.fromAc.authorityRepresenting = acInfo.data.name.includes(' ');
-    this.fromAc.authorityRole = !!acInfo.data.role;
+    this.fromAc.authorityRepresenting = data.name.includes(' ');
+    this.fromAc.authorityRole = !!data.role;
   }
 
   validarCpf(cpf: string): boolean {

@@ -6,8 +6,20 @@ import {BaseService} from './base.service';
 import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
 import { map } from 'rxjs/operators';
 
-type acRoleType = {organization: string, role: string, email: string, localityId: number};
-type acInfoType = {name: string, role: string | undefined, email: string, localityId : number};
+type acRoleType = {
+  organization: string, 
+  role: string, 
+  email: string, 
+  localityId: number, 
+  sub: string
+};
+type acInfoType = {
+  name: string, 
+  role: string | undefined, 
+  email: string, 
+  localityId : number,
+  authoritySub : string
+};
 
 @Injectable({
   providedIn: 'root'

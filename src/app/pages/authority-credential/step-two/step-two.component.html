@@ -48,20 +48,22 @@
     </div>
 
   </div>
-  <div>
+  <div class="d-flex flex-column">
     <label for="reprRole">Cargo do Representante</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
       class="w-100" id="reprRole" [readOnly]="fromAc.authorityRole" />
   </div>
-  <div>
+  <div class="d-flex flex-column">
     <label for="municipio">Municipio do Representante</label>
-    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
-      class="w-100" id="municipio" [readOnly]="fromAc.authorityRole" />
+    <p-dropdown class="locality-dropbox" [options]="localities"
+        [(ngModel)]="newAuthForm.authorityLocalityId" field="label" 
+        optionLabel="name" optionValue="id" placeholder="Selecione o seu Municipio">
+      </p-dropdown>
   </div>
-  <div>s
+  <div>
     <label for="email">Email do Representante</label>
-    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
-      class="w-100" id="email" [readOnly]="fromAc.authorityRole" />
+    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityEmail"
+      class="w-100" id="email" />
   </div>
 <!--  <div>-->
 <!--    <div class="d-flex align-items-center">-->

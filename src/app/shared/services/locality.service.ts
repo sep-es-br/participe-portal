@@ -14,7 +14,7 @@ export class LocalityService extends BaseService<any> {
     super('localities', injector);
   }
 
-  getAllForConference(conferenceId: number) {
+  getAllForConference(conferenceId: number) : Promise<IResultHttp<ILocalityConference>> {
     return this.http.get<IResultHttp<ILocalityConference>>(`${environment.apiUrl}/localities/complement/${conferenceId}`).toPromise();
   }
   getConferenceCards(conferenceId: number) {

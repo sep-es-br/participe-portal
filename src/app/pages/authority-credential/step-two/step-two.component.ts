@@ -6,6 +6,8 @@ import { PersonService } from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
 import { INewAuthForm } from './newAuthForm.interface';
 import { Event } from '@angular/router';
+import { ILocality } from 'src/app/shared/interfaces/ILocality';
+import { LocalityService } from 'src/app/shared/services/locality.service';
 
 @Component({
   selector: 'app-authc-step-two',
@@ -14,10 +16,14 @@ import { Event } from '@angular/router';
 })
 export class StepTwoComponent {
   @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
+  @Input() meeting : Signal<IMeetingDetail> = signal<IMeetingDetail>(undefined);
 
   @Output() onRegister = new EventEmitter<INewAuthForm>();
 
+  localities: ILocality[] = [];
+
   newAuthForm : INewAuthForm = {
+    madeBy : undefined,
     id: undefined,
     sub: undefined,
     name: undefined,
@@ -25,6 +31,7 @@ export class StepTwoComponent {
     representing: 'himself' as 'himself' | 'other' | 'none',
     authorityCpf: undefined,
     authorityEmail: undefined,
+    authorityLocalityId: undefined,
     authorityRepresenting: undefined,
     authorityRole: undefined,
     notRepresentingReason: undefined
@@ -37,11 +44,14 @@ export class StepTwoComponent {
 
   constructor(
     private personService : PersonService,
-    private messageService : MessageService
+    private messageService : MessageService,
+    private localitySrv: LocalityService
   ) {
     effect(() => {
         if(!this.user())
             return;
+        
+        this.newAuthForm.madeBy = this.user().id;
         this.newAuthForm.id = this.user().id;
         this.newAuthForm.name = this.user().name;
 
@@ -53,15 +63,25 @@ export class StepTwoComponent {
           }
         )
 
-        this.personService.getAcRoleById(this.user().id).then(acRole => {
+        this.personService.getAcRoleById(this.user().id, this.meeting().conference.id).then(acRole => {
           if(Array.isArray(acRole.data)) return;
 
           this.newAuthForm.organization = acRole.data.organization;
           this.newAuthForm.authorityRole = acRole.data.role;
+          this.newAuthForm.authorityEmail = acRole.data.email;
+          this.newAuthForm.authorityLocalityId = acRole.data.localityId;
+          
           this.fromAc.authorityRole = !!acRole.data.role;
         });
 
-      })
+      });
+    effect(async () => {
+      if(!this.meeting()) return;
+      const {success, data} = await this.localitySrv.getAllForConference(this.meeting().conference.id);
+      if (success) {
+        this.localities = data.localities;
+      }      
+    })
   }
 
   async otherSelecionado(evt : any) {
@@ -80,14 +100,17 @@ export class StepTwoComponent {
       return;
     }
 
-    const acInfo = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''));
+    const acInfo = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
     if(Array.isArray(acInfo.data)) return;
 
     this.newAuthForm.authorityRepresenting = acInfo.data.name;
-    this.fromAc.authorityRepresenting = acInfo.data.name.includes(' ');
     this.newAuthForm.authorityRole = acInfo.data.role;
-    this.fromAc.authorityRole = !!acInfo.data.role;
     this.newAuthForm.authorityEmail = acInfo.data.email;
+    this.newAuthForm.authorityLocalityId = acInfo.data.localityId;
+
+    
+    this.fromAc.authorityRepresenting = acInfo.data.name.includes(' ');
+    this.fromAc.authorityRole = !!acInfo.data.role;
   }
 
   validarCpf(cpf: string): boolean {

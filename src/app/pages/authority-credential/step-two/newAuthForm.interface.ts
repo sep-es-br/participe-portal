@@ -6,7 +6,9 @@ export interface INewAuthForm {
     representing: 'himself' | 'other' | 'none';
     authorityCpf: string;
     authorityEmail: string;
+    authorityLocalityId: number;
     authorityRepresenting: string;
     authorityRole: string;
     notRepresentingReason: string;
+    madeBy: number;
 }

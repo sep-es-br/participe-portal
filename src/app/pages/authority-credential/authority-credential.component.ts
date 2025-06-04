@@ -21,7 +21,7 @@ import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistr
 })
 export class AuthorityCredentialComponent {
 
-  meeting = {} as IMeetingDetail;
+  meeting = signal<IMeetingDetail>(undefined);
   user = signal<IPerson>({} as IPerson);
   preRegistration = signal<IPreRegistrationAuthority>(undefined);
   step = 1;
@@ -51,7 +51,7 @@ export class AuthorityCredentialComponent {
             router.navigateByUrl('/');
             return;
           }
-          this.meeting = meeting.data;
+          this.meeting.set(meeting.data);
         }
       );
     });
@@ -86,7 +86,9 @@ export class AuthorityCredentialComponent {
         !form.authorityCpf || 
         !form.authorityRepresenting
       )) ||
-      !form.name
+      !form.name ||
+      !form.authorityEmail ||
+      !form.authorityLocalityId
     ){
       this.messageService.add({
         severity: 'error',
@@ -100,14 +102,14 @@ export class AuthorityCredentialComponent {
     switch (form.representing) {
       case "himself":
         preRegistration = (await this.authorityCredential.registerAuthority(
-          form.id, undefined, undefined, form.name,
-          this.meeting.id, form.organization, form.authorityRole
+          form.id, undefined, undefined, form.name, form.authorityEmail, form.authorityLocalityId,
+          this.meeting().id, form.organization, form.authorityRole
         )).data;
         break;
       case "other":
         preRegistration = (await this.authorityCredential.registerAuthority(
-          form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting,
-          this.meeting.id, form.organization, form.authorityRole
+          form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityEmail, form.authorityLocalityId,
+          this.meeting().id, form.organization, form.authorityRole
         )).data;
         break;
       case "none":

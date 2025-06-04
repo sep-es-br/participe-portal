@@ -29,6 +29,15 @@ export class StepThreeComponent implements OnInit {
       this.link = window.location.href;
   }
 
+  get sendedTo() {
+    let out = this.protectExibitionEmail(this.preRegistration().person.contactEmail)
+    if(this.preRegistration().person.id !== this.preRegistration().madeByPerson.id){
+      out += ` e ${this.protectExibitionEmail(this.preRegistration().madeByPerson.contactEmail)}`
+    }
+
+    return out;
+  }
+
   protectExibitionEmail(email?:string){
     if(!email){
       return '*****';

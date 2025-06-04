@@ -1,3 +1,4 @@
+
 <div class="container mb-3 p-0">
   <div #confirmationCard class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 w-100 cardPreRegistration" style="border-radius:20px">
     <header class="text-center print-visible">
@@ -25,7 +26,7 @@
       <img src="data:image/png;base64,{{preRegistration().qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
     </div>
     <div class="mb-3">
-      <em class="informacoes-adicionais mb-3 print-visible p-2">Já o encaminhamos para o seu e-mail {{protectExibitionEmail(userInfo().contactEmail ?? null)}}, mas você pode também:</em><br/>
+      <em class="informacoes-adicionais mb-3 print-visible p-2">Já o encaminhamos para o seu e-mail {{sendedTo}}, mas você pode também:</em><br/>
     </div>
     <a type="button" (click)="saveImage()" class="btn btn-sm btn-outline-primary ms-2 action-buttons mb-2">
       <span class="iconText">Salvar</span>

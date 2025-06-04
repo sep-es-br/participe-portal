@@ -6,6 +6,9 @@ import {BaseService} from './base.service';
 import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
 import { map } from 'rxjs/operators';
 
+type acRoleType = {organization: string, role: string, email: string, localityId: number};
+type acInfoType = {name: string, role: string | undefined, email: string, localityId : number};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,12 +27,12 @@ export class PersonService extends BaseService<any> {
     return this.http.post<IResultHttp<any>>(`${this.urlBase}/complement`, data).toPromise();
   }
 
-  getAcRoleById(idPerson: number) : Promise<IResultHttp<{organization: string, role: string}>> {
-    return this.http.get<IResultHttp<{organization: string, role}>>(`${this.urlBase}/${idPerson}/ACRole`).toPromise();
+  getAcRoleById(idPerson: number, idConference: number) : Promise<IResultHttp<acRoleType>> {
+    return this.http.get<IResultHttp<acRoleType>>(`${this.urlBase}/${idPerson}/ACRole/${idConference}`).toPromise();
   }
 
-  findAcInfoByCpf(cpf: string) : Promise<IResultHttp<{name: string, role: string | undefined, email: string}>> {
-    return this.http.get<IResultHttp<{name: string, role: string | undefined, email: string}>>(`${this.urlBase}/${cpf}/ACInfoByCpf`).toPromise();
+  findAcInfoByCpf(cpf: string, idConference: number) : Promise<IResultHttp<acInfoType>> {
+    return this.http.get<IResultHttp<acInfoType>>(`${this.urlBase}/${cpf}/ACInfoByCpf/${idConference}`).toPromise();
   }
 
   getPersonById(idPerson: number, idConference: number): Promise<IResultHttp<IResultPerson>> {

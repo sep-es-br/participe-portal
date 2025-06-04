@@ -1,10 +1,10 @@
 <main class="d-flex flex-column">
   <div class="d-flex flex-column">
-    <label>Meu nome</label>
+    <label>Meu nome*</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.name" />
   </div>
   <div class="d-flex flex-column">
-    <label>Organização/entidade</label>
+    <label>Organização/entidade*</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.organization">
   </div>
   <div class="d-flex flex-column">
@@ -20,7 +20,7 @@
     <div class="reprInfo">
       <div class="row">
         <div class="col" >
-          <label for="reprCpf" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'" >CPF:</label>
+          <label for="reprCpf" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'" >CPF*</label>
         </div>
       </div>
       <div class="row d-flex align-items-center my-2">
@@ -29,13 +29,13 @@
           <p-inputMask [disabled]="newAuthForm.representing !== 'other'"
              mask="999.999.999-99" [(ngModel)]="newAuthForm.authorityCpf" inputId="reprCpf" placeholder="000.000.000-00" />
         </div>
-        <div class="col px-1">
+        <div class="col-2 px-1">
           <button [disabled]="newAuthForm.representing !== 'other'" (click)="loadAcInfo()">Procurar</button>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <label for="reprName" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'">Nome:</label>
+          <label for="reprName" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'">Nome*</label>
         </div>
       </div>
       <div class="row d-flex align-items-center my-2">
@@ -49,7 +49,7 @@
 
   </div>
   <div>
-    <label for="reprRole">Cargo do Representante</label>
+    <label for="reprRole">Cargo do Representante*</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
       class="w-100" id="reprRole" [readOnly]="fromAc.authorityRole" />
   </div>

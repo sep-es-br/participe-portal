@@ -3,6 +3,11 @@ import {IPerson} from "../../../shared/interfaces/IPerson";
 import { PersonService } from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
 import { INewAuthForm } from './newAuthForm.interface';
+import {IMeetingDetail} from "../../../shared/interfaces/IMeetingDetail";
+import {AuthService} from "../../../shared/services/auth.service";
+import { Event } from '@angular/router';
+import { ILocality } from 'src/app/shared/interfaces/ILocality';
+import { LocalityService } from 'src/app/shared/services/locality.service';
 
 @Component({
   selector: 'app-authc-step-two',

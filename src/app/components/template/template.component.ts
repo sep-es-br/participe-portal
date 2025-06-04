@@ -17,6 +17,7 @@ export class TemplateComponent implements OnInit, OnDestroy {
 
   @Input() title: string;
   @Input() subTitle: string;
+  @Input() customSubtitleFontSize: string;
 
   isLoading: boolean = false;
   loadingSub: Subscription;

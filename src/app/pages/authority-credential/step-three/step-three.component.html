@@ -1,12 +1,20 @@
 <div class="container mb-3 p-0">
   <div #confirmationCard class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 w-100 cardPreRegistration" style="border-radius:20px">
     <header class="text-center print-visible">
-      <h2 class="print-visible confirmacao mb-4">
+      <h2 class="print-visible confirmacao mb-4 text-uppercase">
         Presença confirmada
         <br>
       </h2>
+
+      <p class="print-visible mb-0 text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
+      <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistration().meeting.name}}</p>
+      <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistration().meeting.beginDate}}</p>
+      <p class="print-visible mb-0 text-center">{{preRegistration().meeting.place}}</p>
+      <p class="print-visible mb-0 text-center">{{preRegistration().meeting.address}}</p>
+      <p class="print-visible mb-4 text-center">{{preRegistration().meeting.localityPlace.name}}</p>
+
       <h4 class="person-name m-0">{{preRegistration().person.name}}</h4>
-      <h6>
+      <h6 class="mb-4">
         {{preRegistration().role}}
         <br>
         {{preRegistration().organization}}
@@ -31,12 +39,7 @@
       <em class="informacoes-adicionais mb-3 print-visible p-2">Se quiser corrigir algum dado basta acessar o mesmo link enviado inicialmente</em><br/>
     </div>
     <i><a href="{{link}}" >{{link}}</a></i>
-    <p class="print-visible mb-0 text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
-    <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistration().meeting.name}}</p>
-    <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistration().meeting.beginDate}}</p>
-    <p class="print-visible mb-0 text-center">{{preRegistration().meeting.place}}</p>
-    <p class="print-visible mb-0 text-center">{{preRegistration().meeting.address}}</p>
-    <p class="print-visible mb-0 text-center">{{preRegistration().meeting.localityPlace.name}}</p>
+    
     <p class="print-visible mb-0 text-center">
       <img class="img-fluid print-visible img-logo-es" src="assets/images/brasao.png" >
     </p>

@@ -14,7 +14,7 @@
       <label for="reprHimself">Por mim: {{newAuthForm.name}}</label>
     </div>
     <div class="d-flex flex-row">
-      <p-radioButton (ngModelChange)="otherSelecionado($event)" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
+      <p-radioButton (ngModelChange)="otherSelecionado()" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
       <label for="reprOther">Por outra pessoa:</label>
     </div>
     <div class="reprInfo">
@@ -64,6 +64,6 @@
 <!--      placeholder="Justifique a ausência da sua organização (opcional)" ></textarea>-->
 <!--  </div>-->
 </main>
-<footer>
-  <button (click)="finishRegister()">Enviar</button>
+<footer class="px-2">
+  <button [disabled]="!isAuthValid" (click)="finishRegister()">Enviar</button>
 </footer>

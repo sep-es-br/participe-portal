@@ -72,23 +72,23 @@
                     </tr>
                 </tbody>
             </table>
-            
-            
-           
-            
-           
-            
         </div>
-
     </div>
 </app-template>
 <app-template   *ngIf="preRegistrationCompleted"  [useCard]="false" >
     <div class="container mb-3">
         <div #confirmationCard class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 cardPreRegistration" style="border-radius:20px">
-            <div class="text-center print-visible">
+            <div class="text-center print-visible mb-4">
                 <h2 class="print-visible">Pré-credenciamento<br>Concluído</h2>
             </div>
-            <div class="mt-0">
+
+            <p class="print-visible mb-0 text-center" style="color: #f59a3e;">Encontro Presencial</p>
+            <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
+            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.place}}</p>
+            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.address}}</p>
+            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.localityPlace.name}}</p>
+
+            <div class="mt-4">
                 <em class="informacoes print-visible">Apresente o QR Code na entrada e registre sua presença</em>
                 <img src="data:image/png;base64,{{preRegistrationData.qrcode}}"  alt="QR Code - Audiências Públicas" class="qr-code img-fluid print-visible">
             </div>
@@ -103,18 +103,12 @@
                 <span class="iconText">Imprimir</span>
                 <i class="fas fa-print"></i>
             </a>
-            <p class="print-visible mb-0 text-center" style="color: #f59a3e;margin-top: 30px;">Encontro Presencial</p>
-            <p class="print-visible mb-0 text-center" style="font-style: italic;">{{preRegistrationData.meeting.name}}</p>
-            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.place}}</p>
-            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.address}}</p>
-            <p class="print-visible mb-0 text-center">{{preRegistrationData.meeting.localityPlace.name}}</p>
             <p class="print-visible mb-0 text-center">
                 <img class="img-fluid print-visible img-logo-es" src="assets/images/brasao.png" >
             </p>
         </div>
     </div>
 </app-template>
-
 <app-template  *ngIf="accreditation" title="Credenciamento Concluído" [useCard]="false" >
     <div class="container mb-3">
         <div class="col-10 col-md-6 col-lg-4 m-auto text-center mt-3 p-2 cardAccreditation" style="border-radius:20px">

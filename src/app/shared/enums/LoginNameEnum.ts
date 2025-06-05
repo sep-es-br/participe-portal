@@ -1,8 +1,6 @@
 export enum LoginNameEnum {
   PARTICIPE = 'Participe',
-  ACESSO_CIDADAO = 'AcessoCidadao',
-  FACEBOOK = 'Facebook',
-  GOOGLE = 'Google'
+  ACESSO_CIDADAO = 'AcessoCidadao'
 }
 
 export enum AuthenticationTypeEnum {

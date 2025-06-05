@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { StoreKeys } from "src/app/shared/commons/contants";
@@ -27,10 +27,10 @@ export class LoginRegistrationComponent implements OnInit {
       private route: ActivatedRoute
     ){
     }
-    
+
     async ngOnInit() {
       this.loadingStorage();
-        
+
     }
 
     loadingStorage(){
@@ -63,12 +63,12 @@ export class LoginRegistrationComponent implements OnInit {
           StoreKeys.PRE_REGISTRATION_MEETING_STARTED,
           StoreKeys.PRE_REGISTRATION_MEETING_CLOSED
         ];
-      
+
         return keys.find(key => sessionStorage.getItem(key)) || null;
       };
-      
+
       const key = getKeyFromSessionStorage();
-      
+
       switch (key) {
         case StoreKeys.PRE_REGISTRATION:
           await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION)));
@@ -77,7 +77,7 @@ export class LoginRegistrationComponent implements OnInit {
           this.conferenceName = this.meetingData.conference.name;
           this.meetingName = this.meetingData.name;
           break;
-      
+
         case StoreKeys.CHECK_IN:
           await this.meeting(parseInt(sessionStorage.getItem(StoreKeys.CHECK_IN)));
           this.title = 'Auto Check-in';
@@ -93,17 +93,17 @@ export class LoginRegistrationComponent implements OnInit {
           this.conferenceName = this.meetingData.conference.name;
           this.meetingName = this.meetingData.name;
           break;
-      
+
         case StoreKeys.CHECK_IN_OFF:
           this.title = 'Auto Check-in';
           this.subtitle = 'Encontro presencial encerrado. Acesse abaixo para participar online.';
           break;
-      
+
         case StoreKeys.PRE_REGISTRATION_MEETING_CLOSED:
           this.title = 'Pré-credenciamento';
           this.subtitle = 'Este encontro já terminou. Acesse abaixo para participar online.';
           break;
-      
+
         default:
           this.title = 'Ocorreu um erro';
           this.subtitle = 'Por favor, verifique o link e tente novamente.';
@@ -135,15 +135,10 @@ export class LoginRegistrationComponent implements OnInit {
         throw error;
       }
     }
-  
+
   removeSessionStorage(){
     sessionStorage.removeItem(StoreKeys.PRE_REGISTRATION_MEETING_CLOSED);
     sessionStorage.removeItem(StoreKeys.CHECK_IN_OFF);
-  }
-
-  signInGoogle() {
-    this.removeSessionStorage()
-    this.authSrv.signInGoogle();
   }
 
   signInAcessoCidadao() {

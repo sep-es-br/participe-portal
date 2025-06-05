@@ -4,6 +4,7 @@ import html2canvas from "html2canvas";
 import {IPerson} from "../../../shared/interfaces/IPerson";
 import {LoadingService} from "../../../shared/services/loading.service";
 import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistrationAuthority';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-authc-step-three',
@@ -21,7 +22,7 @@ export class StepThreeComponent implements OnInit {
   public link : string;
 
   constructor(
-    private loadingService: LoadingService,
+    private loadingService: LoadingService
   ) {
   }
 
@@ -36,6 +37,10 @@ export class StepThreeComponent implements OnInit {
     }
 
     return out;
+  }
+
+  forceReload() {
+    window.location.reload();
   }
 
   protectExibitionEmail(email?:string){

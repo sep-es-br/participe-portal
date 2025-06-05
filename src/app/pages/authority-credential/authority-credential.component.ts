@@ -13,6 +13,8 @@ import {IPreRegistration} from "../../shared/interfaces/IPreRegistration";
 import {AuthorityCredentialService} from "../../shared/services/authority-credential.service";
 import {AuthService} from "../../shared/services/auth.service";
 import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistrationAuthority';
+import { ConferenceService } from 'src/app/shared/services/conference.service';
+import { StoreKeys } from 'src/app/shared/commons/contants';
 
 @Component({
   selector: 'app-authority-credential',
@@ -33,6 +35,7 @@ export class AuthorityCredentialComponent {
     private personService : PersonService,
     private authorityCredential : AuthorityCredentialService,
     private routeSnap : ActivatedRoute,
+    private confServ : ConferenceService,
     private router: Router
   ) {
     this.user = this.personService.activePerson;
@@ -52,6 +55,7 @@ export class AuthorityCredentialComponent {
             return;
           }
           this.meeting.set(meeting.data);
+          localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, meeting.data.conference.id);
         }
       );
     });

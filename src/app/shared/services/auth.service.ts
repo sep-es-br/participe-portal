@@ -34,18 +34,42 @@ export class AuthService {
     }).toPromise();
   }
 
-  private getUrlForSocialAuth(origin: string) {
+  private getUrlForSocialAuth(origin: string, meetingId?: number) {
     return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${
-      AuthService.getFrontFallbackUrl()}&front_conference_id=${this.conferenceSrv.ConferenceActiveId}`;
+      AuthService.getFrontFallbackUrl()}&${ meetingId ? `front_meeting_id=${meetingId}` : `front_conference_id=${this.conferenceSrv.ConferenceActiveId}` }`;
   }
 
 
-  signInAcessoCidadao() {
+  signInFacebook() {
+    /*
+    localStorage.setItem(
+      StoreKeys.LOGOUT_URI,
+      environment.logoutURIFacebook
+    );
+    */
+    this.document.location.href = this.getUrlForSocialAuth('facebook');
+  }
+
+  signInFacebookProfile() {
+    this.document.location.href = this.getUrlForSocialAuth('facebook-profile');
+  }
+
+  signInGoogle() {
+    // localStorage.setItem(StoreKeys.LOGOUT_URI, environment.logoutURIGoogle);
+    this.document.location.href = this.getUrlForSocialAuth('google');
+  }
+
+  signInGoogleProfile() {
+    this.document.location.href = this.getUrlForSocialAuth('google-profile');
+  }
+
+
+  signInAcessoCidadao(meetingId? : number) {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
       environment.logoutURIAcessoCidadao
     );
-    this.document.location.href = this.getUrlForSocialAuth('portal');
+    this.document.location.href = this.getUrlForSocialAuth('portal', meetingId);
   }
 
   signInAcessoCidadaoProfile() {
@@ -76,6 +100,7 @@ export class AuthService {
       window.location.href = logoutURI;
     } else {
       await this.router.navigate(['']);
+      debugger;
       this.clearTokens();
     }
   }

@@ -7,6 +7,7 @@ import { PrepareHttpQuery } from '../utils/query.utils';
 import { IResultPaginated } from '../interfaces/IResultPaginated';
 import {IQueryOptions} from '../interfaces/IQueryOptions';
 import * as qs from 'qs';
+import { IMeetingDetail } from '../interfaces/IMeetingDetail';
 
 
 @Injectable({ providedIn: 'root' })

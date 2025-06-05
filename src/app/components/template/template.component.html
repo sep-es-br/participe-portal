@@ -5,7 +5,7 @@
   <app-breadcrumb *ngIf="fullLayout && !disablebreadcrumb"></app-breadcrumb>
   <div class="title-container" tabindex="0">
     <h2>{{title}}</h2>
-    <span>{{subTitle}}</span>
+    <span [style]="customSubtitleFontSize ? {'font-size': customSubtitleFontSize } : null">{{subTitle}}</span>
   </div>
   <div class="layout-container" [ngClass]="{'layout-container-card': useCard}">
     <ng-content></ng-content>

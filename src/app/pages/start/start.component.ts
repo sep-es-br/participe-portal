@@ -1,7 +1,8 @@
 import {Router} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ConferenceService} from '../../shared/services/conference.service';
 import { IConference } from 'src/app/shared/interfaces/IConference';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -24,6 +25,9 @@ export class StartComponent implements OnInit {
   }
 
   loadServer() {
+    if(window.location.pathname.startsWith("/authority-credential"))
+      return
+
     this.conferenceSrv.GetByUrl(document.location.href)
       .then((result) => {
         if (result.success && !(result.data instanceof Array)) {

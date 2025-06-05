@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Inject, Injector } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { IQueryOptions } from '../interfaces/IQueryOptions';
 import { IResultPaginated } from '../interfaces/IResultPaginated';
 import { IResultHttp } from '../interfaces/IResultHttp';
 import { PrepareHttpQuery } from '../utils/query.utils';
 import * as _ from 'lodash';
 
-
+@Injectable({providedIn: "root"})
 export abstract class BaseService<T> {
 
     urlBase: string = '';

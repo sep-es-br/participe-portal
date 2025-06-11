@@ -103,17 +103,19 @@ export class AuthorityCredentialComponent {
       return;
     }
 
+    const [organization, organizatonShort] = form.organization.split(' - ', 2);
+
     switch (form.representing) {
       case "himself":
         preRegistration = (await this.authorityCredential.registerAuthority(
           form.id, undefined, form.authorityEmail, form.name, form.authorityLocalityId,
-          this.meeting().id, form.organization, form.authorityRole, form.authoritySub
+          this.meeting().id, organization, organizatonShort, form.authorityRole, form.authoritySub
         )).data;
         break;
       case "other":
         preRegistration = (await this.authorityCredential.registerAuthority(
           form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
-          this.meeting().id, form.organization, form.authorityRole, form.authoritySub
+          this.meeting().id, organization, organizatonShort, form.authorityRole, form.authoritySub
         )).data;
         break;
       case "none":

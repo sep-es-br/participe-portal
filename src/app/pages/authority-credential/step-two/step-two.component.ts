@@ -92,7 +92,7 @@ export class StepTwoComponent {
         
         if(!success) return;
 
-        this.newAuthForm.organization = data.organization;
+        this.newAuthForm.organization = `${data.organizationShort} - ${data.organization}`;
         this.newAuthForm.authorityRole = data.role;
         this.newAuthForm.authorityEmail = data.email;
         this.newAuthForm.authorityLocalityId = data.localityId;

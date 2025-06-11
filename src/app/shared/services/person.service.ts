@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 
 type acRoleType = {
   organization: string, 
+  organizationShort: string,
   role: string, 
   email: string, 
   localityId: number, 

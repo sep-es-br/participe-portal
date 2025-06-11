@@ -17,7 +17,7 @@ export class AuthorityCredentialService extends BaseService<any>{
 
   registerAuthority(
     madeBy, representedByCpf, representedEmail, representedByName,
-    localityId, meetingId, organization, role, authoritySub
+    localityId, meetingId, organization, organizationShort, role, authoritySub
     ) : Promise<IResultHttp<IPreRegistrationAuthority>> {
     const body = {
       madeBy: madeBy,
@@ -26,6 +26,7 @@ export class AuthorityCredentialService extends BaseService<any>{
       representedByName: representedByName,
       meetingId: meetingId,
       organization: organization,
+      organizationShort: organizationShort,
       role: role,
       localityId: localityId,
       representedBySub: authoritySub

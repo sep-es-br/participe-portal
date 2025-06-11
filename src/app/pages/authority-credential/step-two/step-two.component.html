@@ -1,21 +1,21 @@
 <main class="d-flex flex-column">
   <div class="d-flex flex-column">
-    <label>Meu nome*</label>
-    <input type="text" pInputText [(ngModel)]="newAuthForm.name" />
+    <label>Presença confirmada por:</label>
+    <span>{{newAuthForm.name}}</span>
   </div>
   <div class="d-flex flex-column">
     <label>Organização/entidade representada*</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.organization" [readOnly]="fromAc.organization">
   </div>
   <div class="d-flex flex-column">
-    <label>Será representada:</label>
+    <label>Esta Organização/entidade será representada neste evento por:</label>
     <div class="d-flex flex-row">
       <p-radioButton (ngModelChange)="himselfSelected()" value="himself" [(ngModel)]="newAuthForm.representing" inputId="reprHimself"/>
-      <label for="reprHimself">Por mim: {{newAuthForm.name}}</label>
+      <label for="reprHimself">{{newAuthForm.name}}</label>
     </div>
     <div class="d-flex flex-row">
       <p-radioButton (ngModelChange)="otherSelected()" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
-      <label for="reprOther">Por outra pessoa:</label>
+      <label for="reprOther">Outra pessoa:</label>
     </div>
     <div class="reprInfo">
       <div class="row">
@@ -52,7 +52,7 @@
     <label for="reprRole">Cargo do Representante*</label>
 
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
-      class="w-100" id="reprRole" [readOnly]="fromAc.authorityRole" />
+      class="w-100" id="reprRole" />
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="municipio">Municipio do Representante*</label>

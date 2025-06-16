@@ -1,7 +1,7 @@
 <div class="chartHorizontalBar" *ngIf="config">
   <p-chart #graphBar type="bar" *ngIf="height && data && config && plugins"
     responsive="true"
-    [height]="height.toString()"
+    [ngStyle]="{'height': chartHeight, 'display': 'block'}"
     [data]="data" 
     [options]="config" 
     [plugins]="plugins"

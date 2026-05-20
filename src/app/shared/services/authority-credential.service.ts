@@ -17,20 +17,21 @@ export class AuthorityCredentialService extends BaseService<any>{
 
   registerAuthority(
     madeBy, representedByCpf, representedEmail, representedByName,
-    localityId, meetingId, organization, role, authoritySub
-    ) : Promise<IResultHttp<IPreRegistrationAuthority>> {
+    localityId, meetingId, organization, role, authoritySub,
+    isTeam) : Promise<IResultHttp<IPreRegistrationAuthority>> {
     const body = {
-      madeBy: madeBy,
-      representedByCpf: representedByCpf,
-      representedByEmail: representedEmail,
-      representedByName: representedByName,
-      meetingId: meetingId,
-      organization: organization,
-      role: role,
-      localityId: localityId,
-      representedBySub: authoritySub
+      madeBy,
+      representedByCpf,
+      representedEmail,
+      representedByName,
+      meetingId,
+      organization,
+      role,
+      localityId,
+      authoritySub,
+      isTeam
     };
     return this.http.put<IResultHttp<IPreRegistrationAuthority>>(`${this.urlBase}`, body).toPromise();
-  } 
+  }
 
 }

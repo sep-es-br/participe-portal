@@ -26,6 +26,7 @@ export class AuthorityCredentialComponent {
   meeting = signal<IMeetingDetail>(undefined);
   user = signal<IPerson>({} as IPerson);
   preRegistration = signal<IPreRegistrationAuthority>(undefined);
+  isTeam = false;
   step = 1;
 
   constructor(
@@ -61,6 +62,7 @@ export class AuthorityCredentialComponent {
     });
     this.routeSnap.queryParams.subscribe(qparams => {
       let signInDto = qparams['signinDto'];
+      this.isTeam = qparams['isTeam'] ?? false;
 
       if(signInDto){
         const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
@@ -87,7 +89,7 @@ export class AuthorityCredentialComponent {
     if(
       !form.authorityRole ||
       (form.representing == 'other' && (
-        !form.authorityCpf || 
+        !form.authorityCpf ||
         !form.authorityRepresenting
       )) ||
       !form.name ||
@@ -107,13 +109,13 @@ export class AuthorityCredentialComponent {
       case "himself":
         preRegistration = (await this.authorityCredential.registerAuthority(
           form.id, undefined, form.authorityEmail, form.name, form.authorityLocalityId,
-          this.meeting().id, form.organization, form.authorityRole, form.authoritySub
+          this.meeting().id, form.organization, form.authorityRole, form.authoritySub, this.isTeam
         )).data;
         break;
       case "other":
         preRegistration = (await this.authorityCredential.registerAuthority(
           form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
-          this.meeting().id, form.organization, form.authorityRole, form.authoritySub
+          this.meeting().id, form.organization, form.authorityRole, form.authoritySub, this.isTeam
         )).data;
         break;
       case "none":

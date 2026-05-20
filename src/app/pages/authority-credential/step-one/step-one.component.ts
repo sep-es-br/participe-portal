@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {IMeetingDetail} from "../../../shared/interfaces/IMeetingDetail";
 import {AuthService} from "../../../shared/services/auth.service";
 
+// @ts-ignore
 @Component({
   selector: 'app-authc-step-one',
   templateUrl: './step-one.component.html',

@@ -1,7 +1,9 @@
+import {IOptionOrganization} from "../../../shared/interfaces/IOptionOrganization";
+
 export interface INewAuthForm {
     id: number;
     name: string;
-    organization: string;
+    organization: IOptionOrganization;
     representing: 'himself' | 'other' | 'none';
     authorityCpf: string;
     authoritySub: string;

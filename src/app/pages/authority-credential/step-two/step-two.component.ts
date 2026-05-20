@@ -56,11 +56,11 @@ export class StepTwoComponent {
       : true;
     // ↳ Caso o usuário tenha selecionado que outra pessoa será o representante, precisa verificar
     // ↳ se os campos de CPF e Nome do representante estão preenchidos
-    
+
     return (
       firstPart &&
       this.newAuthForm.name?.length > 0 &&
-      this.newAuthForm.organization?.length > 0 &&
+      this.newAuthForm.organization?.name.length > 0 &&
       this.newAuthForm.authorityRole?.length > 0
     );
   }
@@ -73,7 +73,7 @@ export class StepTwoComponent {
     effect(async () => {
       if(!this.meeting()) return;
       if(!this.user()) return;
-        
+
       this.newAuthForm.madeBy = this.user().id;
       this.newAuthForm.id = this.user().id;
       this.newAuthForm.name = this.user().name;
@@ -82,14 +82,14 @@ export class StepTwoComponent {
       const {success, data} = await this.localitySrv.getAllForConference(this.meeting().conference.id);
       if (success) {
         this.localities = data.localities;
-      }      
+      }
     })
   }
 
   reloadUserData() {
     this.personService.getAcRoleById(this.user().id, this.meeting().conference.id).then(acRole => {
         const {success, data} = acRole;
-        
+
         if(!success) return;
 
         this.newAuthForm.organization = data.organization;
@@ -97,7 +97,7 @@ export class StepTwoComponent {
         this.newAuthForm.authorityEmail = data.email;
         this.newAuthForm.authorityLocalityId = data.localityId;
         this.newAuthForm.authoritySub = data.sub;
-        
+
         this.fromAc.organization = !!data.organization
         this.fromAc.authorityRole = !!data.role;
         this.fromAc.authorityEmail = !!data.email;
@@ -143,7 +143,7 @@ export class StepTwoComponent {
     this.newAuthForm.authorityLocalityId = data.localityId;
     this.newAuthForm.authoritySub = data.authoritySub;
 
-    
+
     this.fromAc.authorityRepresenting = !!data.name?.includes(' ');
     this.fromAc.authorityRole = !!data.role;
     this.fromAc.authorityEmail = !!data.email;

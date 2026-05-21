@@ -15,6 +15,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistrationAuthority';
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { StoreKeys } from 'src/app/shared/commons/contants';
+import {take} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-authority-credential',
@@ -60,10 +61,17 @@ export class AuthorityCredentialComponent {
         }
       );
     });
-    this.routeSnap.queryParams.subscribe(qparams => {
+    this.routeSnap.queryParams.pipe(take(1)).subscribe(qparams => {
       let signInDto = qparams['signinDto'];
-      this.isTeam = qparams['isTeam'] ?? false;
-
+      // Se o param vier na URL, a gente lê e guarda no Storage do navegador 📦
+      if (qparams['isTeam']) {
+        const isTeamBool = qparams['isTeam'] === 'true' || qparams['isTeam'] === true;
+        sessionStorage.setItem('isTeam', String(isTeamBool));
+        this.isTeam = isTeamBool;
+      } else {
+        // Se não vier na URL, pega o que já tava guardado lá (se houver)
+        this.isTeam = sessionStorage.getItem('isTeam') === 'true';
+      }
       if(signInDto){
         const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
 
@@ -71,9 +79,12 @@ export class AuthorityCredentialComponent {
         this.authSrv.saveUserInfo(userInfo.person);
         this.user.set(userInfo.person);
         this.step = 2;
+
         this.router.navigate([], {
-          queryParams: {},
-          queryParamsHandling: '',
+          queryParams: {
+            isTeam: this.isTeam ? 'true': null,
+            signinDto: null
+          },
           replaceUrl: true
         });
 

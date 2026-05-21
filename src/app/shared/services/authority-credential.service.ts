@@ -1,4 +1,4 @@
-import {Inject, Injectable, Injector} from "@angular/core";
+import {Inject, Injectable, Injector, signal} from "@angular/core";
 import {BaseService} from "./base.service";
 import {IPreRegistration} from "../interfaces/IPreRegistration";
 import {IResultHttp} from "../interfaces/IResultHttp";
@@ -8,6 +8,8 @@ import { IPreRegistrationAuthority } from "../interfaces/IPreRegistrationAuthori
   providedIn: "root"
 })
 export class AuthorityCredentialService extends BaseService<any>{
+
+  public readonly isTeamSignal = signal<boolean>(undefined);
 
   constructor(
     @Inject(Injector) injector: Injector

@@ -18,13 +18,13 @@ export class AuthorityCredentialService extends BaseService<any>{
   }
 
   registerAuthority(
-    madeBy, representedByCpf, representedEmail, representedByName,
+    madeBy, representedByCpf, representedByEmail, representedByName,
     localityId, meetingId, organization, role, authoritySub,
     isTeam) : Promise<IResultHttp<IPreRegistrationAuthority>> {
     const body = {
       madeBy,
       representedByCpf,
-      representedEmail,
+      representedByEmail,
       representedByName,
       meetingId,
       organization,

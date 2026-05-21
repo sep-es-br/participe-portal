@@ -8,8 +8,9 @@
     <p-autoComplete
         [ngModel]="newAuthForm.organization"
         optionLabel="name"
+        (completeMethod)="emptyList()"
+        readonly
     ></p-autoComplete>
-    <input type="text" pInputText [(ngModel)]="newAuthForm.organization">
   </div>
   <div class="d-flex flex-column">
     <label>Esta Organização/entidade será representada neste evento por:</label>

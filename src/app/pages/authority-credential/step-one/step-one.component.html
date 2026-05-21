@@ -2,7 +2,7 @@
   <!-- <h1>{{meeting.conference?.name}}</h1> -->
   <p>Acesse com GOV.BR ou Acesso Cidadão para confirmar a presença do representante do seu órgão ou entidade no evento</p>
 </header>
-<main class="w-100">
+<main class="w-100" *ngIf="meeting">
   <div class="d-flex flex-column">
     <label>Encontro Presencial:</label>
     <span>{{meeting.name}}</span>

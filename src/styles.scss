@@ -293,7 +293,7 @@ app-pre-registration {
   opacity: 38%;
 }
 
-.gsi-material-button:not(:disabled):active .gsi-material-button-state, 
+.gsi-material-button:not(:disabled):active .gsi-material-button-state,
 .gsi-material-button:not(:disabled):focus .gsi-material-button-state {
   background-color: #303030;
   opacity: 12%;
@@ -334,4 +334,11 @@ app-pre-registration {
 
 .c-pointer{
   cursor: pointer;
+}
+
+p-autocomplete,
+p-autocomplete > .p-autocomplete,
+p-autocomplete .p-autocomplete-input {
+  width: 100% !important;
+  display: block !important;
 }

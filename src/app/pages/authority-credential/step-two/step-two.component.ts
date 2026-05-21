@@ -60,7 +60,7 @@ export class StepTwoComponent {
     return (
       firstPart &&
       this.newAuthForm.name?.length > 0 &&
-      this.newAuthForm.organization?.name.length > 0 &&
+      this.newAuthForm.organization?.name?.length > 0 &&
       this.newAuthForm.authorityRole?.length > 0
     );
   }
@@ -180,6 +180,10 @@ export class StepTwoComponent {
 
   finishRegister() {
     this.onRegister.emit(this.newAuthForm);
+  }
+
+  emptyList(){
+    return [];
   }
 
 }

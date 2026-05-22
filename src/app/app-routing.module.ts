@@ -22,11 +22,13 @@ import { PreRegistrationComponent } from './pages/pre-registration/pre-registrat
 import { SelfCheckInComponent } from './pages/self-check-in/self-check-in.component';
 import { LoginRegistrationComponent } from './pages/login-registration/login-registration.component';
 import {AuthorityCredentialComponent} from "./pages/authority-credential/authority-credential.component";
+import {TeamCredentialComponent} from "./pages/team-credential/team-credential.component";
 
 
 const routes: Routes = [
   { path: '', component: StartComponent },
   { path: 'authority-credential/:meeting', component: AuthorityCredentialComponent},
+  { path: 'team-credential/:meeting', component: TeamCredentialComponent},
   { path: 'login/:conference', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },

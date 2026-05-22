@@ -1,0 +1,71 @@
+<main class="d-flex flex-column">
+  <div class="warning">
+    <b>Atenção:</b> O servidor indicado será acionado a responder, durante o evento, as questões de competencia da organização representada
+  </div>
+  <div class="d-flex flex-column">
+    <p>Integrará a Equipe de Governo neste evento, representando a(o) {{newAuthForm.organization?.name}} o(a) servidor(a): </p>
+  </div>
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-row">
+      <p-radioButton (ngModelChange)="himselfSelected()" value="himself" [(ngModel)]="newAuthForm.representing" inputId="reprHimself"/>
+      <label for="reprHimself">{{newAuthForm.name}}</label>
+    </div>
+    <div class="d-flex flex-row">
+      <p-radioButton (ngModelChange)="otherSelected()" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
+      <label for="reprOther">Outra pessoa:</label>
+    </div>
+    <div class="reprInfo">
+      <div class="row">
+        <div class="col" >
+          <label for="reprCpf" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'" >CPF*</label>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center my-2">
+
+        <div class="col-7 px-1">
+          <p-inputMask [disabled]="newAuthForm.representing !== 'other'"
+             mask="999.999.999-99" [(ngModel)]="newAuthForm.authorityCpf" inputId="reprCpf" placeholder="000.000.000-00" />
+        </div>
+        <div class="col-2 px-1">
+          <button [disabled]="newAuthForm.representing !== 'other'" (click)="loadAcInfo()">Procurar</button>
+        </div>
+      </div>
+      <div class="row" [hidden]="!isOtherAndLooked">
+        <div class="col">
+          <label for="reprName" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'">Nome*</label>
+        </div>
+      </div>
+      <div class="row align-items-center my-2" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
+        <div class="col px-1">
+          <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other'"
+             [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100"
+             [readOnly]="fromAc.authorityRepresenting"/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="flex-column" [hidden]="!isOtherAndLooked">
+    <label for="reprRole">Cargo do Representante*</label>
+
+    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
+      class="w-100" id="reprRole" />
+  </div>
+  <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
+    <label for="municipio">Municipio do Representante*</label>
+    <p-dropdown class="locality-dropbox" [options]="localities"
+        [(ngModel)]="newAuthForm.authorityLocalityId" field="label"
+        optionLabel="name" optionValue="id" placeholder="Selecione o seu Municipio">
+      </p-dropdown>
+  </div>
+  <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
+    <label for="email">Email do Representante*</label>
+    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityEmail"
+      class="w-100" id="email" [readOnly]="fromAc.authorityEmail" />
+  </div>
+
+</main>
+<footer class="px-2 d-flex flex-column">
+  <button [disabled]="!isAuthValid" (click)="finishRegister()" class="align-self-start">Confirmar</button>
+  <p>Na sequencia, você poderá corrigir esta ou confirmar novas indicações.</p>
+</footer>

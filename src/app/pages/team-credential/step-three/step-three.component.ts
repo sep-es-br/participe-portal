@@ -5,6 +5,7 @@ import {IPerson} from "../../../shared/interfaces/IPerson";
 import {LoadingService} from "../../../shared/services/loading.service";
 import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistrationAuthority';
 import { Location } from '@angular/common';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-autht-step-three',
@@ -22,7 +23,8 @@ export class StepThreeComponent implements OnInit {
   public link : string;
 
   constructor(
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private router: Router,
   ) {
   }
 
@@ -40,7 +42,12 @@ export class StepThreeComponent implements OnInit {
   }
 
   forceReload() {
-    window.location.reload();
+    const urlAtual = this.router.url;
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = "reload";
+
+    this.router.navigate([urlAtual]);
   }
 
   protectExibitionEmail(email?:string){

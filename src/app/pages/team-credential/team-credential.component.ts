@@ -84,11 +84,11 @@ export class TeamCredentialComponent {
     })
   }
 
-  async onRegister(form : INewAuthForm) {
+  async onRegister([form, undoCredential] : [INewAuthForm, boolean]) {
 
     let preRegistration;
 
-    if(
+    if(!undoCredential &&(
       !form.authorityRole ||
       (form.representing == 'other' && (
         !form.authorityCpf ||
@@ -97,7 +97,7 @@ export class TeamCredentialComponent {
       !form.name ||
       !form.authorityEmail ||
       !form.authorityLocalityId
-    ){
+    )){
       this.messageService.add({
         severity: 'error',
         summary: 'Formulário Imcompleto',
@@ -107,24 +107,47 @@ export class TeamCredentialComponent {
       return;
     }
 
-    switch (form.representing) {
-      case "himself":
-        preRegistration = (await this.authorityCredential.registerAuthority(
-          form.id, undefined, form.authorityEmail, form.name, form.authorityLocalityId,
-          this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
-        )).data;
-        break;
-      case "other":
-        preRegistration = (await this.authorityCredential.registerAuthority(
-          form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
-          this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
-        )).data;
-        break;
-      case "none":
-        return;
+    if(!undoCredential) {
+      switch (form.representing) {
+        case "himself":
+          preRegistration = (await this.authorityCredential.registerAuthority(
+            form.id, undefined, form.authorityEmail, form.name, form.authorityLocalityId,
+            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
+          )).data;
+          break;
+        case "other":
+          preRegistration = (await this.authorityCredential.registerAuthority(
+            form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
+            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
+          )).data;
+          break;
+        case "none":
+          return;
+      }
+      this.preRegistration.set(preRegistration);
+      this.step = 3;
+    } else {
+
+      const deleteObj = {
+        meetingId: this.meeting().id,
+        madeBy: form.id,
+        representedBySub: form.authoritySub,
+        representedByEmail: form.authorityEmail,
+        representedByName: form.representing === "himself" ? form.name : form.authorityRepresenting
+
+      }
+
+      await this.authorityCredential.deleteCredential(deleteObj);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Sucesso',
+        detail: 'Pré-credenciamento removido com sucesso!',
+        life: 3000
+      })
+      this.step = 1;
     }
-    this.preRegistration.set(preRegistration);
-    this.step = 3;
-  }
+
+    }
+
 
 }

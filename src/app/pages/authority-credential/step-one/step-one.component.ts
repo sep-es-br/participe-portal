@@ -18,6 +18,6 @@ export class StepOneComponent {
   }
 
   signInAcessoCidadao() {
-    this.authSrv.signInAcessoCidadao(this.meeting.id, 'authority-credencial');
+    this.authSrv.signInAcessoCidadao(this.meeting.id, 'authority-credential');
   }
 }

@@ -18,11 +18,13 @@ export class StepTwoComponent {
   @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
   @Input() meeting : Signal<IMeetingDetail> = signal<IMeetingDetail>(undefined);
 
-  @Output() onRegister = new EventEmitter<INewAuthForm>();
+  @Output() onRegister = new EventEmitter<[INewAuthForm, boolean]>();
 
   lookedOther = false;
 
   localities: ILocality[] = [];
+
+  undoCredential = false;
 
   newAuthForm : INewAuthForm = {
     madeBy : undefined,
@@ -179,7 +181,7 @@ export class StepTwoComponent {
   }
 
   finishRegister() {
-    this.onRegister.emit(this.newAuthForm);
+    this.onRegister.emit([this.newAuthForm, this.undoCredential]);
   }
 
   emptyList(){

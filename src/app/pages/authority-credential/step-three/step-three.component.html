@@ -37,10 +37,8 @@
       <i class="fas fa-print"></i>
     </a>
     <div class="mb-3">
-      <em class="informacoes-adicionais mb-3 print-visible p-2">Se quiser corrigir algum dado basta acessar o mesmo link enviado inicialmente</em><br/>
+      <button class="btn btn-primary text-center" (click)="forceReload()">Corrigir ou Confirmar novos representantes</button>
     </div>
-    <i><a [href]="link" (click)="forceReload()" >{{link}}</a></i>
-    
     <p class="print-visible mb-0 mt-4 text-center">
       <img class="img-fluid print-visible img-logo-es" src="assets/images/brasao.png" >
     </p>

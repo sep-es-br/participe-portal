@@ -10,16 +10,19 @@
         optionLabel="name"
         (completeMethod)="emptyList()"
         readonly
+        [disabled]="undoCredential"
     ></p-autoComplete>
   </div>
   <div class="d-flex flex-column">
     <label>Esta Organização/entidade será representada neste evento por:</label>
     <div class="d-flex flex-row">
-      <p-radioButton (ngModelChange)="himselfSelected()" value="himself" [(ngModel)]="newAuthForm.representing" inputId="reprHimself"/>
+      <p-radioButton (ngModelChange)="himselfSelected()"
+                     [disabled]="undoCredential" value="himself" [(ngModel)]="newAuthForm.representing" inputId="reprHimself"/>
       <label for="reprHimself">{{newAuthForm.name}}</label>
     </div>
     <div class="d-flex flex-row">
-      <p-radioButton (ngModelChange)="otherSelected()" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
+      <p-radioButton (ngModelChange)="otherSelected()"
+                     [disabled]="undoCredential" value="other" [(ngModel)]="newAuthForm.representing" inputId="reprOther"/>
       <label for="reprOther">Outra pessoa:</label>
     </div>
     <div class="reprInfo">
@@ -31,11 +34,11 @@
       <div class="row d-flex align-items-center my-2">
 
         <div class="col-7 px-1">
-          <p-inputMask [disabled]="newAuthForm.representing !== 'other'"
+          <p-inputMask [disabled]="newAuthForm.representing !== 'other' || undoCredential"
              mask="999.999.999-99" [(ngModel)]="newAuthForm.authorityCpf" inputId="reprCpf" placeholder="000.000.000-00" />
         </div>
         <div class="col-2 px-1">
-          <button [disabled]="newAuthForm.representing !== 'other'" (click)="loadAcInfo()">Procurar</button>
+          <button [disabled]="newAuthForm.representing !== 'other' || undoCredential" (click)="loadAcInfo()">Procurar</button>
         </div>
       </div>
       <div class="row" [hidden]="!isOtherAndLooked">
@@ -45,7 +48,7 @@
       </div>
       <div class="row align-items-center my-2" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
         <div class="col px-1">
-          <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other'"
+          <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other' || undoCredential"
              [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100"
              [readOnly]="fromAc.authorityRepresenting"/>
         </div>
@@ -57,11 +60,13 @@
     <label for="reprRole">Cargo do Representante*</label>
 
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
-      class="w-100" id="reprRole" />
+      class="w-100" id="reprRole"
+           [disabled]="undoCredential"/>
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="municipio">Municipio do Representante*</label>
     <p-dropdown class="locality-dropbox" [options]="localities"
+                [disabled]="undoCredential"
         [(ngModel)]="newAuthForm.authorityLocalityId" field="label"
         optionLabel="name" optionValue="id" placeholder="Selecione o seu Municipio">
       </p-dropdown>
@@ -69,19 +74,14 @@
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="email">Email do Representante*</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityEmail"
+           [disabled]="undoCredential"
       class="w-100" id="email" [readOnly]="fromAc.authorityEmail" />
   </div>
-<!--  <div>-->
-<!--    <div class="d-flex align-items-center">-->
-<!--      <p-radioButton value="none" [(ngModel)]="newAuthForm.representing" inputId="reprNone" />-->
-<!--      <label for="reprNone">Infelizmente não enviaremos representante,</label>-->
-<!--    </div>-->
-<!--    <label for="noReprReason">porque</label>-->
-<!--    <textarea pInputTextarea [(ngModel)]="newAuthForm.notRepresentingReason"-->
-<!--      [disabled]="newAuthForm.representing !== 'none'" class="w-100" id="noReprReason"-->
-<!--      placeholder="Justifique a ausência da sua organização (opcional)" ></textarea>-->
-<!--  </div>-->
 </main>
 <footer class="px-2">
-  <button [disabled]="!isAuthValid" (click)="finishRegister()">Enviar</button>
+  <div class="d-flex gap-2">
+    <button [disabled]="!isAuthValid" (click)="finishRegister()" class="align-self-start">Confirmar</button>
+    <p-inputSwitch [(ngModel)]="undoCredential" ></p-inputSwitch>
+    Descredenciar
+  </div>
 </footer>

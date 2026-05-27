@@ -131,6 +131,7 @@ export class TeamCredentialComponent {
       const deleteObj = {
         meetingId: this.meeting().id,
         madeBy: form.id,
+        representedByCpf: form.authorityCpf,
         representedBySub: form.authoritySub,
         representedByEmail: form.authorityEmail,
         representedByName: form.representing === "himself" ? form.name : form.authorityRepresenting

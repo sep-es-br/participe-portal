@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-authc-step-three',
+  selector: 'app-autht-step-three',
   templateUrl: './step-three.component.html',
   styleUrl: './step-three.component.scss'
 })

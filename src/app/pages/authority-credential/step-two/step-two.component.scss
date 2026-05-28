@@ -46,6 +46,22 @@ button {
   }
 }
 
+::ng-deep {
+  p-dropdown.ng-invalid {
+
+    > div {
+      border: 1px solid red;
+
+      .p-placeholder {
+        color: red;
+      }
+    }
+
+  }
+}
+
+
+
 
 
 

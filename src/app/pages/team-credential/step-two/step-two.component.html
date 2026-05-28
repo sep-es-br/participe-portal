@@ -53,7 +53,7 @@
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="municipio">Municipio do Representante*</label>
-    <p-dropdown class="locality-dropbox" [options]="localities"
+    <p-dropdown class="locality-dropbox" [options]="localities" required
         [(ngModel)]="newAuthForm.authorityLocalityId" field="label" [disabled]="undoCredential"
         optionLabel="name" optionValue="id" placeholder="Selecione o seu Municipio">
       </p-dropdown>

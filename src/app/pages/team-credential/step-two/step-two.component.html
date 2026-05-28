@@ -23,7 +23,7 @@
       <div class="row d-flex align-items-center my-2">
 
         <div class="col-7 px-1">
-          <p-inputMask [disabled]="(newAuthForm.representing !== 'other') || undoCredential"
+          <p-inputMask [disabled]="(newAuthForm.representing !== 'other') || undoCredential" gambiCursorMask
              mask="999.999.999-99" [(ngModel)]="newAuthForm.authorityCpf" inputId="reprCpf" placeholder="000.000.000-00" />
         </div>
         <div class="col-2 px-1">

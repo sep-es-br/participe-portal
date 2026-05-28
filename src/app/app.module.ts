@@ -72,6 +72,7 @@ import { StepOneComponent as TeamStepOneComponent } from './pages/team-credentia
 import { StepTwoComponent as TeamStepTwoComponent } from './pages/team-credential/step-two/step-two.component';
 import { StepThreeComponent as TeamStepThreeComponent } from './pages/team-credential/step-three/step-three.component';
 import {TeamCredentialComponent} from "./pages/team-credential/team-credential.component";
+import {CursorMaskDirective} from "./shared/CursorMaskDirective";
 
 
 registerLocaleData(localePtBr);
@@ -146,7 +147,8 @@ registerLocaleData(localePtBr);
     MultiSelectModule,
     MenuModule,
     TriStateCheckboxModule,
-    A11yModule
+    A11yModule,
+    CursorMaskDirective
   ],
   providers: [
     MessageService,

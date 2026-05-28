@@ -65,6 +65,13 @@ $darkColorOr: rgba(0,0,0,0.16);
         &.cidadao {
           background: #016A88;
           height: 11vh;
+
+          span {
+            font-size: 22px;
+            margin-left: 1.5rem;
+            margin-right: 1rem;
+          }
+
           img {
             margin-left: 10px;
             width: 50px;
@@ -235,21 +242,21 @@ $darkColorOr: rgba(0,0,0,0.16);
   .cidadao{
     font-size: 0.9rem;
   }
-  
+
 }
 
 @media screen and (max-width: 600px) {
   .cidadao{
     font-size: 0.8rem;
   }
-  
+
 }
 
 @media screen and (max-width: 500px) {
   .cidadao{
     font-size: 0.7rem;
   }
-  
+
 }
 
 @media screen and (max-width: 400px) {
@@ -260,7 +267,7 @@ $darkColorOr: rgba(0,0,0,0.16);
   .google{
     font-size: 0.8rem;
   }
-  
+
 }
 
 @media screen and (max-width: 280px) {
@@ -268,5 +275,5 @@ $darkColorOr: rgba(0,0,0,0.16);
   .google{
     font-size: 0.6rem;
   }
-  
+
 }

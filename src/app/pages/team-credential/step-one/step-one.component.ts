@@ -4,7 +4,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 
 // @ts-ignore
 @Component({
-  selector: 'app-authc-step-one',
+  selector: 'app-autht-step-one',
   templateUrl: './step-one.component.html',
   styleUrl: './step-one.component.scss'
 })
@@ -18,6 +18,6 @@ export class StepOneComponent {
   }
 
   signInAcessoCidadao() {
-    this.authSrv.signInAcessoCidadao(this.meeting.id, 'authority-credential');
+    this.authSrv.signInAcessoCidadao(this.meeting.id, 'team-credential');
   }
 }

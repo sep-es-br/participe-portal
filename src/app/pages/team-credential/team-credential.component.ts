@@ -19,10 +19,10 @@ import {take} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-authority-credential',
-  templateUrl: './authority-credential.component.html',
-  styleUrl: './authority-credential.component.scss'
+  templateUrl: './team-credential.component.html',
+  styleUrl: './team-credential.component.scss'
 })
-export class AuthorityCredentialComponent {
+export class TeamCredentialComponent {
 
   meeting = signal<IMeetingDetail>(undefined);
   user = signal<IPerson>({} as IPerson);
@@ -62,6 +62,7 @@ export class AuthorityCredentialComponent {
     });
     this.routeSnap.queryParams.pipe(take(1)).subscribe(qparams => {
       let signInDto = qparams['signinDto'];
+      // Se o param vier na URL, a gente lê e guarda no Storage do navegador 📦
 
       if(signInDto){
         const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
@@ -87,7 +88,7 @@ export class AuthorityCredentialComponent {
 
     let preRegistration;
 
-    if (!undoCredential &&(
+    if(!undoCredential &&(
       !form.authorityRole ||
       (form.representing == 'other' && (
         !form.authorityCpf ||
@@ -96,7 +97,7 @@ export class AuthorityCredentialComponent {
       !form.name ||
       !form.authorityEmail ||
       !form.authorityLocalityId
-    )) {
+    )){
       this.messageService.add({
         severity: 'error',
         summary: 'Formulário Imcompleto',
@@ -106,18 +107,18 @@ export class AuthorityCredentialComponent {
       return;
     }
 
-    if (!undoCredential) {
+    if(!undoCredential) {
       switch (form.representing) {
         case "himself":
           preRegistration = (await this.authorityCredential.registerAuthority(
             form.id, undefined, form.authorityEmail, form.name, form.authorityLocalityId,
-            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, false
+            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
           )).data;
           break;
         case "other":
           preRegistration = (await this.authorityCredential.registerAuthority(
             form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
-            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, false
+            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
           )).data;
           break;
         case "none":
@@ -146,5 +147,8 @@ export class AuthorityCredentialComponent {
       })
       this.step = 1;
     }
-  }
+
+    }
+
+
 }

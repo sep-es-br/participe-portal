@@ -34,9 +34,8 @@ export class AuthService {
     }).toPromise();
   }
 
-  private getUrlForSocialAuth(origin: string, meetingId?: number) {
-    return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${
-      AuthService.getFrontFallbackUrl()}&${ meetingId ? `front_meeting_id=${meetingId}` : `front_conference_id=${this.conferenceSrv.ConferenceActiveId}` }`;
+  private getUrlForSocialAuth(origin: string, meetingId?: number, module?: string) {
+    return `${environment.apiUrl}/oauth2/authorization/${origin}?front_callback_url=${AuthService.getFrontFallbackUrl()}&${ meetingId ? `front_meeting_id=${meetingId}` : `front_conference_id=${this.conferenceSrv.ConferenceActiveId}` }${ module ? `&front_module=${module}` : `` }`;
   }
 
 
@@ -64,12 +63,12 @@ export class AuthService {
   }
 
 
-  signInAcessoCidadao(meetingId? : number) {
+  signInAcessoCidadao(meetingId? : number, origin?: string) {
     localStorage.setItem(
       StoreKeys.LOGOUT_URI,
       environment.logoutURIAcessoCidadao
     );
-    this.document.location.href = this.getUrlForSocialAuth('portal', meetingId);
+    this.document.location.href = this.getUrlForSocialAuth('portal', meetingId, origin);
   }
 
   signInAcessoCidadaoProfile() {

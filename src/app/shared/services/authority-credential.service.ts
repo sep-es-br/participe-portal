@@ -1,4 +1,4 @@
-import {Inject, Injectable, Injector} from "@angular/core";
+import {Inject, Injectable, Injector, signal} from "@angular/core";
 import {BaseService} from "./base.service";
 import {IPreRegistration} from "../interfaces/IPreRegistration";
 import {IResultHttp} from "../interfaces/IResultHttp";
@@ -9,6 +9,8 @@ import { IPreRegistrationAuthority } from "../interfaces/IPreRegistrationAuthori
 })
 export class AuthorityCredentialService extends BaseService<any>{
 
+  public readonly isTeamSignal = signal<boolean>(undefined);
+
   constructor(
     @Inject(Injector) injector: Injector
   ) {
@@ -16,21 +18,28 @@ export class AuthorityCredentialService extends BaseService<any>{
   }
 
   registerAuthority(
-    madeBy, representedByCpf, representedEmail, representedByName,
-    localityId, meetingId, organization, role, authoritySub
-    ) : Promise<IResultHttp<IPreRegistrationAuthority>> {
+    madeBy, representedByCpf, representedByEmail, representedByName,
+    localityId, meetingId, organization, role, representedBySub,
+    isTeam) : Promise<IResultHttp<IPreRegistrationAuthority>> {
     const body = {
-      madeBy: madeBy,
-      representedByCpf: representedByCpf,
-      representedByEmail: representedEmail,
-      representedByName: representedByName,
-      meetingId: meetingId,
-      organization: organization,
-      role: role,
-      localityId: localityId,
-      representedBySub: authoritySub
+      madeBy,
+      representedByCpf,
+      representedByEmail,
+      representedByName,
+      representedBySub,
+      meetingId,
+      organization,
+      role,
+      localityId,
+      isTeam
     };
     return this.http.put<IResultHttp<IPreRegistrationAuthority>>(`${this.urlBase}`, body).toPromise();
-  } 
+  }
+
+  deleteCredential(body: any) {
+    return this.http.delete<void>(`${this.urlBase}`, { body }).toPromise();
+  }
+
+
 
 }

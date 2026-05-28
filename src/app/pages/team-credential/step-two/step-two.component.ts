@@ -10,7 +10,7 @@ import { ILocality } from 'src/app/shared/interfaces/ILocality';
 import { LocalityService } from 'src/app/shared/services/locality.service';
 
 @Component({
-  selector: 'app-authc-step-two',
+  selector: 'app-autht-step-two',
   templateUrl: './step-two.component.html',
   styleUrl: './step-two.component.scss'
 })
@@ -23,7 +23,6 @@ export class StepTwoComponent {
   lookedOther = false;
 
   localities: ILocality[] = [];
-
 
   undoCredential = false;
 

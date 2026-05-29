@@ -52,10 +52,10 @@
       class="w-100" id="reprRole" [disabled]="undoCredential" ]/>
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
-    <label for="municipio">Municipio do Representante*</label>
+    <label for="municipio">Município do Representante*</label>
     <p-dropdown class="locality-dropbox" [options]="localities" required
         [(ngModel)]="newAuthForm.authorityLocalityId" field="label" [disabled]="undoCredential"
-        optionLabel="name" optionValue="id" placeholder="Selecione o seu Municipio">
+        optionLabel="name" optionValue="id" placeholder="Selecione o seu Município">
       </p-dropdown>
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">

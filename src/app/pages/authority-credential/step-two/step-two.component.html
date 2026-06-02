@@ -6,8 +6,9 @@
   <div class="d-flex flex-column">
     <label>Organização/entidade representada*</label>
     <p-autoComplete
-        [ngModel]="newAuthForm.organization"
+        [(ngModel)]="newAuthForm.organization"
         optionLabel="name"
+        [suggestions]="filteredOrganizations()"
         (completeMethod)="filterOrganization($event)"
         [disabled]="undoCredential"
     ></p-autoComplete>

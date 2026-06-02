@@ -35,6 +35,12 @@ main {
   margin-left: 2rem;
 }
 
+::ng-deep {
+  .p-icon-wrapper {
+    display: none !important;
+  }
+}
+
 button {
   color: white;
   background-color: #4472C4;

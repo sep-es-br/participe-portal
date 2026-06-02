@@ -65,7 +65,7 @@ export class StepTwoComponent {
     return (
       firstPart &&
       this.newAuthForm.name?.length > 0 &&
-      (typeof (this.newAuthForm.organization) === 'string' ? this.newAuthForm.organization : this.newAuthForm.organization?.name ).length > 0 &&
+      (typeof (this.newAuthForm.organization) === 'string' ? this.newAuthForm.organization : this.newAuthForm.organization?.name )?.length > 0 &&
       this.newAuthForm.authorityRole?.length > 0
     );
   }

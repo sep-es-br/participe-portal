@@ -20,7 +20,7 @@ export class MeetingService extends BaseService<any> {
     @Inject(Injector) injector: Injector
   ) {
     super('meetings', injector);
-    this.getOrganizationList().then((orgList) => this.organizationList.set(orgList));
+    this.getOrganizationList().then((orgList) => this.organizationList.set(orgList.data));
   }
 
   getMeetingsByIdConference(conferenceId: number, filter?: MeetingFilterModel, options?: IQueryOptions) {
@@ -79,7 +79,7 @@ export class MeetingService extends BaseService<any> {
   }
 
   getOrganizationList() {
-    return this.http.get<IOptionOrganization[]>(`${this.urlBase}/organizationList`).toPromise();
+    return this.http.get<IResultHttp<IOptionOrganization[]>>(`${this.urlBase}/organizationList`).toPromise();
   }
 
 }

@@ -196,4 +196,8 @@ export class StepTwoComponent {
 
   }
 
+  emptyList() {
+     return [];
+  }
+
 }

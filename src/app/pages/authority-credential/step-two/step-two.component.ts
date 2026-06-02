@@ -8,6 +8,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import { Event } from '@angular/router';
 import { ILocality } from 'src/app/shared/interfaces/ILocality';
 import { LocalityService } from 'src/app/shared/services/locality.service';
+import {MeetingService} from "../../../shared/services/meeting.service";
 
 @Component({
   selector: 'app-authc-step-two',
@@ -24,6 +25,7 @@ export class StepTwoComponent {
 
   localities: ILocality[] = [];
 
+  filteredOrganizations = signal(this.meetingSrv.organizationList()) ;
 
   undoCredential = false;
 
@@ -63,7 +65,7 @@ export class StepTwoComponent {
     return (
       firstPart &&
       this.newAuthForm.name?.length > 0 &&
-      this.newAuthForm.organization?.name?.length > 0 &&
+      (typeof (this.newAuthForm.organization) === 'string' ? this.newAuthForm.organization : this.newAuthForm.organization?.name ).length > 0 &&
       this.newAuthForm.authorityRole?.length > 0
     );
   }
@@ -71,7 +73,8 @@ export class StepTwoComponent {
   constructor(
     private personService : PersonService,
     private messageService : MessageService,
-    private localitySrv: LocalityService
+    private localitySrv: LocalityService,
+    private meetingSrv : MeetingService,
   ) {
     effect(async () => {
       if(!this.meeting()) return;
@@ -185,8 +188,12 @@ export class StepTwoComponent {
     this.onRegister.emit([this.newAuthForm, this.undoCredential]);
   }
 
-  emptyList(){
-    return [];
+  filterOrganization(evt: any) {
+    const query = evt.query.toLowerCase();
+
+    this.filteredOrganizations.set(this.meetingSrv.organizationList()
+      .filter(org => org.name.toLowerCase().includes(query) || org.shortName.toLowerCase().includes(query)));
+
   }
 
 }

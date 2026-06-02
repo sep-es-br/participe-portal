@@ -8,15 +8,19 @@ import { IResultPaginated } from '../interfaces/IResultPaginated';
 import {IQueryOptions} from '../interfaces/IQueryOptions';
 import * as qs from 'qs';
 import { IMeetingDetail } from '../interfaces/IMeetingDetail';
+import {IOptionOrganization} from "../interfaces/IOptionOrganization";
 
 
 @Injectable({ providedIn: 'root' })
 export class MeetingService extends BaseService<any> {
 
+  public readonly organizationList = signal<IOptionOrganization[]>([]);
+
   constructor(
     @Inject(Injector) injector: Injector
   ) {
     super('meetings', injector);
+    this.getOrganizationList().then((orgList) => this.organizationList.set(orgList));
   }
 
   getMeetingsByIdConference(conferenceId: number, filter?: MeetingFilterModel, options?: IQueryOptions) {
@@ -72,6 +76,10 @@ export class MeetingService extends BaseService<any> {
 
   getSelfCheckInOrPreRegistrationOpen(meetingId: number, participationType: string): Promise<any>{
     return this.http.get<IResultHttp<any>>(`${this.urlBase}/${meetingId}/${participationType}`).toPromise();
+  }
+
+  getOrganizationList() {
+    return this.http.get<IOptionOrganization[]>(`${this.urlBase}/organizationList`).toPromise();
   }
 
 }

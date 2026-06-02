@@ -1,5 +1,5 @@
 import { IResultHttp } from '../interfaces/IResultHttp';
-import { Injectable, Inject, Injector } from '@angular/core';
+import {Injectable, Inject, Injector, signal} from '@angular/core';
 import { MeetingFilterModel } from '../models/MeetingFilterModel';
 import {Meeting, MeetingPageNumber} from '../models/Meeting';
 import { BaseService } from './base.service';

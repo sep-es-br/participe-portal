@@ -6,10 +6,10 @@
   <div class="d-flex flex-column">
     <label>Organização/entidade representada*</label>
     <p-autoComplete
-        [ngModel]="newAuthForm.organization"
+        [(ngModel)]="newAuthForm.organization"
         optionLabel="name"
-        (completeMethod)="emptyList()"
-        readonly
+        [suggestions]="emptyList()"
+        (completeMethod)="filterOrganization($event)"
         [disabled]="undoCredential"
     ></p-autoComplete>
   </div>
@@ -64,11 +64,11 @@
            [disabled]="undoCredential"/>
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
-    <label for="municipio">Municipio do Representante*</label>
+    <label for="municipio">Município do Representante*</label>
     <p-dropdown class="locality-dropbox" [options]="localities" #dropdownLoc="ngModel"
                 [disabled]="undoCredential" required
         [(ngModel)]="newAuthForm.authorityLocalityId" field="label"
-        optionLabel="name" optionValue="id" placeholder="Selecione o seu Municipio">
+        optionLabel="name" optionValue="id" placeholder="Selecione o seu Município">
       </p-dropdown>
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">

@@ -111,13 +111,15 @@ export class AuthorityCredentialComponent {
         case "himself":
           preRegistration = (await this.authorityCredential.registerAuthority(
             form.id, undefined, form.authorityEmail, form.name, form.authorityLocalityId,
-            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, false
+            this.meeting().id, typeof (form.organization) === 'string' ? {name: form.organization} : form.organization,
+            form.authorityRole, form.authoritySub, false
           )).data;
           break;
         case "other":
           preRegistration = (await this.authorityCredential.registerAuthority(
             form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
-            this.meeting().id, form.organization, form.authorityRole, form.authoritySub, false
+            this.meeting().id, typeof (form.organization) === 'string' ? {name: form.organization} : form.organization,
+            form.authorityRole, form.authoritySub, false
           )).data;
           break;
         case "none":

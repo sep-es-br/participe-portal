@@ -15,6 +15,7 @@ type acRoleType = {
   sub: string
 };
 type acInfoType = {
+  organization: IOptionOrganization,
   name: string,
   role: string | undefined,
   email: string,
@@ -84,6 +85,10 @@ export class PersonService extends BaseService<any> {
       `${this.urlBase}/profile/merge/${idPersonToMerge}`,
       null
     ).toPromise();
+  }
+
+  findPersonBySub(sub: string) {
+    return this.http.get<IResultHttp<IPerson>>(`${this.urlBase}/bySub/${sub}`).toPromise();
   }
 
 }

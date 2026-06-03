@@ -16,6 +16,7 @@ import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistr
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { StoreKeys } from 'src/app/shared/commons/contants';
 import {take} from "rxjs/internal/operators";
+import {PreRegistrationService} from "../../shared/services/pre-registration.service";;
 
 @Component({
   selector: 'app-authority-credential',
@@ -26,7 +27,8 @@ export class AuthorityCredentialComponent {
 
   meeting = signal<IMeetingDetail>(undefined);
   user = signal<IPerson>({} as IPerson);
-  preRegistration = signal<IPreRegistrationAuthority>(undefined);
+  preRegistration = signal<IPreRegistration>(undefined);
+  preRegistrationAuthority = signal<IPreRegistrationAuthority>(undefined);
   step = 1;
 
   constructor(
@@ -37,6 +39,7 @@ export class AuthorityCredentialComponent {
     private authorityCredential : AuthorityCredentialService,
     private routeSnap : ActivatedRoute,
     private confServ : ConferenceService,
+    private preregistrationSrv : PreRegistrationService,
     private router: Router
   ) {
     this.user = this.personService.activePerson;
@@ -60,27 +63,58 @@ export class AuthorityCredentialComponent {
         }
       );
     });
-    this.routeSnap.queryParams.pipe(take(1)).subscribe(qparams => {
+    this.routeSnap.queryParams.pipe(take(1)).subscribe(async qparams => {
       let signInDto = qparams['signinDto'];
 
-      if(signInDto){
+      if(signInDto) {
         const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
 
         this.authSrv.saveToken(userInfo);
         this.authSrv.saveUserInfo(userInfo.person);
         this.user.set(userInfo.person);
-        this.step = 2;
 
-        this.router.navigate([], {
+        await  this.router.navigate([], {
           queryParams: {
             signinDto: null
           },
           replaceUrl: true
         });
-
       }
 
-    })
+
+
+    });
+    effect(async () => {
+      if (this.meeting() == null) return;
+      if (this.user() == null) return;
+
+      const { success, data } = await this.preregistrationSrv.preRegistrationConfirmed(this.meeting().id, this.user().id);
+
+      if (!success) return;
+
+      this.preRegistration.set(data);
+      this.step = 2;
+
+
+    });
+  }
+
+  updatePreRegistration(sub:string) {
+
+    const personResult = this.personService.findPersonBySub(sub)
+      .then(async  (person) => {
+        const { success, data } = await this.preregistrationSrv.preRegistrationConfirmed(this.meeting().id, person.data.id);
+
+        if (!success) return;
+
+        this.preRegistration.set(data);
+      })
+      .catch((reason) => {
+      console.error(reason);
+    });
+
+
+
   }
 
   async onRegister([form, undoCredential] : [INewAuthForm, boolean]) {
@@ -125,7 +159,7 @@ export class AuthorityCredentialComponent {
         case "none":
           return;
       }
-      this.preRegistration.set(preRegistration);
+      this.preRegistrationAuthority.set(preRegistration);
       this.step = 3;
     } else {
 

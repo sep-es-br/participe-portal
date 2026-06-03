@@ -8,6 +8,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import { Event } from '@angular/router';
 import { ILocality } from 'src/app/shared/interfaces/ILocality';
 import { LocalityService } from 'src/app/shared/services/locality.service';
+import {IPreRegistration} from "../../../shared/interfaces/IPreRegistration";
 
 @Component({
   selector: 'app-autht-step-two',
@@ -17,6 +18,7 @@ import { LocalityService } from 'src/app/shared/services/locality.service';
 export class StepTwoComponent {
   @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
   @Input() meeting : Signal<IMeetingDetail> = signal<IMeetingDetail>(undefined);
+  @Input() registration : Signal<IPreRegistration> = signal<IPreRegistration>(undefined);
 
   @Output() onRegister = new EventEmitter<[INewAuthForm, boolean]>();
 

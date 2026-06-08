@@ -76,9 +76,9 @@ export class StepTwoComponent implements OnChanges{
 
   async ngOnChanges(changes: SimpleChanges) {
 
-    const meeting = changes['meeting'].currentValue as IMeetingDetail;
-    const user = changes['user'].currentValue as IPerson;
-    const prerregistration = changes['prerregistration'].currentValue as IPreRegistration;
+    const meeting = changes['meeting']?.currentValue as IMeetingDetail ?? this.meeting;
+    const user = changes['user']?.currentValue as IPerson ?? this.user;
+    const prerregistration = changes['prerregistration']?.currentValue as IPreRegistration ?? this.prerregistration;
 
 
     if(!meeting) return;

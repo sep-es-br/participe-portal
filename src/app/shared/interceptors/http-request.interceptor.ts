@@ -112,6 +112,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             message = 'Houve um erro ao processar sua solicitação';
           }
           break;
+        case 404:
+          return throwError({ success: false, data: [{ ...error }], error: error.message });
         default:
           message = _.get(error, 'error.message', 'Houve um erro ao processar sua solicitação');
           break;

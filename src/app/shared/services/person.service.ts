@@ -4,8 +4,12 @@ import {IPerson} from '../interfaces/IPerson';
 import {Inject, Injectable, Injector, signal} from '@angular/core';
 import {BaseService} from './base.service';
 import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError, of } from 'rxjs';
 import {IOptionOrganization} from "../interfaces/IOptionOrganization";
+import {
+  HttpErrorResponse,
+} from '@angular/common/http';
 
 type acRoleType = {
   organization: IOptionOrganization,

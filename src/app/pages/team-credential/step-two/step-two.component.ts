@@ -141,6 +141,16 @@ export class StepTwoComponent {
     const {success, data} = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
     if(!success) return;
 
+
+    if(!data.role){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Não é agente público',
+        detail: 'Esta pessoa não é agente publico ou não tem papel'
+      });
+      return;
+    }
+
     this.newAuthForm.authorityRepresenting = data.name;
     this.newAuthForm.authorityRole = data.role;
     this.newAuthForm.authorityEmail = data.email;
@@ -186,8 +196,5 @@ export class StepTwoComponent {
     this.onRegister.emit([this.newAuthForm, this.undoCredential]);
   }
 
-  emptyList(){
-    return [];
-  }
 
 }

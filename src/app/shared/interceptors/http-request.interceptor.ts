@@ -96,7 +96,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           message = _.get(error, 'error.message', 'Não autorizado');
           break;
         case 500:
-          if (_.get(error, 'error.message').startsWith('JWT expired ')) {
+          if (_.get(error, 'error.message')?.startsWith('JWT expired ')) {
             message = 'Sua sessão expirou. Por favor entre novamente.';
 
             if(sessionStorage.getItem(StoreKeys.PRE_REGISTRATION) || sessionStorage.getItem(StoreKeys.CHECK_IN)){
@@ -112,6 +112,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             message = 'Houve um erro ao processar sua solicitação';
           }
           break;
+        case 404:
+          return throwError({ success: false, data: [{ ...error }], error: error.message });
         default:
           message = _.get(error, 'error.message', 'Houve um erro ao processar sua solicitação');
           break;

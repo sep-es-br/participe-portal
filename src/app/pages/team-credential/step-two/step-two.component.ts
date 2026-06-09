@@ -8,6 +8,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import { Event } from '@angular/router';
 import { ILocality } from 'src/app/shared/interfaces/ILocality';
 import { LocalityService } from 'src/app/shared/services/locality.service';
+import {IPreRegistration} from "../../../shared/interfaces/IPreRegistration";
 
 @Component({
   selector: 'app-autht-step-two',
@@ -17,6 +18,7 @@ import { LocalityService } from 'src/app/shared/services/locality.service';
 export class StepTwoComponent {
   @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
   @Input() meeting : Signal<IMeetingDetail> = signal<IMeetingDetail>(undefined);
+  @Input() registration : Signal<IPreRegistration> = signal<IPreRegistration>(undefined);
 
   @Output() onRegister = new EventEmitter<[INewAuthForm, boolean]>();
 
@@ -139,6 +141,16 @@ export class StepTwoComponent {
     const {success, data} = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
     if(!success) return;
 
+
+    if(!data.role){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Não é agente público',
+        detail: 'Esta pessoa não é agente publico ou não tem papel'
+      });
+      return;
+    }
+
     this.newAuthForm.authorityRepresenting = data.name;
     this.newAuthForm.authorityRole = data.role;
     this.newAuthForm.authorityEmail = data.email;
@@ -184,8 +196,5 @@ export class StepTwoComponent {
     this.onRegister.emit([this.newAuthForm, this.undoCredential]);
   }
 
-  emptyList(){
-    return [];
-  }
 
 }

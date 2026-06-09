@@ -1,4 +1,4 @@
-import {Component, effect, EventEmitter, Input, Output, signal, Signal} from '@angular/core';
+import {Component, effect, EventEmitter, Input, OnChanges, Output, signal, Signal, SimpleChanges} from '@angular/core';
 import {IPerson} from "../../../shared/interfaces/IPerson";
 import { PersonService } from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
@@ -9,17 +9,21 @@ import { Event } from '@angular/router';
 import { ILocality } from 'src/app/shared/interfaces/ILocality';
 import { LocalityService } from 'src/app/shared/services/locality.service';
 import {MeetingService} from "../../../shared/services/meeting.service";
+import {IPreRegistration} from "../../../shared/interfaces/IPreRegistration";
+import {IOptionOrganization} from "../../../shared/interfaces/IOptionOrganization";
 
 @Component({
   selector: 'app-authc-step-two',
   templateUrl: './step-two.component.html',
   styleUrl: './step-two.component.scss'
 })
-export class StepTwoComponent {
-  @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
-  @Input() meeting : Signal<IMeetingDetail> = signal<IMeetingDetail>(undefined);
+export class StepTwoComponent implements OnChanges{
+  @Input() user : IPerson = undefined;
+  @Input() meeting : IMeetingDetail = undefined;
+  @Input() prerregistration : IPreRegistration = undefined;
 
   @Output() onRegister = new EventEmitter<[INewAuthForm, boolean]>();
+  @Output() updatePreRegistration = new EventEmitter<string>();
 
   lookedOther = false;
 
@@ -70,44 +74,72 @@ export class StepTwoComponent {
     );
   }
 
+  async ngOnChanges(changes: SimpleChanges) {
+
+    const meeting = changes['meeting']?.currentValue as IMeetingDetail ?? this.meeting;
+    const user = changes['user']?.currentValue as IPerson ?? this.user;
+    const prerregistration = changes['prerregistration']?.currentValue as IPreRegistration ?? this.prerregistration;
+
+
+    if(!meeting) return;
+    if(!user) return;
+
+    this.newAuthForm.madeBy = user.id;
+    this.newAuthForm.id = user.id;
+    this.newAuthForm.name = user.name;
+
+
+    await this.reloadUserData();
+
+    if(prerregistration && prerregistration.isAuthority){
+      if(this.meetingSrv.organizationList().find(orgIn => orgIn.guid === prerregistration.organization.guid)) {
+        this.newAuthForm.organization = this.meetingSrv.organizationList()
+          .filter(orgIn => orgIn.guid === prerregistration.organization.guid)[0];
+      } else {
+        this.newAuthForm.organization = {name: this.prerregistration.organization.name} as IOptionOrganization;
+      }
+
+      this.newAuthForm.representing = prerregistration.id === prerregistration.person.id ? 'himself' : 'other';
+      if(this.newAuthForm.representing === 'other') {
+        this.newAuthForm.authorityRepresenting = prerregistration.person.name;
+      }
+      this.newAuthForm.authorityLocalityId = prerregistration.localityId;
+      this.newAuthForm.authorityRole = prerregistration.role;
+      this.newAuthForm.authorityEmail = prerregistration.email;
+      this.newAuthForm.authoritySub = prerregistration.authoritySub;
+
+    }
+
+    const {success, data} = await this.localitySrv.getAllForConference(this.meeting.conference.id);
+    if (success) {
+      this.localities = data.localities;
+    }
+  }
+
   constructor(
     private personService : PersonService,
     private messageService : MessageService,
     private localitySrv: LocalityService,
     private meetingSrv : MeetingService,
   ) {
-    effect(async () => {
-      if(!this.meeting()) return;
-      if(!this.user()) return;
 
-      this.newAuthForm.madeBy = this.user().id;
-      this.newAuthForm.id = this.user().id;
-      this.newAuthForm.name = this.user().name;
-
-      this.reloadUserData();
-      const {success, data} = await this.localitySrv.getAllForConference(this.meeting().conference.id);
-      if (success) {
-        this.localities = data.localities;
-      }
-    })
   }
 
-  reloadUserData() {
-    this.personService.getAcRoleById(this.user().id, this.meeting().conference.id).then(acRole => {
-        const {success, data} = acRole;
+  async reloadUserData() {
 
-        if(!success) return;
+    const {success, data} = await this.personService.getAcRoleById(this.user.id, this.meeting.conference.id);
 
-        this.newAuthForm.organization = data.organization;
-        this.newAuthForm.authorityRole = data.role;
-        this.newAuthForm.authorityEmail = data.email;
-        this.newAuthForm.authorityLocalityId = data.localityId;
-        this.newAuthForm.authoritySub = data.sub;
+    if(!success) return;
 
-        this.fromAc.organization = !!data.organization
-        this.fromAc.authorityRole = !!data.role;
-        this.fromAc.authorityEmail = !!data.email;
-      });
+    this.newAuthForm.organization = data.organization;
+    this.newAuthForm.authorityRole = data.role;
+    this.newAuthForm.authorityEmail = data.email;
+    this.newAuthForm.authorityLocalityId = data.localityId;
+    this.newAuthForm.authoritySub = data.sub;
+
+    this.fromAc.organization = !!data.organization
+    this.fromAc.authorityRole = !!data.role;
+    this.fromAc.authorityEmail = !!data.email;
   }
 
   async himselfSelected() {
@@ -140,9 +172,10 @@ export class StepTwoComponent {
       return;
     }
 
-    const {success, data} = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
+    const {success, data} = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting.conference.id);
     if(!success) return;
 
+    this.newAuthForm.organization = data.organization;
     this.newAuthForm.authorityRepresenting = data.name;
     this.newAuthForm.authorityRole = data.role;
     this.newAuthForm.authorityEmail = data.email;
@@ -153,6 +186,8 @@ export class StepTwoComponent {
     this.fromAc.authorityRepresenting = !!data.name?.includes(' ');
     this.fromAc.authorityRole = !!data.role;
     this.fromAc.authorityEmail = !!data.email;
+
+    this.updatePreRegistration.emit(data.authoritySub);
 
     this.lookedOther = true;
   }

@@ -53,9 +53,9 @@ button {
 }
 
 ::ng-deep {
-  p-dropdown.ng-invalid {
+  .ng-invalid {
 
-    > div {
+    &.p-component, .p-component {
       border: 1px solid red;
 
       .p-placeholder {

@@ -16,6 +16,7 @@ import { IPreRegistrationAuthority } from 'src/app/shared/interfaces/IPreRegistr
 import { ConferenceService } from 'src/app/shared/services/conference.service';
 import { StoreKeys } from 'src/app/shared/commons/contants';
 import {take} from "rxjs/internal/operators";
+import {PreRegistrationService} from "../../shared/services/pre-registration.service";
 
 @Component({
   selector: 'app-authority-credential',
@@ -26,7 +27,8 @@ export class TeamCredentialComponent {
 
   meeting = signal<IMeetingDetail>(undefined);
   user = signal<IPerson>({} as IPerson);
-  preRegistration = signal<IPreRegistrationAuthority>(undefined);
+  preRegistration = signal<IPreRegistration>(undefined);
+  preRegistrationAuthority = signal<IPreRegistrationAuthority>(undefined);
   step = 1;
 
   constructor(
@@ -36,6 +38,7 @@ export class TeamCredentialComponent {
     private personService : PersonService,
     private authorityCredential : AuthorityCredentialService,
     private routeSnap : ActivatedRoute,
+    private prerregistrationSrv : PreRegistrationService,
     private confServ : ConferenceService,
     private router: Router
   ) {
@@ -71,13 +74,18 @@ export class TeamCredentialComponent {
         this.authSrv.saveUserInfo(userInfo.person);
         this.user.set(userInfo.person);
         this.step = 2;
+        this.prerregistrationSrv.preRegistration(this.meeting().id, userInfo.person.id).then((preRegistration) => {
 
-        this.router.navigate([], {
-          queryParams: {
-            signinDto: null
-          },
-          replaceUrl: true
+          this.preRegistration.set(preRegistration.data);
+        }).finally(() => {
+          this.router.navigate([], {
+            queryParams: {
+              signinDto: null
+            },
+            replaceUrl: true
+          });
         });
+
 
       }
 
@@ -124,7 +132,7 @@ export class TeamCredentialComponent {
         case "none":
           return;
       }
-      this.preRegistration.set(preRegistration);
+      this.preRegistrationAuthority.set(preRegistration);
       this.step = 3;
     } else {
 

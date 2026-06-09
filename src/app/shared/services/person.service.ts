@@ -4,8 +4,12 @@ import {IPerson} from '../interfaces/IPerson';
 import {Inject, Injectable, Injector, signal} from '@angular/core';
 import {BaseService} from './base.service';
 import {IOptionsContactEmail, IResultPerson} from '../interfaces/IResultPerson';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError, of } from 'rxjs';
 import {IOptionOrganization} from "../interfaces/IOptionOrganization";
+import {
+  HttpErrorResponse,
+} from '@angular/common/http';
 
 type acRoleType = {
   organization: IOptionOrganization,
@@ -15,6 +19,7 @@ type acRoleType = {
   sub: string
 };
 type acInfoType = {
+  organization: IOptionOrganization,
   name: string,
   role: string | undefined,
   email: string,
@@ -84,6 +89,10 @@ export class PersonService extends BaseService<any> {
       `${this.urlBase}/profile/merge/${idPersonToMerge}`,
       null
     ).toPromise();
+  }
+
+  findPersonBySub(sub: string) {
+    return this.http.get<IResultHttp<IPerson>>(`${this.urlBase}/bySub/${sub}`).toPromise();
   }
 
 }

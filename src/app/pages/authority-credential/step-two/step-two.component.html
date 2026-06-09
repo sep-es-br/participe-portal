@@ -7,7 +7,7 @@
     <label>Organização/entidade representada*</label>
     <p-autoComplete
         [(ngModel)]="newAuthForm.organization"
-        optionLabel="name"
+        optionLabel="name" required
         [suggestions]="emptyList()"
         (completeMethod)="filterOrganization($event)"
         [disabled]="undoCredential"
@@ -49,7 +49,7 @@
       <div class="row align-items-center my-2" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
         <div class="col px-1">
           <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other' || undoCredential"
-             [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100"
+             [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100" required
              [readOnly]="fromAc.authorityRepresenting"/>
         </div>
       </div>
@@ -60,12 +60,12 @@
     <label for="reprRole">Cargo do Representante*</label>
 
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityRole"
-      class="w-100" id="reprRole"
+      class="w-100" id="reprRole" required
            [disabled]="undoCredential"/>
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="municipio">Município do Representante*</label>
-    <p-dropdown class="locality-dropbox" [options]="localities" #dropdownLoc="ngModel"
+    <p-dropdown class="locality-dropbox" [options]="localities"
                 [disabled]="undoCredential" required
         [(ngModel)]="newAuthForm.authorityLocalityId" field="label"
         optionLabel="name" optionValue="id" placeholder="Selecione o seu Município">
@@ -74,7 +74,7 @@
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="email">Email do Representante*</label>
     <input type="text" pInputText [(ngModel)]="newAuthForm.authorityEmail"
-           [disabled]="undoCredential"
+           [disabled]="undoCredential" required
       class="w-100" id="email" [readOnly]="fromAc.authorityEmail" />
   </div>
 </main>

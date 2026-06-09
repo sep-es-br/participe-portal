@@ -13,6 +13,7 @@ export interface  IPreRegistration {
   role: string;
   localityId: number;
   email: string;
+  authoritySub: string;
 
   isAuthority: boolean;
 }

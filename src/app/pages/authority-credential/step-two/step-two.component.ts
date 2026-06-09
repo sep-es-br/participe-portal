@@ -106,6 +106,7 @@ export class StepTwoComponent implements OnChanges{
       this.newAuthForm.authorityLocalityId = prerregistration.localityId;
       this.newAuthForm.authorityRole = prerregistration.role;
       this.newAuthForm.authorityEmail = prerregistration.email;
+      this.newAuthForm.authoritySub = prerregistration.authoritySub;
 
     }
 

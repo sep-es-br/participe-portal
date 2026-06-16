@@ -107,6 +107,7 @@ export class AuthorityCredentialComponent {
 
         if (!success) return;
 
+        this.user.set(person.data);
         this.preRegistration.set(data);
       })
       .catch((reason) => {

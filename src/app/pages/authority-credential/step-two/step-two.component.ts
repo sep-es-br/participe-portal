@@ -85,11 +85,11 @@ export class StepTwoComponent implements OnChanges{
     if(!user) return;
 
     this.newAuthForm.madeBy = user.id;
-    this.newAuthForm.id = user.id;
+    this.newAuthForm.id = prerregistration ? prerregistration.person.id : user.id;
     this.newAuthForm.name = user.name;
 
 
-    await this.reloadUserData();
+    await this.reloadUserData(prerregistration ? prerregistration.person : user);
 
     if(prerregistration && prerregistration.isAuthority){
       if(this.meetingSrv.organizationList().find(orgIn => orgIn.guid === prerregistration.organization.guid)) {
@@ -125,9 +125,9 @@ export class StepTwoComponent implements OnChanges{
 
   }
 
-  async reloadUserData() {
+  async reloadUserData(user?: IPerson) {
 
-    const {success, data} = await this.personService.getAcRoleById(this.user.id, this.meeting.conference.id);
+    const {success, data} = await this.personService.getAcRoleById( (user || this.user).id, this.meeting.conference.id);
 
     if(!success) return;
 

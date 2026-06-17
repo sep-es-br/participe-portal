@@ -73,8 +73,8 @@
   </div>
   <div class="flex-column" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
     <label for="email">Email do Representante*</label>
-    <input type="text" pInputText [(ngModel)]="newAuthForm.authorityEmail"
-           [disabled]="undoCredential" required
+    <input type="email" pInputText [(ngModel)]="newAuthForm.authorityEmail" #campoEmail="ngModel"
+           [disabled]="undoCredential" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
       class="w-100" id="email" [readOnly]="fromAc.authorityEmail" />
   </div>
 </main>

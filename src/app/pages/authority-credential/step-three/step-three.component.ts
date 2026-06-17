@@ -46,7 +46,7 @@ export class StepThreeComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = "reload";
 
-    this.router.navigate(['./'], {relativeTo: this.route, queryParamsHandling: 'merge'});
+    this.router.navigate(['./'], {relativeTo: this.route, queryParams: {}, queryParamsHandling: ''});
   }
 
   protectExibitionEmail(email?:string){

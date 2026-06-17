@@ -1,4 +1,15 @@
-import {Component, effect, EventEmitter, Input, OnChanges, Output, signal, Signal, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  effect, ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  signal,
+  Signal,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {IPerson} from "../../../shared/interfaces/IPerson";
 import { PersonService } from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
@@ -11,6 +22,7 @@ import { LocalityService } from 'src/app/shared/services/locality.service';
 import {MeetingService} from "../../../shared/services/meeting.service";
 import {IPreRegistration} from "../../../shared/interfaces/IPreRegistration";
 import {IOptionOrganization} from "../../../shared/interfaces/IOptionOrganization";
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-authc-step-two',
@@ -18,6 +30,9 @@ import {IOptionOrganization} from "../../../shared/interfaces/IOptionOrganizatio
   styleUrl: './step-two.component.scss'
 })
 export class StepTwoComponent implements OnChanges{
+
+  @ViewChild('campoEmail') campoEmail!: NgModel;
+
   @Input() user : IPerson = undefined;
   @Input() meeting : IMeetingDetail = undefined;
   @Input() prerregistration : IPreRegistration = undefined;
@@ -85,11 +100,11 @@ export class StepTwoComponent implements OnChanges{
     if(!user) return;
 
     this.newAuthForm.madeBy = user.id;
-    this.newAuthForm.id = user.id;
+    this.newAuthForm.id = prerregistration ? prerregistration.person.id : user.id;
     this.newAuthForm.name = user.name;
 
 
-    await this.reloadUserData();
+    await this.reloadUserData(prerregistration ? prerregistration.person : user);
 
     if(prerregistration && prerregistration.isAuthority){
       if(this.meetingSrv.organizationList().find(orgIn => orgIn.guid === prerregistration.organization.guid)) {
@@ -125,9 +140,9 @@ export class StepTwoComponent implements OnChanges{
 
   }
 
-  async reloadUserData() {
+  async reloadUserData(user?: IPerson) {
 
-    const {success, data} = await this.personService.getAcRoleById(this.user.id, this.meeting.conference.id);
+    const {success, data} = await this.personService.getAcRoleById( (user || this.user).id, this.meeting.conference.id);
 
     if(!success) return;
 
@@ -220,6 +235,15 @@ export class StepTwoComponent implements OnChanges{
   }
 
   finishRegister() {
+    if (this.campoEmail.invalid) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro ao enviar formulário',
+        detail: 'Campo email invalido!!'
+
+      })
+      return;
+    }
     this.onRegister.emit([this.newAuthForm, this.undoCredential]);
   }
 

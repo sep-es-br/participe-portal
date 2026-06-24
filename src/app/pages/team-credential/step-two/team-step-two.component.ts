@@ -1,6 +1,6 @@
 import {Component, effect, EventEmitter, Input, Output, signal, Signal} from '@angular/core';
 import {IPerson} from "../../../shared/interfaces/IPerson";
-import { PersonService } from 'src/app/shared/services/person.service';
+import {PersonService, PersonsListItems} from 'src/app/shared/services/person.service';
 import { MessageService } from 'primeng/api';
 import { INewAuthForm } from './newAuthForm.interface';
 import {IMeetingDetail} from "../../../shared/interfaces/IMeetingDetail";
@@ -12,10 +12,10 @@ import {IPreRegistration} from "../../../shared/interfaces/IPreRegistration";
 
 @Component({
   selector: 'app-autht-step-two',
-  templateUrl: './step-two.component.html',
-  styleUrl: './step-two.component.scss'
+  templateUrl: './team-step-two.component.html',
+  styleUrl: './team-step-two.component.scss'
 })
-export class StepTwoComponent {
+export class TeamStepTwoComponent {
   @Input() user : Signal<IPerson> = signal<IPerson>(undefined);
   @Input() meeting : Signal<IMeetingDetail> = signal<IMeetingDetail>(undefined);
   @Input() registration : Signal<IPreRegistration> = signal<IPreRegistration>(undefined);
@@ -25,6 +25,10 @@ export class StepTwoComponent {
   lookedOther = false;
 
   localities: ILocality[] = [];
+
+  agentes : PersonsListItems[] = []
+  filteredAgentes : PersonsListItems[] = [];
+  agente : PersonsListItems;
 
   undoCredential = false;
 
@@ -90,21 +94,31 @@ export class StepTwoComponent {
     })
   }
 
-  reloadUserData() {
+  filterAgentes(evt: any) {
+    this.filteredAgentes = this.agentes
+      .filter( _agente => apocTextClean(_agente.name).includes(apocTextClean(evt.query) ) );
+  }
+
+   reloadUserData() {
     this.personService.getAcRoleById(this.user().id, this.meeting().conference.id).then(acRole => {
         const {success, data} = acRole;
 
         if(!success) return;
 
-        this.newAuthForm.organization = data.organization;
-        this.newAuthForm.authorityRole = data.role;
-        this.newAuthForm.authorityEmail = data.email;
-        this.newAuthForm.authorityLocalityId = data.localityId;
-        this.newAuthForm.authoritySub = data.sub;
+        this.personService.findPersonsOrganization(data.organization?.guid).then(value => {
+          this.agentes = value.data;
 
-        this.fromAc.organization = !!data.organization
-        this.fromAc.authorityRole = !!data.role;
-        this.fromAc.authorityEmail = !!data.email;
+          this.newAuthForm.organization = data.organization;
+          this.newAuthForm.authorityRole = data.role;
+          this.newAuthForm.authorityEmail = data.email;
+          this.newAuthForm.authorityLocalityId = data.localityId;
+          this.newAuthForm.authoritySub = data.sub;
+
+          this.fromAc.organization = !!data.organization
+          this.fromAc.authorityRole = !!data.role;
+          this.fromAc.authorityEmail = !!data.email;
+        });
+
       });
   }
 
@@ -128,41 +142,32 @@ export class StepTwoComponent {
   }
 
   async loadAcInfo() {
-    if(!this.validarCpf(this.newAuthForm.authorityCpf)){
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Atenção',
-        detail: 'Favor inserir um CPF válido',
-        life: 15000
-      });
-      return;
-    }
-
-    const {success, data} = await this.personService.findAcInfoByCpf(this.newAuthForm.authorityCpf.replace(/[.-]/g, ''), this.meeting().conference.id);
-    if(!success) return;
 
 
-    if(!data.role){
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Não é agente público',
-        detail: 'Esta pessoa não é agente publico ou não tem papel'
-      });
-      return;
-    }
-
-    this.newAuthForm.authorityRepresenting = data.name;
-    this.newAuthForm.authorityRole = data.role;
-    this.newAuthForm.authorityEmail = data.email;
-    this.newAuthForm.authorityLocalityId = data.localityId;
-    this.newAuthForm.authoritySub = data.authoritySub;
-
-
-    this.fromAc.authorityRepresenting = !!data.name?.includes(' ');
-    this.fromAc.authorityRole = !!data.role;
-    this.fromAc.authorityEmail = !!data.email;
-
-    this.lookedOther = true;
+    // if(!success) return;
+    //
+    //
+    // if(!data.role){
+    //   this.messageService.add({
+    //     severity: 'error',
+    //     summary: 'Não é agente público',
+    //     detail: 'Esta pessoa não é agente publico ou não tem papel'
+    //   });
+    //   return;
+    // }
+    //
+    // this.newAuthForm.authorityRepresenting = data.name;
+    // this.newAuthForm.authorityRole = data.role;
+    // this.newAuthForm.authorityEmail = data.email;
+    // this.newAuthForm.authorityLocalityId = data.localityId;
+    // this.newAuthForm.authoritySub = data.authoritySub;
+    //
+    //
+    // this.fromAc.authorityRepresenting = !!data.name?.includes(' ');
+    // this.fromAc.authorityRole = !!data.role;
+    // this.fromAc.authorityEmail = !!data.email;
+    //
+    // this.lookedOther = true;
   }
 
   validarCpf(cpf: string): boolean {
@@ -197,4 +202,18 @@ export class StepTwoComponent {
   }
 
 
+}
+
+function apocTextClean(text: string | null | undefined): string {
+  if (!text) return '';
+
+  return text
+    // 1. Decompõe caracteres acentuados em sua forma base + diacrítico separado
+    .normalize('NFD')
+    // 2. Remove os diacríticos (os acentos separados) usando um bloco RegEx de propriedades Unicode
+    .replace(/[\u0300-\u036f]/g, '')
+    // 3. Converte para letras minúsculas
+    .toLowerCase()
+    // 4. Remove tudo o que NÃO for uma letra de 'a' a 'z' ou um número de 0 a 9
+    .replace(/[^a-z0-9]/g, '');
 }

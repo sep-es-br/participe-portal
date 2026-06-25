@@ -8,7 +8,7 @@
     <p-autoComplete
         [(ngModel)]="newAuthForm.organization"
         optionLabel="name" required
-        [suggestions]="emptyList()"
+        [suggestions]="filteredOrganizations()"
         (completeMethod)="filterOrganization($event)"
         [disabled]="undoCredential"
     ></p-autoComplete>

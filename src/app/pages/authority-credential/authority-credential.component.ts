@@ -71,6 +71,18 @@ export class AuthorityCredentialComponent {
           this.authSrv.saveToken(userInfo);
           this.authSrv.saveUserInfo(userInfo.person);
           this.user.set(userInfo.person);
+          this.step = 2;
+          this.preregistrationSrv.preRegistration(meetingId, userInfo.person.id).then((preRegistration) => {
+
+            this.preRegistration.set(preRegistration.data);
+          }).finally(() => {
+            this.router.navigate([], {
+              queryParams: {
+                signinDto: null
+              },
+              replaceUrl: true
+            });
+          });
 
           await  this.router.navigate([], {
             queryParams: {

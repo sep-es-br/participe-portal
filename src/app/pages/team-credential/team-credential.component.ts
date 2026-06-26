@@ -62,34 +62,36 @@ export class TeamCredentialComponent {
           localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, meeting.data.conference.id);
         }
       );
-    });
-    this.routeSnap.queryParams.pipe(take(1)).subscribe(qparams => {
-      let signInDto = qparams['signinDto'];
-      // Se o param vier na URL, a gente lê e guarda no Storage do navegador 📦
 
-      if(signInDto){
-        const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
+      this.routeSnap.queryParams.pipe(take(1)).subscribe(qparams => {
+        let signInDto = qparams['signinDto'];
+        // Se o param vier na URL, a gente lê e guarda no Storage do navegador 📦
 
-        this.authSrv.saveToken(userInfo);
-        this.authSrv.saveUserInfo(userInfo.person);
-        this.user.set(userInfo.person);
-        this.step = 2;
-        this.prerregistrationSrv.preRegistration(this.meeting().id, userInfo.person.id).then((preRegistration) => {
+        if(signInDto){
+          const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
 
-          this.preRegistration.set(preRegistration.data);
-        }).finally(() => {
-          this.router.navigate([], {
-            queryParams: {
-              signinDto: null
-            },
-            replaceUrl: true
+          this.authSrv.saveToken(userInfo);
+          this.authSrv.saveUserInfo(userInfo.person);
+          this.user.set(userInfo.person);
+          this.step = 2;
+          this.prerregistrationSrv.preRegistration(meetingId, userInfo.person.id).then((preRegistration) => {
+
+            this.preRegistration.set(preRegistration.data);
+          }).finally(() => {
+            this.router.navigate([], {
+              queryParams: {
+                signinDto: null
+              },
+              replaceUrl: true
+            });
           });
-        });
 
 
-      }
+        }
 
-    })
+      })
+    });
+
   }
 
   async onRegister([form, undoCredential] : [INewAuthForm, boolean]) {

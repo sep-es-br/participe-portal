@@ -58,7 +58,6 @@ export class TeamStepTwoComponent {
     const firstPart: boolean =
       this.newAuthForm.representing === 'other' ?
         (
-          this.newAuthForm.authorityCpf?.length > 0 &&
           this.newAuthForm.authorityRepresenting?.length > 0
         )
       : true;
@@ -127,6 +126,7 @@ export class TeamStepTwoComponent {
 
     this.newAuthForm.authorityCpf = undefined;
     this.newAuthForm.authorityRepresenting = undefined;
+    this.agente = undefined;
 
     this.fromAc.authorityRepresenting = false;
     this.lookedOther = false;
@@ -143,31 +143,32 @@ export class TeamStepTwoComponent {
 
   async loadAcInfo() {
 
+    const {success, data} = await this.personService.findAcInfoBySub(this.agente.sub, this.meeting().conference.id)
 
-    // if(!success) return;
-    //
-    //
-    // if(!data.role){
-    //   this.messageService.add({
-    //     severity: 'error',
-    //     summary: 'Não é agente público',
-    //     detail: 'Esta pessoa não é agente publico ou não tem papel'
-    //   });
-    //   return;
-    // }
-    //
-    // this.newAuthForm.authorityRepresenting = data.name;
-    // this.newAuthForm.authorityRole = data.role;
-    // this.newAuthForm.authorityEmail = data.email;
-    // this.newAuthForm.authorityLocalityId = data.localityId;
-    // this.newAuthForm.authoritySub = data.authoritySub;
-    //
-    //
-    // this.fromAc.authorityRepresenting = !!data.name?.includes(' ');
-    // this.fromAc.authorityRole = !!data.role;
-    // this.fromAc.authorityEmail = !!data.email;
-    //
-    // this.lookedOther = true;
+
+    if(!success) return;
+
+    if(!data.role){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Não é agente público',
+        detail: 'Esta pessoa não é agente publico ou não tem papel'
+      });
+      return;
+    }
+
+    this.newAuthForm.authorityRepresenting = data.name;
+    this.newAuthForm.authorityRole = data.role;
+    this.newAuthForm.authorityEmail = data.email;
+    this.newAuthForm.authorityLocalityId = data.localityId;
+    this.newAuthForm.authoritySub = data.authoritySub;
+
+
+    this.fromAc.authorityRepresenting = !!data.name?.includes(' ');
+    this.fromAc.authorityRole = !!data.role;
+    this.fromAc.authorityEmail = !!data.email;
+
+    this.lookedOther = true;
   }
 
   validarCpf(cpf: string): boolean {

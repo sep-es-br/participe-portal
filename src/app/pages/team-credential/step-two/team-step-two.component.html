@@ -26,9 +26,7 @@
                           [suggestions]="filteredAgentes" (completeMethod)="filterAgentes($event)"
                           optionLabel="name" ></p-autoComplete>
 
-          <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other' || undoCredential"
-             [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100"
-             [readOnly]="fromAc.authorityRepresenting"/>
+          
         </div>
       </div>
     </div>

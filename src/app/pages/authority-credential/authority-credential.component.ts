@@ -62,35 +62,36 @@ export class AuthorityCredentialComponent {
           localStorage.setItem(StoreKeys.CONFERENCE_ACTIVE, meeting.data.conference.id);
         }
       );
+      this.routeSnap.queryParams.pipe(take(1)).subscribe(async qparams => {
+        let signInDto = qparams['signinDto'];
+
+        if(signInDto) {
+          const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
+
+          this.authSrv.saveToken(userInfo);
+          this.authSrv.saveUserInfo(userInfo.person);
+          this.user.set(userInfo.person);
+
+          await  this.router.navigate([], {
+            queryParams: {
+              signinDto: null
+            },
+            replaceUrl: true
+          });
+        }
+
+
+
+      });
     });
-    this.routeSnap.queryParams.pipe(take(1)).subscribe(async qparams => {
-      let signInDto = qparams['signinDto'];
 
-      if(signInDto) {
-        const userInfo = JSON.parse(decodeURIComponent(escape(atob(signInDto)))) as ISocialLoginResult;
-
-        this.authSrv.saveToken(userInfo);
-        this.authSrv.saveUserInfo(userInfo.person);
-        this.user.set(userInfo.person);
-
-        await  this.router.navigate([], {
-          queryParams: {
-            signinDto: null
-          },
-          replaceUrl: true
-        });
-      }
-
-
-
-    });
     effect(async () => {
       if (this.meeting() == null) return;
       if (this.user() == null) return;
 
       const { success, data } = await this.preregistrationSrv.preRegistrationConfirmed(this.meeting().id, this.user().id);
 
-      if (!success) return;
+      if (!success || Array.isArray(data)) return;
 
       this.preRegistration.set(data);
       this.step = 2;

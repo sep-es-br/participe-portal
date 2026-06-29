@@ -38,7 +38,7 @@ export class TeamStepTwoComponent {
     name: undefined,
     organization: undefined,
     representing: 'himself' as 'himself' | 'other' | 'none',
-    authorityCpf: undefined,
+    authorityCpf: '',
     authoritySub: undefined,
     authorityEmail: undefined,
     authorityLocalityId: undefined,

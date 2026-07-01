@@ -27,6 +27,14 @@ type acInfoType = {
   authoritySub : string
 };
 
+export type PersonsListItems = {
+  sub: string,
+  name: string,
+  email: string,
+  role: string,
+  lotacao: string
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -51,6 +59,10 @@ export class PersonService extends BaseService<any> {
 
   findAcInfoByCpf(cpf: string, idConference: number) : Promise<IResultHttp<acInfoType>> {
     return this.http.get<IResultHttp<acInfoType>>(`${this.urlBase}/${cpf}/ACInfoByCpf/${idConference}`).toPromise();
+  }
+
+  findAcInfoBySub(sub: string, idConference: number) : Promise<IResultHttp<acInfoType>> {
+    return this.http.get<IResultHttp<acInfoType>>(`${this.urlBase}/${sub}/ACInfoBySub/${idConference}`).toPromise();
   }
 
   getPersonById(idPerson: number, idConference: number): Promise<IResultHttp<IResultPerson>> {
@@ -93,6 +105,11 @@ export class PersonService extends BaseService<any> {
 
   findPersonBySub(sub: string) {
     return this.http.get<IResultHttp<IPerson>>(`${this.urlBase}/bySub/${sub}`).toPromise();
+  }
+
+  findPersonsOrganization(guid: string) {
+    if (!guid) return Promise.resolve([]);
+    return this.http.get<IResultHttp<PersonsListItems[]>>(`${this.urlBase}/personsByOrganization/${guid}`).toPromise();
   }
 
 }

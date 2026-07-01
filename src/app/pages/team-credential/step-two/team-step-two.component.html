@@ -15,31 +15,18 @@
       <label for="reprOther">Outra pessoa:</label>
     </div>
     <div class="reprInfo">
-      <div class="row">
-        <div class="col" >
-          <label for="reprCpf" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'" >CPF*</label>
-        </div>
-      </div>
-      <div class="row d-flex align-items-center my-2">
 
-        <div class="col-7 px-1">
-          <p-inputMask [disabled]="(newAuthForm.representing !== 'other') || undoCredential" gambiCursorMask
-             mask="999.999.999-99" [(ngModel)]="newAuthForm.authorityCpf" inputId="reprCpf" placeholder="000.000.000-00" />
-        </div>
-        <div class="col-2 px-1">
-          <button [disabled]="newAuthForm.representing !== 'other' || undoCredential" (click)="loadAcInfo()">Procurar</button>
-        </div>
+      <div class="col">
+        <label for="reprName" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'">Nome*</label>
       </div>
-      <div class="row" [hidden]="!isOtherAndLooked">
-        <div class="col">
-          <label for="reprName" class="text-end" [ngClass]="newAuthForm.representing === 'other' ? '' : 'disabled'">Nome*</label>
-        </div>
-      </div>
-      <div class="row align-items-center my-2" [ngClass]="isOtherAndLooked ? 'd-flex' : ''"  [hidden]="!isOtherAndLooked">
+      <div class="row align-items-center my-2" [ngClass]="'d-flex'" >
         <div class="col px-1">
-          <input type="text" pInputText [disabled]="newAuthForm.representing !== 'other' || undoCredential"
-             [(ngModel)]="newAuthForm.authorityRepresenting" id="reprName" class="w-100"
-             [readOnly]="fromAc.authorityRepresenting"/>
+          <p-autoComplete [disabled]="newAuthForm.representing !== 'other' || undoCredential"
+                          id="reprName" class="w-100" (onSelect)="loadAcInfo()" [(ngModel)]="agente"
+                          [suggestions]="filteredAgentes" (completeMethod)="filterAgentes($event)"
+                          optionLabel="name" ></p-autoComplete>
+
+          
         </div>
       </div>
     </div>

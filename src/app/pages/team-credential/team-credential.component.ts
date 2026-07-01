@@ -101,7 +101,6 @@ export class TeamCredentialComponent {
     if(!undoCredential &&(
       !form.authorityRole ||
       (form.representing == 'other' && (
-        !form.authorityCpf ||
         !form.authorityRepresenting
       )) ||
       !form.name ||
@@ -127,7 +126,7 @@ export class TeamCredentialComponent {
           break;
         case "other":
           preRegistration = (await this.authorityCredential.registerAuthority(
-            form.id, form.authorityCpf, form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
+            form.id, '', form.authorityEmail, form.authorityRepresenting, form.authorityLocalityId,
             this.meeting().id, form.organization, form.authorityRole, form.authoritySub, true
           )).data;
           break;

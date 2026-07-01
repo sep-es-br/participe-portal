@@ -61,6 +61,13 @@ footer {
 }
 
 ::ng-deep {
+
+  p-autocomplete {
+    ol, ul {
+      padding-left: unset;
+    }
+  }
+
   p-dropdown.ng-invalid {
 
     > div {

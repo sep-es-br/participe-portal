@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepTwoComponent } from './step-two.component';
+import { StepTwoComponent } from './team-step-two.component';
 
 describe('StepOneComponent', () => {
   let component: StepTwoComponent;
@@ -11,7 +11,7 @@ describe('StepOneComponent', () => {
       declarations: [StepTwoComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(StepTwoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

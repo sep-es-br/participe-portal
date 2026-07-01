@@ -69,7 +69,7 @@ import { StepOneComponent } from './pages/authority-credential/step-one/step-one
 import { StepTwoComponent } from './pages/authority-credential/step-two/step-two.component';
 import { StepThreeComponent } from './pages/authority-credential/step-three/step-three.component';
 import { StepOneComponent as TeamStepOneComponent } from './pages/team-credential/step-one/step-one.component';
-import { StepTwoComponent as TeamStepTwoComponent } from './pages/team-credential/step-two/step-two.component';
+import { TeamStepTwoComponent } from './pages/team-credential/step-two/team-step-two.component';
 import { StepThreeComponent as TeamStepThreeComponent } from './pages/team-credential/step-three/step-three.component';
 import {TeamCredentialComponent} from "./pages/team-credential/team-credential.component";
 import {CursorMaskDirective} from "./shared/CursorMaskDirective";
